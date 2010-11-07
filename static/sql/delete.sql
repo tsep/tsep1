@@ -1,0 +1,10 @@
+DROP table %tablePrefix%internal;
+DROP table %tablePrefix%log;
+DROP table %tablePrefix%loghits;
+DROP table %tablePrefix%search;
+DROP table %tablePrefix%stopwords;
+DROP table %tablePrefix%iprofile;
+DROP table %tablePrefix%iprofile_search;
+DROP table %tablePrefix%ranksymbols;
+DROP table %tablePrefix%users;
+DROP table %tablePrefix%user_levels;

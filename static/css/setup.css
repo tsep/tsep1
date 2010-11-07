@@ -1,0 +1,145 @@
+@CHARSET "ISO-8859-1";
+
+html {
+    font-family:Arial;
+    font-size:medium;
+    color:3366FF;
+    }
+    
+    #sidebar {
+    width:20%;
+    position:absolute;
+    top:5px;
+    left:5px;
+    z-index:1;
+    background-color:00B8F5;
+    }
+    
+    .sidebarTD {
+    border-style:solid;
+    border-width:thin;
+    height:10px;
+    width:18%;
+    border-color:00B8F5;
+    background-color:33FF66;
+    }
+    
+    #step {
+    float:left;
+    width:75%;
+    height:100%;
+    
+    }
+    
+    .activeStep {
+    font-weight:bold;
+    color:FF6633;
+    background-color:CCFF33;
+    height:30px;
+    }
+    
+    #placeholder {
+    margin-top:5px;
+    margin-left:5px;
+    float:left;
+    height:100%;
+    width:20%;
+    z-index:0;
+    
+    }
+    
+    #is {
+    background-color:66FF33;
+    width:100%;
+    margin-top:5px;
+    border-style:groove;
+    border-width:thick;
+    border-color:00B82E;
+    padding:10px;
+    padding-bottom:20px;
+    }
+    
+    body,html,h2 {
+    margin-top:0px;
+    
+    }
+    
+    h2 {
+    font-weight:100;
+    }
+    
+    
+    
+    a {
+    text-decoration:none;
+    }
+    
+    .checkMark {
+    font-size:16pt;
+    color:green;
+    font-weight:bold;
+    }
+    
+    .xMark {
+    font-size:16pt;
+    color:red;
+    font-weight:bold;
+    }
+    
+    td {
+    vertical-align:middle;
+    }
+    
+    .cssbutton{
+    background-color: #d1ec4c;
+    border: 2px #d1ec4c outset;
+    padding: 1px 4px;
+    color: black;
+    text-decoration: none;
+    font: bold 90% "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, sans-serif;
+    margin:5px 5px 5px 5px;
+    }
+
+    .cssbutton:visited{
+    color: black;
+    }
+
+    .cssbutton:hover{
+    border-style: inset;
+    background-color: #e3f48e;
+    padding: 2px 3px 0 5px; /*shift text 1px to the right and down*/
+    }
+
+    .cssbutton:active{
+    color: black;
+    }
+    
+    #inputArea
+    {
+        font-family: Arial, Sans-Serif;
+        font-size: 13px;
+        background-color: #d6e5f4;
+        padding: 10px;
+    }
+    
+    #mf input[type="text"],#mf input[type="password"]
+    {
+        font-family: Arial, Sans-Serif;
+        font-size: 13px;
+        margin-bottom: 5px;
+        display: block;
+        padding: 4px;
+        border: solid 1px #85b1de;
+        width: 300px;
+        background-color: #EDF2F7;
+    }
+    textarea {
+        resize:none;
+    }
+    
+    #mf input[type="text"]:focus,#mf input[type="password"]:focus
+    {
+        background-color: #ffffff;
+        border: solid 1px #33677F;
+    }
+    
