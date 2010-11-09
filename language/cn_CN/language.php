@@ -4,11 +4,11 @@
 
 Do not change by hand!
 
-$LastChangedDate: 2005-06-25 17:39:06 +0200 (Sa, 25 Jun 2005) $
+$LastChangedDate$
 
-@lastedited $LastChangedBy: olaf $
+@lastedited $LastChangedBy$
 
-$LastChangedRevision: 198 $
+$LastChangedRevision$
 */
 $tsep_lng['above_values'] = <<<_P
 以上数值

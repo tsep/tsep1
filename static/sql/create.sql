@@ -1,8 +1,8 @@
 -- following will be filled automatically by SubVersion!
 -- Do not change by hand!
--- $LastChangedDate: 2005-08-16 08:34:55 +0200 (Di, 16 Aug 2005) $
--- @lastedited $LastChangedBy: lu $
--- $LastChangedRevision: 287 $
+-- $LastChangedDate$
+-- @lastedited $LastChangedBy$
+-- $LastChangedRevision$
 
 -- TSEP configuration is stored in this table
 CREATE TABLE %tablePrefix%internal (

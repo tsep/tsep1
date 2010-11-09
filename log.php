@@ -7,9 +7,9 @@
 *
 * following will be filled automatically by SubVersion!
 * Do not change by hand!
-*  $LastChangedDate: 2005-07-12 11:54:45 +0200 (Di, 12 Jul 2005) $
-*  @lastedited $LastChangedBy: olaf $
-*  $LastChangedRevision: 258 $
+*  $LastChangedDate$
+*  @lastedited $LastChangedBy$
+*  $LastChangedRevision$
 *
 */
 

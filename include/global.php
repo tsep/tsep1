@@ -7,9 +7,9 @@
 *
 * following will be filled automatically by SubVersion!
 * Do not change by hand!
-*  $LastChangedDate: 2005-09-01 15:14:02 +0200 (Do, 01 Sep 2005) $
-*  @lastedited $LastChangedBy: toon $
-*  $LastChangedRevision: 303 $
+*  $LastChangedDate$
+*  @lastedited $LastChangedBy$
+*  $LastChangedRevision$
 *
 */
 
@@ -101,4 +101,6 @@ db::loadDBfile($infotxt);
 
 
 require_once TSEP_INCLUDE_DIR.'/class.security.php';
+
+Security::protect();
 ?>

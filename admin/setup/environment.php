@@ -4,6 +4,8 @@ require_once __DIR__.'/../../include/global.php';
 
 Security::protect();
 
+include_once TSEP_INCLUDE_DIR.'/class.modulecheck.php';
+
 ?>
 
 <div id="is">
@@ -14,7 +16,7 @@ Security::protect();
 	
 	function checkEnvironment () {
 		
-		
+			$modules = new moduleCheck();
 			$return = array();
 			
 			$return[0] = array();
@@ -31,13 +33,25 @@ Security::protect();
 		   	if (version_compare(PHP_VERSION, '5.3.3','>=')) {
 		   	   
 		   		$return[1]['status'] = true;
-		   	   	$return[1]['message'] = "Php version is Supported";
+		   	   	$return[1]['message'] = "PHP version is supported";
 		   	
 		   	}
 		   	else {
 		   		$return[1]['status'] = false;
-		   	   	$return[1]['message'] = "Php version is not supported";
+		   	   	$return[1]['message'] = "PHP version is not supported";
 		   	
+		   	}
+		   	
+		   	$return[2] = array();
+		   	if ($modules->isLoaded('PDO')) {
+		   		
+		   		$return[2]['status'] = true;
+		   		$return[2]['message']= "PHP Data Objects is installed";
+		   	}
+		   	else {
+		   		
+		   		$return[2]['status'] = false;
+		   		$return[2]['message']= "PHP Data Objects is not installed";
 		   	}
 		   
 		   	return $return;

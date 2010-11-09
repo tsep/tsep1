@@ -7,9 +7,9 @@
 *
 * following will be filled automatically by SubVersion!
 * Do not change by hand!
-*  $LastChangedDate: 2005-08-14 17:50:49 +0200 (So, 14 Aug 2005) $
-*  @lastedited $LastChangedBy: manfred $
-*  $LastChangedRevision: 284 $
+*  $LastChangedDate$
+*  @lastedited $LastChangedBy$
+*  $LastChangedRevision$
 *
 */
 require_once( __DIR__."../include/global.php" );

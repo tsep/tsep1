@@ -1,8 +1,8 @@
 -- following will be filled automatically by SubVersion!
 -- Do not change by hand!
--- $LastChangedDate: 2005-08-16 08:35:07 +0200 (Di, 16 Aug 2005) $
--- @lastedited $LastChangedBy: lu $
--- $LastChangedRevision: 288 $
+-- $LastChangedDate$
+-- @lastedited $LastChangedBy$
+-- $LastChangedRevision$
 
 DROP TABLE IF EXISTS %tablePrefix%stopwords;
 

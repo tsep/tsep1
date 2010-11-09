@@ -6,9 +6,9 @@
 *
 * following will be filled automatically by SubVersion!
 * Do not change by hand!
-*  $LastChangedDate: 2005-07-14 21:21:26 +0200 (Do, 14 Jul 2005) $
-*  @lastedited $LastChangedBy: oliver $
-*  $LastChangedRevision: 262 $
+*  $LastChangedDate$
+*  @lastedited $LastChangedBy$
+*  $LastChangedRevision$
 *
 */
 require_once ("./include/dereslash.php");

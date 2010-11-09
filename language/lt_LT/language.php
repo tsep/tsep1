@@ -4,11 +4,11 @@
 
 Do not change by hand!
 
-$LastChangedDate: 2005-08-20 16:05:25 +0200 (Sa, 20 Aug 2005) $
+$LastChangedDate$
 
-@lastedited $LastChangedBy: olaf $
+@lastedited $LastChangedBy$
 
-$LastChangedRevision: 291 $
+$LastChangedRevision$
 */
 $tsep_lng['all'] = <<<_P
 visi

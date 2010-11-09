@@ -5,9 +5,9 @@
 #
 # following will be filled automatically by SubVersion!
 # Do not change by hand!
-#  $LastChangedDate: 2005-05-17 17:18:57 +0200 (Di, 17 Mai 2005) $
-#  @lastedited $LastChangedBy: olaf $
-#  $LastChangedRevision: 41 $
+#  $LastChangedDate$
+#  @lastedited $LastChangedBy$
+#  $LastChangedRevision$
 
 DIR_LOCAL_TSEP=/srv/www/htdocs/php/tsep
 DIR_WWW_TSEP=http://localhost/php/tsep

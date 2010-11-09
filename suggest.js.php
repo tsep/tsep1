@@ -10,9 +10,9 @@
  *
  * following will be filled automatically by SubVersion!
  * Do not change by hand!
- *  $LastChangedDate: 2005-07-08 21:57:08 +0200 (Fr, 08 Jul 2005) $
- *  @lastedited $LastChangedBy: toon $
- *  $LastChangedRevision: 229 $
+ *  $LastChangedDate$
+ *  @lastedited $LastChangedBy$
+ *  $LastChangedRevision$
  **/
 
 require_once( "./include/global.php" ); //general config data

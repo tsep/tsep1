@@ -3,9 +3,9 @@
 /*
 * following will be filled automatically by SubVersion!
 * Do not change by hand!
-*  $LastChangedDate: 2005-05-28 09:38:16 +0200 (Sa, 28 Mai 2005) $
-*  @lastedited $LastChangedBy: toon $
-*  $LastChangedRevision: 79 $
+*  $LastChangedDate$
+*  @lastedited $LastChangedBy$
+*  $LastChangedRevision$
 *
 */
 function is_utf8($string) {

@@ -31,9 +31,9 @@ REM      and zzz is either 'CURRENT' or the profile-name, if given (see chapter 
 REM
 REM following will be filled automatically by SubVersion!
 REM Do not change by hand!
-REM  $LastChangedDate: 2005-05-17 17:18:57 +0200 (Tue, 17 May 2005) $
-REM  @lastedited $LastChangedBy: olaf $
-REM  $LastChangedRevision: 41 $
+REM  $LastChangedDate$
+REM  @lastedited $LastChangedBy$
+REM  $LastChangedRevision$
 
 set DIR_LOCAL_TSEP=d:\srv\www\htdocs\php\tsep
 set DIR_WWW_TSEP=http://localhost/php/tsep

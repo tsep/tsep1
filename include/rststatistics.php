@@ -9,9 +9,9 @@
 *
 * following will be filled automatically by SubVersion!
 * Do not change by hand!
-*  $LastChangedDate: 2005-06-13 19:35:27 +0200 (Mo, 13 Jun 2005) $
-*  @lastedited $LastChangedBy: toon $
-*  $LastChangedRevision: 143 $
+*  $LastChangedDate$
+*  @lastedited $LastChangedBy$
+*  $LastChangedRevision$
 *
 */
 

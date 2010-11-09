@@ -99,7 +99,9 @@ class db {
 		/* TSEP table prefix */
 		    $prefix = $info['db_table_prefix'];
 		    
-		   self::setValues($server, $usrname, $pwd, $name, $prefix); 
+		   self::setValues($server, $usrname, $pwd, $name, $prefix);
+
+		   define('UNIQUE_PREFIX', $info['fileprefix']);
 		   
 		   
 	}

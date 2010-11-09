@@ -3,9 +3,9 @@
 #
 # following will be filled automatically by SubVersion!
 # Do not change by hand!
-#  $LastChangedDate: 2005-08-21 11:48:20 +0200 (So, 21 Aug 2005) $
-#  @lastedited $LastChangedBy: manfred $
-#  $LastChangedRevision: 292 $
+#  $LastChangedDate$
+#  @lastedited $LastChangedBy$
+#  $LastChangedRevision$
 #
 # wwwshot.sh is intended to build screenshots from webpages
 #

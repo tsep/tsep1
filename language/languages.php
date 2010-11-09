@@ -6,9 +6,9 @@
 //
 // following will be filled automatically by SubVersion!
 // Do not change by hand!
-//  $LastChangedDate: 2005-07-26 23:56:58 +0200 (Tue, 26 Jul 2005) $
-//  @lastedited $LastChangedBy: manfred $
-//  $LastChangedRevision: 282 $
+//  $LastChangedDate$
+//  @lastedited $LastChangedBy$
+//  $LastChangedRevision$
 //
 //
 // created for

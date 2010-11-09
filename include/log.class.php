@@ -11,9 +11,9 @@
  *
  * following will be filled automatically by SubVersion!
  * Do not change by hand!
- *  $LastChangedDate: 2005-06-24 09:51:53 +0200 (Fr, 24 Jun 2005) $
- *  @lastedited $LastChangedBy: olaf $
- *  $LastChangedRevision: 190 $
+ *  $LastChangedDate$
+ *  @lastedited $LastChangedBy$
+ *  $LastChangedRevision$
  **/
 
 require_once( TSEP_INCLUDE_DIR."/tseptrace.php" );

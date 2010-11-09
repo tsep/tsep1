@@ -1,8 +1,8 @@
 -- following will be filled automatically by SubVersion!
 -- Do not change by hand!
--- $LastChangedDate: 2005-08-27 16:04:08 +0200 (Sa, 27 Aug 2005) $
--- @lastedited $LastChangedBy: manfred $
--- $LastChangedRevision: 296 $
+-- $LastChangedDate$
+-- @lastedited $LastChangedBy$
+-- $LastChangedRevision$
 INSERT INTO %tablePrefix%internal (idinternal, description, stringvalue, numericvalue, sortordervalue, valuetype, fieldtype, stringtag, numtag) VALUES (   1,'tsepdatabaseversion','nothing in here',0.941,NULL,'n','float','internal',NULL);
 INSERT INTO %tablePrefix%internal (idinternal, description, stringvalue, numericvalue, sortordervalue, valuetype, fieldtype, stringtag, numtag) VALUES (   2,'tsepversion','0.942-278 (WCREV)',NULL,NULL,'s','text','internal',NULL);
 INSERT INTO %tablePrefix%internal (idinternal, description, stringvalue, numericvalue, sortordervalue, valuetype, fieldtype, stringtag, numtag) VALUES (   3,'tsepindexeditdate','1103027751',NULL,NULL,'s','text','internal',NULL);

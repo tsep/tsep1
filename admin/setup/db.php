@@ -1,4 +1,17 @@
 <?php
+
+/**
+* Connect to the database (Part of the setup)
+* 
+* @author geoffreyfishing
+*
+* The following will be filled automatically by SubVersion!
+* Do not change by hand!
+*  $LastChangedDate$
+*  $LastChangedBy$
+*  $LastChangedRevision$
+*
+*/
 	require_once __DIR__.'/../../include/global.php';
 	
 	Security::protect();

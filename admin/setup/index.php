@@ -1,4 +1,19 @@
-<?php 
+<?php
+/**
+* Setup Installer for The Search Engine Project
+* 
+* @author geoffreyfishing
+*
+* The following will be filled automatically by SubVersion!
+* Do not change by hand!
+*  $LastChangedDate$
+*  $LastChangedBy$
+*  $LastChangedRevision$
+*
+*/
+
+
+
 error_reporting(E_ALL);
 
 
@@ -42,6 +57,7 @@ SetupInstaller::init();
 		case 5:
 			break;
 		case 6:
+			SetupInstaller::dispStep("verify");
 			break;
 		case 7:
 			break;		
