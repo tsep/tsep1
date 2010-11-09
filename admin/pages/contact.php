@@ -26,11 +26,12 @@
 ?>
 
 <h2>Contact The Search Engine Project</h2>
-
-<p>Below is the output of the error log</p>
-<textarea rows="10" cols="60" readonly="readonly" wrap="off">
+<h2>Error Log</h2>
+<p>The Error Log can be used  to diagnose problems. Below is the output of the error log</p>
+<textarea rows="10" cols="75" readonly="readonly" wrap="off">
 <?php echo errorHandler::getLog();?>
 </textarea>
-
+<p>Click Here to submit the log to our developers. You should not allow this log to be publicly disclosed. It may contain sensitive information.</p>
+<h2>Submit a ticket</h2>
 <p>To submit a new ticket, <a href="http://p.sf.net/tseproject/newticket">click here</a></p>
 

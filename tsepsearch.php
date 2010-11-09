@@ -30,7 +30,7 @@ if (!isset($q))
 <title><?php echo $tsep_lng['tsep'];?> - <?php print $q; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="expires" content="0" />
-<link href="<?php echo TSEP_CLIENT_ROOT;?>/css/tsep.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo TSEP_CLIENT_ROOT;?>/static/css/tsep.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -38,11 +38,10 @@ if (!isset($q))
 <?php require( TSEP_ROOT_DIR."/search.php" ); ?>
 
 <div class="tsepProject">
-
 <div class="poweredby">
     <a href="http://tsep.sourceforge.net/" title="<?php echo $tsep_lng['help_copyright']; ?>" target="_blank"><img src="<?php echo TSEP_CLIENT_ROOT; ?>/graphics/poweredbytsep.gif" alt="<?php echo $tsep_lng['powered_by'];?> <?php echo $tsep_lng['tsep'];?>"></a>
 </div>
-
 </div>
+<div style="text-align:center;font-size:small;"><a href="<?php echo TSEP_CLIENT_ROOT?>/admin">Administation Control Panel</a></div>
 </body>
 </html>

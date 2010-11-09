@@ -24,12 +24,12 @@ class errorHandler {
 	
 	public static function getLog () {
 		
-		return file_get_contents(TSEP_ROOT_DIR."/admin/".UNIQUE_PREFIX."tsep.log");
+		return file_get_contents(TSEP_ROOT_DIR."/cache/".UNIQUE_PREFIX."tsep.log");
 	}
     
 	private static function log ($msg) {
 		
-		file_put_contents(TSEP_ROOT_DIR."/admin/".UNIQUE_PREFIX."tsep.log",$msg."\n" ,FILE_APPEND);
+		file_put_contents(TSEP_ROOT_DIR."/cache/".UNIQUE_PREFIX."tsep.log",$msg."\n" ,FILE_APPEND);
 		
         self::cleanLog();
 
@@ -37,15 +37,15 @@ class errorHandler {
 	
 	private static function cleanLog () {
 		
-		$lines = file(TSEP_ROOT_DIR.'/admin/'.UNIQUE_PREFIX.'tsep.log'); // reads the file into an array by line
+		$lines = file(TSEP_ROOT_DIR.'/cache/'.UNIQUE_PREFIX.'tsep.log'); // reads the file into an array by line
 		
-		if (count($lines)<=900)
+		if (count($lines)<=1500)
 		  return;
 		
 		$keep = array_slice($lines,-500, 500); // keep the last 500 elements of the array
 		$out = implode("\n", $keep); //Convert the array into a string
 		
-		file_put_contents(TSEP_ROOT_DIR."/admin/".UNIQUE_PREFIX."tsep.log", $out);
+		file_put_contents(TSEP_ROOT_DIR."/cache/".UNIQUE_PREFIX."tsep.log", $out);
 	}
 	
     private static function handleInfoError ($error) {
