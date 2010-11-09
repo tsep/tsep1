@@ -55,7 +55,7 @@
         * Prefix to use on cache files
         * @var string
         */
-        protected static $prefix = 'cache_';
+        protected static $prefix = UNIQUE_PREFIX;
 
         /**
         * Stores data

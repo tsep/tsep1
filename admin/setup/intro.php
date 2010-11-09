@@ -1,18 +1,6 @@
 <?php 
 	require_once __DIR__.'/../../include/global.php'; 
 	Security::protect();
-
-	function genRandomString() {
-	    $length = 10;
-	    $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
-	    $string;    
-	    
-	    for ($p = 0; $p < $length; $p++) {
-	        $string .= $characters[mt_rand(0, strlen($characters))];
-	    }
-	    
-	    return $string;
-	}
 	
 	file_put_contents(TSEP_ROOT_DIR.'/tsepverify.txt', genRandomString());
 ?>

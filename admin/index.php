@@ -63,9 +63,9 @@ function writeScreenBegin( $processStep, $resetGlobalError=TRUE ) {
        <title>TSEP <?php echo(isset($_SESSION["tsepVersion"])?$_SESSION["tsepVersion"]:"")." - ".$tsep_lng['adminmainmenu_AdminMainMenu']?></title>
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
        <meta http-equiv="expires" content="0" />
-      <link href="css/tsep_setup.css" rel="stylesheet" type="text/css" />
-       <script type="text/javascript" src="js/overlib.js">    <!-- overLIB (c) Erik Bosrup -->  </script>
-       <script type="text/javascript" src="js/jquery.js"></script>
+      <link href="<?php echo TSEP_CLIENT_ROOT?>/static/css/tsep_setup.css" rel="stylesheet" type="text/css" />
+       <script type="text/javascript" src="<?php echo TSEP_CLIENT_ROOT?>/static/js/overlib.js">    <!-- overLIB (c) Erik Bosrup -->  </script>
+       <script type="text/javascript" src="<?php echo TSEP_CLIENT_ROOT?>/static/js/jquery.js"></script>
        
        <script type="text/javascript">       
        $.get("updater.php", function(data){
@@ -189,6 +189,8 @@ function writeIntroText() {
         Update Avaliable. <input value="Update Now" type="button" onclick="runUpdate();" />    
     </form> 
     </div>
+    
+    <a href="admin_new">Visit the new admin panel(beta)</a>
     
     <?php echo writeLinks(); ?>
     

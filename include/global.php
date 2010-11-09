@@ -60,6 +60,17 @@ function getClientRoot () {
 	
 	return $clientRoot;
 }
+function genRandomString() {
+	$length = 10;
+	$characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+	$string;    
+	
+	for ($p = 0; $p < $length; $p++) {
+	    $string .= $characters[mt_rand(0, strlen($characters))];
+	}
+	
+	return $string;
+}
 
 //Define the constants
 
@@ -68,7 +79,6 @@ define('TSEP_INCLUDE_DIR', __DIR__);
 define('TSEP_UPDATE_URL', $tsepUpdateUrl);
 define('TSEP_CLIENT_ROOT', getClientRoot());
 define('TSEP_CACHE_DIR', TSEP_ROOT_DIR.'/cache/'); //<-- Special Note: The cache class wants a '/' at the end of the path!!!
-
 
 /* Force the browser to use UTF-8 enconding */
 header("Content-type: text/html; charset=utf-8");
@@ -80,9 +90,6 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
 //Handle all errors
 require_once  TSEP_INCLUDE_DIR.'/class.errorhandler.php';
-
-//Include the caching framework
-include_once TSEP_INCLUDE_DIR.'/class.cache.php';
 
 //Include the DB framework
 include_once TSEP_INCLUDE_DIR.'/class.db.php';
@@ -99,7 +106,10 @@ if (($infotxt == null)&&($_SERVER['PHP_SELF']!=TSEP_CLIENT_ROOT."/admin/index.ph
 //Set the db data
 db::loadDBfile($infotxt);
 
+//Include the caching framework
+include_once TSEP_INCLUDE_DIR.'/class.cache.php';
 
+//Include the security framework (This is NOT the authentication framework)
 require_once TSEP_INCLUDE_DIR.'/class.security.php';
 
 Security::protect();

@@ -67,6 +67,8 @@ class db {
 		    $info['db_name'] = self::$name;
 		/* TSEP table prefix */
 		    $info['db_table_prefix'] = self::$prefix;
+		    
+		    $info['fileprefix'] = genRandomString();
 		    		    
 		    $tmp = ";<?php die()?>\n";
 		    $tmp .= self::write_ini_file(array("db" => $info));
@@ -101,7 +103,7 @@ class db {
 		    
 		   self::setValues($server, $usrname, $pwd, $name, $prefix);
 
-		   define('UNIQUE_PREFIX', $info['fileprefix']);
+		   define('UNIQUE_PREFIX', $info['fileprefix'].'_');
 		   
 		   
 	}

@@ -8,6 +8,7 @@ class SetupInstaller {
 	public static $language;
 	public static $step;
 	public static $error;
+	public static $verified;
 
 	static function init () {
 		
