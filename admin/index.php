@@ -17,6 +17,9 @@
 
 require_once __DIR__.'/../include/global.php';
 
+header("Location:admin_new/");
+die();
+
 db::connect();
 
 //require_once( "../include/tseptrace.php" );

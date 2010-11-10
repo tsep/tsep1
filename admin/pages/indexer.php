@@ -61,6 +61,7 @@
 
 			$("#data").html("");
 			$("#loader").css("display","none");
+			change();
 			return;
 		}
 
@@ -68,7 +69,7 @@
 
 			$("#data").html(data);
 			$("#loader").css("display","none");
-			
+			change();
 		});
 	});
 
@@ -84,6 +85,7 @@
 
 			$("#iprofile").html("");
 			$("#iloader").css("display","none");
+			change();
 			return;
 		}
 
@@ -101,7 +103,7 @@
 					$("#savedprofile").css("display","inline");
 				if ($(this).val() == "new")
 					$("#newprofile").css("display","inline");
-
+				change();
 			});
 		});
 	});

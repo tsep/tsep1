@@ -13,12 +13,15 @@
 *
 */
 
-/* The Following value is very important
- * It controls the TSEP Update Url
- * Which is an XML File containing the 
- * Information needed to receive updates
- * (obviously) Please leave this alone,
- * Unless you want to break the updates
+/*
+ * Developer version only
+ * Do NOT uncomment this in the production version
+ */
+sleep(2);
+
+/* The Following value is very important It controls the TSEP Update Url
+ * Which is an XML File containing the Information needed to receive updates
+ * (obviously) Please leave this alone, Unless you want to break the updates
  * for some odd reason.
  * */
 $tsepUpdateUrl = "http://tsep.sourceforge.net/updater/getUpdate.php?"; //<-- Don't forget the "?" at the end!

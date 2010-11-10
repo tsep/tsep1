@@ -91,7 +91,34 @@ $(document).ready(function (){
                  $("#updatePanel").html("Up to date");
              }         
     	});
+		change();
+    	
 	});
+
+	function change () {
+		$(".button").each(function () {
+	    	var img = $(new Image());
+
+			$(img)	.css("margin-top", "24px")
+					.css("margin-bottom", "10px");
+
+	    	img.attr("src","../../static/img/ajax-loader.gif");
+	    	img.hide();
+
+	    	img.insertAfter(this);
+
+	    	$(this).click(function () {
+	    	    var form = $(this).parents('form:first');
+				form.find(":input").attr("disabled","disabled");
+
+				$(this).hide();
+				
+				img.show();
+				form.submit();
+		    });
+    	});
+		
+	}
 
 	function runUpdate () {
 
