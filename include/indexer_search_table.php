@@ -26,8 +26,21 @@ if ( !isset($q) ) // prevent error in "input-type-name=q"-value-definition below
                         <input type="submit" value="<?php echo $tsep_lng['button_search'];?>" />
                 </form>
         </div>
+        <?php 
+        /*
         <div class="indexerSearchTableAdminLinks">
                 <div class="CurrentOrNewIndex"><a href="indexer.php"><?php echo $tsep_lng['create_new_index'];?></a></div>
+                <div class="CurrentOrNewIndex"><a href="indexer.php?showcompleteindex"><?php echo $tsep_lng['indexed_words'];?></a></div>
+                <div class="CurrentOrNewIndex"><a href="indexoverview.php"><?php echo $tsep_lng['index_overview_title'];?></a></div>
+                <div class="CurrentOrNewIndex"><a href="stopwords.php"><?php echo $tsep_lng['stopwords'];?></a></div>
+                <div class="CurrentOrNewIndex"><a href="logview.php"><?php echo $tsep_lng['logview_title'];?></a></div>
+                <div class="CurrentOrNewIndex"><a href="logviewstats.php"><?php echo $tsep_lng['logviewstats_title']; ?></a></div>
+                <div class="CurrentOrNewIndex"><a href="configuration.php"><?php echo $tsep_lng['configuration'];?></a></div>
+                <div class="CurrentOrNewIndex"><a href="configcontentimages.php"><?php echo $tsep_lng['configure'] . "/" . $tsep_lng['manage'] . " " . $tsep_lng['contentimgs'];?></a></div>
+        </div>
+        */?>
+        <div class="indexerSearchTableAdminLinks">
+                <div class="CurrentOrNewIndex"><a href="<?php echo TSEP_CLIENT_ROOT?>/admin/admin_new/index.php?page=indexer"><?php echo $tsep_lng['create_new_index'];?></a></div>
                 <div class="CurrentOrNewIndex"><a href="indexer.php?showcompleteindex"><?php echo $tsep_lng['indexed_words'];?></a></div>
                 <div class="CurrentOrNewIndex"><a href="indexoverview.php"><?php echo $tsep_lng['index_overview_title'];?></a></div>
                 <div class="CurrentOrNewIndex"><a href="stopwords.php"><?php echo $tsep_lng['stopwords'];?></a></div>

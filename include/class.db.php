@@ -1,9 +1,16 @@
 <?php
-/** class.db.php
- *  
- *  Initializes all functions associated with the Database
- * 
- * */
+/**
+* Initialzes database functions
+* 
+* @author geoffreyfishing
+*
+* The following will be filled automatically by SubVersion!
+* Do not change by hand!
+*  $LastChangedDate$
+*  $LastChangedBy$
+*  $LastChangedRevision$
+*
+*/
 
 require_once __DIR__.'/global.php';   
 
@@ -15,7 +22,8 @@ class db {
 	public static $password = null;
 	public static $name = null;
 	public static $prefix = null;
-	
+
+	private static $pdoConnection = null;
 	private static $dbConnection;
 	
 	private static function setValues ($server, $usrname, $pwd, $name, $prefix) {
@@ -48,6 +56,23 @@ class db {
 	        $tmp .= "\n";
 	    }
 	    return $tmp;
+	}
+	
+	/**
+	 * PDO
+	 * Gets an instance of the PDO object
+	 */
+	static function PDO () {
+		
+		if(self::$pdoConnection != null)
+			return self::$pdoConnection;
+		else {
+			
+			self::$pdoConnection = new PDO("mysql:host=".self::$server.";dbname=".self::$name, self::$username, self::$password);
+			
+			return self::$pdoConnection;
+		}
+		
 	}
 	
 	/**
@@ -135,7 +160,6 @@ class db {
 
 			self::setValues($server, $usrname, $pwd, $name, $prefix);		    
 		    self::$isConnected = true;
-		    
 		        
 		return true;
 	}

@@ -21,10 +21,7 @@
 
 require_once( __DIR__."/include/global.php" );
 
-if($_SERVER['SCRIPT_NAME'] == "search.php"){
-    header("Location:".TSEP_CLIENT_ROOT."tsepsearch.php"); //Redirect to tsepsearch.php, as this not a template
-    die();
-}
+Security::protect();
 
 require_once( TSEP_ROOT_DIR."/suggest.js.php" );
 require_once( TSEP_INCLUDE_DIR."/log.class.php" );
