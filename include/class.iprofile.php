@@ -37,9 +37,7 @@ class IProfiles {
 		$return = array();
 		
 		$handle = $pdo->query("SELECT * FROM ".db::$prefix."iprofile");
-		
-		$handle->execute();
-		
+				
 		while ($row = $handle->fetchObject()) {
 			
 			$tmp = new IProfile();
@@ -56,23 +54,51 @@ class IProfiles {
 	}
 	/**
 	 * getProfileById
-	 * Returns the name of the profile
+	 * Gets the Indexing Profile by ID
 	 * @param string $name The ID of the profile
+	 * @return The IProfile of the specified id
 	 */
 	static function getProfileById($id) {
 		
 		$pdo = db::PDO();
 				
-		$handle = $pdo->query("SELECT * FROM ".db::$prefix."iprofile WHERE idiprofile = ?");
+		$handle = $pdo->prepare("SELECT * FROM ".db::$prefix."iprofile WHERE idiprofile = ?");
 		
-		$handle->execute(array($name));
-		
+		$handle->execute(array($id));
+				
 		$row = $handle->fetchObject();
 				
 		$tmp = new IProfile();
 
 		$tmp->profileId = $row->idiprofile;
 		$tmp->profileName = $row->profilename;
+		
+		return $tmp;
+	}
+	/**
+	 * createNewProfile
+	 * Creates a new Indexing Profile
+	 * @param string $name The name of the Indexing Profile
+	 * @return false on failure, the created IProfile on success
+	 */
+	static function createNewProfile($name) {
+	
+		$pdo = db::PDO();
+		
+		$handle = $pdo->prepare("INSERT INTO".db::$prefix."iprofile (idiprofile, profilename) VALUES (?, ?) ");
+		
+		$id = uniqid();
+		
+		if(!$handle->execute(array($id, $name)))
+			return false;
+			
+		$tmp = new IProfile();
+
+		$tmp->profileId = $id;
+		$tmp->profileName = $name;
+		
+		return $tmp;
+	
 	}
 	
 }
