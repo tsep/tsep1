@@ -92,4 +92,23 @@ class DATABASE_CONFIG {
 		'database' => 'test_database_name',
 		'prefix' => '',
 	);
+	
+	function __construct() {
+	
+		//TODO: After everything is migrated to MVC, move file inside 'config'
+		$pathtoini = dirname(__FILE__).'/../../../include/conf.db.ini.php';
+		
+		$ini = parse_ini_file($pathtoini);
+		
+		$this->default = array(
+			'driver' => 'mysql',
+			'persistent' => true,
+			'host' => $ini['db_server'],
+			'login' => $ini['db_usrname'],
+			'password' =>$ini['db_pwd'],
+			'database' => $ini['db_name'],
+			'prefix' => $ini['db_table_prefix'],
+		);
+	
+	}
 }
