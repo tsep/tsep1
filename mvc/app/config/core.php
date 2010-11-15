@@ -33,7 +33,7 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+	Configure::write('debug', 1);
 
 /**
  * CakePHP Log Level:
@@ -86,6 +86,7 @@
  * [Note Routing.admin is deprecated in 1.3.  Use Routing.prefixes instead]
  */
 	//Configure::write('Routing.prefixes', array('admin'));
+	
 
 /**
  * Turn off all caching application-wide.
