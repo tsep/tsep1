@@ -31,11 +31,3 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-/**
- * ...and setup admin routing
- */
-	Router::connect('/admin/:controller/:action/*', array('action' => null, 'prefix' => 'admin', 'admin' => true, 'layout' => 'admin' ));
-/**
- * ...and set the admin default page
- */
-	Router::connect('/admin', array('controller' => 'profiles', 'action' => 'index', 'admin' => true, 'layout' => 'admin'));
