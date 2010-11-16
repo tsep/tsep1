@@ -34,10 +34,13 @@
  */
 class AppController extends Controller {
 
+	var $helpers = array('Html', 'Session', 'Javascript', 'Form');
+	
+	
     function beforeFilter() {
         if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
             $this->layout = 'admin';
-        } 
+        }
     }
 
 }
