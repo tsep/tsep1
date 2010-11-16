@@ -25,7 +25,7 @@
     <div class="header">
     <div class="logo"><a href="#"><?php echo $html->image('logo.gif',array('border'=>'0'))?></a></div>
     
-    <div class="right_header">Welcome Admin, <?php echo $html->link('Visit Site', array('controller'=>'search', 'action'=>'index'))?> | <?php //<a href="#" class="messages">(3) Messages</a>?><span id="updatePanel">Updating...</span> | <a href="#" class="logout">Logout</a></div>
+    <div class="right_header">Welcome Admin, <?php echo $html->link('Visit Site', array('controller'=>'profiles', 'action'=>'index', 'admin'=>false))?> | <?php //<a href="#" class="messages">(3) Messages</a>?><span id="updatePanel">Updating...</span> | <a href="#" class="logout">Logout</a></div>
     <div class="jclock"></div>
     </div>
     
@@ -33,7 +33,7 @@
     
                     <div class="menu">
                     <ul>
-                    <li><a href="?page=main">ACP Home</a></li>
+                    <li><?php echo $html->link('ACP Home', array('controller'=>'profiles', 'action'=>'index'))?></li>
                     <li><a href="?page=sites">Manage Sites<!--[if IE 7]><!--></a><!--<![endif]-->
                     <?php 
                     /*
@@ -49,7 +49,7 @@
                     */
                     ?>
                     </li>
-                    <li><a href="?page=indexer">Create a New Index<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <li><?php echo $html->link('Create a New Index', array('controller'=>'profiles', 'action'=>'create'))?>
                     <?php 
                     /*
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
@@ -158,7 +158,7 @@
                     ?>
                     </li>
                     <li><a href="?page=layout">Search Page Layout</a></li>
-                    <li><a href="?page=contact">Contact TSEP</a></li>
+                    <li><?php echo $html->link('Contact TSEP', array( 'controller'=>'queries', 'action'=>'index'))?></li>
                     </ul>
                     </div> 
                     

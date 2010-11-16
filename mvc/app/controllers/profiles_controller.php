@@ -1,6 +1,6 @@
 <?php
 /**
-* The Default Page for administration (displays indexing profiles)
+* Searches and Creates indexing profiles
 * 
 * @author geoffreyfishing
 *
@@ -19,6 +19,20 @@ class ProfilesController extends AppController {
 	
 		$this->set('profiles', $this->Profile->find("all"));
 	
+	}
+	
+	function admin_create () {
+	
+	
+	}
+	
+	function search ($query = null, $page = null) {
+		
+		
+	
+	}
+	function index () {
+		$this->redirect(array('controller'=>'profiles', 'action'=>'search'), null, true);
 	}
 
 }
