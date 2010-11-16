@@ -13,6 +13,7 @@
 	echo $javascript->link('jquery-confirmation.js');
 	echo $javascript->link('accordion.js');
 	echo $javascript->link('niceforms.js');
+	echo $javascript->link('admin.js');
 
 	echo $scripts_for_layout 
 ?>

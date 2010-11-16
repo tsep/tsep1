@@ -26,7 +26,7 @@
             <td><?php echo $profile['Profile']['modified']?></td>
 
             <td><a href="#"><?php echo $html->image('user_edit.png', array('border'=>'0'))?></a></td>
-            <td><a href="#" class="ask"><?php echo $html->image('trash.png', array('border'=>'0'))?></a></td>
+            <td><a href="#" class="ask"><?php echo $html->image('trash.png', array('border'=>'0', 'class'=>'ask'))?></a></td>
         </tr> 
      <?php }?>   
     </tbody>
