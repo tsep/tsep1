@@ -163,7 +163,7 @@
                     ?>
                     </li>
                     <li><a href="?page=layout">Search Page Layout</a></li>
-                    <li><?php echo $html->link('Contact TSEP', array( 'controller'=>'queries', 'action'=>'index'))?></li>
+                    <li><?php echo $html->link('Contact TSEP', array( 'controller'=>'help', 'action'=>'index'))?></li>
                     </ul>
                     </div> 
                     
@@ -296,8 +296,10 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
     </div>  
     
     <div class="right_content">            
-        
-	<?php echo $content_for_layout ?>
+    <?php
+    	echo $session->flash(); 
+		echo $content_for_layout 
+	?>
     
     </div>
     <!-- end of right content-->
