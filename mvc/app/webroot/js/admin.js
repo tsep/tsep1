@@ -20,13 +20,13 @@ ddaccordion.init({
 });
 
 $(document).ready(function() {
-    $('.ask').jConfirmAction();
     $('.jclock').jclock();
+    $('.ask').jConfirmAction();
 });
 
 $(document).ready(function () {
 
-	$.get("../updater.php", function(data){
+	$.get(window.base + "../admin/updater.php?", function(data){
 		   if (data == "yes") {
             $("#updatePanel").html("<a href=\"#\" onClick=\"runUpdate();\">Click to Update</a>");
         } else {
@@ -37,14 +37,16 @@ $(document).ready(function () {
 	
 });
 
+//Called after a DOM change
 function change () {
+	
 	$(".button").each(function () {
     	var img = $(new Image());
 
 		$(img)	.css("margin-top", "24px")
 				.css("margin-bottom", "10px");
 
-    	img.attr("src","../../static/img/ajax-loader.gif");
+    	img.attr("src","../img/ajax-loader.gif");
     	img.hide();
 
     	img.insertAfter(this);
@@ -65,7 +67,7 @@ function change () {
 function runUpdate () {
 
 	$("#updatePanel").html("Updating...");
-	$.get("../updater.php?Update=yes", function(data){
+	$.get(window.base + '../admin/updater.php?Update=yes', function(data){
 		if (data == "done") {
 			window.reload();
 		} else {

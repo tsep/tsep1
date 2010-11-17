@@ -16,7 +16,12 @@
 	echo $javascript->link('admin.js');
 
 	echo $scripts_for_layout 
+	
+	//The Base Url of the MVC application to provide javascript with
 ?>
+<script type="text/javascript">
+	window.base = <?php echo json_encode($html->url('/'))?>;
+</script>
 
 </head>
 <body>
