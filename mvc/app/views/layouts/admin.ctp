@@ -8,12 +8,12 @@
 	echo $html->css('admin-panel');
 	echo $html->css('niceforms-default');
 	
-	echo $javascript->link('jquery.js');
-	echo $javascript->link('jquery-clock.js');
-	echo $javascript->link('jquery-confirmation.js');
-	echo $javascript->link('accordion.js');
-	echo $javascript->link('niceforms.js');
-	echo $javascript->link('admin.js');
+	echo $html->script('jquery');
+	echo $html->script('jquery-clock');
+	echo $html->script('jquery-confirmation');
+	echo $html->script('accordion');
+	echo $html->script('niceforms');
+	echo $html->script('admin');
 
 	echo $scripts_for_layout 
 	
@@ -297,7 +297,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
     
     <div class="right_content">            
     <?php
-    	echo $session->flash(); 
+    	echo $session->flash();    		
 		echo $content_for_layout 
 	?>
     

@@ -1,4 +1,4 @@
-<h2>Indexes</h2>
+<h2>ACP Home</h2>
 <table id="rounded-corner" summary="Current Indexes">
     <thead>
     	<tr>
@@ -25,8 +25,37 @@
             <td><?php echo $profile['Profile']['url']?></td>
             <td><?php echo $profile['Profile']['modified']?></td>
 
-            <td><a href="#"><?php echo $html->image('user_edit.png', array('border'=>'0'))?></a></td>
-            <td><a href="#" class="ask"><?php echo $html->image('trash.png', array('border'=>'0', 'class'=>'ask'))?></a></td>
+            <td><?php echo 
+	            $html->link(
+		            $html->image('user_edit.png', array(
+		            	'border'=>'0',
+		            	'alt' => 'edit'
+		            )),
+	            array(
+	            	'action' => 'edit',
+	            	'controller' => 'profiles',
+	            	$profile['Profile']['id']
+	            ),
+	            array(
+	            	'escape'=>false
+	            ));			
+           	?></td>
+           	<td><?php echo 
+	            $html->link(
+		            $html->image('trash.png', array(
+		            	'border'=>'0',
+		            	'alt' => 'delete'
+		            )),
+	            array(
+	            	'action' => 'delete',
+	            	'controller' => 'profiles',
+	            	$profile['Profile']['id']
+	            ),
+	            array(
+	            	'class' => 'ask',
+	            	'escape'=> false
+	            ));			
+           	?></td>
         </tr> 
      <?php }?>   
     </tbody>

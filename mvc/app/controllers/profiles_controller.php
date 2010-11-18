@@ -23,6 +23,26 @@ class ProfilesController extends AppController {
 		
 		$this->set('profiles', $this->Profile->find("all"));
 		$this->set('title','ACP Home');
+		
+		$this->Session->setFlash('Welcome to the Administration Control Panel!','flash_success');
+		
+	}
+	
+	/**
+	 * admin_edit
+	 * Edit an Indexing Profile's properties
+	 * @param mixed $id
+	 */
+	function admin_edit($id = null){
+	
+	}
+	
+	/**
+	 * admin_delete
+	 * Deletes an indexing profile AND all associated data
+	 * @param unknown_type $id
+	 */
+	function admin_delete ($id = null) {
 	
 	}
 	
@@ -32,7 +52,7 @@ class ProfilesController extends AppController {
 	 */
 	function admin_create () {
 	
-	
+		$this->Session->setFlash('Indexing has been queued, index may take a moment to appear depending on the size of the site.', 'flash_warn');
 	}
 	
 	/**

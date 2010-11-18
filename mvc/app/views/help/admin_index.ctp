@@ -4,4 +4,24 @@
 <?php echo $log?>
 </textarea>
 <h2>Get Support</h2>
+<ul>
+	<li>
+		<?php echo $html->link('Submit the Error Log', array('controller'=>'help', 'action'=>'submit'))?> <br />
+	</li>
+	<li>
+		<?php echo $html->link('Clear the Error Log', array('controller'=>'help', 'action' => 'clean'))?> <br />
+	</li>
+	<li>
+		<?php echo $html->link('Visit the Help forum', 'http://p.sf.net/tseproject/help')?> <br />
+	</li>
+	<li>
+		<?php echo $html->link('Submit a new Ticket', 'http://p.sf.net/tseproject/newticket')?> <br />
+	</li>
+</ul>
+
+
+
+
+
+
 
