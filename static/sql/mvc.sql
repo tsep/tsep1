@@ -12,3 +12,6 @@ CREATE TABLE `database`.`tsep_profiles` (
 	PRIMARY KEY (`id`)
 );
 
+ALTER TABLE  `tsep_profiles` ADD  `regex` VARCHAR( 255 ) NOT NULL AFTER  `url`;
+
+
