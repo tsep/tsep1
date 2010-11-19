@@ -39,7 +39,7 @@
                     <div class="menu">
                     <ul>
                     <li><?php echo $html->link('ACP Home', array('controller'=>'profiles', 'action'=>'index'))?></li>
-                    <li><a href="?page=sites">Manage Sites<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <li><?php echo $html->link('Index Site', array('controller'=>'indexer', 'action'=>'index'))?>
                     <?php 
                     /*
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
@@ -54,7 +54,7 @@
                     */
                     ?>
                     </li>
-                    <li><?php echo $html->link('Create a New Index', array('controller'=>'profiles', 'action'=>'create'))?>
+                    <li><?php echo $html->link('Create a New IProfile', array('controller'=>'profiles', 'action'=>'create'))?>
                     <?php 
                     /*
                     <!--[if lte IE 6]><table><tr><td><![endif]-->

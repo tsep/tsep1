@@ -31,3 +31,8 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	
+/**
+ * The Default 'admin' page
+ */
+	Router::connect('/admin', array('controller' => 'profiles', 'action' =>'index', 'admin' => true));

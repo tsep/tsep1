@@ -14,4 +14,10 @@ CREATE TABLE `database`.`tsep_profiles` (
 
 ALTER TABLE  `tsep_profiles` ADD  `regex` VARCHAR( 255 ) NOT NULL AFTER  `url`;
 
+CREATE TABLE tsep_indexes (
+    id INTEGER UNSIGNED NOT NULL,
+    profile_id INTEGER UNSIGNED NOT NULL,
+    url VARCHAR(500),
+    text TEXT 
 
+)

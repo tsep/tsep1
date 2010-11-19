@@ -13,7 +13,7 @@
 */
 class ProfilesController extends AppController {
 
-	var $name = "Profiles";
+	var $name = 'Profiles';
 	
 	/**
 	 * admin_index

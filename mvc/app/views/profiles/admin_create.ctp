@@ -1,2 +1,2 @@
-<h2>Create a New Index</h2>
+<h2>Create a New Indexing Profile</h2>
 
