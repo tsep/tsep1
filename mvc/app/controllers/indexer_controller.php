@@ -14,15 +14,25 @@
 	class IndexerController extends AppController {
 		
 		var $name = 'Indexer';
-		var $uses = array('Index');
+		var $uses = array('Index', 'Stopword');
 		
 		function index() {
 			
 		}
 		
 		
-		function _getImptText($text) {
+		function _cleanText($text, $stopwords) {
 		
+			//Clean out all the HTML
+			$text = strip_tags($text);
+			
+			//Clean out all the stopwords
+			foreach ($stopwords as $stopword)
+				$text = str_replace($stopword['Stopword']['stopword'], ' ', $text);
+
+			//Clean out all the spaces
+			$text = preg_replace('!\s+!', ' ', $text);
+			
 			return $text;
 		}
 		
@@ -35,8 +45,10 @@
 			//Import PHPCrawler
 			App::import('Vendor', 'PHPCrawler', array('file'=>'phpcrawler'.DS.'phpcrawler.class.php'));
 			
-			//Import HTMLtoTEXT
-			App::import('Vendor', 'htmltotext');
+			
+			//Load the stopwords
+			$stopwords = $this->Stopword->find('all');
+			
 			
 			class MyCrawler extends PHPCrawler 
 			{
@@ -44,14 +56,9 @@
 			  {
 			  	//Grab the content of the body
 			  	$page_data['source'] = preg_replace("/.*<body[^>]*>|<\/body>.*/si", "", $page_data['source']);
-			  	
-			  	$htt = new htmltotext($page_data['source']);
-			  	
-			  	//Grab the text of the body
-			  	$page_data['source'] = $htt->get_text();
-			  	
+			  				  	
 			  	//Get out the important stuff
-			  	$page_data['source'] = $this->_getImptText($page_data['source']);
+			  	$page_data['source'] = $this->_cleanText($page_data['source'], $stopwords);
 			  }
 			}
 			

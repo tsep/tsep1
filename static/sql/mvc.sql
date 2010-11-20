@@ -21,3 +21,5 @@ CREATE TABLE tsep_indexes (
     text TEXT 
 
 )
+
+ALTER TABLE tsep_stopwords CHANGE idstopwords id INTEGER UNSIGNED AUTO_INCREMENT NOT NULL
