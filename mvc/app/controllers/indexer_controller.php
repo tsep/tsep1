@@ -16,52 +16,66 @@
 		var $name = 'Indexer';
 		var $uses = array('Index', 'Stopword', 'Element', 'Profile');
 		
-		function index($continue = null) {
-						
-			$profile = $this->Profile->findByName('profilename');
+		function start($id = null) {
+
+			if ($id = null) $this->redirect(array('controller'=>'Indexer', 'action' => 'index'), null, true);
+			
+			$profile = $this->Profile->findById('profilename');
+			
+			if(empty($profile)) $this->redirect(array('controller'=>'Indexer', 'action' =>'index'), null, true);
+			
 			$this->_index($profile);
 		}
 		
-		
-		function _index($profile) {
-			
-			$this->log('Importing Modules for index.');
+		function _import()  {
 			
 			App::import('Vendor','get_time_left');
 			App::import('Vendor', 'resolve_url');
 			App::import('Vendor', 'tsep_crawler');
 			App::import('Vendor', 'tsep_indexer');
+			App::import('Vendor', 'start_script');
+			App::import('Vendor', 'random_string');
 			
-			$this->log('Deleting previous indexes');
+		}
+		
+		function _index($profile) {
+			
+			$this->log('Importing Modules for index.');
+			
+			$this->_import();
 						
-			//Remove all indexes of that profile
-			$this->Index->deleteAll(array('Index.profile_id' => $profile['Profile']['id']), false);
-
-			$this->log('Loading Stopwords');
-			//Load the stopwords
-			$stopwords = $this->Stopword->find('all');
+			$this->log('Loading framework');
 			
-			$this->log('Loading Elements');
-			//Load the elements (array to find links)
-			$elements = $this->Element->find('all');
+			$resume = false;
 			
-			$this->log('Profile Object:'.print_r($profile,true));
+			//NEVER TRUST ANYTHING FROM THE USER!!!
+			if (ctype_alnum($this->params['continue']))
+				if (file_exists(TMP.$this->params['continue']))
+					if (($contents = file_get_contents(TMP.$this->params['continue']))!= '')
+						$resume = true;
+						
+			if ($resume) {
+				
+			}
+			else {
 			
-			$this->log('Loading Crawler');
-			//Load the crawler
-			$crawler = new TSEPCrawler($profile['Profile']['url'], $profile['Profile']['regex'], $elements);
+				$stopwords = $this->Stopword->find('all');
+				$elements = $this->Element->find('all');
+				
+				$crawler = new TSEPCrawler($profile['Profile']['url'], $profile['Profile']['regex'], $elements);
+				$indexer = new TSEPIndexer($stopwords);
+				
+				$this->log('Deleting indexes');
+				
+				$this->Index->deleteAll(array('Index.profile_id' => $profile['Profile']['id']), false);
+			}
 			
-			$this->log('Loading Indexer');
-			//Load the indexer
-			$indexer = new TSEPIndexer($stopwords, $crawler);
+			$this->log('Beginning crawl');
 			
-			$this->log('Loading complete');
-			$this->log('Begining crawl');
-			
-			while ($index = $indexer->index()) {
-
-				$this->log('Indexed file:'.$index->url);
-				$this->log('Saving index');
+			while ($page = $crawler->crawl()) {
+				
+				$indexer->parse($page);
+				
 				$save = array(
 					'Index' => array(
 						'profile_id' => $profile['Profile']['id'],
@@ -71,9 +85,7 @@
 				);
 				
 				$this->Index->save($save);
-				
-				$this->log('Save complete');
-				
+								
 				if (get_time_left() <= 5)
 					$this->_shutdown($crawler);
 					
@@ -81,8 +93,6 @@
 			
 			function _shutdown ($crawler) {
 			
-				App::import('Vendor', 'start_script');
-				App::import('Vendor', 'random_string');
 				
 				$randstr = random_string(10);
 								

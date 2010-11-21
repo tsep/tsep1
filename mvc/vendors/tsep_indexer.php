@@ -27,39 +27,33 @@ class TSEPIndexer {
 	 * @param array $stopwords
 	 * @param TSEPCrawler $crawler The TSEPCrawler to use
 	 */
-	function __construct($stopwords, $crawler) {
+	function __construct($stopwords) {
 	
 		if (!is_array($stopwords))
 			throw new Exception('Stopwords is not an array');
-		if (get_class($crawler)!= 'TSEPCrawler')
-			throw new Exception('The passed crawler is corrupt');
 		
 		$this->stopwords = $stopwords;
-		$this->crawler = $crawler;
 	
 	} 
 	
 	/**
-	 * index
-	 * Advances the indexer to the next page and returns the content
-	 * @return TSEPIndex
+	 * parse
+	 * Parses a Page and returns the parsed page
+	 * @var Page $page The page to parse
 	 */
-	function index () {
+	function parse (&$page) {
 	
-		$crawl = $this->crawler->crawl();
-		
-		//Return if $crawl is false
-		if(!$crawl)	return $crawl;
-		
 		
 		//Only keep the body
-		$crawl->content = preg_replace("/.*<body[^>]*>|<\/body>.*/si", "", $crawl->content);
+		$page->content = preg_replace("/.*<body[^>]*>|<\/body>.*/si", "", $page->content);
 		
 		//Get the Important text
-		$crawl->content = $this->cleanText($crawl->content);
+		$page->content = $this->cleanText($page->content);
 		
-		
-		return $crawl;
+		if(empty($page->content))
+			return false;
+		else 	
+			return true;
 	}
 
 }

@@ -68,24 +68,17 @@ class TSEPCrawler {
 	 * @param string $regex The Regular Expression that URLs must match to be crawled
 	 * @param string $elements The elements and their properties that contain the links
 	 */
-	function __construct($start, $regex, $elements, $urls = null, $done= null) {
+	function __construct($start, $regex, $elements) {
 		
 		//Queue the start url to be crawled
 		if ($start != null)
 			array_push($this->urls, $start);
-			
-		CakeLog::write('error','Start URL:'.$start);
-		
+					
 		//Set the RegEx
 		$this->regex = $regex;
 		
 		//Set the elements
 		$this->elements = $elements;
-		
-		if ($urls != null)
-			$this->urls = $urls;
-		if ($done != null)
-			$this->done = $done;
 			
 		$this->cleanURLs();
 		
@@ -94,11 +87,10 @@ class TSEPCrawler {
 	/**
 	 * crawl
 	 * Advances the crawler to the next URL and returns the page contents
-	 * @return TSEPCrawlerPage
+	 * @return Page
 	 */
 	function crawl() {
 		
-		CakeLog::write('error', 'Contents of urls:'. $this->urls);
 		
 		//We will return false if there is nothing left to crawl
 		if (empty($this->urls))
@@ -117,10 +109,8 @@ class TSEPCrawler {
 		$contents = @file_get_contents($this->url, 0, $context);
 		
 		// Check for empties
-		if (!empty($contents))
-			$this->parse($contents);
+		if (!empty($contents))	$this->parse($contents);
 			
-		CakeLog::write('error', 'Contents of page:'.$contents);
 			
 		/*
 		 * If retreiving the contents failed, we don't need to do anything
@@ -188,16 +178,16 @@ class TSEPCrawler {
 		$this->urls = array_values($this->urls);
 	}
 	
-	function save () {
-		$state = array(
-			'start' => null,
-			'regex' => $this->regex,
-			'elements' => $this->elements,
-			'urls' => $this->urls,
-			'done' => $this->done
-		);
+	function __sleep() {
 		
-		return serialize($state);
+		$this->cleanURLs();
+
+		return array('regex', 'urls', 'done', 'elements');
+	}
+	
+	function __wakeup() {
+		
+		
 	}
 	
 }
