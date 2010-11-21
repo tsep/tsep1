@@ -40,7 +40,9 @@ class AppController extends Controller {
     function beforeFilter() {
         if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
             $this->layout = 'admin';
-        }
+        }        
     }
+    
+    
 
 }

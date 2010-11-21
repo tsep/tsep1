@@ -47,18 +47,48 @@ class TSEPCrawler {
 	 * @var array
 	 */
 	private $done = array();
+	
+	/**
+	 * elements
+	 * Link elements
+	 * @var array
+	 */
+	private $elements = array();
+	/**
+	 * url
+	 * The current URL
+	 * @var string
+	 */
+	private $url = '';
 
 	/**
 	 * Contructor
 	 * Initializes the class
 	 * @param string $start The start url
+	 * @param string $regex The Regular Expression that URLs must match to be crawled
+	 * @param string $elements The elements and their properties that contain the links
 	 */
-	function __construct($start, $regex) {
+	function __construct($start, $regex, $elements, $urls = null, $done= null) {
 		
 		//Queue the start url to be crawled
-		array_push($this->urls, $start);
+		if ($start != null)
+			array_push($this->urls, $start);
+			
+		CakeLog::write('error','Start URL:'.$start);
+		
 		//Set the RegEx
 		$this->regex = $regex;
+		
+		//Set the elements
+		$this->elements = $elements;
+		
+		if ($urls != null)
+			$this->urls = $urls;
+		if ($done != null)
+			$this->done = $done;
+			
+		$this->cleanURLs();
+		
 	}
 	
 	/**
@@ -68,11 +98,13 @@ class TSEPCrawler {
 	 */
 	function crawl() {
 		
+		CakeLog::write('error', 'Contents of urls:'. $this->urls);
+		
 		//We will return false if there is nothing left to crawl
-		if (($this->start == '')&&($this->urls == array()))
+		if (empty($this->urls))
 			return false;
 		
-		$url = array_pop($this->urls);
+		$this->url = array_pop($this->urls);
 		
 		// Create the stream context
 		$context = stream_context_create(array(
@@ -82,11 +114,13 @@ class TSEPCrawler {
 		));
 		
 		// Fetch the URL's contents
-		$contents = @file_get_contents($url, 0, $context);
+		$contents = @file_get_contents($this->url, 0, $context);
 		
 		// Check for empties
 		if (!empty($contents))
 			$this->parse($contents);
+			
+		CakeLog::write('error', 'Contents of page:'.$contents);
 			
 		/*
 		 * If retreiving the contents failed, we don't need to do anything
@@ -95,13 +129,13 @@ class TSEPCrawler {
 		 * because we don't want to call the same page twice (or more)
 		 */
 			
-		array_push($this->done, $url);
+		array_push($this->done, $this->url);
 		
 		//Now remove duplacate URLs, URLs that don't match the RegEx, and already crawled URLs
-		cleanUrls();
+		$this->cleanUrls();
 		
 		//And that is pretty much it
-		return new TSEPCrawlerPage($content, $url);
+		return new Page($contents, $this->url);
 	}
 	
 	/**
@@ -111,17 +145,21 @@ class TSEPCrawler {
 	 */
 	private function parse($contents) {
 		
-	/*
-	 * Original PHP code by Chirp Internet: www.chirp.com.au
-	 * Please acknowledge use of this code by including this header.
-	 */ 
+		CakeLog::write('error','Begin Parsing Contents');
 		
-	  $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>(.*)<\/a>";
-	  if(preg_match_all("/$regexp/siU", $contents, $matches, PREG_SET_ORDER)) {
-	    foreach($matches as $match) {
-	    	array_push($this->urls, $math[2]);
-	    }
-	  }
+		$dom = new DOMDocument();
+		@$dom->loadHTML($contents);
+		
+		$simple = simplexml_import_dom($dom);
+		
+		foreach ($this->elements as $element){
+			
+			$results = $simple->xpath('//'.$element['Element']['tag']);
+			
+			foreach ($results as $result)
+				array_push($this->urls, url_to_absolute($this->url, $result[$element['Element']['property']]));
+		}
+		
 	
 	} 
 	
@@ -135,43 +173,42 @@ class TSEPCrawler {
 		$this->urls = array_unique($this->urls);
 		$this->done = array_unique($this->done);
 		
-		//Remove done urls
-		array_filter($this->urls, array($this, 'removeDoneURLs'));
-		
+		//Remove done urls		
+		foreach ($this->urls as $key => $value) 	
+			if(in_array($value, $this->done))
+				unset($this->urls[$key]);
+		//TODO:Design a user friendly system of creating a regex
 		//Check the RegEx
-		array_filter($this->urls, array($this, 'removeRegEx'));
+		//foreach ($this->urls as $key => $value) 	
+		//	if(!preg_match($this->regex, $value))
+		//		unset($this->urls[$key]);;
 		
 		//Reindex the arrays
 		$this->done = array_values($this->done);
 		$this->urls = array_values($this->urls);
 	}
 	
-	/**
-	 * removeDoneURLs
-	 * callback for array_filter to remove urls that are  already done
-	 * @param string $var The URL to check
-	 */
-	private function removeDoneURLs ($var) {
-	
-		if(in_array($var, $this->done))
-			return false;
-			
-		return true;
+	function save () {
+		$state = array(
+			'start' => null,
+			'regex' => $this->regex,
+			'elements' => $this->elements,
+			'urls' => $this->urls,
+			'done' => $this->done
+		);
+		
+		return serialize($state);
 	}
-	/**
-	 * removeRegEx
-	 * callback for array_filter to remove urls that do not match the RegEx
-	 * @param string $var
-	 */
-	private function removeRegEx ($var) {
 	
-		if(preg_match($this->regex, $var))
-			return true;
-		return false;
-	}
 }
 
-class TSEPCrawlerPage {
+/**
+ * TSEPCrawlerPage
+ * A page crawled by TSEPCrawler
+ * @author Geoffrey
+ *
+ */
+class Page {
 	public $content;
 	public $url;
 	
