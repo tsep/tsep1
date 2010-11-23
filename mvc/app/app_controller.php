@@ -36,6 +36,8 @@ class AppController extends Controller {
 
 	var $helpers = array('Html', 'Session', 'Javascript', 'Form');
 	
+	var $components = array('RequestHandler', 'Session');
+	
 	
     function beforeFilter() {
         if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {

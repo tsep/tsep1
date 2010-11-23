@@ -27,7 +27,7 @@
 		 */
 		function admin_index () {
 		
-			$this->set('log', file_get_contents(LOGS.'error.log'));
+			$this->set('log', file_get_contents(LOGS.'error.log')."\n".file_get_contents(LOGS.'debug.log'));
 		
 		}
 		
@@ -70,6 +70,7 @@
 		function admin_clean () {
 			
 			file_put_contents(LOGS.'error.log', '');
+			file_put_contents(LOGS.'debug.log', '');
 			
 			$this->Session->setFlash('The error log has been cleaned.', 'flash_success');
 			

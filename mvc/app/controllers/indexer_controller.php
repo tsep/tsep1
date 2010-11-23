@@ -14,32 +14,80 @@
 	class IndexerController extends AppController {
 		
 		var $name = 'Indexer';
-		var $uses = array('Index', 'Stopword', 'Element', 'Profile');
+		var $uses = array(
+			'Index', 
+			'Stopword', 
+			'Element', 
+			'Profile', 
+			'IndexRequest'
+		);
 		
 		function admin_index ($id = null) {
 		
-		
+			if ($id != null){
+				$this->_start($id);
+				$this->Session->setFlash('Indexing has been queued, but index may take a while to appear depending on the site being crawled', 'flash_warn');
+				$this->redirect(array('controller' => 'profiles', 'action' => 'index', 'admin' => true), null, true);
+			}
+			
+			if($this->RequestHandler->isPost()) {
+				$this->_start($this->data['IndexRequest']['profile']);
+				$this->Session->setFlash('Indexing has been queued, but index may take a while to appear depending on the site being crawled', 'flash_warn');
+				$this->redirect(array('controller' => 'profiles', 'action' => 'index', 'admin' => true), null, true);
+			}
 		}
 		
-		function admin_start($id = null) {
+		function _start($id) {
+		
+			App::import('Vendor', 'start_script');
+			App::import('Vendor', 'random_string');
 			
-			$resume = false;
-			if (ctype_alnum($this->data['continue']))
-				if (file_exists(TMP.$this->data['continue']))
-					if (file_get_contents(TMP.$this->data['continue'])!= '')
-						$resume = true;
-			if (!$resume) {
-				if ($_SERVER['REMOTE_ADDR']!= $_SERVER['SERVER_ADDR']) $this->redirect(array('controller'=>'Indexer', 'action' => 'index', 'admin' => true), null, true);
-	
-				if ($id == null) $this->redirect(array('controller'=>'Indexer', 'action' => 'index','admin' => true), null, true);
-				
-				$profile = $this->Profile->findById($id);
-				
-				if(empty($profile)) $this->redirect(array('controller'=>'Indexer', 'action' =>'index', 'admin' => true), null, true);
+			$randstr = random_string(10);
+
+			$store = array('id' => $id);
+			
+			$data = serialize($store);
+			
+			file_put_contents(TMP.'indexer'.DS.$randstr, $data);
+			
+			//TODO: This is bad practice, find another method
+			App::import('Helper', 'Html');
+			$html = new HtmlHelper();
+
+			$url = $html->url(
+						array(
+							'controller' => 'indexer',
+							'action' => 'start',
+							'admin' => true, 
+							'?' => array(
+								'continue' => $randstr
+							)
+						),
+						true
+					);
+			
+			$status = start_script($url);
+			
+			if (!$status) $this->log('Failed to make async request to '. $url);
+		}
+		
+		function admin_start() {
+			
+			$valid = false;
+			
+			if ((ctype_alnum(@$this->params['url']['continue'])) && 
+				(file_exists(TMP.'indexer'.DS.$this->params['url']['continue'])))
+						$valid = true;
+			
+			if ((!$valid))
+			{
+				//The user shouldn't be here, kill the script.
+				$this->log('Attempted security breach from '. $this->RequestHandler->getClientIP(). ' at URL:'. $this->params['url']['url']);
+				$this->cakeError('error500');
 			}
-			else $profile = true;
 			
-			$this->_index($profile);
+						
+			$this->_index();
 		}
 		
 		
@@ -53,32 +101,48 @@
 			App::import('Vendor', 'random_string');
 			
 		}
-		function _index($profile) {
+		function _index() {
 			
 			$this->log('Importing Modules for index.');
 			
 			$this->_import();
 						
-			$this->log('Loading framework');
-									
-			if ($profile == true) {
-				
-				$this->log('And we are back where we left off');
-				
-				$contents = file_get_contents(TMP.$this->data['continue']);
-				$store = @unserialize($contents);
-				
-				if (!$store) {
+			$this->log('Initializing');
+			
+			$contents = file_get_contents(TMP.'indexer'.DS.$this->params['url']['continue']);
+			$this->log(Debugger::exportVar($contents));
+			
+			$store = @unserialize($contents);
+			
+			unlink(TMP.'indexer'.DS.$this->params['url']['continue']);
+			
+			if (!$store) {
 					$this->log('Error occurred while unserializing stored crawler, Contents:'.$contents);
 					$this->cakeError('error500');
-				}
+			}
+
+			$this->log('Loading framework');
+			$this->log(Debugger::exportVar($store));
+			
+			if (!isset($store['id'])) {
+				
+				//We are resuming 
+				$this->log('And we are back where we left off');
 				
 				$indexer = $store['indexer'];
 				$crawler = $store['crawler'];
 			}
 			else {
 				
+				//We are initializing
 				$this->log('Loading dependancies');
+				
+				$profile = $this->Profile->findById($store['id']);
+				
+				if(empty($profile)) {
+					$this->log('Invalid Profile Request. The TMP directory may be corrupt.');
+					$this->cakeError('error500');
+				}
 			
 				$stopwords = $this->Stopword->find('all');
 				$elements = $this->Element->find('all');
@@ -107,7 +171,7 @@
 				
 				$this->Index->save($save);
 								
-				if (get_time_left() <= 5)
+				if (get_time_left() <= 10)
 					$this->_shutdown($crawler, $indexer);
 					
 			}
@@ -115,7 +179,7 @@
 			$this->log('Indexing Complete');
 			die();
 		}
-		function _shutdown ($crawler, $indexer) {
+		function _shutdown ($crawler, $indexer, $id) {
 			
 				$this->log('Preparing to Restart');
 				
@@ -123,15 +187,19 @@
 
 				$save = serialize(array(
 					'crawler' => $crawler,
-					'indexer' => $indexer				
+					'indexer' => $indexer
 				));
 				
 				$this->log('Saving state');
 				
-				file_put_contents(TMP.$randstr, $save);
+				file_put_contents(TMP.'indexer'.DS.$randstr, $save);
 				
 				$this->log('Restarting');
 				
+				//TODO: This is bad practice, find another method
+				App::import('Helper', 'Html');
+				$html = new HtmlHelper();
+								
 				start_script(
 					$html->url(
 						array(
@@ -139,7 +207,7 @@
 							'action' => 'start',
 							'admin' => true, 
 							'?' => array(
-								'data[continue]' => $randstr
+								'continue' => $randstr
 							)
 						),
 						true
