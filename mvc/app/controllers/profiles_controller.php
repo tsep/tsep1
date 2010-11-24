@@ -23,9 +23,7 @@ class ProfilesController extends AppController {
 		
 		$this->set('profiles', $this->Profile->find("all"));
 		$this->set('title','ACP Home');
-		
-		$this->Session->setFlash('Welcome to the Administration Control Panel!','flash_success');
-		
+				
 	}
 	
 	/**
@@ -43,16 +41,42 @@ class ProfilesController extends AppController {
 	 * @param unknown_type $id
 	 */
 	function admin_delete ($id = null) {
-	
+
+		if($id == null) {
+			$this->Session->setFlash('Profile was not deleted because a valid id was not supplied.', 'flash_fail');
+			$this->redirect(array('controller'=>'profiles', 'action' =>'index', 'admin' =>true), null, true);
+		}
+		
+		$this->Profile->delete($id);
+		
+		App::import('Vendor', 'start_script');
+		
+		start_script(
+			Router::url(array(
+				'controller' => 'indexer',
+				'action' => 'cleanup',
+				'admin' => true
+			),true)
+		);
+		
+		$this->Session->setFlash('The selected profile has been deleted', 'flash_success');
+		$this->redirect(array('controller'=>'profiles', 'action' =>'index', 'admin' =>true), null, true);
+		
 	}
 	
 	/**
 	 * admin_create
-	 * Creates a new index (STARTS crawler)
+	 * Creates a new Indexing Profile (DOES NOT START INDEXER)
 	 */
 	function admin_create () {
-	
-		$this->Session->setFlash('Indexing has been queued, index may take a moment to appear depending on the size of the site.', 'flash_warn');
+		
+		if ($this->RequestHandler->isPost()) {
+			
+			if($this->Profile->save($this->data)) {
+				$this->Session->setFlash('Indexing Profile Created', 'flash_success');
+				$this->redirect(array('controller'=>'profiles', 'action' =>'index','admin' =>true), null, true);
+			}			
+		}
 	}
 	
 	/**

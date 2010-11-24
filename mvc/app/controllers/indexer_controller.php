@@ -18,23 +18,41 @@
 			'Index', 
 			'Stopword', 
 			'Element', 
-			'Profile', 
-			'IndexRequest'
+			'Profile'
 		);
 		
 		function admin_index ($id = null) {
 		
-			if ($id != null){
-				$this->_start($id);
-				$this->Session->setFlash('Indexing has been queued, but index may take a while to appear depending on the site being crawled', 'flash_warn');
-				$this->redirect(array('controller' => 'profiles', 'action' => 'index', 'admin' => true), null, true);
-			}
+			if($id != null)	$profile = $this->Profile->findById($id);
 			
-			if($this->RequestHandler->isPost()) {
-				$this->_start($this->data['IndexRequest']['profile']);
-				$this->Session->setFlash('Indexing has been queued, but index may take a while to appear depending on the site being crawled', 'flash_warn');
+			if (!empty($profile)){
+				$this->_start($id);
+				$this->Session->setFlash('Indexing has been queued, but may take a while to appear depending on the site being crawled', 'flash_warn');
 				$this->redirect(array('controller' => 'profiles', 'action' => 'index', 'admin' => true), null, true);
+			} else {
+				
+				$this->Session->setFlash('No valid indexing profile specified. Indexer was not started', 'flash_fail');
+				$this->redirect(array('controller'=>'profiles', 'action' => 'index'), null, true);
 			}
+		}
+		
+		function admin_cleanup () {
+			
+			$profiles = $this->Profile->find('all');
+			
+			$ids = array();
+			
+			foreach ($profiles as $profile)	array_push($ids, $profile['Profile']['id']);
+			
+			
+				
+			$this->Index->deleteAll(array(
+				'NOT' => array(
+					'Index.profile_id' => $ids
+				)
+			));
+			
+			die();
 		}
 		
 		function _start($id) {
@@ -50,11 +68,8 @@
 			
 			file_put_contents(TMP.'indexer'.DS.$randstr, $data);
 			
-			//TODO: This is bad practice, find another method
-			App::import('Helper', 'Html');
-			$html = new HtmlHelper();
 
-			$url = $html->url(
+			$url = Router::url(
 						array(
 							'controller' => 'indexer',
 							'action' => 'start',
@@ -79,7 +94,7 @@
 				(file_exists(TMP.'indexer'.DS.$this->params['url']['continue'])))
 						$valid = true;
 			
-			if ((!$valid))
+			if (!$valid)
 			{
 				//The user shouldn't be here, kill the script.
 				$this->log('Attempted security breach from '. $this->RequestHandler->getClientIP(). ' at URL:'. $this->params['url']['url']);
@@ -110,7 +125,6 @@
 			$this->log('Initializing');
 			
 			$contents = file_get_contents(TMP.'indexer'.DS.$this->params['url']['continue']);
-			$this->log(Debugger::exportVar($contents));
 			
 			$store = @unserialize($contents);
 			
@@ -122,7 +136,6 @@
 			}
 
 			$this->log('Loading framework');
-			$this->log(Debugger::exportVar($store));
 			
 			if (!isset($store['id'])) {
 				
@@ -158,19 +171,19 @@
 			$this->log('Beginning crawl');
 			
 			while ($page = $crawler->crawl()) {
-				
+								
 				$indexer->parse($page);
-				
-				$save = array(
+								
+				$save = $this->Index->create(array(
 					'Index' => array(
 						'profile_id' => $profile['Profile']['id'],
-						'url' => $index->url,
-						'text' => $index->content
+						'url' => $page->url,
+						'text' => $page->content
 					)
-				);
-				
-				$this->Index->save($save);
+				));
 								
+				$this->Index->save($save);
+
 				if (get_time_left() <= 10)
 					$this->_shutdown($crawler, $indexer);
 					
@@ -179,7 +192,7 @@
 			$this->log('Indexing Complete');
 			die();
 		}
-		function _shutdown ($crawler, $indexer, $id) {
+		function _shutdown ($crawler, $indexer) {
 			
 				$this->log('Preparing to Restart');
 				
@@ -195,13 +208,10 @@
 				file_put_contents(TMP.'indexer'.DS.$randstr, $save);
 				
 				$this->log('Restarting');
-				
-				//TODO: This is bad practice, find another method
-				App::import('Helper', 'Html');
-				$html = new HtmlHelper();
+
 								
 				start_script(
-					$html->url(
+					Router::url(
 						array(
 							'controller' => 'indexer',
 							'action' => 'start',

@@ -12,16 +12,30 @@
     </thead>
         <tfoot>
     	<tr>
-        	<td colspan="6" class="rounded-foot-left"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</em></td>
+        	<td colspan="6" class="rounded-foot-left"><em>To begin indexing a profile, click on its name. Note: you cannot stop a profile that is being indexed.</em></td>
         	<td class="rounded-foot-right">&nbsp;</td>
 
         </tr>
     </tfoot>
     <tbody>
-    <?php foreach ($profiles as $profile) {?>
+    <?php 
+    if (!empty($profiles)) {
+    	foreach ($profiles as $profile) {?>
     	<tr>
         	<td><input type="checkbox" name="" /></td>
-            <td><?php echo $profile['Profile']['name']?></td>
+            <td><?php echo 
+            	$html->link(
+            		$profile['Profile']['name'],
+            		array(
+            			'controller' => 'indexer',
+            			'action' => 'index',
+            			$profile['Profile']['id']
+            		),
+            		array(
+            			'class' => 'ask'
+            		)
+            	);
+            ?></td>
             <td><?php echo $profile['Profile']['url']?></td>
             <td><?php echo $profile['Profile']['modified']?></td>
 
@@ -57,6 +71,10 @@
 	            ));			
            	?></td>
         </tr> 
+     <?php } } else { ?>
+     <tr><td colspan="6" style="text-align:center;"> There are no Indexing Profiles in the database.</td></tr>
      <?php }?>   
     </tbody>
 </table>
+
+<h2><?php echo $html->link('Create a New Indexing Profile', array('controller'=>'profiles', 'action' => 'create', 'admin' =>true))?></h2>

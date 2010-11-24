@@ -18,6 +18,8 @@ class TSEPIndexer {
 			//Clean out all the spaces
 			$text = preg_replace('!\s+!', ' ', $text);
 			
+			$text = trim($text);
+			
 			return $text;
 	}
 	
