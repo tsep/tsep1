@@ -42,7 +42,15 @@ class AppController extends Controller {
     function beforeFilter() {
         if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
             $this->layout = 'admin';
-        }        
+        }
+        /*
+         * Fixes PHP bug:
+         * http://bugs.php.net/bug.php?id=50953
+         */        
+        if ($_SERVER['HTTP_HOST'] == 'localhost'){
+        	header('Location:http://127.0.0.1'.$_SERVER['SCRIPT_NAME'].'?'.$_SERVER['QUERY_STRING']);
+        	die();
+        }        	
     }
     
     

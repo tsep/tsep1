@@ -9,7 +9,7 @@ ddaccordion.init({
     animatedefault: false, //Should contents open by default be animated into view?
     persiststate: true, //persist state of opened contents within browser session?
     toggleclass: ["", ""], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
-    togglehtml: ["suffix", "<img src='<?php echo TSEP_CLIENT_ROOT?>/static/img/plus.gif' class='statusicon' />", "<img src='<?php echo TSEP_CLIENT_ROOT?>/static/img/minus.gif' class='statusicon' />"], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+    togglehtml: ["suffix", '<img src='+window.base + "/img/plus.gif' class='statusicon' />", '<img src=' + window.base + "/img/minus.gif' class='statusicon' />"], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
     animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
     oninit:function(headers, expandedindices){ //custom code to run when headers have initalized
         //do nothing
@@ -22,58 +22,22 @@ ddaccordion.init({
 $(document).ready(function() {
     $('.jclock').jclock();
     $('.ask').jConfirmAction();
-});
-
-$(document).ready(function () {
-
-	$.get(window.base + "../admin/updater.php?", function(data){
-		   if (data == "yes") {
-            $("#updatePanel").html("<a href=\"#\" onClick=\"runUpdate();\">Click to Update</a>");
-        } else {
-             $("#updatePanel").html("Up to date");
-         }         
-	});
-	change();
-	
-});
-
-//Called after a DOM change
-function change () {
-	
-	$(".button").each(function () {
+    $('.button').each(function () {
+        var form = $(this).parents('form:first');
+    	
     	var img = $(new Image());
-
-		$(img)	.css("margin-top", "24px")
-				.css("margin-bottom", "10px");
-
-    	img.attr("src","../img/ajax-loader.gif");
+    	img.attr('src', window.base + '/img/ajax-loader.gif');
+    	
     	img.hide();
-
-    	img.insertAfter(this);
-
-    	$(this).click(function () {
-    	    var form = $(this).parents('form:first');
-			form.find(":input").attr("disabled","disabled");
-
-			$(this).hide();
-			
-			img.show();
-			form.submit();
-	    });
-	});
-	
-}
-
-function runUpdate () {
-
-	$("#updatePanel").html("Updating...");
-	$.get(window.base + '../admin/updater.php?Update=yes', function(data){
-		if (data == "done") {
-			window.reload();
-		} else {
-			$("#updatePanel").html("Update Failed");
-		}  
-	});
-
-
-}
+    	
+    	var div = this;
+    	
+    	$(this).append(img);
+    	
+    	$(form).submit(function () {
+    		$(div).find(':input').hide();
+    		$(form).find(':input').attr('disabled', 'disabled');
+    		img.show();
+    	});
+    });
+});

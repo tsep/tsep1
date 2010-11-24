@@ -17,10 +17,25 @@ label a{font-size:11px; font-weight:bold; color:#666;}
 dl {clear:both; width:600px;}
 dl.submit {clear:both; width:500px; text-align:center; padding:0 0 0 90px;}
 
-.button {width:300px;height:50px;font-size:large;font-weight:100;}
+.button > input {
+	width:300px;
+	height:50px;
+	font-size:large;
+	font-weight:100;
+	text-align:center;
+}
+.button {
+    text-align:center;
+}
 
 dt {float:left; text-align:right; width:170px; line-height:34px; padding:0 10px 10px 0;}
 dd {float:left; width:400px; margin:0 0 10px 0;}
+
+dd > span {
+    text-align:center;
+    vertical-align:bottom;
+    font-weight:bold;
+}
 
 
 label.check_label{

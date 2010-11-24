@@ -27,12 +27,9 @@
             	$html->link(
             		$profile['Profile']['name'],
             		array(
-            			'controller' => 'indexer',
-            			'action' => 'index',
+            			'controller' => 'profiles',
+            			'action' => 'view',
             			$profile['Profile']['id']
-            		),
-            		array(
-            			'class' => 'ask'
             		)
             	);
             ?></td>

@@ -21,7 +21,7 @@ class ProfilesController extends AppController {
 	 */
 	function admin_index () {
 		
-		$this->set('profiles', $this->Profile->find("all"));
+		$this->set('profiles', $this->Profile->find('all'));
 		$this->set('title','ACP Home');
 				
 	}
@@ -47,21 +47,46 @@ class ProfilesController extends AppController {
 			$this->redirect(array('controller'=>'profiles', 'action' =>'index', 'admin' =>true), null, true);
 		}
 		
-		$this->Profile->delete($id);
+		$this->Profile->delete($id, false);
 		
 		App::import('Vendor', 'start_script');
+		App::import('Vendor', 'random_string');
+		
+		$randstr = random_string(10);
+		
+		file_put_contents(TMP.'indexer'.DS.$randstr, $id);
 		
 		start_script(
 			Router::url(array(
-				'controller' => 'indexer',
+				'controller' => 'indices',
 				'action' => 'cleanup',
-				'admin' => true
+				'admin' => true,
+				'?' => array(
+					'continue' => $randstr
+				)
 			),true)
 		);
 		
 		$this->Session->setFlash('The selected profile has been deleted', 'flash_success');
 		$this->redirect(array('controller'=>'profiles', 'action' =>'index', 'admin' =>true), null, true);
 		
+	}
+	
+	function admin_view($id = null) {
+		
+		if ($id == null) {
+			$this->Session->setFlash('Their was no profile specified to view', 'flash_fail');
+			$this->redirect(array('controller'=>'profiles', 'action' =>'index'),null, true);
+		} 
+		
+		$profile = $this->Profile->findById($id);
+		
+		if(empty($profile)) {
+			$this->Session->setFlash('The profile that you selected to view does not exist', 'flash_fail');
+			$this->redirect(array('controller'=>'profiles', 'action' =>'index'),null, true);
+		}
+		
+		$this->set('profile', $profile);
 	}
 	
 	/**
@@ -79,24 +104,5 @@ class ProfilesController extends AppController {
 		}
 	}
 	
-	/**
-	 * search
-	 * searches index for search terms
-	 * @param string $query
-	 * @param string $page
-	 * @param string $profile
-	 */
-	function search ($profile = null, $query = null, $page = null) {
-		
-		
-	
-	}
-	/**
-	 * index
-	 * Redirects to search page
-	 */
-	function index () {
-		$this->redirect(array('controller'=>'profiles', 'action'=>'search'), null, true);
-	}
 
 }
