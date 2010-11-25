@@ -83,12 +83,13 @@
 		protected static $strReportedUserAgent=null;
 
 		/** @brief Class constructor, can only be called from inside the class (or its children)
-			@param $strScheme the protocol the host is on (http,https)
-			@param $strHost the host to crawl,check robots.txt
+			@param $strUrl the url that robots.txt is located on
 			@param $strUserAgent the useragent name */
-		protected function __construct($strScheme,$strHost,$strUserAgent) {
+		protected function __construct($strUrl,$strUserAgent) {
 
-			$this->init($strScheme,$strHost,$strUserAgent);
+			$parsed = parse_url($strUrl);
+			
+			$this->init($parsed['scheme'],$parsed['host'],$strUserAgent);
 		}
 		
 		/** @brief Initializes this instance, retrieves the robots.txt file and parses it
