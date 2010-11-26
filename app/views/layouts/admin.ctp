@@ -3,6 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?php echo $title_for_layout?></title>
+<script type="text/javascript">
+  window.base = <?php echo json_encode($html->url('/'))?>;
+</script>
 <?php 
 	
 	echo $html->css('admin-panel');
@@ -17,12 +20,7 @@
 
 	echo $scripts_for_layout 
 	
-	//The Base Url of the MVC application to provide javascript with
 ?>
-<script type="text/javascript">
-	window.base = <?php echo json_encode($html->url('/'))?>;
-</script>
-
 </head>
 <body>
 <div id="main_container">
@@ -317,7 +315,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
     <div class="footer">
     
     	<div class="left_footer">TSEP ACP | Powered by <a href="http://indeziner.com">INDEZINER</a></div>
-    	<div class="right_footer"><a href="http://indeziner.com"><?php $html->image('indeziner_logo.gif')?></a></div>
+    	<div class="right_footer"><a href="http://indeziner.com"><?php echo $html->image('indeziner_logo.gif')?></a></div>
     
     </div>
 

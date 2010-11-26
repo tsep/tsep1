@@ -105,7 +105,7 @@
 				
 			} else {
 
-				throw new Exception('Syntax: new Robots_txt($strScheme,$strHost,$strUserAgent)');
+				throw new Exception('Syntax Error');
 			}
 			
 		}

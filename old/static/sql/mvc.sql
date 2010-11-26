@@ -60,4 +60,14 @@ DROP TABLE tsep_ranksymbols;
 DROP TABLE tsep_search;
 DROP TABLE tsep_user_levels;
 
+DROP TABLE tsep_groups;
+DROP TABLE tsep_users;
 
+CREATE TABLE users (
+    id integer auto_increment,
+    username char(50),
+    password char(40),
+    PRIMARY KEY (id)
+);
+
+RENAME TABLE users TO tsep_users;

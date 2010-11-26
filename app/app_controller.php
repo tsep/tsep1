@@ -36,15 +36,21 @@ class AppController extends Controller {
 
 	var $helpers = array('Html', 'Session', 'Javascript', 'Form');
 	
-	var $components = array('RequestHandler', 'Session');
+	var $components = array('RequestHandler', 'Session', 'Auth');
 	
 	
     function beforeFilter() {
         if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
             $this->layout = 'admin';
         }        	
-    }
     
+    	$this->Auth->loginAction = array('controller'=>'users', 'action' => 'login', 'admin' => 'true');
+    	$this->Auth->logoutRedirect = array('controller'=>'users', 'action' => 'logout', 'admin' => 'true');
+    	$this->Auth->loginRedirect = array('controller' => 'profiles', 'action' =>'index', 'admin' => 'true');
+    
+    	//Temporary (Auth not yet setup)
+    	$this->Auth->allow('*');
+    }
     
 
 }
