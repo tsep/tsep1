@@ -29,14 +29,9 @@
     <div class="logo"><a href="#"><?php echo $html->image('logo.gif')?></a></div>
     
     </div>
-
-     
-         <div class="login_form">
+    <div class="login_form">
          <?php echo $content_for_layout?>
-         </div>  
-          
-  
-    
+    </div>
     <div class="footer_login">
     
       <div class="left_footer_login">IN ADMIN PANEL | Powered by <a href="http://indeziner.com">INDEZINER</a></div>

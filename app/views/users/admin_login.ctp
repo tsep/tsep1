@@ -1,17 +1,25 @@
 <h3>Admin Panel Login</h3>
-         
+         <div id="message" style="display:none;">
+          <?php echo $session->flash('auth')?>
+         </div>
+         <script type="text/javascript">
+          $(window).load(function () {
+            var msg = $("#message").text();
+            if ($.trim(msg) != '')
+              alert(msg);
+          });
+         </script>
          <a href="#" class="forgot_pass">Forgot password</a> 
          
-         <form action="" method="post" class="niceform">
-         
+          <?php echo $form->create('User', array('action' => 'login', 'class' => 'niceform')); ?>         
                 <fieldset>
                     <dl>
-                        <dt><label for="email">Username:</label></dt>
-                        <dd><input type="text" name="" id="" size="54" /></dd>
+                        <dt><label for="username">Username:</label></dt>
+                        <dd><?php echo $form->input('username', array('label' => '', 'size' => '54'))?></dd>
                     </dl>
                     <dl>
                         <dt><label for="password">Password:</label></dt>
-                        <dd><input type="text" name="" id="" size="54" /></dd>
+                        <dd><?php echo $form->input('password', array('label' => '', 'size' => '54'))?></dd>
                     </dl>
                     
                     <dl>
@@ -26,4 +34,4 @@
                      </dl>
                     
                 </fieldset>
-         </form>
+      <?php echo $form->end()?>

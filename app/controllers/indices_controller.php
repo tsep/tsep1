@@ -1,5 +1,18 @@
 <?php
-	
+	/**
+	* The heart of TSEP: manages indexes, stopwords, ect.
+	* 
+	* @author Geoffrey
+	*
+	* The following will be filled automatically by SubVersion!
+	* Do not change by hand!
+	*  $LastChangedDate: $
+	*  $LastChangedBy:  $
+	*  $LastChangedRevision: $
+	*
+	*/
+
+	//TODO:Centralize all queue functions into one function
 	class IndicesController extends AppController {
 	
 		var $name = 'Indices';
@@ -10,8 +23,15 @@
 			'Profile'
 		);
 		
-		function search ($profile = null, $page = null) {
+		function beforeFilter () {
+			parent::beforeFilter();
+			$this->Auth->allow('admin_start', 'admin_cleanup');
+		}
 		
+		function search ($profile = null, $page = null) {
+			
+			$this->layout = 'search';
+			
 			//Don't care if the query is empty
 			$query = @$this->params['url']['q'];
 			
@@ -62,7 +82,7 @@
 				die(); 	
 			} else {
 				$this->log('Attempted security breach from '. $this->RequestHandler->getClientIP(). ' at URL:'. $this->params['url']['url']);
-				$this->cakeError('error500');
+				$this->cakeError('error403');
 			}
 		}
 		
@@ -109,7 +129,7 @@
 			{
 				//The user shouldn't be here, kill the script.
 				$this->log('Attempted security breach from '. $this->RequestHandler->getClientIP(). ' at URL:'. $this->params['url']['url']);
-				$this->cakeError('error500');
+				$this->cakeError('error403');
 			}
 			
 						

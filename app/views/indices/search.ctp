@@ -1,16 +1,6 @@
-<?php 
-	echo $form->create(null, array(
-		'url' => array(
-			'controller'=>'indices', 
-			'action'=>'search'
-		),
-		'type' => 'get'
-	));
-?>
-<input type="text" name="q" />
+
 
 <?php 
-	echo $form->end('Search');
 
 	if (!empty($matches)) {
 		foreach ($matches as $match) {

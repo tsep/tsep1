@@ -1,5 +1,17 @@
 <?php
 /**
+* The main App Controller
+* 
+* @author Geoffrey
+*
+* The following will be filled automatically by SubVersion!
+* Do not change by hand!
+*  $LastChangedDate: $
+*  $LastChangedBy:  $
+*  $LastChangedRevision: $
+*
+*/
+/**
  * Application level Controller
  *
  * This file is application-wide controller file. You can put all
@@ -40,16 +52,19 @@ class AppController extends Controller {
 	
 	
     function beforeFilter() {
+    	
+    	
         if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
-            $this->layout = 'admin';
-        }        	
+        	$this->layout = 'admin';
+        }
+       	else {
+       		$this->Auth->allow('*');
+       	}        	
     
     	$this->Auth->loginAction = array('controller'=>'users', 'action' => 'login', 'admin' => 'true');
     	$this->Auth->logoutRedirect = array('controller'=>'users', 'action' => 'logout', 'admin' => 'true');
     	$this->Auth->loginRedirect = array('controller' => 'profiles', 'action' =>'index', 'admin' => 'true');
     
-    	//Temporary (Auth not yet setup)
-    	$this->Auth->allow('*');
     }
     
 

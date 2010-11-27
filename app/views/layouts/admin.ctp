@@ -28,7 +28,7 @@
     <div class="header">
     <div class="logo"><a href="#"><?php echo $html->image('logo.gif',array('border'=>'0'))?></a></div>
     
-    <div class="right_header">Welcome Admin, <?php echo $html->link('Visit Site', array('controller'=>'indices', 'action'=>'search', 'admin'=>false))?> | <?php //<a href="#" class="messages">(3) Messages</a>?><span id="updatePanel">Updating...</span> | <a href="#" class="logout">Logout</a></div>
+    <div class="right_header">Welcome Admin, <?php echo $html->link('Visit Site', array('controller'=>'indices', 'action'=>'search', 'admin'=>false))?> | <?php //<a href="#" class="messages">(3) Messages</a>?><span id="updatePanel">Updating...</span> | <?php echo $html->link('Logout', array('controller' => 'users' , 'action' => 'logout'), array('class' => 'logout')) ?></div>
     <div class="jclock"></div>
     </div>
     

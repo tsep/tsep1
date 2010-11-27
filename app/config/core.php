@@ -1,5 +1,17 @@
 <?php
 /**
+* The core configuration for this application
+* 
+* @author Geoffrey
+*
+* The following will be filled automatically by SubVersion!
+* Do not change by hand!
+*  $LastChangedDate: $
+*  $LastChangedBy:  $
+*  $LastChangedRevision: $
+*
+*/
+/**
  * This is core configuration file.
  *
  * Use it to configure core behavior of Cake.
@@ -197,15 +209,16 @@
  */
 	Configure::write('Security.level', 'medium');
 
+	$ini = parse_ini_file(dirname(__FILE__).DS.'security.ini.php');
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
+	Configure::write('Security.salt', $ini['salt']);
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '76859309657453542496749683645');
+	Configure::write('Security.cipherSeed', $ini['cipherSeed']);
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
