@@ -54,6 +54,11 @@ class ProfilesController extends AppController {
 		
 		$randstr = random_string(10);
 		
+		if(!(is_dir(TMP.'indexer')))
+		{
+		   mkdir(TMP.'indexer', 0777);
+		}
+		
 		file_put_contents(TMP.'indexer'.DS.$randstr, $id);
 		
 		start_script(

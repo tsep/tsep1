@@ -97,6 +97,11 @@
 			
 			$data = serialize($store);
 			
+			if(!(is_dir(TMP.'indexer')))
+			{
+			   mkdir(TMP.'indexer', 0777);
+			}
+			
 			file_put_contents(TMP.'indexer'.DS.$randstr, $data);
 			
 
