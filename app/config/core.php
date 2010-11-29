@@ -209,7 +209,7 @@
  */
 	Configure::write('Security.level', 'medium');
 
-	$ini = parse_ini_file(dirname(__FILE__).DS.'security.ini.php');
+	$ini = @parse_ini_file(CONFIGS.'security.ini.php');
 /**
  * A random string used in security hashing methods.
  */

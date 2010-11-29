@@ -26,7 +26,10 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
+if (file_exists(CONFIGS.'db.ini.php'))
 	Router::connect('/', array('controller' => 'indices', 'action' => 'search'));
+else 
+	Router::connect('/', array('plugin' => 'install', 'controller' => 'install'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */

@@ -532,9 +532,4 @@ CREATE TABLE IF NOT EXISTS `%prefix%users` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
---
--- Dumping data for table `%prefix%users`
---
 
-INSERT INTO `%prefix%users` (`id`, `username`, `password`) VALUES
-(1, '%username%', '%password%');

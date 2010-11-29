@@ -58,7 +58,7 @@ class AppController extends Controller {
         	$this->layout = 'admin';
         }
        	else {
-       		$this->Auth->allow('*');
+       		if (isset($this->Auth)) $this->Auth->allow('*');
        	}        	
     
     	$this->Auth->loginAction = array('controller'=>'users', 'action' => 'login', 'admin' => 'true');

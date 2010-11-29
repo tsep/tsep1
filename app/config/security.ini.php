@@ -1,4 +1,4 @@
-;<?php die()?>
-[security]
-salt = "DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9ml"
-cipherSeed = "76859309657453542496749683641"
+;<?php die()?>[security]
+salt = "kcXy0smRPzzZ3vVkW80v"
+cipherSeed = "518379756347029845937580323"
+

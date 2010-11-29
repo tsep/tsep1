@@ -8,7 +8,7 @@ body {
     width: 40em;
     }
 #theform fieldset {
-    height: 20em;
+    height: 25em;
     width: 11em;
     border: 0;
     margin: 0;
@@ -100,8 +100,11 @@ body {
     font-style: italic;
     }
 #theform div.loader {
+  padding-top:10em;
+  margin-top:0em;
+  margin-bottom:0em;
   text-align:center;
   font-weight:bold;
   display:block;
-  height:20em;
+  height:17em;
 }

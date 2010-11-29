@@ -1,7 +1,7 @@
-;<?php die()?>
-[database]
-host = "127.0.0.1"
-login = "root"
+;<?php die()?>[database]
+host = ""
+login = ""
 password = ""
-database = "tsep"
-prefix = "tsep_"
+database = ""
+prefix = ""
+
