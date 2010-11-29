@@ -20,12 +20,9 @@
 			$this->layout = 'install';
 		}
 		
-		function index () {
-			$this->redirect(array('action' => 'install'));
-		}
 		
 		function run () {
-			
+			//Nothing here
 		}
 		
 		function start () {
@@ -34,7 +31,7 @@
 		}
 		
 		
-		function install () {
+		function index () {
 			
 			if ($this->RequestHandler->isAjax())
 				$this->layout = 'ajax';
@@ -79,8 +76,36 @@
 					$this->set('one', 'Could not connect to MySQL');
 				}
 			}
+			else {
+				$this->Session->destroy();
+			}
 				
 		}
+		
+		function addUser () {
+			
+			$user = $this->Session->read('user');
+			$pass = $this->Session->read('pass');
+			
+			if (empty($user)) die();
+			
+			App::import('Component', 'Auth');
+			$this->Auth = new AuthComponent;
+			
+			$this->loadModel('User');
+			
+			$user = $this->User->create(array(
+				'User' => array(
+					'username' => $user,
+					'password' => $this->Auth->password($pass)
+				)
+			));
+			
+			$this->User->save($user);
+			
+			die();
+		}
+		
 		function _install () {
 			
 			$server = $this->Session->read('server');
@@ -96,17 +121,20 @@
 			
 			$options = array(
 				'database' => array(
-					'host' => $this->Session->read('server'),
-					'login' => $this->Session->read('login'),
-					'password' => $this->Session->read('password'),
-					'database' => $this->Session->read('database'),
-					'prefix' => $this->Session->read('prefix')
+					'host' => $server,
+					'login' => $login,
+					'password' => $password,
+					'database' => $database,
+					'prefix' => $prefix
 				)
 			);
 			
 			$ini .= $this->_write_ini_file($options);
 			
 			file_put_contents(CONFIGS.'db.ini.php', $ini);
+			
+			unset($ini);
+			unset($options);
 			
 			App::import('Vendor', 'random_string');
 			
@@ -124,25 +152,14 @@
 			file_put_contents(CONFIGS.'security.ini.php', $ini);
 			
 			unset($ini);
+			unset($options);
 			
-			mysql_pconnect($this->Session->read('server'), $this->Session->read('login'), $this->Session->read('password'));
-			mysql_select_db($this->Session->read('database'));
+			mysql_pconnect($server, $login, $password);
+			mysql_select_db($database);
 			
-			$this->_SplitSQL(dirname(__FILE__).DS.'install.sql', array('prefix' => $this->Session->read('prefix')));
+			$this->_SplitSQL(dirname(__FILE__).DS.'install.sql', array('prefix' => $prefix));
 
-			App::import('Component', 'Auth');
-			$this->Auth = new AuthComponent;
-			
-			App::import('Model', 'User');
-			
-			$user = $this->User->create(array(
-				'User' => array(
-					'username' => $this->Session->read('user'),
-					'password' => $this->Auth->password($this->Session->read('pass'))
-				)
-			));
-			
-			$this->User->save($user);
+			$this->redirect(array('action' => 'addUser'), null, true);
 		}
 		
 		function  _write_ini_file(array $options){
@@ -208,12 +225,12 @@
 		                        echo '<h3>SUCCESS: ' . $query . '</h3>' . "\n";
 		                    }
 		
-		                    while (ob_get_level() > 0)
-		                    {
-		                        ob_end_flush();
-		                    }
+		                    //while (ob_get_level() > 0)
+		                    //{
+		                    //    ob_end_flush();
+		                    //}
 		
-		                    flush();
+		                    //flush();
 		                }
 		
 		                if (is_string($query) === true)

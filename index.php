@@ -1,5 +1,17 @@
 <?php
 /**
+* Request collector for MVC
+* 
+* @author garnergeoffrey
+*
+* The following will be filled automatically by SubVersion!
+* Do not change by hand!
+*  $LastChangedDate: $
+*  $LastChangedBy:  $
+*  $LastChangedRevision: $
+*
+*/
+/**
  * Requests collector.
  *
  *  This file collects requests if:
