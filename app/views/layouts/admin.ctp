@@ -37,7 +37,7 @@
                     <div class="menu">
                     <ul>
                     <li><?php echo $html->link('ACP Home', array('controller'=>'profiles', 'action'=>'index'))?></li>
-                    <li><?php echo $html->link('Index Site', array('controller'=>'indexer', 'action'=>'index'))?>
+                    <?php //<li><?php echo $html->link('Index Site', array('controller'=>'indexer', 'action'=>'index'))?>
                     <?php 
                     /*
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
@@ -51,7 +51,7 @@
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     */
                     ?>
-                    </li>
+                    <?php //</li>?>
                     <li><?php echo $html->link('Create a New IProfile', array('controller'=>'profiles', 'action'=>'create'))?>
                     <?php 
                     /*
@@ -88,7 +88,7 @@
                     */
                     ?>
                     </li>
-                    <li><a href="?page=users">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <?php //<li><a href="?page=users">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->?>
                     <?php 
                     /*
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
@@ -123,8 +123,8 @@
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     */
                     ?>
-                    </li>
-                    <li><a href="?page=settings">Settings<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <?php //</li>?>
+                    <?php //<li><a href="?page=settings">Settings<!--[if IE 7]><!--></a><!--<![endif]-->?>
                     <?php 
                     /*
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
@@ -159,8 +159,8 @@
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     */
                     ?>
-                    </li>
-                    <li><a href="?page=layout">Search Page Layout</a></li>
+                    <?php //</li>?>
+                    <?php //<li><a href="?page=layout">Search Page Layout</a>?>
                     <li><?php echo $html->link('Contact TSEP', array( 'controller'=>'help', 'action'=>'index'))?></li>
                     </ul>
                     </div> 
@@ -175,15 +175,17 @@
     <div class="left_content">
     
     		<div class="sidebar_search">
-            <form>
-            <input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
-            <?php echo $form->submit('search.png', array('class'=>'search_submit'))?>
-            </form>            
-            </div>
-    
+            
+              <form>
+              <input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
+              <?php echo $form->submit('search.png', array('class'=>'search_submit'))?>
+              </form>            
+       </div>
+            
             <div class="sidebarmenu">
             
-                <a class="menuitem <?php //submenuheader?>" href="?page=main">ACP Home</a>
+                <?php //<a class="menuitem //submenuheader" href="?page=main">ACP Home</a>?>
+                <?php echo $html->link('ACP Home', array('controller'=>'profiles', 'action'=>'index'), array('class' => 'menuitem'))?>
                 <?php /*
                 <div class="submenu">
                     <ul>
@@ -195,6 +197,7 @@
                     </ul>
                 </div>
                 */?>
+                <?php /*
                 <a class="menuitem" href="?page=sites" >Manage Sites</a>
                 <?php /*
                 <div class="submenu">
@@ -205,7 +208,7 @@
                     <li><a href="">Sidebar submenu</a></li>
                     <li><a href="">Sidebar submenu</a></li>
                     </ul>
-                </div>*/?>
+                </div>
                 <a class="menuitem" href="?page=indexer">Create a new Index</a>
                 <?php /*
                 <div class="submenu">
@@ -216,11 +219,12 @@
                     <li><a href="">Sidebar submenu</a></li>
                     <li><a href="">Sidebar submenu</a></li>
                     </ul>
-                </div> */?>
+                </div> 
                 <a class="menuitem" href="?page=users">Manage Users</a>
                 <a class="menuitem" href="?page=settings">Settings</a>
                 <a class="menuitem" href="?page=layout">Search Page Layout</a>
                 <a class="menuitem" href="?page=contact">Contact TSEP</a>
+                */?>
                 <?php /*
                 <a class="menuitem" href="">Blue button</a>
                 

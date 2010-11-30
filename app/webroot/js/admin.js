@@ -40,4 +40,21 @@ $(document).ready(function() {
     		img.show();
     	});
     });
+    
+    $.get(window.base + 'update/update/check', function (data) {
+    	
+    	if (data == 'no') {
+    		$('#updatePanel').html('No Update');
+    	}
+    	else {
+    		$('#updatePanel').click(function () {
+    			
+    			$.get(window.base + 'update/update/run', function (data) {
+    				$('#updatePanel').html('Update Complete');
+    				window.location.reload();
+    			});
+    		});
+    		$('#updatePanel').html('Click to Update');
+    	}
+    });
 });

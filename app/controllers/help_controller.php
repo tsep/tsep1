@@ -27,7 +27,7 @@
 		 */
 		function admin_index () {
 		
-			$this->set('log', file_get_contents(LOGS.'error.log')."\n".file_get_contents(LOGS.'debug.log'));
+			$this->set('log', @file_get_contents(LOGS.'error.log')."\n".@file_get_contents(LOGS.'debug.log'));
 		
 		}
 		
@@ -40,7 +40,7 @@
 			App::import('Vendor','post_to_url');
 			App::import('Vendor', 'current_url');
 			
-			$contents = file_get_contents(LOGS.'error.log');
+			$contents = @file_get_contents(LOGS.'error.log');
 			
 			$data = http_build_query(array(
 			
