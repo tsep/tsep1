@@ -38,7 +38,7 @@
 		
 		function index () {
 			
-			file_put_contents(CONFIGS.'install.tmp', '');
+			file_put_contents(TMP.'install.tmp', '');
 						
 			if ($this->RequestHandler->isAjax())
 				$this->layout = 'ajax';
@@ -72,7 +72,7 @@
 								'pass' => $pass
 							);
 							
-							file_put_contents(CONFIGS.'install.tmp', serialize($data));
+							file_put_contents(TMP.'install.tmp', serialize($data));
 							
 							$this->render('run');
 						}
@@ -99,7 +99,7 @@
 		
 		function _add () {
 			
-			$data = unserialize(file_get_contents(CONFIGS.'install.tmp'));
+			$data = unserialize(file_get_contents(TMP.'install.tmp'));
 			
 			$user = $data['user'];
 			$pass = $data['pass'];
@@ -120,7 +120,7 @@
 			
 			$this->User->save($user);
 			
-			unlink(CONFIGS.'install.tmp');
+			unlink(TMP.'install.tmp');
 			
 			die('User Added');
 		}
@@ -128,7 +128,7 @@
 		
 		function _install () {
 			
-			$data = unserialize(file_get_contents(CONFIGS.'install.tmp'));
+			$data = unserialize(file_get_contents(TMP.'install.tmp'));
 						
 			$server = $data['server'];
 			$login = $data['login'];
