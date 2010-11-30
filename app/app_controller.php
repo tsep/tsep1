@@ -53,18 +53,21 @@ class AppController extends Controller {
 	
     function beforeFilter() {
     	
-    	
-        if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
-        	$this->layout = 'admin';
-        }
-       	else {
-       		if (isset($this->Auth)) $this->Auth->allow('*');
-       	}        	
-    
-    	$this->Auth->loginAction = array('controller'=>'users', 'action' => 'login', 'admin' => 'true');
-    	$this->Auth->logoutRedirect = array('controller'=>'users', 'action' => 'logout', 'admin' => 'true');
-    	$this->Auth->loginRedirect = array('controller' => 'profiles', 'action' =>'index', 'admin' => 'true');
-    
+    	if(file_exists(CONFIGS.'settings.ini.php') && !file_exists(CONFIGS.'install.tmp')) {
+	        if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
+	        	$this->layout = 'admin';
+	        }
+	       	else {
+	       		$this->Auth->allow('*');
+	       	}        	
+	    
+	    	$this->Auth->loginAction = array('controller'=>'users', 'action' => 'login', 'admin' => 'true');
+	    	$this->Auth->logoutRedirect = array('controller'=>'users', 'action' => 'logout', 'admin' => 'true');
+	    	$this->Auth->loginRedirect = array('controller' => 'profiles', 'action' =>'index', 'admin' => 'true');
+    	}
+    	else {
+    		
+    	}
     }
     
 

@@ -12,68 +12,83 @@
 			parent::beforeFilter();
 			
 			App::import('Component', 'RequestHandler');
-			$this->RequestHandler = new RequestHandlerComponent;
+			$this->RequestHandler = new RequestHandlerComponent();
 			
 			App::import('Component', 'Session');
-			$this->Session = new SessionComponent;
+			$this->Session = new SessionComponent();
 			
 			$this->layout = 'install';
 		}
 		
 		
 		function run () {
-			//Nothing here
-		}
-		
-		function start () {
-			$this->_install();
-			die();
+			
+			if (!$this->RequestHandler->isAjax()) $this->redirect(array('action' =>'index'), null, true);
+			
+			if (@$this->params['url']['action'] == 'install') {
+				$this->_install();
+				die();
+			}
+			if (@$this->params['url']['action'] == 'add'){ 
+				$this->_add();
+				die();
+			}
 		}
 		
 		
 		function index () {
 			
+			file_put_contents(CONFIGS.'install.tmp', '');
+						
 			if ($this->RequestHandler->isAjax())
 				$this->layout = 'ajax';
 			
 			if (!empty($this->data)) {
 				
-				$server = $this->data['Install']['server'];
-				$login = $this->data['Install']['login'];
-				$password = $this->data['Install']['password'];
+				$server = @$this->data['Install']['server'];
+				$login = @$this->data['Install']['login'];
+				$password = @$this->data['Install']['password'];
 				
-				$database = $this->data['Install']['database'];
-				$prefix = $this->data['Install']['prefix'];
+				$database = @$this->data['Install']['database'];
+				$prefix = @$this->data['Install']['prefix'];
 				
 				//This is the admin user, not the mysql user
-				$user = $this->data['Install']['user'];
-				$pass = $this->data['Install']['pass'];
+				$user = @$this->data['Install']['user'];
+				$pass = @$this->data['Install']['pass'];
 				
 				if (@mysql_pconnect($server, $login, $password)) {
 					if(@mysql_select_db($database)) {
 						
 						if(!empty($user) && !empty($pass)) {
 							
-							$this->Session->write('server', $server);
-							$this->Session->write('login', $login);
-							$this->Session->write('password', $password);
-							$this->Session->write('database' ,$database);
-							$this->Session->write('prefix', $prefix);
-							$this->Session->write('user', $user);
-							$this->Session->write('pass', $pass);
+							$this->Session->write('Install.server', $server);
+							$this->Session->write('Install.login', $login);
+							$this->Session->write('Install.password', $password);
+							$this->Session->write('Install.database' ,$database);
+							$this->Session->write('Install.prefix', $prefix);
+							
+							$data = array(
+								'user' => $user,
+								'pass' => $pass
+							);
+							
+							file_put_contents(CONFIGS.'install.tmp', serialize($data));
 							
 							$this->render('run');
 						}
 						else {
 							$this->set('three', 'Login details are invalid');
+							$this->Session->destroy();							
 						}
 					}
 					else {
 						$this->set('two', 'Could not select the database');
+						$this->Session->destroy();
 					}
 				}
 				else {
 					$this->set('one', 'Could not connect to MySQL');
+					$this->Session->destroy();
 				}
 			}
 			else {
@@ -82,15 +97,17 @@
 				
 		}
 		
-		function addUser () {
+		function _add () {
 			
-			$user = $this->Session->read('user');
-			$pass = $this->Session->read('pass');
+			$data = unserialize(file_get_contents(CONFIGS.'install.tmp'));
 			
-			if (empty($user)) die();
+			$user = $data['user'];
+			$pass = $data['pass'];
+			
+			if (empty($user)) die('User empty');
 			
 			App::import('Component', 'Auth');
-			$this->Auth = new AuthComponent;
+			$this->Auth = new AuthComponent();
 			
 			$this->loadModel('User');
 			
@@ -103,22 +120,28 @@
 			
 			$this->User->save($user);
 			
-			die();
+			unlink(CONFIGS.'install.tmp');
+			
+			die('User Added');
 		}
+		
 		
 		function _install () {
 			
-			$server = $this->Session->read('server');
-			$login = $this->Session->read('login');
-			$password = $this->Session->read('password');
-			$database = $this->Session->read('database');
-			$prefix = $this->Session->read('prefix');
-			$user = $this->Session->read('user');
-			$pass = $this->Session->read('pass');		
+			$server = $this->Session->read('Install.server');
+			$login = $this->Session->read('Install.login');
+			$password = $this->Session->read('Install.password');
+			$database = $this->Session->read('Install.database');
+			$prefix = $this->Session->read('Install.prefix');
+
+			App::import('Vendor', 'random_string');
 			
 			
-			$ini = ';<?php die()?>';
+			mysql_pconnect($server, $login, $password);
+			mysql_select_db($database);
 			
+			$this->_SplitSQL(dirname(__FILE__).DS.'..'.DS.'models'.DS.'install.sql', array('prefix' => $prefix));
+
 			$options = array(
 				'database' => array(
 					'host' => $server,
@@ -126,44 +149,30 @@
 					'password' => $password,
 					'database' => $database,
 					'prefix' => $prefix
-				)
-			);
-			
-			$ini .= $this->_write_ini_file($options);
-			
-			file_put_contents(CONFIGS.'db.ini.php', $ini);
-			
-			unset($ini);
-			unset($options);
-			
-			App::import('Vendor', 'random_string');
-			
-			$ini = ';<?php die()?>';
-						
-			$options = array(
+				),
 				'security' => array(
 					'salt' => random_string(20),
 					'cipherSeed' => mt_rand().mt_rand().mt_rand()
 				)
 			);
 			
-			$ini .= $this->_write_ini_file($options);
+			$this->_write_ini_file(CONFIGS.'settings.ini.php', $options);
 			
-			file_put_contents(CONFIGS.'security.ini.php', $ini);
-			
-			unset($ini);
 			unset($options);
 			
-			mysql_pconnect($server, $login, $password);
-			mysql_select_db($database);
-			
-			$this->_SplitSQL(dirname(__FILE__).DS.'install.sql', array('prefix' => $prefix));
-
-			$this->redirect(array('action' => 'addUser'), null, true);
+			die();		
 		}
 		
-		function  _write_ini_file(array $options){
-		    $tmp = '';
+		/**
+		 * A function to write values to ini file
+		 * 
+		 * @param string $file
+		 * @param array $options
+		 * 
+		 * @link http://stackoverflow.com/questions/4082626/
+		 */
+		function _write_ini_file($file, array $options){
+		    $tmp = ";<?php die()?>\n";
 		    foreach($options as $section => $values){
 		        $tmp .= "[$section]\n";
 		        foreach($values as $key => $val){
@@ -177,7 +186,8 @@
 		        }
 		        $tmp .= "\n";
 		    }
-		    return $tmp;
+		    file_put_contents($file, $tmp);
+		    unset($tmp);
 		}
 
 		/**

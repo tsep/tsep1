@@ -26,11 +26,9 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
-if (file_exists(CONFIGS.'db.ini.php'))
+if (file_exists(CONFIGS.'settings.ini.php') && !file_exists(CONFIGS.'install.tmp')){
 	Router::connect('/', array('controller' => 'indices', 'action' => 'search'));
-else 
-	Router::connect('/', array('plugin' => 'install', 'controller' => 'install'));
-/**
+	/**
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
@@ -39,4 +37,15 @@ else
  * The Default 'admin' page
  */
 	Router::connect('/admin', array('controller' => 'profiles', 'action' =>'index', 'admin' => true));
+}
+else{  
+	//Not installed yet
+	
+	Router::connect('/install', array('action' => 'index', 'plugin' => 'install'));
+	Router::connect('/install/:controller', array('action' => 'index', 'plugin' => 'install'));
+	Router::connect('/install/:controller/:action/*', array('plugin' => 'install'));
+	
+	Router::connect('/*', array('plugin' => 'install', 'controller' => 'install'));
+	
+}
 	

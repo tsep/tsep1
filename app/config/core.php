@@ -32,6 +32,8 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
+Configure::write('Configuration.ini', @parse_ini_file(CONFIGS.'settings.ini.php', true));
+
 /**
  * CakePHP Debug Level:
  *
@@ -209,16 +211,19 @@
  */
 	Configure::write('Security.level', 'medium');
 
-	$ini = @parse_ini_file(CONFIGS.'security.ini.php');
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', $ini['salt']);
+	$ini = Configure::read('Configuration.ini');
+	Configure::write('Security.salt', $ini['security']['salt']);
+	unset($ini);
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', $ini['cipherSeed']);
+	$ini = Configure::read('Configuration.ini');
+	Configure::write('Security.cipherSeed', $ini['security']['cipherSeed']);
+	unset($ini);
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).

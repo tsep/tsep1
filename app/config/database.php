@@ -96,17 +96,19 @@ class DATABASE_CONFIG {
 	function __construct() {
 	
 		
-		$ini = parse_ini_file(dirname(__FILE__).DS.'db.ini.php');
+		$ini = Configure::read('Configuration.ini');
 		
 		$this->default = array(
 			'driver' => 'mysql',
 			'persistent' => true,
-			'host' => $ini['host'],
-			'login' => $ini['login'],
-			'password' =>$ini['password'],
-			'database' => $ini['database'],
-			'prefix' => $ini['prefix'],
+			'host' => $ini['database']['host'],
+			'login' => $ini['database']['login'],
+			'password' =>$ini['database']['password'],
+			'database' => $ini['database']['database'],
+			'prefix' => $ini['database']['prefix'],
 		);
+		
+		unset($ini);
 	
 	}
 }

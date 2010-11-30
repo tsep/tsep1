@@ -36,7 +36,10 @@
     <fieldset id="pt4" >
         <legend>Step 4  : Submit form</legend>
         <h3>Terms of Service</h3>
-        <div id="disclaimer"></div>
+        <div id="disclaimer">Note: due to <a href="http://bugs.php.net/bug.php?id=50953">this</a> bug, it is recommended that you enter
+         '127.0.0.1' into the MySQL server field instead of 'localhost'. If you have a problem during installation, open a ticket
+          <a href="http://p.sf.net/tseproject/newticket">here</a>. We thank you for installing The Search Engine Project, and hope that 
+          you have a good experience with this application.</div>
         <input type="submit" id="submitform" tabindex="8" value="Complete Installation &raquo;" />
     </fieldset>
     <div id="copyright">Powered by <a href="http://tsep.sf.net/">The Search Engine Project</a></div>
