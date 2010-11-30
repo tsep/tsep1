@@ -61,13 +61,13 @@
 						
 						if(!empty($user) && !empty($pass)) {
 							
-							$this->Session->write('Install.server', $server);
-							$this->Session->write('Install.login', $login);
-							$this->Session->write('Install.password', $password);
-							$this->Session->write('Install.database' ,$database);
-							$this->Session->write('Install.prefix', $prefix);
 							
 							$data = array(
+								'server' => $server,
+								'login' => $login,
+								'password' => $password,
+								'database' => $database,
+								'prefix' => $prefix,
 								'user' => $user,
 								'pass' => $pass
 							);
@@ -128,11 +128,14 @@
 		
 		function _install () {
 			
-			$server = $this->Session->read('Install.server');
-			$login = $this->Session->read('Install.login');
-			$password = $this->Session->read('Install.password');
-			$database = $this->Session->read('Install.database');
-			$prefix = $this->Session->read('Install.prefix');
+			$data = unserialize(file_get_contents(CONFIGS.'install.tmp'));
+						
+			$server = $data['server'];
+			$login = $data['login'];
+			$password = $data['password'];
+			$database = $data['database'];
+			$prefix = $data['prefix'];			
+			
 
 			App::import('Vendor', 'random_string');
 			
