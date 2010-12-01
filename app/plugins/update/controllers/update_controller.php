@@ -1,8 +1,18 @@
 <?php
 class UpdateController extends UpdateAppController {
 	
+	var $uses = array();
+	
+	function beforeFilter () {
+		parent::beforeFilter();
+		
+		$this->layout = 'ajax';
+		
+		if (!$this->RequestHandler->isAjax()) $this->cakeError('error404');
+	}
+	
 	function check () {
-				
+		
 		$this->set('status', $this->_check());
 	}
 	
@@ -10,11 +20,9 @@ class UpdateController extends UpdateAppController {
 		
 		$url = $this->_check();
 		
-		if(!$url) die();
+		if (!$url) die();
 		
 		set_time_limit(0);
-		
-		$settings = file_get_contents(CONFIGS.'settings.ini.php');
 		
 		$this->_clean(APP);
 		
@@ -28,30 +36,26 @@ class UpdateController extends UpdateAppController {
 		
 		unlink(APP.'Update.zip');
 		
-		file_put_contents(CONFIGS.'settings.ini.php', $settings);
-		
 		die();
 	}
 	
-	function _download ($url, $path) {
-
-		$newfname = $path;
-		$file = fopen ($url, "rb");
-		if ($file) {
-		  $newf = fopen ($newfname, "wb");
+	function _check () {
 		
-		  if ($newf)
-		  while(!feof($file)) {
-		    fwrite($newf, fread($file, 1024 * 8 ), 1024 * 8 );
-		  }
+		$update = Configure::read('Configuration.Update');
+		
+		$version = file_get_contents(CONFIGS.'version.txt');
+		
+		$query = http_build_query(array(
+			'version' => $version
+		));
+		
+		$result = file_get_contents($update.$query);
+		
+		if (trim($result == 'no')) {
+			return false;
 		}
-		
-		if ($file) {
-		  fclose($file);
-		}
-		
-		if ($newf) {
-		  fclose($newf);
+		else {
+			return $result;
 		}
 	}
 	
@@ -71,7 +75,7 @@ class UpdateController extends UpdateAppController {
 	    
 	    if(is_dir($full) && $recursive)
 	    {
-	       $result&=cleanDir($full,$recursive,$delDirs,$delDirs);
+	       $result&=$this->_clean($full,$recursive,$delDirs,$delDirs);
 	    }else if(is_file($full))
 	    {
 	       $result&=unlink($full);
@@ -86,25 +90,26 @@ class UpdateController extends UpdateAppController {
 	    }
 	    return $result;
 	}
-	
-	
-	function _check() {
+
+	function _download($url, $path) {
+
+		$newfname = $path;
+		$file = fopen ($url, "rb");
+		if ($file) {
+		  $newf = fopen ($newfname, "wb");
 		
-		$version = file_get_contents(CONFIGS.'version.txt');
-		
-		$query = http_build_query(array(
-			'version' => $version
-		));
-		
-		$status = file_get_contents(Configure::read('Configuration.Update').$query);
-		
-		$status = trim($status);
-		
-		if ($status == 'no') {
-			return false;
+		  if ($newf)
+		  while(!feof($file)) {
+		    fwrite($newf, fread($file, 1024 * 8 ), 1024 * 8 );
+		  }
 		}
-		else {
-			return $status;
+		
+		if ($file) {
+		  fclose($file);
+		}
+		
+		if ($newf) {
+		  fclose($newf);
 		}
 	}
 }
