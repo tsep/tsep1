@@ -20,7 +20,8 @@
 	<div id="header">
 		<div id="menu">
 			<ul>
-				<li><a href="#" class="first">Search</a></li>
+				<li><?php echo $html->link('Search', array('action'=>'search', 'controller' => 'indices'), array('class' =>'first'))?></li>
+			  <li><?php echo $html->link('Help', array('action' =>'index', 'controller' =>'help'))?></li>
 			</ul>
 		</div>
 		<!-- end #menu -->
@@ -47,7 +48,7 @@
 	<div id="page">
 		<div id="content">
 		  <div class="post">
-				<h2 class="title"><a href="#">Search Results</a></h2>
+				<h2 class="title"><a href="#"><?php echo $title_for_layout?></a></h2>
 				<div class="entry">
 				  <?php echo $content_for_layout ?>	
 			 </div>
@@ -56,13 +57,13 @@
 		<div id="sidebar">
 			<ul>
 				<li>
-					<h2>Search Tips</h2>
+					<h2>Search tips</h2>
 					<ul>
 					 <li>
 					   By default, TSEP searches for all the given words and displays the page which has the all given search words. 
 					 </li>
 					 <li>
-					 The minimum number of characters for a wordto perform a search is 4.
+					 The minimum number of characters for a word to perform a search is 4.
 					 </li>
 					</ul>
 				</li>

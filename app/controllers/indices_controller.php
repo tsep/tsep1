@@ -30,7 +30,6 @@
 		
 		function search ($profile = null, $page = null) {
 			
-			$this->layout = 'search';
 			
 			//Don't care if the query is empty
 			$query = @$this->params['url']['q'];

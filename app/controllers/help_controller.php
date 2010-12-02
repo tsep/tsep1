@@ -50,8 +50,9 @@
 			));
 			
 			try {
-				$return = do_post_request("http://tsep.sourceforge.net/postLog.php", $data);
-				$this->Session->setFlash('The Log has been submitted. You may find the support ticket'. $this->Html->link('here', $return), 'flash_success');
+				$return = do_post_request("http://tsep.sourceforge.net/logs/postLog.php", $data);
+				if(empty($return)) throw new Exception('Log is empty');				
+				$this->Session->setFlash('The Log has been submitted. Your ticket ID is '.$return,'flash_success');
 			}
 			catch (Exception $e) {
 				$this->log('Problem occurred while submitting the error log.');
@@ -83,7 +84,7 @@
 		 */
 		function index () {
 		
-			
+			$this->set('title','Searching Recommendations');
 		
 		} 
 	}

@@ -59,6 +59,8 @@ class AppController extends Controller {
 	        }
 	       	else {
 	       		$this->Auth->allow('*');
+	       		$this->layout = 'search';
+	       		
 	       	}        	
 	    
 	    	$this->Auth->loginAction = array('controller'=>'users', 'action' => 'login', 'admin' => 'true');
@@ -66,7 +68,7 @@ class AppController extends Controller {
 	    	$this->Auth->loginRedirect = array('controller' => 'profiles', 'action' =>'index', 'admin' => 'true');
     	}
     	else {
-    		
+    		//Not installed yet
     	}
     }
     

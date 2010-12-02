@@ -1,1 +1,1 @@
-<h2>Searching Recommendations</h2>
+Help with searching goes here.
