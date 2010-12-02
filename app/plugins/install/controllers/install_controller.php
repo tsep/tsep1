@@ -20,6 +20,20 @@
 			$this->layout = 'install';
 		}
 		
+		function _submit () {
+			
+			$url = 'http://www.tsep.info/?';
+			
+			$data = http_build_query(array(
+				'installOK' => 'yes',
+				'ver' => file_get_contents(CONFIGS.'version.txt'),
+				'comment' => Router::url('/')
+			));
+			
+			//@file_get_contents($url.$data);
+			
+			//$this->log('Got URL:'.$url.$data);
+		}
 		
 		function run () {
 			
@@ -27,6 +41,7 @@
 			
 			if (@$this->params['url']['action'] == 'install') {
 				$this->_install();
+				$this->_submit();
 				die();
 			}
 			if (@$this->params['url']['action'] == 'add'){ 
@@ -122,7 +137,6 @@
 			
 			unlink(TMP.'install.tmp');
 			
-			die('User Added');
 		}
 		
 		
@@ -163,7 +177,6 @@
 			
 			unset($options);
 			
-			die();		
 		}
 		
 		/**
