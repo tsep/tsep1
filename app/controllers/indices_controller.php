@@ -28,6 +28,53 @@
 			$this->Auth->allow('admin_start', 'admin_cleanup');
 		}
 		
+		/**
+		 * Adds a job to the indexing queue
+		 * 
+		 */
+		function _add () {
+			
+			App::import('Vendor', 'start_script');
+			App::import('Vendor', 'random_string');
+			
+			$randstr = random_string(10);
+
+			$contents = @file_get_contents(TMP.'jobs.tmp');
+			
+			if (empty($contents)) $this->_tmp();
+			
+			$data = unserialize($contents);
+
+			
+			
+			$data = serialize($store);
+			
+			file_put_contents(TMP.'jobs.tmp', $data);
+			
+
+			$url = Router::url(
+						array(
+							'controller' => 'indices',
+							'action' => 'start',
+							'admin' => true, 
+							'?' => array(
+								'continue' => $randstr
+							)
+						),
+						true
+					);
+			
+			$status = start_script($url);
+		}
+		
+		/**
+		 * Starts the indexer
+		 * 
+		 */
+		function run () {
+		
+		}
+		
 		function search ($profile = null, $page = null) {
 			
 			
