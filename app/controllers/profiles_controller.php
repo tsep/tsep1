@@ -95,13 +95,22 @@ class ProfilesController extends AppController {
 	 * Creates a new Indexing Profile (DOES NOT START INDEXER)
 	 */
 	function admin_create () {
-		
+				
 		if ($this->RequestHandler->isPost()) {
 			
-			if($this->Profile->save($this->data)) {
-				$this->Session->setFlash('Indexing Profile Created', 'flash_success');
-				$this->redirect(array('controller'=>'profiles', 'action' =>'index','admin' =>true), null, true);
-			}			
+			if (!empty($this->data)) {
+				if($this->Profile->save($this->data)) {
+					$this->Session->setFlash('Indexing Profile Created', 'flash_success');
+					$this->redirect(array('controller'=>'profiles', 'action' =>'index','admin' =>true), null, true);
+				}
+				else {
+					$this->Session->setFlash('Failed to save indexing profile', 'flash_fail');
+					$this->redirect(array('controller'=>'profiles', 'action' =>'index','admin' =>true), null, true);
+				}			
+			}
+			else {
+				$this->Session->setFlash('No Data to save.', 'flash_fail');
+			}
 		}
 	}
 	

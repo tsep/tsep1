@@ -175,11 +175,22 @@
     <div class="left_content">
     
     		<div class="sidebar_search">
-            
-              <form>
-              <input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
-              <?php echo $form->submit('search.png', array('class'=>'search_submit'))?>
-              </form>            
+              <?php 
+                echo $form->create(null, array(
+                  'url' => array(
+                    'controller'=>'indices', 
+                    'action'=>'search',
+                    'admin' => false
+                  ),
+                  'type' => 'get'
+                ));
+                echo $form->input('q', array(
+                  'label' => false,
+                  'class' => 'search_input'
+                ));
+                echo $form->submit('search.png', array('class'=>'search_submit'));
+                echo $form->end()
+             ?>
        </div>
             
             <div class="sidebarmenu">

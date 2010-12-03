@@ -36,7 +36,7 @@ $(document).ready(function() {
     	
     	$(form).submit(function () {
     		$(div).find(':input').hide();
-    		$(form).find(':input').attr('disabled', 'disabled');
+    		$(form).find('fieldset').hide();
     		img.show();
     	});
     });

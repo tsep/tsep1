@@ -67,9 +67,6 @@ class AppController extends Controller {
 	    	$this->Auth->logoutRedirect = array('controller'=>'users', 'action' => 'logout', 'admin' => 'true');
 	    	$this->Auth->loginRedirect = array('controller' => 'profiles', 'action' =>'index', 'admin' => 'true');
     	}
-    	else {
-    		//Not installed yet
-    	}
     }
     
 
