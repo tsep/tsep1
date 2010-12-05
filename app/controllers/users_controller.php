@@ -7,8 +7,12 @@
 		}
 		
 		function admin_login () {
-			if ($this->Auth->user())
+			if ($this->Auth->user()) {
+				
+				$this->_afterLogin();
+		    	
 				$this->redirect(array('controller' => 'profiles', 'admin' => true), null, true);
+			}
 		}
 		function admin_logout () {
 			if($this->Auth->user())

@@ -73,13 +73,26 @@
 						
 			$this->_import();
 			
+			$this->_run();
+		}
+		
+		function _run () {
+			
 			$jobs = unserialize(file_get_contents(TMP.'jobs.tmp'));
+			
+			if(empty($jobs)) die();
 			
 			$job = array_pop($jobs);
 			
 			file_put_contents(TMP.'jobs.tmp', serialize($jobs));
 			
+			file_put_contents(TMP.'indexer_running.tmp', '');
+			
 			$this->_index($job);
+			
+			unlink(TMP.'indexer_running.tmp');
+			
+			$this->_start();
 		}
 		
 		/**
@@ -118,6 +131,9 @@
 			$auth = @file_get_contents(TMP.'auth.tmp');
 						
 			if(@$this->params['url']['auth'] != $auth) return false;
+			
+			if (file_exists(TMP.'indexer_running.tmp')) return false;
+			
 			
 			@unlink(TMP.'auth.tmp');
 			
@@ -197,11 +213,14 @@
 			}
 			
 			$this->log('Indexing Complete');
-			die();
+			
+			return true;
 		}
 		function _shutdown ($crawler, $indexer, $id) {
 			
 				$this->log('Preparing to Restart');
+				
+				unlink(TMP.'indexer_running.tmp');
 				
 				$save = array(
 					'crawler' => $crawler,
@@ -223,9 +242,11 @@
 		
 		function search ($profile = null, $page = null) {
 			
+			$this->set('title_for_layout', 'Search Results');
 			
 			//Don't care if the query is empty
 			$query = @$this->params['url']['q'];
+			
 			
 			if(!empty($query)) {
 				$params= array('conditions' => array(

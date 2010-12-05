@@ -240,11 +240,15 @@ class TSEPCrawler {
 		//	if(!preg_match($this->regex, $value))
 		//		unset($this->urls[$key]);
 		
-		//Check that the URL is on the same domain
 		foreach ($this->urls as $key => $value) {
+			//Check that the URL is on the same domain
 			$parsed = parse_url($value);
 			if ($this->regex != @$parsed['host']) 
-				unset($this->urls['value']);
+				unset($this->urls[$key]);
+
+			//Check that the URL is not mailto
+			if(preg_match('/mailto\:([^">]+)/', $value))
+				unset($this->urls[$key]);
 		}
 		
 		//Reindex the arrays

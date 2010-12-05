@@ -12,7 +12,7 @@ class TSEPIndexer {
 					
 			//Clean out all the stopwords
 			foreach ($this->stopwords as $stopword)
-				$text = str_replace($stopword['Stopword']['stopword'], ' ', $text);
+				$text = str_replace(' '.$stopword['Stopword']['stopword'].' ', ' ', $text);
 
 			//Clean out all the spaces
 			$text = preg_replace('!\s+!', ' ', $text);

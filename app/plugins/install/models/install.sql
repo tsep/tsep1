@@ -21,26 +21,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `%prefix%elements`
---
-
-DROP TABLE IF EXISTS `%prefix%elements`;
-CREATE TABLE IF NOT EXISTS `%prefix%elements` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tag` varchar(20) NOT NULL,
-  `property` varchar(50) NOT NULL,
-  UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `%prefix%elements`
---
-
-INSERT INTO `%prefix%elements` (`id`, `tag`, `property`) VALUES
-(1, 'a', 'href'),
-(2, 'script', 'src'),
-(3, 'link', 'href');
+-- Table %prefix%elements removed
 
 -- --------------------------------------------------------
 
@@ -516,7 +497,8 @@ INSERT INTO `%prefix%stopwords` (`id`, `stopword`) VALUES
 (419, 'youngest'),
 (420, 'your'),
 (421, 'yours'),
-(422, 'z');
+(422, 'z'),
+(423, '&nbsp;');
 
 -- --------------------------------------------------------
 

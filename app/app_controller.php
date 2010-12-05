@@ -50,6 +50,19 @@ class AppController extends Controller {
 	
 	var $components = array('RequestHandler', 'Session', 'Auth');
 	
+	function _dir_size($directory) { 
+	    $size = 0; 
+	    foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory)) as $file){ 
+	        $size+=$file->getSize(); 
+	    } 
+	    return $size; 
+	}
+	
+	function afterLogin () {
+		if ($this->_dir_size(LOGS) > 1000000) {
+			$this->Session->setFlash('Your LOGS directory is quite large. You should clean it.', 'flash_warn');
+		}
+	}
 	
     function beforeFilter() {
     	
@@ -66,6 +79,7 @@ class AppController extends Controller {
 	    	$this->Auth->loginAction = array('controller'=>'users', 'action' => 'login', 'admin' => 'true');
 	    	$this->Auth->logoutRedirect = array('controller'=>'users', 'action' => 'logout', 'admin' => 'true');
 	    	$this->Auth->loginRedirect = array('controller' => 'profiles', 'action' =>'index', 'admin' => 'true');
+    		
     	}
     }
     
