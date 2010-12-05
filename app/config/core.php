@@ -35,6 +35,9 @@
 Configure::write('Configuration.ini', @parse_ini_file(CONFIGS.'settings.ini.php', true));
 
 Configure::write('Configuration.Update', 'http://tsep.sourceforge.net/updater/getUpdate.php?');
+
+Configure::write('UserAgent', 'TSEP');
+
 /**
  * CakePHP Debug Level:
  *

@@ -1,12 +1,20 @@
 <?php
 function start_script($url){
+	
+	$parsed = parse_url($url);
+	
+	if (empty($parsed['port'])) $parsed['port'] = 80;
   
-  $fp = @fopen($url, 'r');
- 
-  if (!$fp) {
-      return false;
-  } else { 
-      fclose($fp);
-      return true;
-  }
+	$fp = fsockopen($parsed['host'],$parsed['port']);
+	
+	if (!$fp) return false;
+	
+	$out = "GET ${parsed['path']}?${parsed['query']} HTTP/1.1\r\n";
+	$out.= "Host: ${parsed['host']}:${parsed['port']}\r\n";
+	$out.= "Connection: close\r\n\r\n";
+	
+	fwrite($fp, $out);
+	fclose($fp);
+
+	return true;
 }

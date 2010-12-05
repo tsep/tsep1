@@ -3,14 +3,13 @@
 class TSEPIndexer {
 
 	private $stopwords;
-	private $crawler;
-	
+	private $crawler;	
 	
 	private function cleanText($text) {
 		
 			//Clean out all the HTML
-			$text = strip_tags($text);
-			
+			$text = html_to_text($text);
+					
 			//Clean out all the stopwords
 			foreach ($this->stopwords as $stopword)
 				$text = str_replace($stopword['Stopword']['stopword'], ' ', $text);
@@ -35,7 +34,7 @@ class TSEPIndexer {
 			throw new Exception('Stopwords is not an array');
 		
 		$this->stopwords = $stopwords;
-	
+		
 	} 
 	
 	/**

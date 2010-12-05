@@ -53,14 +53,25 @@ class TSEPCrawler {
 	 * Link elements
 	 * @var array
 	 */
-	private $elements = array();
+	private $elements = array(
+		'a' => 'href',
+		'script' => 'src',
+		'link' => 'href'
+	);
 	/**
 	 * url
 	 * The current URL
 	 * @var string
 	 */
 	private $url = '';
-
+	
+	/**
+	 * agent
+	 * The user agent to act as
+	 * @var string
+	 */
+	private $agent = '';
+	
 	/**
 	 * Contructor
 	 * Initializes the class
@@ -68,7 +79,7 @@ class TSEPCrawler {
 	 * @param string $regex The Regular Expression that URLs must match to be crawled
 	 * @param string $elements The elements and their properties that contain the links
 	 */
-	function __construct($start, $regex, $elements) {
+	function __construct($start, $regex, $agent) {
 		
 		//Queue the start url to be crawled
 		if ($start != null)
@@ -77,10 +88,13 @@ class TSEPCrawler {
 		//Set the RegEx
 		$this->regex = $regex;
 		
-		//Set the elements
-		$this->elements = $elements;
-			
+		//Set the User Agent
+		$this->agent = $agent;
+					
 		$this->cleanURLs();
+		
+		//Grab the robots.txt file
+		$this->robotstxt($start);
 		
 	}
 	
@@ -123,35 +137,88 @@ class TSEPCrawler {
 		
 		//Now remove duplacate URLs, URLs that don't match the RegEx, and already crawled URLs
 		$this->cleanUrls();
+
+		$url = $this->url;
+		
+		$this->url = '';
 		
 		//And that is pretty much it
-		return new Page($contents, $this->url);
+		return new Page($contents, $url);
+	}
+	
+	private function robotstxt ($url) {
+		# parse url to retrieve host and path
+    $parsed = parse_url($url);
+    
+    $useragent = $this->agent;
+
+    $agents = array(preg_quote('*'));
+    if($useragent) $agents[] = preg_quote($useragent);
+    $agents = implode('|', $agents);
+
+    # location of robots.txt file
+    $robotstxt = @file("http://{$parsed['host']}/robots.txt");
+    if(!$robotstxt) return true;
+
+    $rules = array();
+    $ruleapplies = false;
+    foreach($robotstxt as $line) {
+      # skip blank lines
+      if(!$line = trim($line)) continue;
+
+      # following rules only apply if User-agent matches $useragent or '*'
+      if(preg_match('/User-agent: (.*)/i', $line, $match)) {
+        $ruleapplies = preg_match("/($agents)/i", $match[1]);
+      }
+      if($ruleapplies && preg_match('/Disallow:(.*)/i', $line, $regs)) {
+        # an empty rule implies full access - no further tests required
+        if(!$regs[1]) return true;
+        # add rules that apply to array for testing
+        $rules[] = preg_quote(trim($regs[1]), '/');
+      }
+    }
+
+    foreach($rules as $rule) {
+      # Push the URL into the 'done' array
+			array_push($this->done, url_to_absolute("http://{$parsed['host']}/robots.txt", $rule));
+    }
+
 	}
 	
 	/**
 	 * parse
-	 * Parses an html page and adds all the URLs it can find to $this->urls
+	 * Parses an page and adds all the URLs it can find to $this->urls
 	 * @param string $contents The contents to parse
 	 */
 	private function parse($contents) {
-		
-		CakeLog::write('error','Begin Parsing Contents');
+				
+		$this->parseHTML($contents);
+	}
+
+	private function parseHTML($contents) {
 		
 		$dom = new DOMDocument();
 		@$dom->loadHTML($contents);
 		
 		$simple = simplexml_import_dom($dom);
 		
-		foreach ($this->elements as $element){
+		unset($dom);
+		
+		foreach ($this->elements as $key => $value){
 			
-			$results = $simple->xpath('//'.$element['Element']['tag']);
+			$results = $simple->xpath('//'.$key);
 			
 			foreach ($results as $result)
-				array_push($this->urls, url_to_absolute($this->url, $result[$element['Element']['property']]));
+				array_push($this->urls, url_to_absolute($this->url, $result[$value]));
 		}
 		
+	}
+	private function parseJS ($content) {
 	
-	} 
+	}
+	private function  parseCSS ($content) {
+	
+	}
 	
 	/**
 	 * cleanURLs
@@ -171,29 +238,24 @@ class TSEPCrawler {
 		//Check the RegEx
 		//foreach ($this->urls as $key => $value) 	
 		//	if(!preg_match($this->regex, $value))
-		//		unset($this->urls[$key]);;
+		//		unset($this->urls[$key]);
+		
+		//Check that the URL is on the same domain
+		foreach ($this->urls as $key => $value) {
+			$parsed = parse_url($value);
+			if ($this->regex != @$parsed['host']) 
+				unset($this->urls['value']);
+		}
 		
 		//Reindex the arrays
 		$this->done = array_values($this->done);
 		$this->urls = array_values($this->urls);
 	}
 	
-	function __sleep() {
-		
-		$this->cleanURLs();
-
-		return array('regex', 'urls', 'done', 'elements');
-	}
-	
-	function __wakeup() {
-		
-		
-	}
-	
 }
 
 /**
- * TSEPCrawlerPage
+ * Page
  * A page crawled by TSEPCrawler
  * @author Geoffrey
  *
@@ -201,9 +263,11 @@ class TSEPCrawler {
 class Page {
 	public $content;
 	public $url;
+	public $type;
 	
-	function __construct($content, $url) {
+	function __construct($content, $url, $type = 'text/html') {
 		$this->content = $content;
 		$this->url = $url;	
+		$this->type = $type;
 	}
 }
