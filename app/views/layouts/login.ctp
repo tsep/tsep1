@@ -26,7 +26,12 @@
 <div id="main_container">
 
   <div class="header_login">
-    <div class="logo"><a href="#"><?php echo $html->image('logo.gif')?></a></div>
+    <div class="logo"><? echo $html->link( 
+  $html->image("logo.gif",
+    array('border' => '0')
+  ), 
+  '/', 
+  array('escape' => false))?></div>
     
     </div>
     <div class="login_form">

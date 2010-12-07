@@ -58,7 +58,7 @@ class AppController extends Controller {
 	    return $size; 
 	}
 	
-	function afterLogin () {
+	function _afterLogin () {
 		if ($this->_dir_size(LOGS) > 1000000) {
 			$this->Session->setFlash('Your LOGS directory is quite large. You should clean it.', 'flash_warn');
 		}
@@ -71,14 +71,12 @@ class AppController extends Controller {
 	        	$this->layout = 'admin';
 	        }
 	       	else {
-	       		$this->Auth->allow('*');
-	       		$this->layout = 'search';
-	       		
+	       		$this->Auth->allow('*');	       		
 	       	}        	
 	    
 	    	$this->Auth->loginAction = array('controller'=>'users', 'action' => 'login', 'admin' => 'true');
 	    	$this->Auth->logoutRedirect = array('controller'=>'users', 'action' => 'logout', 'admin' => 'true');
-	    	$this->Auth->loginRedirect = array('controller' => 'profiles', 'action' =>'index', 'admin' => 'true');
+	    	$this->Auth->loginRedirect = array('controller' => 'users', 'action' =>'login', 'admin' => 'true');
     		
     	}
     }

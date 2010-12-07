@@ -1,59 +1,82 @@
-<?php
-/**
- *
- * PHP versions 4 and 5
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       cake
- * @subpackage    cake.cake.libs.view.templates.layouts
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- */
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php __('The Search Engine Project:'); ?>
-		<?php echo $title_for_layout; ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
-
-		echo $scripts_for_layout;
-	?>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title><?php echo $title_for_layout?></title>
+<script type="text/javascript">
+  window.base = <?php echo json_encode($html->url('/'))?>;
+</script>
+<?php 
+  echo $html->css('style'); 
+?>
 </head>
 <body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link(__('The Search Engine Project', true), 'http://www.tsep.info/'); ?></h1>
-		</div>
-		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $content_for_layout; ?>
-
-		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					'The Search Engine Project',
-					'http://www.tsep.info/',
-					array('target' => '_blank')
-				);
-			?>
-		</div>
+	<div id="logo">
+		<h1><a href="#">search our site</a></h1>
+		<p><em>Powered by <a href="http://tsep.sf.net"/>The Search Engine Project</a></em></p>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<hr />
+	<!-- end #logo -->
+	<div id="header">
+		<div id="menu">
+			<ul>
+				<li><?php echo $html->link('Search', array('action'=>'search', 'controller' => 'indices'), array('class' =>'first'))?></li>
+			  <li><?php echo $html->link('Help', array('action' =>'index', 'controller' =>'help'))?></li>
+			</ul>
+		</div>
+		<!-- end #menu -->
+		<div id="search">
+		  <?php 
+        echo $form->create(null, array(
+          'url' => array(
+            'controller'=>'indices', 
+            'action'=>'search'
+          ),
+          'type' => 'get'
+        ));
+      ?>
+				<fieldset>
+				<input type="text" name="q" id="search-text" size="15" />
+				<input type="submit" id="search-submit" value="GO" />
+				</fieldset>
+      <?php echo $form->end(); ?>
+		</div>
+		<!-- end #search -->
+	</div>
+	<!-- end #header -->
+	<!-- end #header-wrapper -->
+	<div id="page">
+		<div id="content">
+		  <div class="post">
+				<h2 class="title"><a href="#"><?php echo $title_for_layout?></a></h2>
+				<div class="entry">
+				  <?php echo $content_for_layout ?>	
+			 </div>
+		  </div>
+		</div><!-- end #content -->
+		<div id="sidebar">
+			<ul>
+				<li>
+					<h2>Search tips</h2>
+					<ul>
+					 <li>
+					   By default, TSEP searches for all the given words and displays the page which has the all given search words. 
+					 </li>
+					 <li>
+					 The minimum number of characters for a word to perform a search is 4.
+					 </li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	<!-- end #page -->
+	<div id="footer">
+		<p>Powered by <a href="http://tsep.sf.net/">The Search Engine Project</a>. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+	  <p><?php echo $html->link('Administration Control Panel', array('controller' => 'profiles', 'admin' => true))?></p>
+	</div>
+	<!-- end #footer -->
 </body>
 </html>
