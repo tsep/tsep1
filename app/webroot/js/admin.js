@@ -49,10 +49,10 @@ $(document).ready(function() {
     	else {
     		$('#updatePanel').click(function () {
     			
-    			$.get(window.base + 'update/update/run', function (data) {
-    				$('#updatePanel').html('Update Complete');
-    				window.location.reload();
-    			});
+    			$('#updatePanel').html('Preparing to Update...');
+    			
+    			$(document).load(window.base + 'update/update/template');
+
     		});
     		$('#updatePanel').html('Click to Update');
     	}

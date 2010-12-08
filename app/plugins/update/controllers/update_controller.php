@@ -8,12 +8,16 @@ class UpdateController extends UpdateAppController {
 		
 		$this->layout = 'ajax';
 		
-		if (!$this->RequestHandler->isAjax()) $this->cakeError('error404');
+		//if (!$this->RequestHandler->isAjax()) $this->cakeError('error404');
 	}
 	
 	function check () {
 		
 		$this->set('status', $this->_check());
+	}
+	
+	function template () {
+		
 	}
 	
 	function run () {
