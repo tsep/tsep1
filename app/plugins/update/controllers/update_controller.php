@@ -8,7 +8,7 @@ class UpdateController extends UpdateAppController {
 		
 		$this->layout = 'ajax';
 		
-		//if (!$this->RequestHandler->isAjax()) $this->cakeError('error404');
+		if (!$this->RequestHandler->isAjax()) $this->cakeError('error404');
 	}
 	
 	function check () {
@@ -16,31 +16,38 @@ class UpdateController extends UpdateAppController {
 		$this->set('status', $this->_check());
 	}
 	
-	function template () {
+	function run () {
 		
+		if(@$this->params['url']['do'] == 'yes') $this->_run();
 	}
 	
-	function run () {
+	function _run () {
 		
 		$url = $this->_check();
 		
 		if (!$url) die();
 		
-		set_time_limit(0);
+		@set_time_limit(0); //TODO: Fix this not to use set_time_limit()
 		
-		$this->_clean(APP);
+		$root = APP.'..'.DS;
 		
-		$this->_download($url, APP.'Update.zip');
+		$settings = file_get_contents(CONFIGS.'settings.ini.php');
+		
+		$this->_clean($root);
+		
+		$this->_download($url, $root.'Update.zip');
 		
 		$zip = new ZipArchive();
 		
-		$zip->open(APP.'Update.zip');
-		$zip->extractTo(APP);
+		$zip->open($root.'Update.zip');
+		$zip->extractTo($root);
 		$zip->close();
 		
-		unlink(APP.'Update.zip');
+		unlink($root.'Update.zip');
 		
-		die();
+		file_put_contents(CONFIGS.'settings.ini.php', $settings);
+		
+		echo Router::url(array('controller' => 'upgrade', 'action' => 'index', 'plugin' => 'update'));
 	}
 	
 	function _check () {
