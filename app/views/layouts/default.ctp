@@ -34,7 +34,9 @@
 		  <div class="post">
 				<h2 class="title"><a href="#"><?php echo $title_for_layout?></a></h2>
           <div class="entry">
-            <?php echo $content_for_layout?>
+	          <div id="update">
+	          	            <?php echo $content_for_layout?>
+	          </div>
           </div>
 		  </div>
 		</div><!-- end #content -->

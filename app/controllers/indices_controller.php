@@ -304,7 +304,7 @@
 					'conditions' => array(
 						'MATCH(Index.text) AGAINST(? IN BOOLEAN MODE)' => array($query)
 					),
-					'limit' => 10
+					'limit' => 10,
 				);
 				
 				$data = $this->paginate('Index');
