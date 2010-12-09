@@ -298,15 +298,20 @@
 			//Don't care if the query is empty
 			$query = @$this->params['url']['q'];
 			
-			
 			if(!empty($query)) {
-				$params= array('conditions' => array(
-					'MATCH(Index.text) AGAINST(? IN BOOLEAN MODE)' => array($query)
-				));
 				
-				$matches = $this->Index->find('all', $params);
+				$this->paginate = array(
+					'conditions' => array(
+						'MATCH(Index.text) AGAINST(? IN BOOLEAN MODE)' => array($query)
+					),
+					'limit' => 10
+				);
 				
-				$this->set('matches', $matches);
+				$data = $this->paginate('Index');
+				
+				unset($this->params['url']['url']);
+				
+				$this->set(array('matches' => $data));
 			}
 			else {
 				$this->set('matches', array());

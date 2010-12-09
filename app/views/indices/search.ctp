@@ -13,6 +13,11 @@
 	<?php echo $match['Index']['text']?>	
 	</div>
 </div>
+<br />
+<br />
+  <?php echo $paginator->prev('Previous', array('url' => array('?' => $this->params['url']))); ?>
+&nbsp;&nbsp;&nbsp;
+<?php echo $paginator->next('Next', array('url' => array('?' => $this->params['url']))); ?> 
 <?php 
 		} 
 	}
