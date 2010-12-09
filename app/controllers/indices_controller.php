@@ -38,6 +38,34 @@
 		}
 		
 		/**
+		 * _begin
+		 * Creates the indexer_running.tmp file
+		 */
+		function _begin() {
+			$fp = fopen(TMP.'indexer_running.tmp', 'w');
+			fclose($fp);
+		}
+		/**
+		 * _end
+		 * removes the indexer_running.tmp file
+		 */
+		function _end () {
+			@unlink(TMP.'indexer_running.tmp');
+		}
+		/**
+		 * _singular
+		 * checks if another indexer is running
+		 */
+		function _singular () {
+			if(!file_exists(TMP.'indexer_running.tmp')) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}		
+		
+		/**
 		 * Adds a job to the indexing queue
 		 * 
 		 */
@@ -63,36 +91,51 @@
 		}
 		
 		/**
-		 * Processes the indexing queue 
+		 * _get
+		 * Gets the next job in the indexing queue
 		 */
-		function admin_run () {
+		function _get() {
 			
-			$this->log('Begin Run');
+			$contents = @file_get_contents(TMP.'jobs.tmp');
 			
-			if (!$this->_check()) $this->cakeError('error403');
+			if(empty($contents)) return false;
+			
+			$jobs = unserialize($contents);
+			
+			if(empty($jobs)) return false;
 						
-			$this->_import();
-			
-			$this->_run();
-		}
-		
-		function _run () {
-			
-			$jobs = unserialize(file_get_contents(TMP.'jobs.tmp'));
-			
-			if(empty($jobs)) die();
-			
 			$job = array_pop($jobs);
 			
 			file_put_contents(TMP.'jobs.tmp', serialize($jobs));
 			
-			file_put_contents(TMP.'indexer_running.tmp', '');
+			return $job;
+		}
+		
+		
+		function _run () {
 			
-			$this->_index($job);
+			if(!$this->_singular()) return false;
 			
-			unlink(TMP.'indexer_running.tmp');
+			$this->_begin();
 			
-			$this->_start();
+			$job = $this->_get();
+			
+			if(empty($job)) {
+				
+				$this->_end();
+				
+				return false;
+			
+			}
+			else {
+				
+				$this->_index($job);
+				$this->_end();
+				
+				return true;
+			
+			}
+									
 		}
 		
 		/**
@@ -101,8 +144,11 @@
 		 */
 		function _start() {
 			
-			$this->_import();
-			
+			if(!$this->_singular()) {
+				$this->log('Cannot start indexer because duplicate is running');
+				return false;
+			}
+						
 			$randstr = random_string(10);
 			
 			file_put_contents(TMP.'auth.tmp', $randstr);
@@ -120,6 +166,8 @@
 						true
 					)
 				);
+				
+				return true;
 		}
 
 		/**
@@ -130,27 +178,26 @@
 			
 			$auth = @file_get_contents(TMP.'auth.tmp');
 						
-			if(@$this->params['url']['auth'] != $auth) return false;
-			
-			if (file_exists(TMP.'indexer_running.tmp')) return false;
-			
+			if(@$this->params['url']['auth'] != $auth) return false;			
 			
 			@unlink(TMP.'auth.tmp');
 			
 			return true;
 		}
 		
+		/**
+		 * _index
+		 * Indexes the job given
+		 * @param array $job The Job to index
+		 */
 	function _index($job) {
-			
-			$this->log('Importing Modules for index.');
-			
-			$this->_import();
-						
+												
 			$this->log('Initializing');
 			
-			if (!$job) {
-					$this->log('Error occurred while unserializing stored crawler, Contents:'.$contents);
-					$this->cakeError('error500');
+			if (empty($job)) {
+				
+				$this->log('Invalid Job given to indexer');
+				return false;
 			}
 
 			$this->log('Loading framework');
@@ -207,8 +254,12 @@
 								
 				$this->Index->save($save);
 
-				if (get_time_left() <= 10)
+				if (get_time_left() <= 10) {
+					
 					$this->_shutdown($crawler, $indexer, $id);
+					
+					return true;
+				}
 					
 			}
 			
@@ -219,10 +270,8 @@
 		function _shutdown ($crawler, $indexer, $id) {
 			
 				$this->log('Preparing to Restart');
-				
-				unlink(TMP.'indexer_running.tmp');
-				
-				$save = array(
+								
+				$job = array(
 					'crawler' => $crawler,
 					'indexer' => $indexer,
 					'id' => $id
@@ -230,13 +279,15 @@
 				
 				$this->log('Saving state');
 				
-				$this->_add($save);
+				$this->_add($job);
 				
 				$this->log('Restarting');
 				
+				$this->_end();
+				
 				$this->_start();
 				
-				die();
+				return true;
 			}
 		
 		
@@ -261,6 +312,25 @@
 				$this->set('matches', array());
 			}
 		}
+		
+		/**
+		 * Processes the indexing queue 
+		 */
+		function admin_run () {
+			
+			$this->log('Begin Run');
+			
+			if (!$this->_check()) {
+				$this->log('Access Violation');
+				$this->cakeError('error403');
+			}
+			else {
+				$this->_import();
+				$this->_run();
+			}
+			
+			die();
+		}
 			
 		function admin_index ($id = null) {
 					
@@ -275,6 +345,7 @@
 				
 				$this->Session->setFlash('Indexing has been queued, but may take a while to appear depending on the site being crawled', 'flash_warn');
 				$this->redirect(array('controller' => 'profiles', 'action' => 'index', 'admin' => true), null, true);
+			
 			} else {
 				
 				$this->Session->setFlash('No valid indexing profile specified. Indexer was not started', 'flash_fail');
