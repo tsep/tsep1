@@ -19,27 +19,11 @@
 	<!-- end #logo -->
 	<div id="header">
 		<div id="menu">
-			<ul>
-				<li><?php echo $html->link('Search', array('action'=>'search', 'controller' => 'indices'), array('class' =>'first'))?></li>
-			  <li><?php echo $html->link('Help', array('action' =>'index', 'controller' =>'help'))?></li>
-			</ul>
+			<?php echo $this->element('search_menu')?>
 		</div>
 		<!-- end #menu -->
 		<div id="search">
-		  <?php 
-        echo $form->create(null, array(
-          'url' => array(
-            'controller'=>'indices', 
-            'action'=>'search'
-          ),
-          'type' => 'get'
-        ));
-      ?>
-				<fieldset>
-				<input type="text" name="q" id="search-text" size="15" />
-				<input type="submit" id="search-submit" value="GO" />
-				</fieldset>
-      <?php echo $form->end(); ?>
+		  <?php echo $this->element('search_form')?>
 		</div>
 		<!-- end #search -->
 	</div>
@@ -49,9 +33,9 @@
 		<div id="content">
 		  <div class="post">
 				<h2 class="title"><a href="#"><?php echo $title_for_layout?></a></h2>
-				<div class="entry">
-				  <?php echo $content_for_layout ?>	
-			 </div>
+          <div class="entry">
+            <?php echo $this->element('search_results')?>
+          </div>
 		  </div>
 		</div><!-- end #content -->
 		<div id="sidebar">
