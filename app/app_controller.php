@@ -66,7 +66,7 @@ class AppController extends Controller {
 	
     function beforeFilter() {
     	
-    	if(file_exists(CONFIGS.'settings.ini.php') && !file_exists(TMP.'install.tmp')) {
+    	if(isset($this->Auth)) {
     		
 	        if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
 	        	$this->layout = 'admin';

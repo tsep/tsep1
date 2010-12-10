@@ -11,6 +11,10 @@
 		function beforeFilter () {
 			parent::beforeFilter();
 			
+			if(file_exists(CONFIGS.'settings.ini.php') && !file_exists(TMP.'install.tmp')){
+				$this->cakeError('error403');
+			}
+			
 			App::import('Component', 'RequestHandler');
 			$this->RequestHandler = new RequestHandlerComponent();
 			
