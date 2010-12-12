@@ -18,12 +18,6 @@ $this->Paginator->options(array(
 	<?php echo $match['Index']['text']?>	
 	</div>
 </div>
-<br />
-<br />
-<?php echo $paginator->prev('&laquo;Previous', array('url' => array('?' => $this->params['url']))); ?>
-&nbsp;&nbsp;&nbsp;
-<?php echo $paginator->next('Next&raquo;', array('url' => array('?' => $this->params['url']))); ?> 
-
 <?php 
 		} 
 	}
@@ -35,4 +29,8 @@ $this->Paginator->options(array(
 	
 	echo $js->writeBuffer();
 ?>
-	
+<br />
+<br />
+<?php echo $paginator->prev('&laquo;Previous', array('escape' => false, 'url' => array('?' => $this->params['url'])), null, array('escape' => false)); ?>
+&nbsp;&nbsp;&nbsp;
+<?php echo $paginator->next('Next&raquo;', array('escape' => false,'url' => array('?' => $this->params['url'])), null, array('escape' => false)); ?> 	

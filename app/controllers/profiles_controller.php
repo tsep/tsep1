@@ -32,7 +32,45 @@ class ProfilesController extends AppController {
 	 * @param mixed $id
 	 */
 	function admin_edit($id = null){
-	
+		
+		if ($this->RequestHandler->isPost()) {
+				
+				if (!empty($this->data)) {					
+					if($this->Profile->save($this->data)) {
+						$this->Session->setFlash('Modifications to the Indexing Profile were saved', 'flash_success');
+						$this->redirect(array('controller'=>'profiles', 'action' =>'index','admin' =>true), null, true);
+					}
+					else {
+						$this->log('Failure to save indexing profile: $this->Profile->save()');
+						
+						$this->Session->setFlash('Failed to save indexing profile', 'flash_fail');
+						$this->redirect(array('controller'=>'profiles', 'action' =>'index','admin' =>true), null, true);
+					}			
+				}
+				else {
+					
+					$this->log('Empty data supplied');
+					$this->Session->setFlash('Invalid Data supplied', 'flash_fail');
+				}
+			
+		}
+		else {
+			
+			if(empty($id)) {
+				$this->Session->setFlash('No Profile Specified', 'flash_fail');
+				$this->redirect(array('controller' => 'profiles', 'action' => 'index'), null, true);
+			}
+			
+			$profile = $this->Profile->findById($id);
+			
+			if(empty($profile)) {
+				$this->Session->setFlash('Invalid Profile Specified', 'flash_fail');
+				$this->redirect(array('controller' => 'profiles', 'action' => 'index'), null, true);
+			}
+			
+			$this->set('profile',$profile);
+			
+		}
 	}
 	
 	/**
@@ -83,6 +121,8 @@ class ProfilesController extends AppController {
 		$profile = $this->Profile->findById($id);
 		
 		if(empty($profile)) {
+			$this->log('Empty profile supplied while trying to view the profile');
+			
 			$this->Session->setFlash('The profile that you selected to view does not exist', 'flash_fail');
 			$this->redirect(array('controller'=>'profiles', 'action' =>'index'),null, true);
 		}
