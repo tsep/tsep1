@@ -3,7 +3,6 @@
 class TSEPIndexer {
 
 	private $stopwords;
-	private $crawler;	
 	
 	private function cleanText($text) {
 		
@@ -14,6 +13,10 @@ class TSEPIndexer {
 			foreach ($this->stopwords as $stopword)
 				$text = str_replace(' '.$stopword['Stopword']['stopword'].' ', ' ', $text);
 
+			//Clean out the escape characters
+			$text = preg_replace('/(&)((?:[a-z][a-z]+))(;)/is', ' ', $text);
+			$text = preg_replace('/(&)(#)(\\d+)(;)/is', ' ', $text);
+				
 			//Clean out all the spaces
 			$text = preg_replace('!\s+!', ' ', $text);
 			
