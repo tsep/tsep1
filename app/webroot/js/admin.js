@@ -19,27 +19,46 @@ ddaccordion.init({
     }
 });
 
+window.loading = false;
+
 $(document).ready(function() {
     $('.jclock').jclock();
-    $('.ask').jConfirmAction();
-    $('.button').each(function () {
-        var form = $(this).parents('form:first');
+    
+    function parseForms() {
     	
-    	var img = $(new Image());
-    	img.attr('src', window.base + '/img/ajax-loader.gif');
+    	$('.button').each(function () {
+            var form = $(this).parents('form:first');
+        	    	
+        	$(form).submit(function () {
+        		
+        		if(window.loading) return false;
+        		
+        		window.loading = true;
+        		
+        		$("#loader").show();
+        		$("#content").hide();
+        		
+        		$.post($(this).attr('action'), $(this).serialize(), function (data) {
+        			
+        			$("#content").html(data);
+        			
+        			parseLinks();
+        			parseForms();
+        			
+        	        $('.ask').jConfirmAction();
+        			
+        			$("#content").show();
+        			$("#loader").hide();
+        			
+        			window.loading = false;
+        		});
+        		
+        		return false;
+        	});
+        });
     	
-    	img.hide();
-    	
-    	var div = this;
-    	
-    	$(this).append(img);
-    	
-    	$(form).submit(function () {
-    		$(div).find(':input').hide();
-    		$(form).find('fieldset').hide();
-    		img.show();
-    	});
-    });
+    }
+    
     
     $.get(window.base + 'update/update/check', function (data) {
     	
@@ -57,4 +76,42 @@ $(document).ready(function() {
     		$('#updatePanel').html('Click to Update');
     	}
     });
+    
+    function parseLinks () {
+        	
+	    $(".menu, #content").find("a").each(function () {
+	    		    	
+	    	$(this).click(function () {
+	    		
+	    		if(window.loading) return false;
+	    			    		
+	    		window.loading = true;
+	    		
+	    		$("#loader").show();
+	    		$("#content").hide();
+	    			    		
+	    		$("#content").load($(this).attr('href'), function () {
+	    			
+	    			parseLinks();
+	    			parseForms();
+	    			
+	    	        $('.ask').jConfirmAction();
+	    			
+	    			$("#content").show();
+	    			$("#loader").hide();
+	    			
+	    			window.loading = false;
+	    			
+	    		});
+	    		
+	    		return false;
+	    	});
+	    });
+    }
+    
+    parseLinks();
+    parseForms();
+    
+    $('.ask').jConfirmAction();
+
 });

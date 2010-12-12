@@ -460,7 +460,6 @@ color: #ccc;
 div#loader img {
   display:block;
   margin:auto;
-  padding-top:40%;
 }
 div#loader {
   display:none;

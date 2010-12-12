@@ -80,6 +80,11 @@ class AppController extends Controller {
 	    	$this->Auth->loginRedirect = array('controller' => 'users', 'action' =>'login', 'admin' => 'true');
     		
     	}
+    	
+    	if(isset($this->RequestHandler)) {
+    		if ($this->RequestHandler->isAjax())
+    			$this->layout = 'ajax';
+    	}
     }
     
 

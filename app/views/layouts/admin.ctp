@@ -41,7 +41,6 @@
     
                     <div class="menu">
                     <ul>
-                    <li><?php echo $html->link('ACP Home', array('controller'=>'profiles', 'action'=>'index'))?></li>
                     <?php //<li><?php echo $html->link('Index Site', array('controller'=>'indexer', 'action'=>'index'))?>
                     <?php 
                     /*
@@ -57,7 +56,13 @@
                     */
                     ?>
                     <?php //</li>?>
-                    <li><?php echo $html->link('Create a New IProfile', array('controller'=>'profiles', 'action'=>'create'))?>
+                    <li><?php echo $html->link('Profiles', array('controller' => 'profiles', 'action' => 'index'))?>
+                    	<ul>
+                    		<li><?php echo $html->link('New IProfile', array('controller'=>'profiles', 'action'=>'create'))?></li>
+                    		<li><?php echo $html->link('View all', array('controller'=>'profiles', 'action'=>'index'))?></li>
+                    	</ul>
+                    </li>
+                    <?php //<li><?php echo $html->link('Create a New IProfile', array('controller'=>'profiles', 'action'=>'create'))?>
                     <?php 
                     /*
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
@@ -92,6 +97,12 @@
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     */
                     ?>
+                    <li>
+                    	<?php echo $html->link('Stopwords', array('controller' => 'stopwords', 'action' => 'index'))?>
+                    	<ul>
+                    		<li><?php echo $html->link('View all', array('controller' => 'stopwords', 'action' => 'index'))?></li>
+                    		<li><?php echo $html->link('Add new', array('controller' => 'stopwords', 'action' => 'add'))?></li>
+                    	</ul>
                     </li>
                     <?php //<li><a href="?page=users">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->?>
                     <?php 
@@ -166,7 +177,7 @@
                     ?>
                     <?php //</li>?>
                     <?php //<li><a href="?page=layout">Search Page Layout</a>?>
-                    <li><?php echo $html->link('Contact TSEP', array( 'controller'=>'help', 'action'=>'index'))?></li>
+                    <li><?php echo $html->link('Customer Assistance', array( 'controller'=>'help', 'action'=>'index'))?></li>
                     </ul>
                     </div> 
                     
@@ -201,7 +212,7 @@
             <div class="sidebarmenu">
             
                 <?php //<a class="menuitem //submenuheader" href="?page=main">ACP Home</a>?>
-                <?php echo $html->link('ACP Home', array('controller'=>'profiles', 'action'=>'index'), array('class' => 'menuitem'))?>
+                <?php //echo $html->link('ACP Home', array('controller'=>'profiles', 'action'=>'index'), array('class' => 'menuitem'))?>
                 <?php /*
                 <div class="submenu">
                     <ul>
@@ -322,7 +333,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
 			?>
 		</div>  
 		<div id="loader">
-			<?php echo $html->image('ajax-loader.gif')?>
+			<?php echo $html->image('ajax-loader-large.gif')?>
 		</div>  
     </div>
     <!-- end of right content-->

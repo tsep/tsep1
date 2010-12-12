@@ -47,26 +47,26 @@ class ProfilesController extends AppController {
 			$this->redirect(array('controller'=>'profiles', 'action' =>'index', 'admin' =>true), null, true);
 		}
 		
-		$this->Profile->delete($id, false);
+		$this->loadModel('Index');
+				
+		if(!$this->Index->deleteAll(array('Index.profile_id' => $id))) {
+			
+			$this->log('Failed to remove indices. This is a fatal error.');
+			Debugger::log($id);
+			
+			$this->Session->setFlash('Failed to delete indices of profile. See error log for details', 'flash_fail');
+			$this->redirect(array('controller' => 'profiles', 'action' => 'index'), null, true);
+		}
 		
-		App::import('Vendor', 'start_script');
-		App::import('Vendor', 'random_string');
-		
-		$randstr = random_string(10);
-		
-		
-		file_put_contents(TMP.'indexer'.DS.$randstr, $id);
-		
-		start_script(
-			Router::url(array(
-				'controller' => 'indices',
-				'action' => 'cleanup',
-				'admin' => true,
-				'?' => array(
-					'continue' => $randstr
-				)
-			),true)
-		);
+		if(!$this->Profile->delete($id)) {
+			
+			$this->log('Failed to remove profile. This is a fatal error.');
+			Debugger::log($id);
+			
+			$this->Session->setFlash('Failed to delete profile', 'flash_fail');
+			$this->redirect(array('controller' => 'profiles', 'action' => 'index'), null, true);
+		}
+				
 		
 		$this->Session->setFlash('The selected profile has been deleted', 'flash_success');
 		$this->redirect(array('controller'=>'profiles', 'action' =>'index', 'admin' =>true), null, true);
