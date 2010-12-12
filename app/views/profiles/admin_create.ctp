@@ -5,15 +5,15 @@
 <fieldset>
 	<dl>
 		<dt>Profile Name</dt>
-		<dd><?php echo $form->input('name',array('label'=>''))?></dd>
+		<dd><?php echo $form->input('name',array('label'=> false))?></dd>
 	</dl>
 	<dl>
 		<dt>Start URL</dt>
-		<dd><?php echo $form->input('url',array('label'=>''))?></dd>
+		<dd><?php echo $form->input('url',array('label'=> false))?></dd>
 	</dl>
 	<dl>
 		<dt>Regular Expression</dt>
-		<dd><?php echo $form->input('regex',array('label'=>''))?></dd>
+		<dd><?php echo $form->input('regex',array('label'=>false))?></dd>
 	</dl>
 </fieldset>
 <?php 

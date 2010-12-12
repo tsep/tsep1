@@ -457,3 +457,14 @@ margin-right: 2px;
 border: 1px solid #f3f3f3;
 color: #ccc;
 }
+div#loader img {
+  display:block;
+  margin:auto;
+  padding-top:40%;
+}
+div#loader {
+  display:none;
+  height:100%;
+  width:100%;
+  background-color:white;
+}

@@ -313,12 +313,17 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
     		*/?>
     </div>  
     
-    <div class="right_content">            
-    <?php
-    	echo $session->flash();    		
-		echo $content_for_layout 
-	?>
+    <div class="right_content">
     
+	    <div id="content">
+		    <?php
+		    	echo $session->flash();    		
+				echo $content_for_layout;
+			?>
+		</div>  
+		<div id="loader">
+			<?php echo $html->image('ajax-loader.gif')?>
+		</div>  
     </div>
     <!-- end of right content-->
             
