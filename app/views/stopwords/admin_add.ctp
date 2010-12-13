@@ -16,3 +16,5 @@
 		'label' => 'Add Stopword'
 	));
 ?>
+<br />
+<b>Note that the stopword will not take effect until the next indexer run.</b>

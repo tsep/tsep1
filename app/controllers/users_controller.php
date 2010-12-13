@@ -3,6 +3,9 @@
 	
 		function beforeFilter () {
 			parent::beforeFilter();
+			
+			$this->Security->requireAuth();
+			
 			$this->layout = 'login';
 		}
 		

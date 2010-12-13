@@ -14,6 +14,13 @@
 class ProfilesController extends AppController {
 
 	var $name = 'Profiles';
+	var $uses = array('Profile');
+	
+	function beforeFilter() {
+		parent::beforeFilter();
+		
+		$this->Security->requireAuth();
+	}
 	
 	/**
 	 * admin_index
@@ -32,8 +39,6 @@ class ProfilesController extends AppController {
 	 * @param mixed $id
 	 */
 	function admin_edit($id = null){
-		
-		if ($this->RequestHandler->isPost()) {
 				
 				if (!empty($this->data)) {					
 					if($this->Profile->save($this->data)) {
@@ -47,13 +52,6 @@ class ProfilesController extends AppController {
 						$this->redirect(array('controller'=>'profiles', 'action' =>'index','admin' =>true), null, true);
 					}			
 				}
-				else {
-					
-					$this->log('Empty data supplied');
-					$this->Session->setFlash('Invalid Data supplied', 'flash_fail');
-				}
-			
-		}
 		else {
 			
 			if(empty($id)) {

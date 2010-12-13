@@ -50,7 +50,9 @@
 				'evalScripts' => true,
 				'before' => $js->get('#content')->effect('hide', array('buffer' => false)).
 							$js->get('#loader')->effect('show', array('buffer' => false)),
-    			'complete'=>$js->get('#loader')->effect('hide', array('buffer' => false)).
+    			'complete'=>'parseLinks();'.
+							'parseForms();'.
+							$js->get('#loader')->effect('hide', array('buffer' => false)).
 							$js->get('#content')->effect('show', array('buffer' => false)),
 		));
 	?>

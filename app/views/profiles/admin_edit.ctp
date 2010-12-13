@@ -38,7 +38,7 @@
 		$("#ProfileRegex").val(a.hostname);
 	});
 
-	$(".button").find("input").click(function () {
+	$("#ProfileAdminEditForm").submit(function () {
 		$("#ProfileUrl").change();
 		$("#ProfileRegex").attr("disabled","");
 	});

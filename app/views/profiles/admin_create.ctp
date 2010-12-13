@@ -9,11 +9,17 @@
 	</dl>
 	<dl>
 		<dt>Start URL</dt>
-		<dd><?php echo $form->input('url',array('label'=> false))?></dd>
+		<dd>
+			<?php echo $form->input('url',array('label'=> false))?>
+			<em>The URL to the document root of your website.</em>
+		</dd>
 	</dl>
 	<dl>
 		<dt>Regular Expression</dt>
-		<dd><?php echo $form->input('regex',array('label'=>false,'disabled' => 'disabled',))?></dd>
+		<dd>
+			<?php echo $form->input('regex',array('label'=>false,'disabled' => 'disabled',))?>
+			<em>This field is currently automatically generated.</em>
+		</dd>
 	</dl>
 </fieldset>
 <?php 
@@ -24,6 +30,9 @@
 		'label' => 'Create Profile'
 	));
 ?>
+<br />
+<b>You must index the new Profile before it will appear in the search results.</b>
+
 <script type="text/javascript">
 	$("#ProfileUrl").change(function () {
 		var value = $(this).val();
@@ -35,7 +44,7 @@
 		$("#ProfileRegex").val(a.hostname);
 	});
 
-	$(".button").find("input").click(function () {
+	$("#ProfileAdminCreateForm").submit(function () {
 		$("#ProfileUrl").change();
 		$("#ProfileRegex").attr("disabled","");
 	});

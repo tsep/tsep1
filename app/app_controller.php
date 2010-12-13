@@ -48,7 +48,7 @@ class AppController extends Controller {
 
 	var $helpers = array('Html', 'Session', 'Js', 'Form', 'Paginator');
 	
-	var $components = array('RequestHandler', 'Session', 'Auth');
+	var $components = array('RequestHandler', 'Session', 'Auth', 'Security');
 	
 	function _dir_size($directory) { 
 	    $size = 0; 
@@ -84,6 +84,11 @@ class AppController extends Controller {
     	if(isset($this->RequestHandler)) {
     		if ($this->RequestHandler->isAjax())
     			$this->layout = 'ajax';
+    	}
+    	
+    	if(!isset($this->Security)) {
+    		App::import('Component', 'Security');
+    		$this->Security = new SecurityComponent();
     	}
     }
     
