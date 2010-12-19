@@ -46,13 +46,18 @@ class TSEPIndexer {
 	 * @var Page $page The page to parse
 	 */
 	function parse (&$page) {
-	
+
+		
+		//If the page is not html
+		if($page->type != 'text/html') return false;
 		
 		//Only keep the body
 		$page->content = preg_replace("/.*<body[^>]*>|<\/body>.*/si", "", $page->content);
 		
 		//Get the Important text
 		$page->content = $this->cleanText($page->content);
+
+		
 		
 		if(empty($page->content))
 			return false;

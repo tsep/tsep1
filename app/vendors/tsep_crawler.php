@@ -123,7 +123,7 @@ class TSEPCrawler {
 		$contents = @file_get_contents($this->url, 0, $context);
 		
 		// Check for empties
-		if (!empty($contents))	$this->parse($contents);
+		if (!empty($contents))	$type = $this->parse($contents);
 			
 			
 		/*
@@ -143,46 +143,56 @@ class TSEPCrawler {
 		$this->url = '';
 		
 		//And that is pretty much it
-		return new Page($contents, $url);
+		return new Page($contents, $url, $type);
 	}
 	
 	private function robotstxt ($url) {
 		# parse url to retrieve host and path
-    $parsed = parse_url($url);
-    
-    $useragent = $this->agent;
+	    $parsed = parse_url($url);
+	    
+	    $useragent = $this->agent;
+	
+	    $agents = array(preg_quote('*'));
+	    if($useragent) $agents[] = preg_quote($useragent);
+	    $agents = implode('|', $agents);
+	
+	    # location of robots.txt file
+	    $robotstxt = @file("http://{$parsed['host']}/robots.txt");
+	    if(!$robotstxt) return true;
+	
+	    $rules = array();
+	    $ruleapplies = false;
+	    foreach($robotstxt as $line) {
+	      # skip blank lines
+	      if(!$line = trim($line)) continue;
+	
+	      # following rules only apply if User-agent matches $useragent or '*'
+	      if(preg_match('/User-agent: (.*)/i', $line, $match)) {
+	        $ruleapplies = preg_match("/($agents)/i", $match[1]);
+	      }
+	      if($ruleapplies && preg_match('/Disallow:(.*)/i', $line, $regs)) {
+	        # an empty rule implies full access - no further tests required
+	        if(!$regs[1]) return true;
+	        # add rules that apply to array for testing
+	        $rules[] = preg_quote(trim($regs[1]), '/');
+	      }
+	    }
+	
+	    foreach($rules as $rule) {
+	      # Push the URL into the 'done' array
+				array_push($this->done, url_to_absolute("http://{$parsed['host']}/robots.txt", $rule));
+	    }
 
-    $agents = array(preg_quote('*'));
-    if($useragent) $agents[] = preg_quote($useragent);
-    $agents = implode('|', $agents);
-
-    # location of robots.txt file
-    $robotstxt = @file("http://{$parsed['host']}/robots.txt");
-    if(!$robotstxt) return true;
-
-    $rules = array();
-    $ruleapplies = false;
-    foreach($robotstxt as $line) {
-      # skip blank lines
-      if(!$line = trim($line)) continue;
-
-      # following rules only apply if User-agent matches $useragent or '*'
-      if(preg_match('/User-agent: (.*)/i', $line, $match)) {
-        $ruleapplies = preg_match("/($agents)/i", $match[1]);
-      }
-      if($ruleapplies && preg_match('/Disallow:(.*)/i', $line, $regs)) {
-        # an empty rule implies full access - no further tests required
-        if(!$regs[1]) return true;
-        # add rules that apply to array for testing
-        $rules[] = preg_quote(trim($regs[1]), '/');
-      }
-    }
-
-    foreach($rules as $rule) {
-      # Push the URL into the 'done' array
-			array_push($this->done, url_to_absolute("http://{$parsed['host']}/robots.txt", $rule));
-    }
-
+	}
+	
+	private function getType($contents) {
+		
+		if(preg_match('/<[^<>]+>/', $contents)) {
+			return 'text/html';
+		}
+		else {
+			return 'text/javascript';
+		}
 	}
 	
 	/**
@@ -192,7 +202,27 @@ class TSEPCrawler {
 	 */
 	private function parse($contents) {
 				
-		$this->parseHTML($contents);
+		
+		$type = $this->getType($contents);
+		
+		switch ($type) {
+			case 'text/html':
+				$this->parseHTML($contents);
+				break;
+			case 'text/javascript':
+				$this->parseJS($contents);
+				break;
+			case 'text/css':
+				$this->parseCSS($contents);
+				break;
+			default: //Attempt to parse all three
+				$this->parseHTML($contents);
+				$this->parseCSS($contents);
+				$this->parseJS($contents);
+				break;
+		}
+		
+		return $type;
 	}
 
 	private function parseHTML($contents) {
@@ -213,11 +243,12 @@ class TSEPCrawler {
 		}
 		
 	}
-	private function parseJS ($content) {
+	private function parseJS ($contents) {
 	
+		return true;
 	}
-	private function  parseCSS ($content) {
-	
+	private function  parseCSS ($contents) {
+		return true;
 	}
 	
 	/**

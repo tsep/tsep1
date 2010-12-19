@@ -129,7 +129,7 @@
 			}
 			else {
 				
-				$this->_index($job);
+				@$this->_index($job);
 				$this->_end();
 				
 				return true;
@@ -241,18 +241,22 @@
 			while ($page = $crawler->crawl()) {
 
 				
-				$indexer->parse($page);
+				$status = $indexer->parse($page);
 				
+				
+				if($status) {
 								
-				$save = $this->Index->create(array(
-					'Index' => array(
-						'profile_id' => $id,
-						'url' => $page->url,
-						'text' => $page->content
-					)
-				));
-								
-				$this->Index->save($save);
+					$save = $this->Index->create(array(
+						'Index' => array(
+							'profile_id' => $id,
+							'url' => $page->url,
+							'text' => $page->content
+						)
+					));
+									
+					$this->Index->save($save);
+				
+				}
 
 				if (get_time_left() <= 10) {
 					
