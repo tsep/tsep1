@@ -42,8 +42,8 @@
 		 * Creates the indexer_running.tmp file
 		 */
 		function _begin() {
-			$fp = fopen(TMP.'indexer_running.tmp', 'w');
-			fclose($fp);
+			$fp = @fopen(TMP.'indexer_running.tmp', 'w');
+			@fclose($fp);
 		}
 		/**
 		 * _end
@@ -190,7 +190,7 @@
 		 * Indexes the job given
 		 * @param array $job The Job to index
 		 */
-	function _index($job) {
+		function _index($job) {
 												
 			$this->log('Initializing');
 			
@@ -225,6 +225,8 @@
 				}
 			
 				$stopwords = $this->Stopword->find('all');
+				
+				//TODO: Specify a different user agent for ea. indexing profile
 				
 				$crawler = new TSEPCrawler($profile['Profile']['url'], $profile['Profile']['regex'], Configure::read('UserAgent'));
 				$indexer = new TSEPIndexer($stopwords);
@@ -273,26 +275,26 @@
 		}
 		function _shutdown ($crawler, $indexer, $id) {
 			
-				$this->log('Preparing to Restart');
+			$this->log('Preparing to Restart');
 								
-				$job = array(
-					'crawler' => $crawler,
-					'indexer' => $indexer,
-					'id' => $id
-				);
-				
-				$this->log('Saving state');
-				
-				$this->_add($job);
-				
-				$this->log('Restarting');
-				
-				$this->_end();
-				
-				$this->_start();
-				
-				return true;
-			}
+			$job = array(
+				'crawler' => $crawler,
+				'indexer' => $indexer,
+				'id' => $id
+			);
+			
+			$this->log('Saving state');
+			
+			$this->_add($job);
+			
+			$this->log('Restarting');
+			
+			$this->_end();
+			
+			$this->_start();
+			
+			return true;
+		}
 		
 		
 		function search ($profile = null, $page = null) {

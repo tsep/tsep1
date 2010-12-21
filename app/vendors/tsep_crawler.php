@@ -49,16 +49,6 @@ class TSEPCrawler {
 	private $done = array();
 	
 	/**
-	 * elements
-	 * Link elements
-	 * @var array
-	 */
-	private $elements = array(
-		'a' => 'href',
-		'script' => 'src',
-		'link' => 'href'
-	);
-	/**
 	 * url
 	 * The current URL
 	 * @var string
@@ -94,7 +84,7 @@ class TSEPCrawler {
 		$this->cleanURLs();
 		
 		//Grab the robots.txt file
-		$this->robotstxt($start);
+		$this->parseRobots($start);
 		
 	}
 	
@@ -123,7 +113,7 @@ class TSEPCrawler {
 		$contents = @file_get_contents($this->url, 0, $context);
 		
 		// Check for empties
-		if (!empty($contents))	$type = $this->parse($contents);
+		if (!empty($contents))	$this->parse($contents);
 			
 			
 		/*
@@ -142,11 +132,13 @@ class TSEPCrawler {
 		
 		$this->url = '';
 		
+		$type = $this->getType($contents);
+		
 		//And that is pretty much it
 		return new Page($contents, $url, $type);
 	}
 	
-	private function robotstxt ($url) {
+	private function parseRobots ($url) {
 		# parse url to retrieve host and path
 	    $parsed = parse_url($url);
 	    
@@ -202,51 +194,72 @@ class TSEPCrawler {
 	 */
 	private function parse($contents) {
 				
-		
-		$type = $this->getType($contents);
-		
-		switch ($type) {
-			case 'text/html':
-				$this->parseHTML($contents);
-				break;
-			case 'text/javascript':
-				$this->parseJS($contents);
-				break;
-			case 'text/css':
-				$this->parseCSS($contents);
-				break;
-			default: //Attempt to parse all three
-				$this->parseHTML($contents);
-				$this->parseCSS($contents);
-				$this->parseJS($contents);
-				break;
+		try {
+			$type = $this->getType($contents);
+			
+			switch ($type) {
+				case 'text/html':
+					$this->parseHTML($contents);
+					break;
+				case 'text/javascript':
+					$this->parseJS($contents);
+					break;
+				case 'text/css':
+					$this->parseCSS($contents);
+					break;
+				default: //Attempt to parse all three
+					$this->parseHTML($contents);
+					$this->parseCSS($contents);
+					$this->parseJS($contents);
+					break;
+			}
+			
+			return true; 
 		}
-		
-		return $type;
+		catch (Exception $ex) {
+			
+			return false;
+		}
 	}
 
 	private function parseHTML($contents) {
 		
 		$dom = new DOMDocument();
-		@$dom->loadHTML($contents);
+		$dom->loadHTML($contents);
 		
 		$simple = simplexml_import_dom($dom);
 		
-		unset($dom);
+		unset($dom); //DomDocument is heavy and bloated
 		
-		foreach ($this->elements as $key => $value){
 			
-			$results = $simple->xpath('//'.$key);
-			
-			foreach ($results as $result)
-				array_push($this->urls, url_to_absolute($this->url, $result[$value]));
+		$links = $simple->xpath('/html/body//a');
+		
+		foreach ($links as $link){
+
+			array_push($this->urls, url_to_absolute($this->url, $link['href']));
+				
 		}
 		
 	}
+	
+	
+	//TODO: Implement Javascript parsing
+	/**
+	 * parseJS
+	 * Parses links from JavaScript
+	 * @param string $contents The JavaScript to parse
+	 */
 	private function parseJS ($contents) {
 	
 		return true;
 	}
+	
+	//TODO: Implement CSS parsing
+	/**
+	 * parseCSS
+	 * Parses links from CSS
+	 * @param string $contents The CSS to parse
+	 */
 	private function  parseCSS ($contents) {
 		return true;
 	}
