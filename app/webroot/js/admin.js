@@ -70,7 +70,7 @@ $(document).ready(function() {
     			
     			$('#updatePanel').html('Preparing to Update...');
     			
-    			$(document).load(window.base + 'update/update/template');
+    			$(document).load(window.base + 'update/update/run');
 
     		});
     		$('#updatePanel').html('Click to Update');

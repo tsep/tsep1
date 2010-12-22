@@ -1,6 +1,5 @@
 <div class="loader">
-  Installing The Search Engine Project...<br />
-  <em>Do NOT close your browser during this process.</em>
+  <?php echo $html->image('ajax-loader.gif')?>
 </div>
 <script type="text/javascript">
   $.get(<?php echo json_encode($html->url(array('action' => 'run', '?' => array('action' => 'install'))))?>, function (data) {

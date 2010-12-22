@@ -18,9 +18,10 @@
 			}
 		}
 		function admin_logout () {
-			if($this->Auth->user())
+			if($this->Auth->user()){
+				$this->Session->setFlash('You have been logged out', 'default', array(), 'auth');
 				$this->Auth->logout();
-			else 
+			}
 				$this->redirect(array('controller' => 'users', 'action' => 'login'), null, true);
 		}
 	}

@@ -21,12 +21,11 @@
   <body>
     <center>
       <div id="updatePanel">
-        Updating...
+				<?php echo $html->image('ajax-loader.gif')?>
       </div>
     </center>
     <script>
           $.get(window.base + 'update/update/run?do=yes', function (data) {
-            $('#updatePanel').html('Update Complete');
             window.location = data;
           });
     </script>

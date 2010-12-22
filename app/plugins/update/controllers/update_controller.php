@@ -45,9 +45,9 @@ class UpdateController extends UpdateAppController {
 		
 		unlink($root.'Update.zip');
 		
-		file_put_contents(CONFIGS.'settings.ini.php', $settings);
-		
-		echo Router::url(array('controller' => 'upgrade', 'action' => 'index', 'plugin' => 'update'));
+		App::import('Vendor', 'upgrade');
+
+		upgrade($settings);
 	}
 	
 	function _check () {
@@ -123,4 +123,5 @@ class UpdateController extends UpdateAppController {
 		  fclose($newf);
 		}
 	}
+	
 }

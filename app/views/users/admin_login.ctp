@@ -1,14 +1,4 @@
-<h3>Admin Panel Login</h3>
-         <div id="message" style="display:none;">
-          <?php echo $session->flash('auth')?>
-         </div>
-         <script type="text/javascript">
-          $(window).load(function () {
-            var msg = $("#message").text();
-            if ($.trim(msg) != '')
-              alert(msg);
-          });
-         </script>
+<h3>Administration Control Panel Login</h3>
          <a href="#" class="forgot_pass">Forgot password</a> 
          
           <?php echo $form->create('User', array('action' => 'login', 'class' => 'niceform')); ?>         

@@ -1,7 +1,8 @@
 .login_form{
 width:600px;
-height:250px;
-background:url(../img/login_bg.png) no-repeat center top;
+height:450px;
+background:white repeat-y center top;
+border-radius:15px;
 margin:20px 0 0 145px;
 float:left;
 padding:0px 0 0 0px;

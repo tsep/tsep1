@@ -419,6 +419,20 @@ border:1px #cceac4 solid;background-position:15px 10px;padding:20px 20px 15px 60
 .error_box{width:540px;clear:both;background:url(../img/error.png) no-repeat left #fce9e9;
 border:1px #eac7c7 solid;background-position:15px 10px;padding:20px 20px 15px 60px;margin:0 0 10px 0;}
 
+
+.login_form > .warning_box {
+  width:500px;
+  margin-top:20px;
+}
+.login_form > .valid_box {
+  width:500px;
+  margin-top:20px;
+}
+.login_form > .error_box {
+  width:500px;
+  margin-top:20px;
+}
+
 /*--------------*/
 div.pagination {
 width:625px;

@@ -8,8 +8,9 @@
 </script>
 <?php 
   
-  echo $html->css('admin-panel');
   echo $html->css('niceforms-default');
+  echo $html->css('admin-panel');
+  
   
   echo $html->script('jquery');
   echo $html->script('jquery-clock');
@@ -26,7 +27,7 @@
 <div id="main_container">
 
   <div class="header_login">
-    <div class="logo"><? echo $html->link( 
+    <div class="logo"><?php echo $html->link( 
   $html->image("logo.gif",
     array('border' => '0')
   ), 
@@ -35,7 +36,15 @@
     
     </div>
     <div class="login_form">
-         <?php echo $content_for_layout?>
+    	<?php 
+    	
+    		$auth = $session->flash('auth');
+    		
+    		if(!empty($auth))	
+    			echo $this->element('flash_warn', array('message' => $auth));
+        
+    		echo $content_for_layout;
+     ?>
     </div>
     <div class="footer_login">
     

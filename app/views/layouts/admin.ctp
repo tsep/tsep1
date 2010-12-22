@@ -26,7 +26,7 @@
 <div id="main_container">
 
     <div class="header">
-    <div class="logo"><? echo $html->link( 
+    <div class="logo"><?php echo $html->link( 
   $html->image("logo.gif",
     array('border' => '0')
   ), 
