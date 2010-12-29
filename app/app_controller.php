@@ -49,27 +49,14 @@ class AppController extends Controller {
 	var $helpers = array('Html', 'Session', 'Js', 'Form', 'Paginator');
 	
 	var $components = array('RequestHandler', 'Session', 'Auth', 'Security');
-	
-	function _dir_size($directory) { 
-	    $size = 0; 
-	    foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory)) as $file){ 
-	        $size+=$file->getSize(); 
-	    } 
-	    return $size; 
-	}
-	
-	function _afterLogin () {
-		if ($this->_dir_size(LOGS) > 1000000) {
-			$this->Session->setFlash('Your LOGS directory is quite large. You should clean it.', 'flash_warn');
-		}
-	}
-	
+		
     function beforeFilter() {
     	
     	if(isset($this->Auth)) {
     		
 	        if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
 	        	$this->layout = 'admin';
+	        
 	        }
 	       	else {
 	       		$this->Auth->allow('*');	       		
@@ -82,8 +69,14 @@ class AppController extends Controller {
     	}
     	
     	if(isset($this->RequestHandler)) {
+    			            		
     		if ($this->RequestHandler->isAjax())
     			$this->layout = 'ajax';
+    			
+    		elseif($this->params['url']['url'] != 'admin' && 
+    			(isset($this->params['prefix']) 
+    			&& $this->params['prefix'] == 'admin')) 
+	        	$this->redirect('/admin', null, true);
     	}
     	
     	if(!isset($this->Security)) {

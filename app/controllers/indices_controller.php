@@ -24,7 +24,6 @@
 		
 		function beforeFilter () {
 			parent::beforeFilter();
-			$this->Auth->allow('admin_run');
 		}
 		
 		function _import()  {
@@ -129,7 +128,8 @@
 			}
 			else {
 				
-				@$this->_index($job);
+				$this->_index($job);
+				
 				$this->_end();
 				
 				return true;
@@ -143,11 +143,6 @@
 		 * Starts the queue processor
 		 */
 		function _start() {
-			
-			if(!$this->_singular()) {
-				$this->log('Cannot start indexer because duplicate is running');
-				return false;
-			}
 						
 			$randstr = random_string(10);
 			
@@ -158,7 +153,7 @@
 						array(
 							'controller' => 'indices',
 							'action' => 'run',
-							'admin' => true, 
+							'admin' => false, 
 							'?' => array(
 								'auth' => $randstr
 							)
@@ -166,6 +161,17 @@
 						true
 					)
 				);
+				
+				$i = 0;
+				
+				while($this->_singular()) {
+					
+					if($i > 5) return false;
+					
+					$i++;
+					sleep(1);
+					
+				}
 				
 				return true;
 		}
@@ -327,9 +333,11 @@
 		/**
 		 * Processes the indexing queue 
 		 */
-		function admin_run () {
+		function run () {
 			
 			$this->log('Begin Run');
+			
+			ob_start();
 			
 			if (!$this->_check()) {
 				$this->log('Access Violation');
@@ -352,11 +360,19 @@
 				$job = array('id' => $id);
 				
 				$this->_add($job);
-				$this->_start();
 				
-				$this->Session->setFlash('Indexing has been queued, but may take a while to appear depending on the site being crawled', 'flash_warn');
-				$this->redirect(array('controller' => 'profiles', 'action' => 'index', 'admin' => true), null, true);
-			
+				if($this->_start()) {
+				
+					$this->Session->setFlash('Indexing has been queued, but may take a while to appear depending on the site being crawled', 'flash_warn');
+					$this->redirect(array('controller' => 'profiles', 'action' => 'index', 'admin' => true), null, true);
+				
+				}
+				else {
+					
+					$this->Session->setFlash('Failed to start indexer. More information may be avaliable in the error log.', 'flash_fail');
+					$this->redirect(array('controller' => 'profiles', 'action' => 'index', 'admin' => true), null, true);
+				
+				}
 			} else {
 				
 				$this->Session->setFlash('No valid indexing profile specified. Indexer was not started', 'flash_fail');
@@ -366,3 +382,10 @@
 		
 		
 	}
+	
+function shutdown()
+{
+	@unlink(TMP.'indexer_running.tmp');
+}
+
+register_shutdown_function('shutdown');

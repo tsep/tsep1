@@ -416,8 +416,9 @@ border:1px #e9e6c7 solid;background-position:15px 10px;padding:20px 20px 15px 60
 .valid_box{width:540px;clear:both;background:url(../img/valid.png) no-repeat left #edfce9;
 border:1px #cceac4 solid;background-position:15px 10px;padding:20px 20px 15px 60px;margin:0 0 10px 0;}
 
-.error_box{width:540px;clear:both;background:url(../img/error.png) no-repeat left #fce9e9;
+.error_box, pre.cake-debug{width:540px;clear:both;background:url(../img/error.png) no-repeat left #fce9e9;
 border:1px #eac7c7 solid;background-position:15px 10px;padding:20px 20px 15px 60px;margin:0 0 10px 0;}
+
 
 
 .login_form > .warning_box {

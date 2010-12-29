@@ -80,6 +80,8 @@ $(document).ready(function() {
     function parseLinks () {
         	
 	    $(".menu, #content").find("a").each(function () {
+	    	
+	    	if($(this).attr('target') == '_blank') return;
 	    		    	
 	    	$(this).click(function () {
 	    		
