@@ -130,7 +130,17 @@
 			else {
 				
 				@$this->_index($job);
-				$this->_end();
+
+				//Check if there is another job to process
+				$next = $this->_get();
+				
+				if(!empty($next)) {
+					
+					$this->_add($next);
+					$this->end();
+					$this->_start();
+					
+				}
 				
 				return true;
 			
@@ -216,7 +226,7 @@
 			if (isset($job['crawler']) && isset($job['indexer'])) {
 				
 				//We are resuming 
-				$this->log('And we are back where we left off');
+				$this->log('Resuming from previous state');
 				
 				$indexer = $job['indexer'];
 				$crawler = $job['crawler'];
