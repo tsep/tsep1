@@ -144,8 +144,8 @@
 		function _start() {
 			
 			if(!$this->_singular()) {
-				$this->log('Cannot start indexer because duplicate is running');
-				return false;
+				$this->log('Attempted to start indexer failed (ISSUE #2)');
+				return true;
 			}
 						
 			$randstr = random_string(10);
