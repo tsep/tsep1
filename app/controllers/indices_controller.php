@@ -132,8 +132,16 @@
 			}
 			else {
 				
-				@$this->_index($job);
+				try {
 				
+					@$this->_index($job);
+				
+				}
+				catch (Exception $ex) {
+					
+					//
+				}
+								
 				return true;
 			
 			}
