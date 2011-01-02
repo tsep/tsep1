@@ -16,7 +16,7 @@ function upgrade ($settings) {
 
 		file_put_contents(CONFIGS.'settings.ini.php', $settings);
 	
-		echo Router::url(array('controller' => 'profiles', 'action' => 'index', 'admin' => true));
+		echo Router::url('/admin');
 		
 		die();
 }
