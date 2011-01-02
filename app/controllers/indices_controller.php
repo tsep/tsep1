@@ -130,17 +130,6 @@
 			else {
 				
 				@$this->_index($job);
-
-				//Check if there is another job to process
-				$next = $this->_get();
-				
-				if(!empty($next)) {
-					
-					$this->_add($next);
-					$this->end();
-					$this->_start();
-					
-				}
 				
 				return true;
 			
@@ -291,6 +280,22 @@
 			}
 			
 			$this->log('Indexing Complete');
+			
+			//Check if there is another job to process
+			
+			$this->log('Checking for new jobs');
+			
+			$next = $this->_get();
+			
+			if(!empty($next)) {
+				
+				$this->log('New Job detected');
+					
+				$this->_add($next);
+				$this->end();
+				$this->_start();
+					
+			}
 			
 			return true;
 		}
