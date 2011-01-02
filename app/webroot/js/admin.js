@@ -70,8 +70,7 @@ $(document).ready(function() {
     			
     			$('#updatePanel').html('Preparing to Update...');
     			
-    			$(document).load(window.base + 'update/update/run');
-
+    			window.location = window.base + 'update/update/run';
     		});
     		$('#updatePanel').html('Click to Update');
     	}

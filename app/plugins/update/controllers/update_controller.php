@@ -6,9 +6,10 @@ class UpdateController extends UpdateAppController {
 	function beforeFilter () {
 		parent::beforeFilter();
 		
-		$this->layout = 'ajax';
+		$this->layout = 'update';
 		
-		if (!$this->RequestHandler->isAjax()) $this->cakeError('error404');
+		if ($this->RequestHandler->isAjax()) $this->layout = 'ajax';
+		
 	}
 	
 	function check () {
@@ -18,11 +19,12 @@ class UpdateController extends UpdateAppController {
 	
 	function run () {
 		
-		if(@$this->params['url']['do'] == 'yes') $this->_run();
+		if((@$this->params['url']['do'] == 'yes') && 
+			($this->RequestHandler->isAjax())) $this->_run();
 	}
 	
 	function _run () {
-		
+				
 		$url = $this->_check();
 		
 		if (!$url) die();
