@@ -60,7 +60,7 @@
 	</div>
 	<!-- end #page -->
 	<div id="footer">
-		<p>Powered by <a href="http://tsep.sf.net/">The Search Engine Project</a>. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+		<p>Powered by <a href="http://tsep.sf.net/">The Search Engine Project</a> <?php echo $version?>. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
 	  <p><?php echo $html->link('Administration Control Panel', array('controller' => 'profiles', 'admin' => true))?></p>
 	</div>
 	<!-- end #footer -->

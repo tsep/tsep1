@@ -87,5 +87,12 @@ class AppController extends Controller {
     	}
     }
     
+    function beforeRender() {
+    	parent::beforeRender();
+    	
+    	$this->set('version', file_get_contents(CONFIGS.'version.txt'));
+    
+    }
+    
 
 }
