@@ -73,9 +73,11 @@ class AppController extends Controller {
     		if ($this->RequestHandler->isAjax())
     			$this->layout = 'ajax';
     			
-    		elseif($this->params['url']['url'] != 'admin' && 
-    			(isset($this->params['prefix']) 
-    			&& $this->params['prefix'] == 'admin')) 
+    		elseif(($this->params['url']['url'] != 'admin')
+    			&& (isset($this->params['prefix']) 
+    			&& ($this->params['prefix'] == 'admin'))
+    			&& ($this->params['url']['url'] != 'admin/users/login')
+    			&& ($this->params['url']['url'] != 'admin/users/logout'))
 	        	$this->redirect('/admin', null, true);
     	}
     	

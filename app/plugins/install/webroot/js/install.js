@@ -4,7 +4,7 @@ $(document).ready(function () {
 		$('#theform').children().hide();
 		$('.loader').show();
 		$.post(window.base + 'install/install', serial, function (data) {
-			$('#theform').html(data);
+			$('#theform').append(data);
 		});
 	    return false;
 	});

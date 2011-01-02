@@ -7,6 +7,6 @@ database = "tsep\"
 prefix = "tsep_"
 
 [security]
-salt = "ie6TTd0IBjnRWidC9V2k"
-cipherSeed = "17933513221531786290139494269"
+salt = "DXrir56BkzWtmi8Vh3cw"
+cipherSeed = "33510669717797228081273191250"
 
