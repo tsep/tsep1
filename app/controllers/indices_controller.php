@@ -42,6 +42,9 @@
 		 * Creates the indexer_running.tmp file
 		 */
 		function _begin() {
+			
+			register_shutdown_function(array($this, '_end'));
+			
 			$fp = @fopen(TMP.'indexer_running.tmp', 'w');
 			@fclose($fp);
 		}
