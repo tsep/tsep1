@@ -40,8 +40,7 @@
     	
     		$auth = $session->flash('auth');
     		
-    		if(!empty($auth))	
-    			echo $this->element('flash_warn', array('message' => $auth));
+    		if(!empty($auth))	echo $this->element('flash_warn', array('message' => $auth));
         
     		echo $content_for_layout;
      ?>
