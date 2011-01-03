@@ -132,15 +132,9 @@
 			}
 			else {
 				
-				try {
 				
-					@$this->_index($job);
+				$this->_index($job);
 				
-				}
-				catch (Exception $ex) {
-					
-					//
-				}
 								
 				return true;
 			
@@ -261,10 +255,10 @@
 			
 			$this->log('Beginning crawl');
 			
-			while ($page = $crawler->crawl()) {
+			while ($page = @$crawler->crawl()) {
 
 				
-				$status = $indexer->parse($page);
+				$status = @$indexer->parse($page);
 				
 				
 				if($status) {
@@ -277,6 +271,7 @@
 						)
 					));
 									
+					$this->log('Saving Page');
 					$this->Index->save($save);
 				
 				}
@@ -367,6 +362,8 @@
 		function run () {
 			
 			$this->log('Begin Run');
+			
+			ob_start();
 			
 			if (!$this->_check()) {
 				$this->log('Access Violation');
