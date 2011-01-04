@@ -258,10 +258,9 @@
 			while ($page = @$crawler->crawl()) {
 
 				
-				$status = @$indexer->parse($page);
-				
-				
-				if($status) {
+				$indexer->parse($page);
+								
+				if($page) {
 								
 					$save = $this->Index->create(array(
 						'Index' => array(

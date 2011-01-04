@@ -33,6 +33,13 @@ p, ul, ol {
 	text-align: justify;
 }
 
+p.error {
+  background-color:red;
+  color:white;
+  border-radius:5px;
+  padding-left:15px;
+}
+
 ul, ol { }
 
 blockquote { }

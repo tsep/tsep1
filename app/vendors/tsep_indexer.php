@@ -4,7 +4,7 @@ class TSEPIndexer {
 
 	private $stopwords;
 	
-	private function cleanText($text) {
+	private function _cleanText($text) {
 		
 			//Clean out all the HTML
 			$text = html_to_text($text);
@@ -33,10 +33,14 @@ class TSEPIndexer {
 	 */
 	function __construct($stopwords) {
 	
-		if (!is_array($stopwords))
-			throw new Exception('Stopwords is not an array');
+		if (!is_array($stopwords)) {
 		
-		$this->stopwords = $stopwords;
+			trigger_error('List of stopwords passed to indexer not valid', E_USER_WARNING);
+		}
+		else {
+		
+			$this->stopwords = $stopwords;
+		}
 		
 	} 
 	
@@ -47,7 +51,19 @@ class TSEPIndexer {
 	 */
 	function parse (&$page) {
 
+		$page = $this->_parse($page);
 		
+		return $page;
+		
+	}
+	
+	/**
+	 * _parse
+	 * Private function that parses the page and returns
+	 * @param Page $page
+	 */
+	private function _parse($page) {
+	
 		//If the page is not html
 		if($page->type != 'text/html') return false;
 		
@@ -55,14 +71,10 @@ class TSEPIndexer {
 		$page->content = preg_replace("/.*<body[^>]*>|<\/body>.*/si", "", $page->content);
 		
 		//Get the Important text
-		$page->content = $this->cleanText($page->content);
-
+		$page->content = $this->_cleanText($page->content);
 		
-		
-		if(empty($page->content))
-			return false;
-		else 	
-			return true;
+		return $page;
+	
 	}
 
 }

@@ -43,6 +43,7 @@
         <input type="submit" id="submitform" tabindex="8" value="Complete Installation &raquo;" />
     </fieldset>
     <div id="copyright">Powered by <a href="http://tsep.sf.net/">The Search Engine Project</a></div>
-	<div class="loader" style="display:none;">
-  		<?php echo $html->image('ajax-loader.gif')?>
-	</div>
+
+	<script type="text/javascript">
+		$('.loader').hide();
+	</script>
