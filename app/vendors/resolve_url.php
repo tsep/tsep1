@@ -231,6 +231,8 @@ function url_to_absolute( $baseUrl, $relativeUrl )
             $r['query'] = $b['query'];
         return join_url( $r );
     }
+    
+    if(empty($b['path'])) $b['path'] = '';
  
     // If relative URL path doesn't start with /, merge with base path
     if ( $r['path'][0] != '/' )

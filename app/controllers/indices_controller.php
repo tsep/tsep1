@@ -255,12 +255,9 @@
 			
 			$this->log('Beginning crawl');
 			
-			while ($page = @$crawler->crawl()) {
-
+			while ($page = $crawler->crawl()) {
 				
-				$indexer->parse($page);
-								
-				if($page) {
+				if($indexer->parse($page)) {
 								
 					$save = $this->Index->create(array(
 						'Index' => array(

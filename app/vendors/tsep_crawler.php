@@ -225,7 +225,9 @@ class TSEPCrawler {
 	private function parseHTML($contents) {
 		
 		$dom = new DOMDocument();
-		$dom->loadHTML($contents);
+		
+		@$dom->recover = true;
+		@$dom->loadHTML($contents);
 		
 		$simple = simplexml_import_dom($dom);
 		
