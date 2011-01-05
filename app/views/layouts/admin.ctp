@@ -33,7 +33,7 @@
   '/', 
   array('escape' => false))?></div>
     
-    <div class="right_header">Welcome Admin, <?php echo $html->link('Visit Site', array('controller'=>'indices', 'action'=>'search', 'admin'=>false))?> | <?php //<a href="#" class="messages">(3) Messages</a>?><span id="updatePanel">Updating...</span> | <?php echo $html->link('Logout', array('controller' => 'users' , 'action' => 'logout'), array('class' => 'logout')) ?></div>
+    <div class="right_header">Welcome Admin, <?php echo $html->link('Visit Site', array('controller'=>'indices', 'action'=>'search', 'admin'=>false))?> | <?php //<a href="#" class="messages">(3) Messages</a>?><span id="updatePanel">Loading...</span> | <?php echo $html->link('Logout', array('controller' => 'users' , 'action' => 'logout'), array('class' => 'logout')) ?></div>
     <div class="jclock"></div>
     </div>
     

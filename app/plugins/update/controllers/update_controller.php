@@ -14,42 +14,99 @@ class UpdateController extends UpdateAppController {
 	
 	function check () {
 		
-		$this->set('status', $this->_check());
+		$url = $this->_check();
+		
+		if($url) {
+		
+			$this->set('status', $url);
+			
+			$this->Session->write('Update.url', $url);
+		}
+		else {
+			
+			$this->Session->write('Update.url', false);
+			
+			$this->set('status', false);
+			
+		}
 	}
 	
 	function run () {
 		
-		if((@$this->params['url']['do'] == 'yes') && 
-			($this->RequestHandler->isAjax())) $this->_run();
+		if($this->RequestHandler->isAjax()) {
+
+			$this->layout = 'ajax';
+			
+			switch (@$this->params['url']['do']) {
+
+				case 'download':
+			 		$this->_download();
+			 		break;
+				case 'extract' :
+			 		$this->_extract();
+			 		break;
+				case 'upgrade' :
+			 		$this->_upgrade();
+			 		break;
+				default:
+					break;
+			}
+		}
 	}
 	
-	function _run () {
-				
-		$url = $this->_check();
+	function _upgrade () {
 		
-		if (!$url) die();
-		
-		@set_time_limit(0); //TODO: Fix this not to use set_time_limit()
+		App::import('Vendor', 'upgrade');
+		upgrade();	
+	}
+	
+	function _extract () {
 		
 		$root = APP.'..'.DS;
 		
-		$settings = file_get_contents(CONFIGS.'settings.ini.php');
 		
-		$this->_clean($root);
+		if(file_exists($root.'Update.zip')) {
 		
-		$this->_download($url, $root.'Update.zip');
+			$zip = new ZipArchive();
+			
+			$zip->open($root.'Update.zip');
+			$zip->extractTo($root);
+			$zip->close();
+			
+			unlink($root.'Update.zip'); 
+			
+			return true;
 		
-		$zip = new ZipArchive();
+		}
+		else {
 		
-		$zip->open($root.'Update.zip');
-		$zip->extractTo($root);
-		$zip->close();
+			$this->log('Attempt to extract archive failed.');
+			
+			return false;
+		}
 		
-		unlink($root.'Update.zip');
+	}
+	
+	function _download () {
+				
+		$url = @$this->Session->read('Update.url');
 		
-		App::import('Vendor', 'upgrade');
-
-		upgrade($settings);
+		$root = APP.'..'.DS;
+		
+		if ($url) {
+									
+			$this->_dw($url, $root.'Update.zip');
+			
+			return true;
+		
+		}
+		else {
+		
+			$this->log('Attempt to download update failed (ISSUE #3)');
+			
+			return false;
+		}
+		
 	}
 	
 	function _check () {
@@ -104,7 +161,7 @@ class UpdateController extends UpdateAppController {
 	    return $result;
 	}
 
-	function _download($url, $path) {
+	function _dw($url, $path) {
 
 		$newfname = $path;
 		$file = fopen ($url, "rb");

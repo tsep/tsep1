@@ -66,13 +66,14 @@ $(document).ready(function() {
     		$('#updatePanel').html('No Update');
     	}
     	else {
-    		$('#updatePanel').click(function () {
-    			
-    			$('#updatePanel').html('Preparing to Update...');
-    			
-    			window.location = window.base + 'update/update/run';
-    		});
-    		$('#updatePanel').html('Click to Update');
+
+    		$('#updatePanel').html('');
+
+    		$('<a />')
+    			.attr('href', window.base + 'update/update/run')
+    			.html('Click To Update')
+    			.appendTo('#updatePanel');
+    		
     	}
     });
     

@@ -12,11 +12,7 @@
 *
 */
 
-function upgrade ($settings) {
+function upgrade () {
 
-		file_put_contents(CONFIGS.'settings.ini.php', $settings);
-	
-		echo Router::url('/admin');
-		
-		die();
+		//Put any upgrade code here
 }
