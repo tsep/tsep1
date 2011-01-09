@@ -1,5 +1,7 @@
 <?php 
 
+//TODO: Clean this up! This code is absoulutely outrageous.
+
 	class InstallController extends InstallAppController {
 		
 		var $name = 'Install';
@@ -145,6 +147,25 @@
 		
 		
 		function _install () {
+			
+			$dirs = array(
+			
+				TMP.'cache',
+				TMP.'logs',
+				TMP.'sessions',
+				TMP.'tests',
+				TMP.'cache'.DS.'models',
+				TMP.'cache'.DS.'persistent',
+				TMP.'cache'.DS.'views'
+			
+			);
+			
+			foreach ($dirs as $dir){
+				if(!is_dir($dir)) {
+					mkdir($dir);
+				}
+			}
+			
 			
 			$data = unserialize(file_get_contents(TMP.'install.tmp'));
 						
