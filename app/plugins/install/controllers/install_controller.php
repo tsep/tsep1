@@ -150,6 +150,7 @@
 			
 			$dirs = array(
 			
+				TMP,
 				TMP.'cache',
 				TMP.'logs',
 				TMP.'sessions',
