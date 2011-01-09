@@ -1,6 +1,6 @@
 <?php
 /**
-* Stopword Model
+* Theme Model
 * 
 * @author Geoffrey
 *
@@ -11,8 +11,8 @@
 *  $LastChangedRevision: $
 *
 */
-class Stopword extends AppModel {
-	
-	var $name = 'Stopword';
 
+class Theme extends AppModel {
+
+	var $name = 'Theme';
 }

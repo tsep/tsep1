@@ -3,6 +3,7 @@
 	class StopwordsController extends AppController {
 	
 		var $name = 'Stopwords';
+		var $uses = array('Stopword');
 		
 		function admin_add () {
 			
