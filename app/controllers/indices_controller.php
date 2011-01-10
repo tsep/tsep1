@@ -21,11 +21,7 @@
 			'Stopword', 
 			'Profile'
 		);
-		
-		function beforeFilter () {
-			parent::beforeFilter();
-			$this->Auth->allow('admin_run');
-		}
+
 		
 		function _import()  {
 			App::import('Vendor', 'html_to_text');		
