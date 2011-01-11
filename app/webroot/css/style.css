@@ -27,6 +27,19 @@ h2 { font-size: 18px; }
 
 h3 { }
 
+div.result {
+  margin-top:3px;
+  padding-top:2px;
+  padding-bottom:2px;
+  margin-bottom:3px;
+  background-color:#CCFFCC;
+  
+}
+div.result > div.url {
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
 p, ul, ol {
 	margin-top: 0;
 	line-height: 240%;

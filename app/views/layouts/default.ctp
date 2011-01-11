@@ -8,6 +8,7 @@
 </script>
 <?php 
   echo $html->css('style'); 
+  echo $html->script('jquery');
 ?>
 </head>
 <body>

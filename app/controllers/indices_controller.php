@@ -328,6 +328,7 @@
 			//Don't care if the query is empty
 			$query = @$this->params['url']['q'];
 			
+			
 			if(!empty($query)) {
 				
 				$this->paginate = array(
@@ -337,11 +338,18 @@
 					'limit' => 10,
 				);
 				
-				$data = $this->paginate('Index');
+				$matches = $this->paginate('Index');
 				
 				unset($this->params['url']['url']);
 				
-				$this->set(array('matches' => $data));
+				//Truncate the results
+				
+				foreach ($matches as $key => $match) {
+				
+					$matches[$key]['Index']['text'] = substr($match['Index']['text'], 0, 255);
+				}
+				
+				$this->set('matches', $matches);
 			}
 			else {
 				$this->set('matches', array());

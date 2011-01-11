@@ -1,11 +1,5 @@
-
-
 <?php 
 
-$this->Paginator->options(array(
-    'update' => '#update',
-    'evalScripts' => true
-));
 
 	if (!empty($matches)) {
 		foreach ($matches as $match) {
@@ -27,10 +21,9 @@ $this->Paginator->options(array(
 		<?php 
 	}
 	
-	echo $js->writeBuffer();
 ?>
 <br />
 <br />
 <?php echo $paginator->prev('&laquo;Previous', array('escape' => false, 'url' => array('?' => $this->params['url'])), null, array('escape' => false)); ?>
 &nbsp;&nbsp;&nbsp;
-<?php echo $paginator->next('Next&raquo;', array('escape' => false,'url' => array('?' => $this->params['url'])), null, array('escape' => false)); ?> 	
+<?php echo $paginator->next('Next&raquo;', array('escape' => false,'url' => array('?' => $this->params['url'])), null, array('escape' => false)); ?> 
