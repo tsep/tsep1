@@ -78,8 +78,11 @@
 				$pass = @$this->data['Install']['pass'];
 				
 				if (@mysql_pconnect($server, $login, $password)) {
+					
+					@mysql_query('CREATE DATABASE IF NOT EXISTS '.mysql_escape_string($database));
+					
 					if(@mysql_select_db($database)) {
-						
+												
 						if(!empty($user) && !empty($pass)) {
 							
 							
@@ -103,7 +106,9 @@
 						}
 					}
 					else {
-						$this->set('two', 'Could not select the database');
+												
+						
+						$this->set('two', 'Could not select or create the database');
 						$this->Session->destroy();
 					}
 				}
