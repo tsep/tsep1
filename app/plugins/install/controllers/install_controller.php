@@ -59,7 +59,14 @@
 		
 		function index () {
 			
-			file_put_contents(TMP.'install.tmp', '');
+			
+			if(!file_exists(TMP.'install.tmp')) {
+				
+				//Start-up stuff
+			
+				file_put_contents(TMP.'install.tmp', '');
+			
+			}
 						
 			if ($this->RequestHandler->isAjax())
 				$this->layout = 'ajax';
