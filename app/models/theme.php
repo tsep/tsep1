@@ -14,4 +14,8 @@
 
 class Theme extends AppModel {
 	var $name = 'Theme';
+	var $useTable = false;
+	var $_schema = array(
+		'file' => array('type' => 'file')
+	);
 }

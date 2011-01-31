@@ -104,6 +104,13 @@
                     		<li><?php echo $html->link('Add new', array('controller' => 'stopwords', 'action' => 'add'))?></li>
                     	</ul>
                     </li>
+                    <li>
+                    	<?php echo $html->link('Themes', array('controller' => 'themes', 'action' => 'index'))?>
+                    	<ul>
+                    		<li><?php echo $html->link('View all', array('controller' => 'themes', 'action' => 'index'))?></li>
+                    		<li><?php echo $html->link('Add new', array('controller' => 'themes', 'action' => 'add'))?></li>
+                    	</ul>
+                    </li>
                     <?php //<li><a href="?page=users">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->?>
                     <?php 
                     /*
