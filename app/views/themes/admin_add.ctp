@@ -1,10 +1,10 @@
 <h2>Add a New Stopword</h2>
 <?php 
-	echo $form->create('Theme', array('enctype', 'multipart/form-data'));
+	echo $form->create();
 ?>
 <fieldset>
 	<dl>
-		<dt>Stopword name:</dt>
+		<dt>URL to theme: </dt>
 		<dd><?php echo $form->file('Theme.file',array('label'=> false))?></dd>
 	</dl>
 </fieldset>

@@ -94,8 +94,10 @@ class UpdateController extends UpdateAppController {
 		$root = APP.'..'.DS;
 		
 		if ($url) {
+			
+			App::import('Vendor', 'download_file');
 									
-			$this->_dw($url, $root.'Update.zip');
+			download_file($url, $root.'Update.zip');
 			
 			return true;
 		
@@ -159,28 +161,6 @@ class UpdateController extends UpdateAppController {
 	       $result&=rmdir($dir->path);
 	    }
 	    return $result;
-	}
-
-	function _dw($url, $path) {
-
-		$newfname = $path;
-		$file = fopen ($url, "rb");
-		if ($file) {
-		  $newf = fopen ($newfname, "wb");
-		
-		  if ($newf)
-		  while(!feof($file)) {
-		    fwrite($newf, fread($file, 1024 * 8 ), 1024 * 8 );
-		  }
-		}
-		
-		if ($file) {
-		  fclose($file);
-		}
-		
-		if ($newf) {
-		  fclose($newf);
-		}
 	}
 	
 }

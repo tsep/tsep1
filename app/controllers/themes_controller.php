@@ -15,7 +15,7 @@
 class ThemesController extends AppController {
 	
 	var $name = 'Themes';
-	var $uses = array('Theme');
+	var $uses = array();
 	
 	function admin_index () {
 		
