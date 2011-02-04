@@ -1,6 +1,6 @@
 <?php
 /**
-* Performs necesary upgrades after updating
+* INI Custom Configuration Provider 
 * 
 * @author Geoffrey
 *
@@ -11,11 +11,4 @@
 *  $LastChangedRevision: $
 *
 */
-
-function upgrade () {
-
-		//Put any upgrade code here
-		
-
-	//TODO: Upgrade INI file
-}
+	$config = parse_ini_file(CONFIGS.'settings.ini.php', true);

@@ -71,44 +71,12 @@
  * database.  Uses database default.
  *
  */
+
 class DATABASE_CONFIG {
-
-	var $default = array(
-		'driver' => 'mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'database_name',
-		'prefix' => '',
-	);
-
-	var $test = array(
-		'driver' => 'mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'test_database_name',
-		'prefix' => '',
-	);
 	
 	function __construct() {
-	
 		
-		$ini = Configure::read('Configuration.ini');
-		
-		$this->default = array(
-			'driver' => 'mysql',
-			'persistent' => true,
-			'host' => $ini['database']['host'],
-			'login' => $ini['database']['login'],
-			'password' =>$ini['database']['password'],
-			'database' => $ini['database']['database'],
-			'prefix' => $ini['database']['prefix'],
-		);
-		
-		unset($ini);
-	
+		$this->default = Configure::read('Database');
+
 	}
 }

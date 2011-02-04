@@ -5,7 +5,10 @@
 <fieldset>
 	<dl>
 		<dt>URL to theme: </dt>
-		<dd><?php echo $form->file('Theme.file',array('label'=> false))?></dd>
+		<dd><?php echo $form->input('Theme.url',array(
+			'label'=> false,
+			'type' => 'text'
+		))?></dd>
 	</dl>
 </fieldset>
 <?php 
@@ -13,8 +16,8 @@
 		'div'=> array(
 			'class' => 'button'
 		),
-		'label' => 'Add Stopword'
+		'label' => 'Add Theme'
 	));
 ?>
 <br />
-<b>Note that the stopword will not take effect until the next indexer run.</b>
+<b>You will have to enable the theme after you install it for it to become active.</b>

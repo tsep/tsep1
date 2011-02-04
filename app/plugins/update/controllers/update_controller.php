@@ -113,7 +113,7 @@ class UpdateController extends UpdateAppController {
 	
 	function _check () {
 		
-		$update = Configure::read('Configuration.Update');
+		$update = Configure::read('UpdateURL');
 		
 		$version = file_get_contents(CONFIGS.'version.txt');
 		

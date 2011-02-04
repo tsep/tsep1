@@ -32,11 +32,9 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-Configure::write('Configuration.ini', @parse_ini_file(CONFIGS.'settings.ini.php', true));
+Configure::write('UpdateURL', 'http://tsep.sourceforge.net/updater/getUpdate.php?'); #Don't forget the question mark!
 
-Configure::write('Configuration.Update', 'http://tsep.sourceforge.net/updater/getUpdate.php?');
-
-Configure::write('UserAgent', 'TSEP');
+Configure::write('UserAgent', 'The Search Engine Project (http://www.tsep.info/home)');
 
 /**
  * CakePHP Debug Level:
@@ -182,7 +180,7 @@ Configure::write('UserAgent', 'TSEP');
  * characters."
  * @link http://php.net/session_name
  */
-	Configure::write('Session.cookie', 'TSEP');
+	Configure::write('Session.cookie', 'TheSearchEngineProject');
 
 /**
  * Session time out time (in minutes).
@@ -218,16 +216,13 @@ Configure::write('UserAgent', 'TSEP');
 /**
  * A random string used in security hashing methods.
  */
-	$ini = Configure::read('Configuration.ini');
-	Configure::write('Security.salt', $ini['security']['salt']);
-	unset($ini);
+
+	Configure::write('Security.salt', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	$ini = Configure::read('Configuration.ini');
-	Configure::write('Security.cipherSeed', $ini['security']['cipherSeed']);
-	unset($ini);
+	Configure::write('Security.cipherSeed', '1234567890');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -322,3 +317,7 @@ Configure::write('UserAgent', 'TSEP');
  *
  */
 	Cache::config('default', array('engine' => 'File'));
+	
+	//Load the Custom INI values
+	
+	Configure::load('ini_config_provider');
