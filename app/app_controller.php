@@ -94,5 +94,11 @@ class AppController extends Controller {
     
     }
     
+    function afterFilter() {
+    	
+    	//Save Configuration
+    	
+    }
+    
 
 }

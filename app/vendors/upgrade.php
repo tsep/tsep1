@@ -12,6 +12,9 @@
 *
 */
 
+/**
+ * Upgrades the database after an update
+ */
 function upgrade () {
 
 		//Put any upgrade code here

@@ -1,5 +1,7 @@
 <?php
 
+//TODO: Change this to a component
+
 class TSEPIndexer {
 
 	private $stopwords;
