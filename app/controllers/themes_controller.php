@@ -19,7 +19,22 @@ class ThemesController extends AppController {
 	
 	function admin_index () {
 		
-		//TODO:List the themes installed
+		App::import('Vendor', 'list_dirs');
+		
+		$dirs = list_dirs(VIEWS.'themed');
+		
+		$themes = array();
+		
+		foreach ($dirs as $dir) {
+			
+			if(!file_exists($dir.DS.'theme.ini')) continue;
+			
+			$theme = array('Theme' => array('name' => basename($dir)));
+			array_push($themes, $theme);
+		}
+		
+		$this->set('themes', $themes);
+	
 	}
 	
 	function admin_add() {
@@ -93,7 +108,7 @@ class ThemesController extends AppController {
 
 		//TODO: Sanitize $name
 		
-		if(is_dir(VIEWS.'themed'.DS.$name)) {
+		if(file_exists(VIEWS.'themed'.DS.$name.DS.'theme.ini')) {
 			Configure::write('ThemeName', $name);
 			$this->_saveConfig();
 		}
