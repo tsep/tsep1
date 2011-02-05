@@ -6,6 +6,9 @@ class UpdateController extends UpdateAppController {
 	function beforeFilter () {
 		parent::beforeFilter();
 		
+		$this->Auth->deny('*');
+		
+		
 		$this->layout = 'update';
 		
 		if ($this->RequestHandler->isAjax()) $this->layout = 'ajax';

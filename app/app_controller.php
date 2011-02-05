@@ -96,13 +96,21 @@ class AppController extends Controller {
     
     function afterFilter() {
     	
-    	//Save Configuration
-    	App::import('Vendor', 'write_config_file');
+    	$this->_saveConfig();    	
     	
+    }
+    
+    function _saveConfig () {
+    	    	
     	$configs = (array)Configure::getInstance();
     	
-    	write_config_file(TMP.'config.php', $configs);
+    	if($GLOBALS['configSum'] != $configs) {
     	
+    		App::import('Vendor', 'write_config_file');
+    		   		
+    		write_config_file(CONFIGS.'settings.php', $configs);
+    	}
+    
     }
     
 
