@@ -38,11 +38,17 @@ class ThemesController extends AppController {
 				
 				set_time_limit(0);
 				
+				if(file_exists(TMP.'theme.zip')) unlink(TMP.'theme.zip');
+				
 				$file_url = $this->data['Theme']['url'];
 				
 				App::import('Vendor', 'download_file');
 				
 				download_file($file_url, TMP.'theme.zip');
+				
+				App::import('Vendor', 'delete_dir');
+				
+				if(is_dir(TMP.'theme')) delete_dir(TMP.'theme');
 								
 				$zip = new ZipArchive();
 								
@@ -52,8 +58,25 @@ class ThemesController extends AppController {
 				
 				unlink(TMP.'theme.zip');
 				
+				if(!file_exists(TMP.'theme'.DS.'theme.ini')) {
+					
+					//NOT a valid theme! Abort.
+				}
 				
+				$themeConfig = parse_ini_file(TMP.'theme'.DS.'theme.ini');
 				
+				//TODO: Sanitize theme name
+				
+				App::import('Vendor', 'smart_copy');
+				
+				smart_copy(TMP.'theme'.DS, VIEWS.'themed'.DS.$themeConfig['themeName'].DS);
+				
+				delete_dir(TMP.'theme');
+				
+				//Success!
+				
+				$this->Session->setFlash('Theme Installed', 'flash_success');
+				$this->redirect(array('controller' => 'themes', 'action' => 'index', 'admin' => true), null, true);
 			}
 			else {
 				$this->Session->setFlash('Invalid URL.', 'flash_fail');

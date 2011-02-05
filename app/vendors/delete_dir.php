@@ -13,8 +13,7 @@
 */
 
 /**
- * 
- * Delete a directory
+ * PERMENANTLY delete a directory
  * @param string $dir The directory to delete
  * @copyright Copyright 2011 Helio Networks
  * @link http://www.heliohost.org/home/
