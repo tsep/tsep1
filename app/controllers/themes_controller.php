@@ -64,11 +64,17 @@ class ThemesController extends AppController {
 		}
 	}
 	
-	function admin_delete ($id) {
+	function admin_delete ($name) {
 		//TODO:Delete a theme
 	}
 	
-	function admin_activate($id) {
-		//TODO:Set the displayed theme
+	function admin_activate($name) {
+
+		//TODO: Sanitize $name
+		
+		if(is_dir(VIEWS.'themed'.DS.$name)) {
+			Configure::write('ThemeName', $name);
+			$this->_saveConfig();
+		}
 	}
 }
