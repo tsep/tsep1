@@ -13,7 +13,7 @@
 		function beforeFilter () {
 			parent::beforeFilter();
 			
-			if(file_exists(CONFIGS.'settings.ini.php') && !file_exists(TMP.'install.tmp')){
+			if(file_exists(CONFIGS.'settings.php') && !file_exists(TMP.'install.tmp')){
 				$this->cakeError('error403');
 			}
 			
@@ -25,33 +25,53 @@
 			
 			$this->layout = 'install';
 		}
+
 		
-		function _submit () {
+		function _create_tables() {
 			
-			$url = 'http://www.tsep.info/?';
+			App::import('Vendor', 'split_sql');
 			
-			$data = http_build_query(array(
-				'installOK' => 'yes',
-				'ver' => file_get_contents(CONFIGS.'version.txt'),
-				'comment' => Router::url('/')
+			$file = dirname(__FILE__).DS.'..'.DS.'models'.DS.'install.sql';
+			$params = array('prefix' => $prefix);
+			
+			split_sql($file, $params);			
+			
+		}
+		
+		function _add_user() {
+			
+			$data = unserialize(file_get_contents(TMP.'install.tmp'));
+			
+			$user = $data['user'];
+			$pass = $data['pass'];
+						
+			App::import('Component', 'Auth');
+			$this->Auth = new AuthComponent();
+			
+			$this->loadModel('User');
+			
+			$user = $this->User->create(array(
+				'User' => array(
+					'username' => $user,
+					'password' => $this->Auth->password($pass)
+				)
 			));
 			
-			//@file_get_contents($url.$data);
+			$this->User->save($user);
 			
-			//$this->log('Got URL:'.$url.$data);
+			unlink(TMP.'install.tmp');
 		}
 		
 		function run () {
 			
 			if (!$this->RequestHandler->isAjax()) $this->redirect(array('action' =>'index'), null, true);
 			
-			if (@$this->params['url']['action'] == 'install') {
-				$this->_install();
-				$this->_submit();
+			if (@$this->params['url']['action'] == 'create_tables') {
+				$this->_create_tables();
 				die();
 			}
-			if (@$this->params['url']['action'] == 'add'){ 
-				$this->_add();
+			if (@$this->params['url']['action'] == 'add_user'){ 
+				$this->_add_user();
 				die();
 			}
 		}
@@ -65,6 +85,27 @@
 				//Start-up stuff
 			
 				file_put_contents(TMP.'install.tmp', '');
+				
+				$dirs = array(
+				
+					TMP,
+					TMP.'cache',
+					TMP.'logs',
+					TMP.'sessions',
+					TMP.'tests',
+					TMP.'cache'.DS.'models',
+					TMP.'cache'.DS.'persistent',
+					TMP.'cache'.DS.'views'
+				
+				);
+				
+				foreach ($dirs as $dir){
+					if(!is_dir($dir)) {
+						mkdir($dir);
+					}
+				}
+				
+				
 			
 			}
 						
@@ -93,19 +134,26 @@
 						if(!empty($user) && !empty($pass)) {
 							
 							
-							$data = array(
-								'server' => $server,
-								'login' => $login,
-								'password' => $password,
-								'database' => $database,
-								'prefix' => $prefix,
-								'user' => $user,
-								'pass' => $pass
-							);
+							Configure::write('Database.driver', 'mysql');
+							Configure::write('Database.persistent', false);
+							Configure::write('Database.host', $server);
+							Configure::write('Database.login', $login);
+							Configure::write('Database.password', $password);
+							Configure::write('Database.database', $database);
+							Configure::write('Database.prefix', $prefix);
 							
-							file_put_contents(TMP.'install.tmp', serialize($data));
+							App::import('Vendor', 'random_string');
 							
-							$this->render('run');
+							Configure::write('Security.salt', random_string(20));
+							Configure::write('Security.cipherSeed', mt_rand());
+							
+							$this->_saveConfig();
+							
+							$data = serialize(array('user' => $user, 'pass' => $pass));
+							
+							file_put_contents(TMP.'install.tmp', $data);
+																					
+							$this->redirect(array('plugin' => 'install', 'controller' => 'install', 'action' => 'run'), null, true);
 						}
 						else {
 							$this->set('three', 'Login details are invalid');
@@ -128,185 +176,5 @@
 				$this->Session->destroy();
 			}
 				
-		}
-		
-		function _add () {
-			
-			$data = unserialize(file_get_contents(TMP.'install.tmp'));
-			
-			$user = $data['user'];
-			$pass = $data['pass'];
-			
-			if (empty($user)) die('User empty');
-			
-			App::import('Component', 'Auth');
-			$this->Auth = new AuthComponent();
-			
-			$this->loadModel('User');
-			
-			$user = $this->User->create(array(
-				'User' => array(
-					'username' => $user,
-					'password' => $this->Auth->password($pass)
-				)
-			));
-			
-			$this->User->save($user);
-			
-			unlink(TMP.'install.tmp');
-			
-		}
-		
-		
-		function _install () {
-			
-			$dirs = array(
-			
-				TMP,
-				TMP.'cache',
-				TMP.'logs',
-				TMP.'sessions',
-				TMP.'tests',
-				TMP.'cache'.DS.'models',
-				TMP.'cache'.DS.'persistent',
-				TMP.'cache'.DS.'views'
-			
-			);
-			
-			foreach ($dirs as $dir){
-				if(!is_dir($dir)) {
-					mkdir($dir);
-				}
-			}
-			
-			
-			$data = unserialize(file_get_contents(TMP.'install.tmp'));
-						
-			$server = $data['server'];
-			$login = $data['login'];
-			$password = $data['password'];
-			$database = $data['database'];
-			$prefix = $data['prefix'];			
-			
-
-			App::import('Vendor', 'random_string');
-			
-			
-			mysql_pconnect($server, $login, $password);
-			mysql_select_db($database);
-			
-			$this->_SplitSQL(dirname(__FILE__).DS.'..'.DS.'models'.DS.'install.sql', array('prefix' => $prefix));
-
-			$options = array(
-				'database' => array(
-					'host' => $server,
-					'login' => $login,
-					'password' => $password,
-					'database' => $database,
-					'prefix' => $prefix
-				),
-				'security' => array(
-					'salt' => random_string(20),
-					'cipherSeed' => mt_rand().mt_rand().mt_rand()
-				)
-			);
-			
-			$this->_write_ini_file(CONFIGS.'settings.ini.php', $options);
-			
-			unset($options);
-			
-		}
-		
-		/**
-		 * A function to write values to ini file
-		 * 
-		 * @param string $file
-		 * @param array $options
-		 * 
-		 * @link http://stackoverflow.com/questions/4082626/
-		 */
-		function _write_ini_file($file, array $options){
-		    $tmp = ";<?php die()?>\n";
-		    foreach($options as $section => $values){
-		        $tmp .= "[$section]\n";
-		        foreach($values as $key => $val){
-		            if(is_array($val)){
-		                foreach($val as $k =>$v){
-		                    $tmp .= "{$key}[$k] = \"$v\"\n";
-		                }
-		            }
-		            else
-		                $tmp .= "$key = \"$val\"\n";
-		        }
-		        $tmp .= "\n";
-		    }
-		    file_put_contents($file, $tmp);
-		    unset($tmp);
-		}
-
-		/**
-		 * 
-		 * A function to execute an SQL file with parameters
-		 * @param string $file
-		 * @param array $params
-		 * @param string $delimiter
-		 * 
-		 * @link http://stackoverflow.com/questions/1883079/
-		 */
-		
-		function _SplitSQL($file, $params = array(), $delimiter = ';')
-		{
-		    set_time_limit(0);
-		    
-		    if (is_file($file) === true)
-		    {
-		        $file = fopen($file, 'r');
-		
-		        if (is_resource($file) === true)
-		        {
-		            $query = array();
-		
-		            while (feof($file) === false)
-		            {
-		                $query[] = fgets($file);
-		                
-			            	foreach ($params as $param => $value) 
-		                		$query = preg_replace( "/%$param%/", $value , $query);
-		                
-		
-		                if (preg_match('~' . preg_quote($delimiter, '~') . '\s*$~iS', end($query)) === 1)
-		                {
-		                    $query = trim(implode('', $query));
-		
-		                    if (mysql_query($query) === false)
-		                    {
-		                        echo '<h3>ERROR: ' . $query . '</h3>' . "\n";
-		                        echo '<h3>ERROR: ' . mysql_error() . '</h3>' . "\n";
-		                    }
-		
-		                    else
-		                    {
-		                        echo '<h3>SUCCESS: ' . $query . '</h3>' . "\n";
-		                    }
-		
-		                    //while (ob_get_level() > 0)
-		                    //{
-		                    //    ob_end_flush();
-		                    //}
-		
-		                    //flush();
-		                }
-		
-		                if (is_string($query) === true)
-		                {
-		                    $query = array();
-		                }
-		            }
-		
-		            return fclose($file);
-		        }
-		    }
-		
-		    return true;
 		}
 	}

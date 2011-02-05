@@ -320,5 +320,4 @@ Configure::write('UserAgent', 'The Search Engine Project (http://www.tsep.info/h
 
 	if(file_exists(CONFIGS.'settings.php'))  {
 		Configure::load('settings');
-		$GLOBALS['configSum'] = (array)Configure::getInstance();
 	}
