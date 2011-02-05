@@ -49,7 +49,7 @@ class AppController extends Controller {
 	var $helpers = array('Html', 'Session', 'Js', 'Form', 'Paginator');
 	
 	var $components = array('RequestHandler', 'Session', 'Auth', 'Security');
-		
+			
     function beforeFilter() {
     	
     	if(isset($this->Auth)) {
@@ -97,6 +97,11 @@ class AppController extends Controller {
     function afterFilter() {
     	
     	//Save Configuration
+    	App::import('Vendor', 'write_config_file');
+    	
+    	$configs = (array)Configure::getInstance();
+    	
+    	write_config_file(TMP.'config.php', $configs);
     	
     }
     
