@@ -45,11 +45,9 @@ class ThemesController extends AppController {
 				download_file($file_url, TMP.'theme.zip');
 								
 				$zip = new ZipArchive();
-				
-				//TODO: Fix secuirty hole
-				
+								
 				$zip->open(TMP.'theme.zip');
-				$zip->extractTo(APP.'views'.DS.'themed'.DS);
+				$zip->extractTo(TMP.'theme'.DS);
 				$zip->close();
 				
 				unlink(TMP.'theme.zip');
