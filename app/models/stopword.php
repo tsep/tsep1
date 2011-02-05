@@ -6,9 +6,9 @@
 *
 * The following will be filled automatically by SubVersion!
 * Do not change by hand!
-*  $LastChangedDate: $
-*  $LastChangedBy:  $
-*  $LastChangedRevision: $
+*  $LastChangedDate$
+*  $LastChangedBy$
+*  $LastChangedRevision$
 *
 */
 class Stopword extends AppModel {
