@@ -49,6 +49,10 @@ class AppController extends Controller {
 	var $helpers = array('Html', 'Session', 'Js', 'Form', 'Paginator');
 	
 	var $components = array('RequestHandler', 'Session', 'Auth', 'Security');
+	
+	var $view = 'Theme';
+	
+	var $theme = 'default';
 			
     function beforeFilter() {
     	
@@ -85,6 +89,8 @@ class AppController extends Controller {
     		App::import('Component', 'Security');
     		$this->Security = new SecurityComponent();
     	}
+    	
+    	$this->theme = Configure::read('ThemeName');
     }
     
     function beforeRender() {

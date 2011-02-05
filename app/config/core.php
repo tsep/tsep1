@@ -36,6 +36,8 @@ Configure::write('UpdateURL', 'http://tsep.sourceforge.net/updater/getUpdate.php
 
 Configure::write('UserAgent', 'The Search Engine Project (http://www.tsep.info/home)');
 
+Configure::write('ThemeName', 'default');
+
 /**
  * CakePHP Debug Level:
  *
