@@ -76,6 +76,7 @@ class ThemesController extends AppController {
 				if(!file_exists(TMP.'theme'.DS.'theme.ini')) {
 					
 					//NOT a valid theme! Abort.
+					die();
 				}
 				
 				$themeConfig = parse_ini_file(TMP.'theme'.DS.'theme.ini');
@@ -101,7 +102,17 @@ class ThemesController extends AppController {
 	}
 	
 	function admin_delete ($name) {
-		//TODO:Delete a theme
+		
+		//TODO:Add security
+		
+		App::import('Vendor', 'delete_dir');
+		
+		delete_dir(VIEWS.'themed'.DS.$name);
+		
+		$this->Session->setFlash('Theme Deleted', 'flash_success');
+		
+		$this->redirect(array('controller' => 'themes', 'action' => 'index', 'admin' => true));
+		
 	}
 	
 	function admin_activate($name) {

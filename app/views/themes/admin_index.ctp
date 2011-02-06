@@ -6,7 +6,7 @@
             <th width="118" class="rounded" scope="col">Theme Name</th>
             <th width="100" class="rounded" scope="col"></th>
             <th width="131" class="rounded" scope="col">Activate Theme</th>
-            <th width="63" class="rounded" scope="col"></th>
+            <th width="63" class="rounded" scope="col">Delete Theme</th>
             <th width="70" class="rounded-q4" scope="col"></th>
         </tr>
     </thead>
@@ -35,7 +35,15 @@
 	            ));			
            	?></td>
 
-            <td></td>
+            <td><?php echo 
+	            $html->link(
+		            'Delete',
+	            array(
+	            	'action' => 'delete',
+	            	'controller' => 'themes',
+	            	$theme['Theme']['name']
+	            ));			
+           	?></td>
            	<td></td>
         </tr> 
      <?php } } else { ?>
