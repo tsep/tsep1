@@ -15,6 +15,27 @@
 
 class QueueComponent extends Object {
 	
+	/**
+	 * The path to the jobs file
+	 * @var string
+	 */
+	var $jobPath = '';
+	
+	function initialize(&$controller, $settings=array()) {
+		
+		$this->jobPath = TMP.'queue_jobs';
+		
+	}
+	
+	private function _checkFile () {
+		
+		if(!file_exists($this->jobPath)) {
+			
+			$schema = array(
+				
+			);
+		}
+	}
 	
 	
 	/**
@@ -33,6 +54,8 @@ class QueueComponent extends Object {
 	 * @param string $job_options The parameters to be passed to the job
 	 */
 	function addJob($job_name, array $job_options) {
+		
+		
 		
 		
 		return $job_id;
