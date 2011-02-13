@@ -118,11 +118,28 @@
 		 */
 		function install () {
 			
+			$this->set('title_for_layout', __('Performing the Installation', true));
+			
 			if($this->RequestHandler->isAjax()) {
 				
+				App::import('Model', 'CakeSchema', false);
+        App::import('Model', 'ConnectionManager');
 				
-				
-				
+				/**
+         * @var DboSource
+         */
+	      $db = ConnectionManager::getDataSource('default');
+			
+				$schema =& new CakeSchema(array('name'=>'app'));
+			                
+				$schema = $schema->load();
+
+				$drop   = $db->dropSchema($schema);
+				$create = $db->createSchema($schema);
+							
+				$db->execute($drop);
+				$db->execute($create);
+							
 			}
 			
 		}
@@ -131,6 +148,9 @@
 		 * Thank the user for installing
 		 */
 		function finish () {
-		
+			
+			$this->set('title_for_layout', __('Thanks for installing', true));
+			
+			unlink(TMP.'install.tmp');
 		}
 	}
