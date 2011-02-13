@@ -74,6 +74,30 @@
 		 */
 		function database () {
 			
+			$this->set('title_for_layout', __('Database Configuration', true));
+			
+			if(!empty($this->data)) {
+
+				Configure::write('Database', $this->data['Database']);
+				
+				App::import('Model', 'ConnectionManager');
+						        
+		        ConnectionManager::create('install', Configure::read('Database'));
+		        $db = ConnectionManager::getDataSource('install');
+		        		        
+		        if ($db->isConnected()) {
+							        	
+		        	$this->_saveConfig();
+		        			        	
+		        	$this->Session->setFlash(__('Connection to the database established.', true), 'flash_success');
+		        			        	
+					$this->redirect(array('controller' => 'install', 'plugin' => 'install', 'action' => 'settings'), null, true);
+		        }
+		        else {
+		        	$this->Session->setFlash(__('Could not connect to database.', true), 'flash_fail');
+		        }
+		        
+			}
 		}
 		
 		/**
@@ -81,13 +105,26 @@
 		 */
 		function settings () {
 			
+			if(!empty($this->data)) {
+				
+				Configure::write('Install', $this->data['Install']);
+				
+				$this->redirect(array('controller' => 'install', 'plugin' => 'install', 'action' => 'install'), null, true);
+			}
 		}
 		
 		/**
 		 * Perform the installation
 		 */
 		function install () {
-		
+			
+			if($this->RequestHandler->isAjax()) {
+				
+				
+				
+				
+			}
+			
 		}
 		
 		/**

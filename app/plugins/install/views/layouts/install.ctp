@@ -24,7 +24,7 @@
 
 <body>
 <h1><?php echo $title_for_layout; ?></h1>
-
+<?php echo $session->flash(); ?>
 <div id='content'>
 
 <?php echo $content_for_layout; ?>
