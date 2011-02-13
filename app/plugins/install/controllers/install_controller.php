@@ -1,7 +1,5 @@
 <?php 
 
-//TODO: Clean this up! This code is absoulutely outrageous.
-
 	class InstallController extends InstallAppController {
 		
 		var $name = 'Install';
@@ -109,6 +107,8 @@
 				
 				Configure::write('Install', $this->data['Install']);
 				
+				$this->_saveConfig();
+				
 				$this->redirect(array('controller' => 'install', 'plugin' => 'install', 'action' => 'install'), null, true);
 			}
 		}
@@ -121,6 +121,11 @@
 			$this->set('title_for_layout', __('Performing the Installation', true));
 			
 			if($this->RequestHandler->isAjax()) {
+				
+				App::import('Vendor', 'random_string');
+				
+				Configure::write('Security.salt', random_string(20));
+				Configure::write('Security.cipherSeed', mt_rand());
 				
 				App::import('Model', 'CakeSchema', false);
         App::import('Model', 'ConnectionManager');
@@ -139,6 +144,23 @@
 							
 				$db->execute($drop);
 				$db->execute($create);
+				
+				App::import('Component', 'Auth');
+				$this->Auth = new AuthComponent();
+
+				$this->loadModel('User');
+				
+				$this->User->create();
+				
+				$this->User->save(array(
+					'username' => Configure::read('Install.username'),
+					'password' => $this->Auth->password(Configure::read('Install.password'))
+				
+				));
+				
+				Configure::delete('Install');
+				
+				$this->_saveConfig();
 							
 			}
 			
