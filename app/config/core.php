@@ -321,5 +321,8 @@ Configure::write('ThemeName', 'default');
 	Cache::config('default', array('engine' => 'File'));
 
 	if(file_exists(CONFIGS.'settings.php'))  {
+		
 		Configure::load('settings');
+
 	}
+
