@@ -24,15 +24,12 @@
 
 <body>
 <h1>Installation</h1>
- 
-<h2>Complete the following form to complete installation.</h2>
 
-<form id="theform" action="action.php" enctype="multipart/form-data" method="post">
-<div class="loader">
-  		<?php echo $html->image('ajax-loader.gif')?>
-</div>
+<div id='content'>
+
 <?php echo $content_for_layout?>
-</form>
+
+</div>
 
 </body>
 </html>
