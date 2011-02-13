@@ -24,6 +24,9 @@
 			
 			App::import('Component', 'Session');
 			$this->Session = new SessionComponent();
+			
+			App::import('Component', 'Security');
+			$this->Security = new SecurityComponent();
 		}
 		
 		function beforeFilter () {
@@ -39,6 +42,30 @@
 		 * Welcome the user
 		 */
 		function index () {
+			
+			$handle = fopen(TMP.'install.tmp', 'w');
+			fclose($handle);
+			
+			$this->set('title_for_layout', __('Welcome', true));
+			
+			$languages = array(
+				'fre' => 'Francias',
+				'eng' => 'English'
+			);
+			
+			$this->set('languages', $languages);
+			
+			if(!empty($this->params['url']['language'])) {
+			
+				if(array_key_exists($this->params['url']['language'], $languages)) {
+				
+					Configure::write('Config.language', $this->params['url']['language']);
+					
+					$this->_saveConfig();
+					
+					$this->redirect(array('controller' => 'install', 'plugin' => 'install', 'action' => 'database'), null, true);
+				}
+			}
 			
 		}
 		
