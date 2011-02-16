@@ -15,11 +15,7 @@
 
 class QueueComponent extends Object {
 	
-	/**
-	 * The path to the jobs file
-	 * @var string
-	 */
-	var $jobPath = '';
+	var $jobPath;
 	
 	function initialize(&$controller, $settings=array()) {
 		
@@ -27,63 +23,68 @@ class QueueComponent extends Object {
 		
 	}
 	
-	private function _checkFile () {
+	private function _getJobFile () {
 		
-		if(!file_exists($this->jobPath)) {
+		$cont = file_get_contents($this->jobPath);
+		
+		if(empty($cont)) {
 			
-			$schema = array(
+			return array();
+			
+		}
+		else {
+			
+			$jobs = @unserialize($cont);
+			
+			if (empty($jobs) || !is_array($jobs)) {
 				
-			);
+				return array();
+			}
+			else {
+				
+				return $jobs;
+			}			
+		}
+		
+	}
+	
+	private function _saveJobFile ($jobs) {
+		
+		$cont = serialize($jobs);
+		
+		if(@file_put_contents($this->jobPath, $cont)) {
+		
+			return true;
+		}
+		else {
+			
+			return false;
 		}
 	}
 	
-	
-	/**
-	 * Execute the next job in the queue
-	 */
-	function executeJob ($job_id = null) {
+	function addJob($function_name, array $params) {
 		
+		$job = compact('function_name', 'params');
+				
+		$jobs = $this->_getJobFile();
 		
+		array_push($jobs, $job);
 		
-		return $job_id;
+		if($this->_saveJobFile($jobs)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
-	/**
-	 * Add a job to the queue
-	 * @param string $job_name The name of the function to execute
-	 * @param string $job_options The parameters to be passed to the job
-	 */
-	function addJob($job_name, array $job_options) {
+	function isJob () {
 		
 		
-		
-		
-		return $job_id;
 	}
 	
+	function getJob () {
 	
-	/**
-	 * Removes the job with the given id
-	 * @param string $job_id The job to remove
-	 */
-	function removeJob ($job_id) {
 		
-		return $job_id;
-	}
-	
-	/**
-	 * Clear all jobs
-	 */
-	function clearAllJobs() {
-		
-		return true;	
-	}
-	
-	/**
-	 * Get the ID of the next job in the queue
-	 */
-	function nextJob() {
-		
-		return $job_id;
 	}
 }
