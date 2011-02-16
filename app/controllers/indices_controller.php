@@ -377,7 +377,7 @@
 			die();
 		}
 			
-		function admin_index ($id = null) {
+		function admin_start ($id = null) {
 					
 			if (!empty($id)){
 				
@@ -402,5 +402,17 @@
 			
 		}
 		
+		/**
+		 * List all of the indices
+		 */
+		function admin_index() {
 		
+		}
+		
+		/**
+		 * View an index
+		 */
+		function admin_view () {
+		
+		}
 	}

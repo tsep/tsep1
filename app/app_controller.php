@@ -48,13 +48,14 @@ class AppController extends Controller {
 
 	var $helpers = array('Html', 'Session', 'Js', 'Form', 'Paginator');
 	
-	var $components = array('RequestHandler', 'Session', 'Auth', 'Security');
+	var $components = array('RequestHandler', 'Session', 'Auth'/*, 'Security'*/);
 	
 	var $view = 'Theme';
 	
 	var $theme = 'default';
 			
     function beforeFilter() {
+    	parent::beforeFilter();
     	
     	if(isset($this->Auth)) {
     		
@@ -96,7 +97,7 @@ class AppController extends Controller {
     
     /**
      * Save the configuration to disk
-     * @deprecated
+     * @deprecated Use $this->saveConfiguration() instead.
      */
     function _saveConfig () {
     	    	
@@ -112,9 +113,9 @@ class AppController extends Controller {
     	$config = (array)Configure::getInstance();
     	
     	$code = "<?php \n ";
-		$code .= '$config = '.var_export($config, true).';';
+			$code .= '$config = '.var_export($config, true).';';
 		
-		file_put_contents(CONFIGS.'settings.php', $code);
+			file_put_contents(CONFIGS.'settings.php', $code);
     }
 
 }

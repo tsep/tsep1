@@ -44,18 +44,6 @@
 </table>
 
 <div class="pagination">
-	<?php 
-		$paginator->options(array(
-				'update' => '#content',
-				'evalScripts' => true,
-				'before' => $js->get('#content')->effect('hide', array('buffer' => false)).
-							$js->get('#loader')->effect('show', array('buffer' => false)),
-    			'complete'=>'parseLinks();'.
-							'parseForms();'.
-							$js->get('#loader')->effect('hide', array('buffer' => false)).
-							$js->get('#content')->effect('show', array('buffer' => false)),
-		));
-	?>
 	
 	<?php echo $this->Paginator->prev('&laquo; Previous', array('escape' => false), null, array('class' => 'disabled', 'escape' => false)); ?>
 	<?php echo $this->Paginator->next('Next &raquo;', array('escape' => false), null, array('class' => 'disabled', 'escape' => false)); ?> 
@@ -63,4 +51,3 @@
 
 <h2><?php echo $html->link('Add a stopword', array('action' => 'add'))?></h2>
 
-<?php echo $js->writeBuffer();?>

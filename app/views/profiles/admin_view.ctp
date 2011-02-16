@@ -14,4 +14,4 @@
 		<dd><span><?php echo $profile['Profile']['regex']?></span></dd>
 	</dl>
 </fieldset>
-<h2><?php echo $html->link('Index this profile',array('controller'=>'indices','action' =>'index','admin'=>true,$profile['Profile']['id']))?></h2>
+<h2><?php echo $html->link('Index this profile',array('controller'=>'indices','action' =>'start','admin'=>true,$profile['Profile']['id']))?></h2>
