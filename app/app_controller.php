@@ -103,15 +103,25 @@ class AppController extends Controller {
     
     /**
      * Save the configuration to disk
+     * @deprecated
      */
     function _saveConfig () {
     	    	
-    	$configs = (array)Configure::getInstance();
-   	
-   		App::import('Vendor', 'write_config_file');
-   		   		
-  		write_config_file(CONFIGS.'settings.php', $configs);
+    	$this->saveConfiguration();
     
-    }    
+    }   
+
+    /**
+     * Save the current configuration
+     */
+    function saveConfiguration () {
+    	
+    	$config = (array)Configure::getInstance();
+    	
+    	$code = "<?php \n ";
+		$code .= '$config = '.var_export($config, true).';';
+		
+		file_put_contents(CONFIGS.'settings.php', $code);
+    }
 
 }

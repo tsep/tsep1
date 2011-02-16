@@ -17,6 +17,8 @@
  * 
  * @param string $file The file to write to
  * @param array $options The data to write
+ * 
+ * @deprecated
  */
  function write_ini_file($file, array $options){
 		    $tmp = ";<?php die()?>\n";
