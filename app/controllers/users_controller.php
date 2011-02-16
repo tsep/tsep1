@@ -5,8 +5,6 @@
 			parent::beforeFilter();
 			
 			$this->Security->requireAuth();
-			
-			$this->layout = 'login';
 		}
 		
 		function admin_login () {
