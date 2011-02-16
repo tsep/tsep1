@@ -114,5 +114,80 @@ class AppController extends Controller {
     
     }
     
+	/**
+	 * This function calls a specific hook out of any plugin's hooks.php that matches $pluginFilter
+	 * The list of hooks.php files get's cached for a certain time depending on the value of DEBUG.
+	 * The 3rd argument &$caller has to be a reference to the caller/variable that get's affected by
+	 * the Hook.
+	 *
+	 * @param string $hook
+	 * @param string $pluginFilter
+	 * @param mixed $caller
+	 */
+	function callHooks($hook, $pluginFilter = '.+')
+	{
+	    // pluginHooks contains an array of plugins that provide a hook File
+	    static $hookPlugins = array();
+	    
+	    if (empty($pluginFilter))
+	        $pluginFilter = '.+';
+	        
+	    $params = func_get_args();
+	    
+	    // Get rid of $hook, $pluginFilter and &$caller in our $params array
+	    array_shift($params);
+	    array_shift($params);
+	    array_shift($params);
+	        
+	
+	    if (empty($hookPlugins))
+	    {
+	        $cachePath = 'hook_files';
+	            
+	        $hookFiles = Cache::read($cachePath);
+	        
+	        if (empty($hookFiles))
+	        {
+	            App::import('Core', 'Folder');        
+	            $Folder =& new Folder(APP.'plugins');
+	            $hookFiles = $Folder->findRecursive('hooks.php');
+	            
+	            Cache::write($cachePath, $hookFiles);
+	        }
+	                    
+	        
+	        foreach ($hookFiles as $hookFile)
+	        {
+	            list($plugin) = explode(DS, substr($hookFile, strlen(APP.'plugins'.DS)));                
+	            require($hookFile);
+	            
+	            $hookPlugins[] = $plugin;
+	            
+	            if (preg_match('/'.$pluginFilter.'/iUs', $plugin))
+	            {
+	                $hookFunction = $plugin.$hook.'Hook';
+	                if (function_exists($hookFunction))
+	                {
+	                    call_user_func_array($hookFunction, array_merge(array(&$caller), $params));
+	                }
+	            }
+	        }        
+	    }
+	    else 
+	    {
+	        foreach ($hookPlugins as $plugin)
+	        {
+	            if (preg_match('/'.$pluginFilter.'/iUs', $plugin))
+	            {
+	                $hookFunction = $plugin.$hook.'Hook';                    
+	                if (function_exists($hookFunction))
+	                {
+	                    call_user_func_array($hookFunction, array_merge(array(&$caller), $params));
+	                }
+	            }                   
+	        }
+	    }
+	}
+    
 
 }
