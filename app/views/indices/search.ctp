@@ -1,5 +1,6 @@
 <?php 
 
+	echo $this->element('search_form');
 
 	if (!empty($matches)) {
 		foreach ($matches as $match) {

@@ -25,4 +25,22 @@ if(false) {
     $session = new SessionHelper(); 
     $text = new TextHelper(); 
     $time = new TimeHelper(); 
+    
+    /**
+     * Content For Layout
+     * @var string
+     */
+    $content_for_layout = '';
+    
+    /**
+     * Scripts For Layout
+     * @var string
+     */
+    $scripts_for_layout = '';
+    
+    /**
+     * Title For Layout
+     * @var string
+     */
+    $title_for_layout = '';
 } 

@@ -8,7 +8,7 @@
         ));
       ?>
         <fieldset>
-        <input type="text" name="q" id="search-text" size="15" />
-        <input type="submit" id="search-submit" value="GO" />
+        <input type="text" name="q" id="search-box" />
+        <input type="submit" id="search-submit" value="Search" />
         </fieldset>
 <?php echo $form->end(); ?>
