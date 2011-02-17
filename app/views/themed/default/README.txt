@@ -1,1 +1,0 @@
-This theme is the default theme. It replaces no files.
