@@ -14,5 +14,15 @@
 
 class SearchesController extends AppController {
 	
+	var $name = 'Searches';
+	var $uses = array('Search');
 	
+	function get($phrase) {
+		
+		$this->set('results', $this->Search->get($phrase));
+	}
+	
+	function add($phrase) {
+	
+	}
 }
