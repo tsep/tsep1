@@ -1,2 +1,2 @@
-<p>Powered by <a href="http://tsep.sf.net/">The Search Engine Project</a> <?php echo $version?>.
+<p>Powered by <a href="http://www.tsep.info/home">The Search Engine Project</a> <?php echo $version?>.
 		<p><?php echo $html->link('Administration Control Panel', array('controller' => 'profiles', 'admin' => true))?></p>
