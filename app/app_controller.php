@@ -106,19 +106,16 @@ class AppController extends Controller {
     	parent::beforeRender();
     	
     	$this->set('version', file_get_contents(CONFIGS.'version.txt'));
+    	
+    	if(isset($this->Auth)) {
+    		$this->set('user', $this->Auth->user());
+    	}
+    	else {
+    		$this->set('user', false);
+    	}
     
     }
-    
-    
-    /**
-     * Save the configuration to disk
-     * @deprecated Use $this->saveConfiguration() instead.
-     */
-    function _saveConfig () {
-    	    	
-    	$this->saveConfiguration();
-    
-    }   
+       
 
     /**
      * Save the current configuration

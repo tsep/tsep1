@@ -20,7 +20,11 @@
                     </dl>
                     
                      <dl class="submit">
-                    <input type="submit" name="submit" id="submit" value="Enter" />
+                    	<dd>
+                    		<div class="button">
+                    			<input type="submit" name="submit" id="submit" value="Enter"/>
+                    		</div>
+                    	</dd>
                      </dl>
                     
                 </fieldset>

@@ -15,7 +15,7 @@
 	echo $html->script('jquery-clock');
 	echo $html->script('jquery-confirmation');
 	echo $html->script('accordion');
-	echo $html->script('niceforms');
+	//echo $html->script('niceforms');
 	echo $html->script('admin');
 
 	echo $scripts_for_layout 
@@ -33,7 +33,11 @@
   '/', 
   array('escape' => false))?></div>
     
-    <div class="right_header">Welcome Admin, <?php echo $html->link('Visit Site', array('controller'=>'indices', 'action'=>'search', 'admin'=>false))?> | <?php //<a href="#" class="messages">(3) Messages</a>?><span id="updatePanel">Loading...</span> | <?php echo $html->link('Logout', array('controller' => 'users' , 'action' => 'logout'), array('class' => 'logout')) ?></div>
+    <div class="right_header">
+    	<?php if($user): ?>
+    		Welcome Admin, <?php echo $html->link('Visit Site', array('controller'=>'indices', 'action'=>'search', 'admin'=>false))?> | <?php //<a href="#" class="messages">(3) Messages</a>?><span id="updatePanel">Loading...</span> | <?php echo $html->link('Logout', array('controller' => 'users' , 'action' => 'logout'), array('class' => 'logout')) ?>
+   		<?php endif; ?>
+   	</div>
     <div class="jclock"></div>
     </div>
     
@@ -41,150 +45,152 @@
     
                     <div class="menu">
                     <ul>
-                    <?php //<li><?php echo $html->link('Index Site', array('controller'=>'indexer', 'action'=>'index'))?>
-                    <?php 
-                    /*
-                    <!--[if lte IE 6]><table><tr><td><![endif]-->
-                        <ul>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        </ul>
-                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
-                    */
-                    ?>
-                    <?php //</li>?>
-                    <li><?php echo $html->link('Profiles', array('controller' => 'profiles', 'action' => 'index'))?>
-                    	<ul>
-                    		<li><?php echo $html->link('New IProfile', array('controller'=>'profiles', 'action'=>'create'))?></li>
-                    		<li><?php echo $html->link('View all', array('controller'=>'profiles', 'action'=>'index'))?></li>
-                    	</ul>
-                    </li>
-                    <?php //<li><?php echo $html->link('Create a New IProfile', array('controller'=>'profiles', 'action'=>'create'))?>
-                    <?php 
-                    /*
-                    <!--[if lte IE 6]><table><tr><td><![endif]-->
-                        <ul>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a class="sub1" href="" title="">sublevel2<!--[if IE 7]><!--></a><!--<![endif]-->
-                        <!--[if lte IE 6]><table><tr><td><![endif]-->
-                            <ul>
-                                <li><a href="" title="">sublevel link</a></li>
-                                <li><a href="" title="">sulevel link</a></li>
-                                <li><a class="sub2" href="#nogo">sublevel3<!--[if IE 7]><!--></a><!--<![endif]-->
-                        
-                                <!--[if lte IE 6]><table><tr><td><![endif]-->
-                                    <ul>
-                                        <li><a href="#nogo">Third level-1</a></li>
-                                        <li><a href="#nogo">Third level-2</a></li>
-                                        <li><a href="#nogo">Third level-3</a></li>
-                                        <li><a href="#nogo">Third level-4</a></li>
-                                    </ul>
-                        
-                                <!--[if lte IE 6]></td></tr></table></a><![endif]-->
-                                </li>
-                                <li><a href="" title="">sulevel link</a></li>
-                            </ul>
-                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
-                        </li>
-                    
-                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        </ul>
-                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
-                    */
-                    ?>
-                    <li>
-                    	<?php echo $html->link('Stopwords', array('controller' => 'stopwords', 'action' => 'index'))?>
-                    	<ul>
-                    		<li><?php echo $html->link('View all', array('controller' => 'stopwords', 'action' => 'index'))?></li>
-                    		<li><?php echo $html->link('Add new', array('controller' => 'stopwords', 'action' => 'add'))?></li>
-                    	</ul>
-                    </li>
-                    <li>
-                    	<?php echo $html->link('Themes', array('controller' => 'themes', 'action' => 'index'))?>
-                    	<ul>
-                    		<li><?php echo $html->link('View all', array('controller' => 'themes', 'action' => 'index'))?></li>
-                    		<li><?php echo $html->link('Add new', array('controller' => 'themes', 'action' => 'add'))?></li>
-                    	</ul>
-                    </li>
-                    <?php //<li><a href="?page=users">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->?>
-                    <?php 
-                    /*
-                    <!--[if lte IE 6]><table><tr><td><![endif]-->
-                        <ul>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a class="sub1" href="" title="">sublevel2<!--[if IE 7]><!--></a><!--<![endif]-->
-                        <!--[if lte IE 6]><table><tr><td><![endif]-->
-                            <ul>
-                                <li><a href="" title="">sublevel link</a></li>
-                                <li><a href="" title="">sulevel link</a></li>
-                                <li><a class="sub2" href="#nogo">sublevel3<!--[if IE 7]><!--></a><!--<![endif]-->
-                        
-                                <!--[if lte IE 6]><table><tr><td><![endif]-->
-                                    <ul>
-                                        <li><a href="#nogo">Third level-1</a></li>
-                                        <li><a href="#nogo">Third level-2</a></li>
-                                        <li><a href="#nogo">Third level-3</a></li>
-                                        <li><a href="#nogo">Third level-4</a></li>
-                                    </ul>
-                        
-                                <!--[if lte IE 6]></td></tr></table></a><![endif]-->
-                                </li>
-                                <li><a href="" title="">sulevel link</a></li>
-                            </ul>
-                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
-                        </li>
-                    
-                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        </ul>
-                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
-                    */
-                    ?>
-                    <?php //</li>?>
-                    <?php //<li><a href="?page=settings">Settings<!--[if IE 7]><!--></a><!--<![endif]-->?>
-                    <?php 
-                    /*
-                    <!--[if lte IE 6]><table><tr><td><![endif]-->
-                        <ul>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a class="sub1" href="" title="">sublevel2<!--[if IE 7]><!--></a><!--<![endif]-->
-                        <!--[if lte IE 6]><table><tr><td><![endif]-->
-                            <ul>
-                                <li><a href="" title="">sublevel link</a></li>
-                                <li><a href="" title="">sulevel link</a></li>
-                                <li><a class="sub2" href="#nogo">sublevel3<!--[if IE 7]><!--></a><!--<![endif]-->
-                        
-                                <!--[if lte IE 6]><table><tr><td><![endif]-->
-                                    <ul>
-                                        <li><a href="#nogo">Third level-1</a></li>
-                                        <li><a href="#nogo">Third level-2</a></li>
-                                        <li><a href="#nogo">Third level-3</a></li>
-                                        <li><a href="#nogo">Third level-4</a></li>
-                                    </ul>
-                        
-                                <!--[if lte IE 6]></td></tr></table></a><![endif]-->
-                                </li>
-                                <li><a href="" title="">sulevel link</a></li>
-                            </ul>
-                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
-                        </li>
-                    
-                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        </ul>
-                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
-                    */
-                    ?>
-                    <?php //</li>?>
-                    <?php //<li><a href="?page=layout">Search Page Layout</a>?>
-                    <li><?php echo $html->link('Customer Assistance', array( 'controller'=>'help', 'action'=>'index'))?></li>
+                    <?php if($user): ?>
+	                    <?php //<li><?php echo $html->link('Index Site', array('controller'=>'indexer', 'action'=>'index'))?>
+	                    <?php 
+	                    /*
+	                    <!--[if lte IE 6]><table><tr><td><![endif]-->
+	                        <ul>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        </ul>
+	                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	                    */
+	                    ?>
+	                    <?php //</li>?>
+	                    <li><?php echo $html->link('Profiles', array('controller' => 'profiles', 'action' => 'index'))?>
+	                    	<ul>
+	                    		<li><?php echo $html->link('New IProfile', array('controller'=>'profiles', 'action'=>'create'))?></li>
+	                    		<li><?php echo $html->link('View all', array('controller'=>'profiles', 'action'=>'index'))?></li>
+	                    	</ul>
+	                    </li>
+	                    <?php //<li><?php echo $html->link('Create a New IProfile', array('controller'=>'profiles', 'action'=>'create'))?>
+	                    <?php 
+	                    /*
+	                    <!--[if lte IE 6]><table><tr><td><![endif]-->
+	                        <ul>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a class="sub1" href="" title="">sublevel2<!--[if IE 7]><!--></a><!--<![endif]-->
+	                        <!--[if lte IE 6]><table><tr><td><![endif]-->
+	                            <ul>
+	                                <li><a href="" title="">sublevel link</a></li>
+	                                <li><a href="" title="">sulevel link</a></li>
+	                                <li><a class="sub2" href="#nogo">sublevel3<!--[if IE 7]><!--></a><!--<![endif]-->
+	                        
+	                                <!--[if lte IE 6]><table><tr><td><![endif]-->
+	                                    <ul>
+	                                        <li><a href="#nogo">Third level-1</a></li>
+	                                        <li><a href="#nogo">Third level-2</a></li>
+	                                        <li><a href="#nogo">Third level-3</a></li>
+	                                        <li><a href="#nogo">Third level-4</a></li>
+	                                    </ul>
+	                        
+	                                <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	                                </li>
+	                                <li><a href="" title="">sulevel link</a></li>
+	                            </ul>
+	                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	                        </li>
+	                    
+	                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        </ul>
+	                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	                    */
+	                    ?>
+	                    <li>
+	                    	<?php echo $html->link('Stopwords', array('controller' => 'stopwords', 'action' => 'index'))?>
+	                    	<ul>
+	                    		<li><?php echo $html->link('View all', array('controller' => 'stopwords', 'action' => 'index'))?></li>
+	                    		<li><?php echo $html->link('Add new', array('controller' => 'stopwords', 'action' => 'add'))?></li>
+	                    	</ul>
+	                    </li>
+	                    <li>
+	                    	<?php echo $html->link('Themes', array('controller' => 'themes', 'action' => 'index'))?>
+	                    	<ul>
+	                    		<li><?php echo $html->link('View all', array('controller' => 'themes', 'action' => 'index'))?></li>
+	                    		<li><?php echo $html->link('Add new', array('controller' => 'themes', 'action' => 'add'))?></li>
+	                    	</ul>
+	                    </li>
+	                    <?php //<li><a href="?page=users">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->?>
+	                    <?php 
+	                    /*
+	                    <!--[if lte IE 6]><table><tr><td><![endif]-->
+	                        <ul>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a class="sub1" href="" title="">sublevel2<!--[if IE 7]><!--></a><!--<![endif]-->
+	                        <!--[if lte IE 6]><table><tr><td><![endif]-->
+	                            <ul>
+	                                <li><a href="" title="">sublevel link</a></li>
+	                                <li><a href="" title="">sulevel link</a></li>
+	                                <li><a class="sub2" href="#nogo">sublevel3<!--[if IE 7]><!--></a><!--<![endif]-->
+	                        
+	                                <!--[if lte IE 6]><table><tr><td><![endif]-->
+	                                    <ul>
+	                                        <li><a href="#nogo">Third level-1</a></li>
+	                                        <li><a href="#nogo">Third level-2</a></li>
+	                                        <li><a href="#nogo">Third level-3</a></li>
+	                                        <li><a href="#nogo">Third level-4</a></li>
+	                                    </ul>
+	                        
+	                                <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	                                </li>
+	                                <li><a href="" title="">sulevel link</a></li>
+	                            </ul>
+	                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	                        </li>
+	                    
+	                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        </ul>
+	                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	                    */
+	                    ?>
+	                    <?php //</li>?>
+	                    <?php //<li><a href="?page=settings">Settings<!--[if IE 7]><!--></a><!--<![endif]-->?>
+	                    <?php 
+	                    /*
+	                    <!--[if lte IE 6]><table><tr><td><![endif]-->
+	                        <ul>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        <li><a class="sub1" href="" title="">sublevel2<!--[if IE 7]><!--></a><!--<![endif]-->
+	                        <!--[if lte IE 6]><table><tr><td><![endif]-->
+	                            <ul>
+	                                <li><a href="" title="">sublevel link</a></li>
+	                                <li><a href="" title="">sulevel link</a></li>
+	                                <li><a class="sub2" href="#nogo">sublevel3<!--[if IE 7]><!--></a><!--<![endif]-->
+	                        
+	                                <!--[if lte IE 6]><table><tr><td><![endif]-->
+	                                    <ul>
+	                                        <li><a href="#nogo">Third level-1</a></li>
+	                                        <li><a href="#nogo">Third level-2</a></li>
+	                                        <li><a href="#nogo">Third level-3</a></li>
+	                                        <li><a href="#nogo">Third level-4</a></li>
+	                                    </ul>
+	                        
+	                                <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	                                </li>
+	                                <li><a href="" title="">sulevel link</a></li>
+	                            </ul>
+	                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	                        </li>
+	                    
+	                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
+	                        </ul>
+	                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	                    */
+	                    ?>
+	                    <?php //</li>?>
+	                    <?php //<li><a href="?page=layout">Search Page Layout</a>?>
+	                    <li><?php echo $html->link('Customer Assistance', array( 'controller'=>'help', 'action'=>'index'))?></li>
+                    <?php endif; ?>
                     </ul>
                     </div> 
                     
@@ -196,6 +202,7 @@
     
     
     <div class="left_content">
+           	<?php if($user): ?>
     
     		<div class="sidebar_search">
               <?php 
@@ -217,55 +224,54 @@
        </div>
             
             <div class="sidebarmenu">
-            
-                <?php //<a class="menuitem //submenuheader" href="?page=main">ACP Home</a>?>
-                <?php //echo $html->link('ACP Home', array('controller'=>'profiles', 'action'=>'index'), array('class' => 'menuitem'))?>
-                <?php /*
-                <div class="submenu">
-                    <ul>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    </ul>
-                </div>
-                */?>
-                <?php /*
-                <a class="menuitem" href="?page=sites" >Manage Sites</a>
-                <?php /*
-                <div class="submenu">
-                    <ul>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    </ul>
-                </div>
-                <a class="menuitem" href="?page=indexer">Create a new Index</a>
-                <?php /*
-                <div class="submenu">
-                    <ul>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    <li><a href="">Sidebar submenu</a></li>
-                    </ul>
-                </div> 
-                <a class="menuitem" href="?page=users">Manage Users</a>
-                <a class="menuitem" href="?page=settings">Settings</a>
-                <a class="menuitem" href="?page=layout">Search Page Layout</a>
-                <a class="menuitem" href="?page=contact">Contact TSEP</a>
-                */?>
-                <?php /*
-                <a class="menuitem" href="">Blue button</a>
-                
-                <a class="menuitem_green" href="">Green button</a>
-                
-                <a class="menuitem_red" href="">Red button</a>
-                    */?>
+	                <?php //<a class="menuitem //submenuheader" href="?page=main">ACP Home</a>?>
+	                <?php //echo $html->link('ACP Home', array('controller'=>'profiles', 'action'=>'index'), array('class' => 'menuitem'))?>
+	                <?php /*
+	                <div class="submenu">
+	                    <ul>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    </ul>
+	                </div>
+	                */?>
+	                <?php /*
+	                <a class="menuitem" href="?page=sites" >Manage Sites</a>
+	                <?php /*
+	                <div class="submenu">
+	                    <ul>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    </ul>
+	                </div>
+	                <a class="menuitem" href="?page=indexer">Create a new Index</a>
+	                <?php /*
+	                <div class="submenu">
+	                    <ul>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    <li><a href="">Sidebar submenu</a></li>
+	                    </ul>
+	                </div> 
+	                <a class="menuitem" href="?page=users">Manage Users</a>
+	                <a class="menuitem" href="?page=settings">Settings</a>
+	                <a class="menuitem" href="?page=layout">Search Page Layout</a>
+	                <a class="menuitem" href="?page=contact">Contact TSEP</a>
+	                */?>
+	                <?php /*
+	                <a class="menuitem" href="">Blue button</a>
+	                
+	                <a class="menuitem_green" href="">Green button</a>
+	                
+	                <a class="menuitem_red" href="">Red button</a>
+	                    */?>
             </div>
             
             
@@ -329,6 +335,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
             </div>
               
     		*/?>
+    	<?php endif; ?>
     </div>  
     
     <div class="right_content">
