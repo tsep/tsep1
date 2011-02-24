@@ -121,7 +121,7 @@ class ThemesController extends AppController {
 		
 		if(file_exists(VIEWS.'themed'.DS.$name.DS.'theme.ini')) {
 			Configure::write('ThemeName', $name);
-			$this->_saveConfig();
+			$this->saveConfiguration();
 		}
 	}
 }

@@ -59,7 +59,7 @@
 				
 					Configure::write('Config.language', $this->params['url']['language']);
 					
-					$this->_saveConfig();
+					$this->saveConfiguration();
 					
 					$this->redirect(array('controller' => 'install', 'plugin' => 'install', 'action' => 'database'), null, true);
 				}
@@ -85,7 +85,7 @@
 		        		        
 		        if ($db->isConnected()) {
 							        	
-		        	$this->_saveConfig();
+		        	$this->saveConfiguration();
 		        			        	
 		        	$this->Session->setFlash(__('Connection to the database established.', true), 'flash_success');
 		        			        	
@@ -107,7 +107,7 @@
 				
 				Configure::write('Install', $this->data['Install']);
 				
-				$this->_saveConfig();
+				$this->saveConfiguration();
 				
 				$this->redirect(array('controller' => 'install', 'plugin' => 'install', 'action' => 'install'), null, true);
 			}
@@ -160,7 +160,7 @@
 				
 				Configure::delete('Install');
 				
-				$this->_saveConfig();
+				$this->saveConfiguration();
 							
 			}
 			
