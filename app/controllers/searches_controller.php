@@ -23,6 +23,7 @@ class SearchesController extends AppController {
 	}
 	
 	function add($phrase) {
-	
+		
+		$this->set('added', $this->Search->add($phrase));
 	}
 }

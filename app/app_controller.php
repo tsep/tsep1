@@ -53,6 +53,21 @@ class AppController extends Controller {
 	var $view = 'Theme';
 	
 	var $theme = 'default';
+	
+	/**
+	 * @var RequestHandlerComponent
+	 */
+	var $RequestHandler;
+	
+	/**
+	 * @var SessionComponent
+	 */
+	var $Session; 
+	
+	/**
+	 * @var AuthComponent
+	 */
+	var $Auth;
 			
     function beforeFilter() {
     	parent::beforeFilter();
