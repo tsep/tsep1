@@ -1,5 +1,5 @@
 <?php 
-/* App schema generated on: 2011-02-17 04:50:21 : 1297914621*/
+/* App schema generated on: 2011-02-25 03:10:28 : 1298599828*/
 class AppSchema extends CakeSchema {
 	var $name = 'App';
 
@@ -25,6 +25,13 @@ class AppSchema extends CakeSchema {
 		'regex' => array('type' => 'string', 'null' => false, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
+		'tableParameters' => array()
+	);
+	var $searches = array(
+		'phrase' => array('type' => 'string', 'null' => false, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'count' => array('type' => 'integer', 'null' => false, 'default' => NULL),
+		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
+		'indexes' => array('id' => array('column' => 'id', 'unique' => 1)),
 		'tableParameters' => array()
 	);
 	var $stopwords = array(
