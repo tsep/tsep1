@@ -22,7 +22,7 @@ class Search extends AppModel {
 	 */
 	function get($phrase) {
 		
-		return 
+		$results =  
 		
 		$this->find('list', array(
 			'conditions' => array(
@@ -32,6 +32,20 @@ class Search extends AppModel {
 			'limit' => Configure::read('LimitSuggestions'),
 			'order' => array('Search.count')
 		));
+		
+		$return = array();
+		
+		foreach ($results as $key => $result) {
+			
+			array_push($return, array(
+				'id' => $key,
+				'label' => $result,
+				'value' => $result
+			));
+			
+		}
+		
+		return $return;
 	}
 	
 	/**

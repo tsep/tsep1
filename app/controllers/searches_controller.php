@@ -23,13 +23,17 @@ class SearchesController extends AppController {
 		$this->layout = 'ajax';
 	}
 	
-	function get($phrase) {
+	function get() {
+		
+		$phrase = $this->params['url']['term'];
 		
 		$this->set('results', $this->Search->get($phrase));
 	}
 	
-	function add($phrase) {
+	function add() {
 		
+		$phrase = $this->params['url']['term'];
+				
 		$this->set('added', $this->Search->add($phrase));
 	}
 }

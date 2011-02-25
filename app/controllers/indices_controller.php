@@ -19,7 +19,8 @@
 		var $uses = array(
 			'Index', 
 			'Stopword', 
-			'Profile'
+			'Profile',
+			'Search'
 		);
 
 		
@@ -329,7 +330,10 @@
 			$query = @$this->params['url']['q'];
 			
 			
+			
 			if(!empty($query)) {
+				
+				$this->Search->add($query);
 				
 				$this->paginate = array(
 					'conditions' => array(

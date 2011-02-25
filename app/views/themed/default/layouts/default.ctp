@@ -3,7 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html;  charset=iso-8859-1" />
-	<?php echo $html->css('default'); ?>
+	<script type="text/javascript">
+		window.base = <?php echo json_encode($html->url('/')); ?>;
+	</script>
+	<?php 
+		echo $html->css('default'); 
+		echo $html->css('ui-lightness/jquery-ui');
+
+		echo $html->script('jquery');
+		echo $html->script('jquery-ui');
+		echo $html->script('suggest-framework');
+		
+		echo $scripts_for_layout;
+	?>
 	<title><?php echo $title_for_layout; ?></title>
 </head>
 
