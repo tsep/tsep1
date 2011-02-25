@@ -25,7 +25,8 @@
         <div id="content-wrapper">
             <div id="content">
                 <?php echo $content_for_layout; ?>
-             </div>   
+                <?php echo $this->element('sql_dump'); ?>
+            </div> 
         </div>
         
         <div id="footer">

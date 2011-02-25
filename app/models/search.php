@@ -26,9 +26,10 @@ class Search extends AppModel {
 		
 		$this->find('list', array(
 			'conditions' => array(
-					'MATCH(Search.phrase) AGAINST(? IN BOOLEAN MODE)' => array($phrase),
-					'limit' => Configure::read('LimitSuggestions')
+					'Search.phrase LIKE' => '%'.$phrase.'%',
 			),
+			'fields' => array('Search.id', 'Search.phrase'),
+			'limit' => Configure::read('LimitSuggestions'),
 			'order' => array('Search.count')
 		));
 	}
@@ -39,14 +40,9 @@ class Search extends AppModel {
 	 */
 	function add($phrase) {
 		
-		$result = 
-		
-		$this->find('first', array(
-			'conditions' => array('Search.phrase' => $phrase)
-		));
-		
-		
-		if(empty($result)) {
+		$result = $this->findByPhrase($phrase);
+										
+		if(empty($result['Search']['id'])) {
 
 			$this->create();
 			
@@ -61,11 +57,12 @@ class Search extends AppModel {
 			
 		}
 		else {
-			
+						
 			$this->id = $result['Search']['id'];
 			
 			if($this->saveField('Search.count', $result['Search']['count']++)) {
 				return true;
+				
 			}
 			
 		}

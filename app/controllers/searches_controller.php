@@ -17,6 +17,12 @@ class SearchesController extends AppController {
 	var $name = 'Searches';
 	var $uses = array('Search');
 	
+	function beforeFilter() {
+		parent::beforeFilter();
+		
+		$this->layout = 'ajax';
+	}
+	
 	function get($phrase) {
 		
 		$this->set('results', $this->Search->get($phrase));

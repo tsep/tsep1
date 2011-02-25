@@ -38,7 +38,7 @@ Configure::write('UserAgent', 'The Search Engine Project (http://www.tsep.info/h
 
 Configure::write('ThemeName', 'default');
 
-Configure::write('LimitSuggestions', 10);
+Configure::write('LimitSuggestions', 5);
 
 /**
  * CakePHP Debug Level:
