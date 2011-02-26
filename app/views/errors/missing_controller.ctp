@@ -1,5 +1,5 @@
-<h2>URL Not Found</h2>
+<h2><?php __('404 Not Found'); ?></h2>
 <p class="error">
-  <strong>Error:</strong>
-  The URL That You Requested Does Not Exist.
+  <strong><?php __('Error:'); ?></strong>
+  <?php __('The URL that you entered could not be found.'); ?>
 </p>

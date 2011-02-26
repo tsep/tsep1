@@ -35,7 +35,7 @@
     
     <div class="right_header">
     	<?php if($user): ?>
-    		Welcome Admin, <?php echo $html->link('Visit Site', array('controller'=>'indices', 'action'=>'search', 'admin'=>false))?> | <?php //<a href="#" class="messages">(3) Messages</a>?><span id="updatePanel">Loading...</span> | <?php echo $html->link('Logout', array('controller' => 'users' , 'action' => 'logout'), array('class' => 'logout')) ?>
+    		<?php echo $html->link(__('Visit Site', true), array('controller'=>'indices', 'action'=>'search', 'admin'=>false))?> | <?php //<a href="#" class="messages">(3) Messages</a>?><span id="updatePanel">Loading...</span> | <?php echo $html->link(__('Logout', true), array('controller' => 'users' , 'action' => 'logout'), array('class' => 'logout')) ?>
    		<?php endif; ?>
    	</div>
     <div class="jclock"></div>
@@ -61,10 +61,10 @@
 	                    */
 	                    ?>
 	                    <?php //</li>?>
-	                    <li><?php echo $html->link('Profiles', array('controller' => 'profiles', 'action' => 'index'))?>
+	                    <li><?php echo $html->link(__('Profiles', true), array('controller' => 'profiles', 'action' => 'index'))?>
 	                    	<ul>
-	                    		<li><?php echo $html->link('New IProfile', array('controller'=>'profiles', 'action'=>'create'))?></li>
-	                    		<li><?php echo $html->link('View all', array('controller'=>'profiles', 'action'=>'index'))?></li>
+	                    		<li><?php echo $html->link(__('New IProfile', true), array('controller'=>'profiles', 'action'=>'create'))?></li>
+	                    		<li><?php echo $html->link(__('View all', true), array('controller'=>'profiles', 'action'=>'index'))?></li>
 	                    	</ul>
 	                    </li>
 	                    <?php //<li><?php echo $html->link('Create a New IProfile', array('controller'=>'profiles', 'action'=>'create'))?>
@@ -103,17 +103,17 @@
 	                    */
 	                    ?>
 	                    <li>
-	                    	<?php echo $html->link('Stopwords', array('controller' => 'stopwords', 'action' => 'index'))?>
+	                    	<?php echo $html->link(__('Stopwords', true), array('controller' => 'stopwords', 'action' => 'index'))?>
 	                    	<ul>
-	                    		<li><?php echo $html->link('View all', array('controller' => 'stopwords', 'action' => 'index'))?></li>
-	                    		<li><?php echo $html->link('Add new', array('controller' => 'stopwords', 'action' => 'add'))?></li>
+	                    		<li><?php echo $html->link(__('View all', true), array('controller' => 'stopwords', 'action' => 'index'))?></li>
+	                    		<li><?php echo $html->link(__('Add new', true), array('controller' => 'stopwords', 'action' => 'add'))?></li>
 	                    	</ul>
 	                    </li>
 	                    <li>
-	                    	<?php echo $html->link('Themes', array('controller' => 'themes', 'action' => 'index'))?>
+	                    	<?php echo $html->link(__('Themes', true), array('controller' => 'themes', 'action' => 'index'))?>
 	                    	<ul>
-	                    		<li><?php echo $html->link('View all', array('controller' => 'themes', 'action' => 'index'))?></li>
-	                    		<li><?php echo $html->link('Add new', array('controller' => 'themes', 'action' => 'add'))?></li>
+	                    		<li><?php echo $html->link(__('View all', true), array('controller' => 'themes', 'action' => 'index'))?></li>
+	                    		<li><?php echo $html->link(__('Add new', true), array('controller' => 'themes', 'action' => 'add'))?></li>
 	                    	</ul>
 	                    </li>
 	                    <?php //<li><a href="?page=users">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->?>
@@ -274,7 +274,7 @@
 	                    */?>
             </div>
             
-            
+            <?php /*
             <div class="sidebar_box">
                 <div class="sidebar_box_top"></div>
                 <div class="sidebar_box_content">
@@ -304,6 +304,7 @@
                 </div>
                 <div class="sidebar_box_bottom"></div>
             </div>
+			*/ ?>
             <?php /*
             <div class="sidebar_box">
                 <div class="sidebar_box_top"></div>

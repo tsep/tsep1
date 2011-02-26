@@ -9,6 +9,6 @@
       ?>
         <fieldset>
         <input type="text" name="q" id="search-box" />
-        <input type="submit" id="search-submit" value="Search" />
+        <input type="submit" id="search-submit" value="<?php __('Search'); ?>" />
         </fieldset>
 <?php echo $form->end(); ?>

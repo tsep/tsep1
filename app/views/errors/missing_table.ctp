@@ -1,5 +1,5 @@
-<h2>Fatal Error</h2>
+<h2>500 Internal Error</h2>
 <p class="error">
-    <strong>Error: </strong>
-    There is a problem with the database. Please contact the webmaster of this site.
+    <strong><?php __('Error:'); ?><</strong>
+    <?php __('There appears to be a problem with the database.'); ?>
 </p>

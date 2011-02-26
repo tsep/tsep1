@@ -1,5 +1,5 @@
-<h2>Access Denied</h2>
+<h2><?php __('403 Access Denied'); ?></h2>
 <p class="error">
-    <strong>Error: </strong>
-    You are Not Allowed to Access This Page
+    <strong><?php __('Error:'); ?> </strong>
+    <?php __('You are Not Allowed to Access This Page'); ?>
 </p>

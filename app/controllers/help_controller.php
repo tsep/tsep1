@@ -10,6 +10,7 @@
 *  $LastChangedBy$
 *  $LastChangedRevision$
 *
+*@deprecated See CoreController
 */
 	class HelpController extends AppController {
 		

@@ -1,5 +1,5 @@
-<h2>URL Not Defined</h2>
+<h2><?php __('404 Not Found'); ?></h2>
 <p class="error">
-  <strong>Error:</strong>
-  The URL That You Requested is Not Defined. Please click back in your browser.
+  <strong><?php __('Error:'); ?></strong>
+  <?php __('The URL that you entered could not be found.'); ?>
 </p>

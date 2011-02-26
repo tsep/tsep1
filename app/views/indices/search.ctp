@@ -18,7 +18,7 @@
 	}
 	else {
 		?>
-		<div class="empty">No Results</div>
+		<div class="empty"><?php __('No Results'); ?></div>
 		<?php 
 	}
 	
