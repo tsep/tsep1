@@ -52,7 +52,7 @@
 			try {
 				$return = do_post_request("http://tsep.sourceforge.net/logs/postLog.php", $data);
 				if(empty($return)) throw new Exception('Log is empty');				
-				$this->Session->setFlash('The Log has been submitted. Your ticket ID is '.$return,'flash_success');
+				$this->Session->setFlash(__('The Log has been submitted. Your ticket ID is ', true).$return,'flash_success');
 			}
 			catch (Exception $e) {
 				$this->log('Problem occurred while submitting the error log.');
