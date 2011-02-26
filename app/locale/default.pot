@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-02-26 21:35+0100\n"
+"POT-Creation-Date: 2011-02-26 23:37+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: \controllers\help_controller.php:55
+#: \controllers\help_controller.php:56
 msgid "The Log has been submitted. Your ticket ID is "
 msgstr ""
 
@@ -77,6 +77,88 @@ msgstr ""
 
 #: \plugins\install\views\install\settings.ctp:6
 msgid "Enter the details for the administrator below."
+msgstr ""
+
+#: \views\elements\search_footer.ctp:1
+msgid "Powered by"
+msgstr ""
+
+#: \views\elements\search_footer.ctp:2
+msgid "Administration Control Panel"
+msgstr ""
+
+#: \views\elements\search_form.ctp:12
+#: \views\elements\search_menu.ctp:2
+msgid "Search"
+msgstr ""
+
+#: \views\elements\search_menu.ctp:3
+msgid "Help"
+msgstr ""
+
+#: \views\errors\error_403.ctp:1
+msgid "403 Access Denied"
+msgstr ""
+
+#: \views\errors\error_403.ctp:3
+#: \views\errors\missing_action.ctp:3
+#: \views\errors\missing_controller.ctp:3
+#: \views\errors\missing_table.ctp:3
+msgid "Error:"
+msgstr ""
+
+#: \views\errors\error_403.ctp:4
+msgid "You are Not Allowed to Access This Page"
+msgstr ""
+
+#: \views\errors\missing_action.ctp:1
+#: \views\errors\missing_controller.ctp:1
+msgid "404 Not Found"
+msgstr ""
+
+#: \views\errors\missing_action.ctp:4
+#: \views\errors\missing_controller.ctp:4
+msgid "The URL that you entered could not be found."
+msgstr ""
+
+#: \views\errors\missing_table.ctp:4
+msgid "There appears to be a problem with the database."
+msgstr ""
+
+#: \views\indices\search.ctp:21
+msgid "No Results"
+msgstr ""
+
+#: \views\layouts\admin.ctp:38
+msgid "Visit Site"
+msgstr ""
+
+#: \views\layouts\admin.ctp:38
+msgid "Logout"
+msgstr ""
+
+#: \views\layouts\admin.ctp:64
+msgid "Profiles"
+msgstr ""
+
+#: \views\layouts\admin.ctp:66
+msgid "New IProfile"
+msgstr ""
+
+#: \views\layouts\admin.ctp:67;108;115
+msgid "View all"
+msgstr ""
+
+#: \views\layouts\admin.ctp:106
+msgid "Stopwords"
+msgstr ""
+
+#: \views\layouts\admin.ctp:109;116
+msgid "Add new"
+msgstr ""
+
+#: \views\layouts\admin.ctp:113
+msgid "Themes"
 msgstr ""
 
 #: \webroot\test.php:88
