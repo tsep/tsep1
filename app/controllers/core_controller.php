@@ -9,5 +9,26 @@
  *
  */
 class CoreController extends AppController {
-
+	
+	/**
+	 * Configuration Options
+	 */
+	function settings () {
+	
+	}
+	
+	/**
+	 * Process all jobs in the Queue
+	 */
+	function batch() {
+	
+	}
+	
+	/**
+	 * Submit log, get help, etc
+	 */
+	function troubleshoot () {
+	
+	}
+	
 }
