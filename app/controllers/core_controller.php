@@ -13,21 +13,28 @@ class CoreController extends AppController {
 	/**
 	 * Configuration Options
 	 */
-	function settings () {
+	function admin_settings () {
 	
 	}
 	
 	/**
 	 * Process all jobs in the Queue
 	 */
-	function batch() {
-	
+	function admin_batch() {
+		
+		
+		if($this->RequestHandler->isAjax()) {
+			//Process the jobs
+		}
+		else {
+			//Display the page
+		}
 	}
 	
 	/**
 	 * Submit log, get help, etc
 	 */
-	function troubleshoot () {
+	function admin_troubleshoot () {
 	
 	}
 	

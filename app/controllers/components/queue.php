@@ -19,7 +19,7 @@ class QueueComponent extends Object {
 	
 	function initialize(&$controller, $settings=array()) {
 		
-		$this->jobPath = TMP.'queue_jobs';
+		$this->jobPath = TMP.'batch_jobs';
 		
 	}
 	
@@ -80,11 +80,24 @@ class QueueComponent extends Object {
 	
 	function isJob () {
 		
+		$jobs = $this->_getJobFile();
 		
+		if(empty($jobs)) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 	
 	function getJob () {
 	
+		$jobs = $this->_getJobFile();
 		
+		$job = array_pop($jobs);
+		
+		$this->_saveJobFile($jobs);
+		
+		return $job;
 	}
 }
