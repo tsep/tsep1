@@ -1,10 +1,4 @@
 <?php
-/**
- * @deprecated Move this into the 'install' controller 
- * Enter description here ...
- * @author Geoffrey
- *
- */
 class UpdateController extends UpdateAppController {
 	
 	var $uses = array();
