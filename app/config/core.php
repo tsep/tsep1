@@ -321,6 +321,12 @@ Configure::write('LimitSuggestions', 5);
  *
  */
 	Cache::config('default', array('engine' => 'File'));
+	
+	Cache::config('long', array(  
+	    'engine' => 'File',  
+	    'duration'=> '+1 day',  
+	));
+	
 
 	if(file_exists(CONFIGS.'settings.php'))  {
 		
