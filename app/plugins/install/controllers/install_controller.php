@@ -33,7 +33,7 @@
 			$this->_check();
 			$this->_init();
 			
-			$this->layout = 'install';
+			//$this->layout = 'install';
 		}
 
 		/**
@@ -122,45 +122,55 @@
 			
 			if($this->RequestHandler->isAjax()) {
 				
-				App::import('Vendor', 'random_string');
 				
-				Configure::write('Security.salt', random_string(20));
-				Configure::write('Security.cipherSeed', mt_rand());
-				
-				App::import('Model', 'CakeSchema', false);
-        App::import('Model', 'ConnectionManager');
-				
-				/**
-         * @var DboSource
-         */
-	      $db = ConnectionManager::getDataSource('default');
-			
-				$schema =& new CakeSchema(array('name'=>'app'));
-			                
-				$schema = $schema->load();
-
-				$drop   = $db->dropSchema($schema);
-				$create = $db->createSchema($schema);
+				try {
+					$this->layout = 'ajax';
+									
+					App::import('Vendor', 'random_string');
+					
+					Configure::write('Security.salt', random_string(20));
+					Configure::write('Security.cipherSeed', mt_rand());
+					
+					App::import('Model', 'CakeSchema', false);
+			        App::import('Model', 'ConnectionManager');
 							
-				$db->execute($drop);
-				$db->execute($create);
+					/**
+			         * @var DboSource
+			         */
+				    $db = ConnectionManager::getDataSource('default');
 				
-				App::import('Component', 'Auth');
-				$this->Auth = new AuthComponent();
-
-				$this->loadModel('User');
+					$schema =& new CakeSchema(array('name'=>'app'));
+				                
+					$schema = $schema->load();
+	
+					$drop   = $db->dropSchema($schema);
+					$create = $db->createSchema($schema);
+								
+					$db->execute($drop);
+					$db->execute($create);
+					
+					App::import('Component', 'Auth');
+					$this->Auth = new AuthComponent();
+	
+					$this->loadModel('User');
+					
+					$this->User->create();
+					
+					$this->User->save(array(
+						'username' => Configure::read('Install.username'),
+						'password' => $this->Auth->password(Configure::read('Install.password'))
+					
+					));
+					
+					Configure::delete('Install');
+					
+					$this->saveConfiguration();
 				
-				$this->User->create();
+				}
+				catch (Exception $ex) {
 				
-				$this->User->save(array(
-					'username' => Configure::read('Install.username'),
-					'password' => $this->Auth->password(Configure::read('Install.password'))
+				}
 				
-				));
-				
-				Configure::delete('Install');
-				
-				$this->saveConfiguration();
 							
 			}
 			

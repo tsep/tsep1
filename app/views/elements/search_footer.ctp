@@ -1,2 +1,1 @@
 <p><?php __('Powered by'); ?> <a href="http://www.tsep.info/home">The Search Engine Project</a> <?php echo $version?>.
-		<p><?php echo $html->link(__('Administration Control Panel', true), array('controller' => 'profiles', 'admin' => true))?></p>
