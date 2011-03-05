@@ -358,3 +358,9 @@ ul#sidenotes li a:active
   padding:1px;
   background-color:gray;
 }
+
+p.error {
+	background-color:red;
+	color:white;
+	padding:5px;
+}

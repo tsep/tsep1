@@ -119,11 +119,9 @@
 		function install () {
 			
 			$this->set('title_for_layout', __('Performing the Installation', true));
-			
+						
 			if($this->RequestHandler->isAjax()) {
 				
-				
-				try {
 					$this->layout = 'ajax';
 									
 					App::import('Vendor', 'random_string');
@@ -133,6 +131,7 @@
 					
 					App::import('Model', 'CakeSchema', false);
 			        App::import('Model', 'ConnectionManager');
+			        
 							
 					/**
 			         * @var DboSource
@@ -145,14 +144,19 @@
 	
 					$drop   = $db->dropSchema($schema);
 					$create = $db->createSchema($schema);
-								
+					
+																		
 					$db->execute($drop);
 					$db->execute($create);
 					
+					
+					
 					App::import('Component', 'Auth');
 					$this->Auth = new AuthComponent();
+					
 	
 					$this->loadModel('User');
+					
 					
 					$this->User->create();
 					
@@ -162,15 +166,11 @@
 					
 					));
 					
+					
 					Configure::delete('Install');
 					
 					$this->saveConfiguration();
-				
-				}
-				catch (Exception $ex) {
-				
-				}
-				
+								
 							
 			}
 			
