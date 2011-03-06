@@ -24,10 +24,34 @@ class CoreController extends AppController {
 		
 		
 		if($this->RequestHandler->isAjax()) {
+			
+			$this->set('processing', true);
+			
 			//Process the jobs
-		}
-		else {
-			//Display the page
+
+			/*
+			$job = array(
+				'function_name',
+				'params'			
+			);
+			*/
+			
+			App::import('Component', 'Queue');
+			$queue = new QueueComponent();
+			
+			$queue->initialize($this);
+			
+			$job = $queue->getJob();
+			
+			App::import('Vendor', $job['function_name']);
+			
+			$return_job = call_user_func_array($job['function_name'], $job['params']);
+			
+			if($return_job) {
+				$queue->addJob($return_job['function_name'], $return_job['params']);
+			}
+			
+			$this->set('done', $queue->isJob());
 		}
 	}
 	
