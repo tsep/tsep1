@@ -12,9 +12,9 @@
 *
 */
 
-class SearchesController extends AppController {
+class SuggestController extends AppController {
 	
-	var $name = 'Searches';
+	var $name = 'Suggest';
 	var $uses = array('Search');
 	
 	function beforeFilter() {
@@ -30,7 +30,10 @@ class SearchesController extends AppController {
 		$this->set('results', $this->Search->get($phrase));
 	}
 	
-	function add() {
+	/**
+	 * Registers a search phrase
+	 */
+	function regsiter() {
 		
 		$phrase = $this->params['url']['term'];
 				
