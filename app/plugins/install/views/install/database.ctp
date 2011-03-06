@@ -3,7 +3,7 @@
 
 	echo $form->create(); 
 	
-	echo $form->hidden('Database.driver', array('value' => 'mysql'));
+	echo $form->hidden('Database.driver', array('value' => 'mysqli'));
 	echo $form->hidden('Database.persistent', array('value' => false));
 	
 	echo $form->input('Database.host');
