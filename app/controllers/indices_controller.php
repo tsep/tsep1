@@ -333,7 +333,7 @@
 			
 			if(!empty($query)) {
 				
-				$this->Search->add($query);
+				$this->Profile->Search->add($query);
 				
 				$this->paginate = array(
 					'conditions' => array(

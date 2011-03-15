@@ -16,6 +16,8 @@ class Search extends AppModel {
 	
 	var $name = 'Search';
 	
+	var $belongsTo = 'Profile';
+	
 	/**
 	 * Get all the searches that match $phrase
 	 * @param string $phrase The phrase to look for

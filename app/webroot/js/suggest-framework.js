@@ -10,7 +10,7 @@ $(function() {
 					return;
 				}
 
-				lastXhr = $.getJSON( window.base + 'searches/get', request, function( data, status, xhr ) {
+				lastXhr = $.getJSON( window.base + 'suggest/suggest/get', request, function( data, status, xhr ) {
 					
 					cache[ term ] = data;
 					if ( xhr === lastXhr ) {

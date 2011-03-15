@@ -30,10 +30,7 @@ class SuggestController extends AppController {
 		$this->set('results', $this->Search->get($phrase));
 	}
 	
-	/**
-	 * Registers a search phrase
-	 */
-	function regsiter() {
+	function register() {
 		
 		$phrase = $this->params['url']['term'];
 				
