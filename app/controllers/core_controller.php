@@ -24,6 +24,7 @@ class CoreController extends AppController {
 	 */
 	function admin_batch() {
 		
+		//TODO: Cleanup
 		
 		if($this->RequestHandler->isAjax()) {
 			
@@ -40,10 +41,7 @@ class CoreController extends AppController {
 			
 			$this->layout = 'ajax';
 			
-			App::import('Component', 'Queue');
-			$queue = new QueueComponent();
-			
-			$queue->initialize($this);
+			$queue = $this->getQueue();
 			
 			if($queue->isJob()) {
 			

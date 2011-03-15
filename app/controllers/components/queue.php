@@ -17,10 +17,10 @@ class QueueComponent extends Object {
 	
 	var $jobPath;
 	
-	function initialize(&$controller, $settings=array()) {
+	function __construct() {
 		
-		$this->jobPath = TMP.'batch_jobs';
-		
+		$this->jobPath = TMP.'jobs.tmp';
+	
 	}
 	
 	private function _getJobFile () {
@@ -62,13 +62,17 @@ class QueueComponent extends Object {
 		}
 	}
 	
-	function addJob($function_name, array $params) {
+	function addJob($function_name, array $params, $group = 'default') {
 		
 		$job = compact('function_name', 'params');
 				
 		$jobs = $this->_getJobFile();
 		
-		array_push($jobs, $job);
+		if(!isset($jobs[$group])){
+			$jobs[$group] = array();
+		}
+		
+		array_push($jobs[$group], $job);
 		
 		if($this->_saveJobFile($jobs)) {
 			return true;
@@ -78,11 +82,11 @@ class QueueComponent extends Object {
 		}
 	}
 	
-	function isJob () {
+	function isJob ($group = 'default') {
 		
 		$jobs = $this->_getJobFile();
 		
-		if(empty($jobs)) {
+		if(empty($jobs[$group])) {
 			return false;
 		}
 		else {
@@ -90,14 +94,20 @@ class QueueComponent extends Object {
 		}
 	}
 	
-	function getJob () {
+	function getJob ($group = 'default') {
 	
 		$jobs = $this->_getJobFile();
 		
-		$job = array_pop($jobs);
+		if(!empty($jobs[$group])) {
 		
-		$this->_saveJobFile($jobs);
-		
-		return $job;
+			$job = array_pop($jobs[$group]);
+			
+			$this->_saveJobFile($jobs);
+			
+			return $job;
+		}
+		else {
+			return false;
+		}
 	}
 }

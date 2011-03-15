@@ -129,5 +129,23 @@ class AppController extends Controller {
 		
 			file_put_contents(CONFIGS.'settings.php', $code);
     }
+    
+    /**
+     * Gets the Queue object
+     */
+    function getQueue () {
+    	
+    	App::import('Component', 'Queue');
+    	
+    	return new QueueComponent();
+    }
+    
+    /**
+     * Process all objects in the Queue
+     */
+    function processQueue () {
+    
+    	$this->redirect(array('controller' => 'core', 'admin' => true, 'action' => 'batch'), null, true);
+    }
 
 }
