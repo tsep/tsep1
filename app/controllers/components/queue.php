@@ -25,7 +25,7 @@ class QueueComponent extends Object {
 	
 	private function _getJobFile () {
 		
-		$cont = file_get_contents($this->jobPath);
+		$cont = @file_get_contents($this->jobPath);
 		
 		if(empty($cont)) {
 			

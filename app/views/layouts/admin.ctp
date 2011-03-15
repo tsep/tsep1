@@ -12,6 +12,7 @@
 	echo $html->css('niceforms-default');
 	
 	echo $html->script('jquery');
+	echo $html->script('jquery-ui');
 	echo $html->script('jquery-clock');
 	echo $html->script('jquery-confirmation');
 	echo $html->script('accordion');

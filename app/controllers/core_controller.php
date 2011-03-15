@@ -10,6 +10,8 @@
  */
 class CoreController extends AppController {
 	
+	var $uses = array();
+	
 	/**
 	 * Configuration Options
 	 */
@@ -43,19 +45,27 @@ class CoreController extends AppController {
 			
 			$queue->initialize($this);
 			
-			$job = $queue->getJob();
+			if($queue->isJob()) {
 			
-			App::import('Vendor', $job['function_name']);
-			
-			$return_jobs = call_user_func_array($job['function_name'], $job['params']);
-			
-			if(is_array($return_jobs)) {
-				foreach ($return_jobs as $return_job) {
-					$queue->addJob($return_job['function_name'], $return_job['params']);
+				$job = $queue->getJob();
+				
+				App::import('Vendor', $job['function_name']);
+				
+				$return_jobs = call_user_func_array($job['function_name'], $job['params']);
+				
+				if(is_array($return_jobs)) {
+					foreach ($return_jobs as $return_job) {
+						$queue->addJob($return_job['function_name'], $return_job['params']);
+					}
+				}
+				elseif (!$return_jobs) {
+					
+					//Re-queue the job
+					$queue->addJob($job['function_name'], $job['params']);
 				}
 			}
 			
-			$this->set('done', $queue->isJob());
+			$this->set('done', !$queue->isJob());
 		}
 	}
 	
