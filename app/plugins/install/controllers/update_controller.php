@@ -1,5 +1,5 @@
 <?php
-class UpdateController extends UpdateAppController {
+class UpdateController extends InstallAppController {
 	
 	var $uses = array();
 	
@@ -13,8 +13,20 @@ class UpdateController extends UpdateAppController {
 		
 	}
 	
-	function download() {
+	/**
+	 * Executes the update
+	 */
+	function execute() {
 		
+		$queue = $this->getQueue();
+		
+		/* Push the items in BACKWARDS */
+		
+		$queue->addJob('update_database');
+		$queue->addJob('update_install');
+		$queue->addJob('update_download');
+		
+		$this->processQueue();
 		
 	}	
 		

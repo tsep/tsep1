@@ -62,7 +62,7 @@ class QueueComponent extends Object {
 		}
 	}
 	
-	function addJob($function_name, array $params, $group = 'default') {
+	function addJob($function_name, array $params = array(), $group = 'default') {
 		
 		$job = compact('function_name', 'params');
 				
