@@ -1,4 +1,4 @@
-<?php if(!$processing): ?>
+<?php if(!isset($done)): ?>
 	<?php echo $html->script('batch-framework'); ?>
 	
 	<h2>Please Wait</h2>

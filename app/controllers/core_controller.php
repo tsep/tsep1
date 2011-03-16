@@ -15,9 +15,27 @@ class CoreController extends AppController {
 	/**
 	 * Configuration Options
 	 */
-	function admin_settings () {
-	
+	function admin_setting () {
+		
+		if(!empty($this->data)) {
+			
+			Configure::write($this->data['Setting']['key'], $this->data['Setting']['value']);
+			
+			$this->saveConfiguration();
+			
+			$this->Session->setFlash(__('Configuration Updated', true), 'flash_success');
+			
+			$this->redirect(array('controller' => 'core', 'action' => 'setting', 'admin' => true), null, true);
+		}
+		else {
+			
+			$config = (array)Configure::getInstance();
+						
+			$this->set(compact('config'));
+		}
+		
 	}
+	
 	
 	/**
 	 * Process all jobs in the Queue
@@ -27,17 +45,8 @@ class CoreController extends AppController {
 		//TODO: Cleanup
 		
 		if($this->RequestHandler->isAjax()) {
-			
-			$this->set('processing', true);
-			
+						
 			//Process the jobs
-
-			/*
-			$job = array(
-				'function_name',
-				'params'			
-			);
-			*/
 			
 			$this->layout = 'ajax';
 			
@@ -59,7 +68,14 @@ class CoreController extends AppController {
 				elseif (!$return_jobs) {
 					
 					//Re-queue the job
-					$queue->addJob($job['function_name'], $job['params']);
+					$this->Session->setFlash(__('The selected operation failed', true), 'flash_fail');
+					
+					$this->log('Batch operation failed. See debug log for details');
+					Debugger::log($job);
+					
+					$this->set('done', true);
+					
+					return;
 				}
 			}
 			

@@ -40,6 +40,8 @@ Configure::write('ThemeName', 'default');
 
 Configure::write('LimitSuggestions', 5);
 
+Configure::write('JobPath', TMP.'jobs.tmp');
+
 /**
  * CakePHP Debug Level:
  *

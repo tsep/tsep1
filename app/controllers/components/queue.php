@@ -15,17 +15,9 @@
 
 class QueueComponent extends Object {
 	
-	var $jobPath;
-	
-	function __construct() {
-		
-		$this->jobPath = TMP.'jobs.tmp';
-	
-	}
-	
 	private function _getJobFile () {
 		
-		$cont = @file_get_contents($this->jobPath);
+		$cont = @file_get_contents(Configure::read('JobPath'));
 		
 		if(empty($cont)) {
 			
@@ -52,7 +44,7 @@ class QueueComponent extends Object {
 		
 		$cont = serialize($jobs);
 		
-		if(@file_put_contents($this->jobPath, $cont)) {
+		if(@file_put_contents(Configure::read('JobPath'), $cont)) {
 		
 			return true;
 		}

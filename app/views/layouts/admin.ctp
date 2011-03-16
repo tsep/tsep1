@@ -190,7 +190,13 @@
 	                    ?>
 	                    <?php //</li>?>
 	                    <?php //<li><a href="?page=layout">Search Page Layout</a>?>
-	                    <li><?php echo $html->link('Customer Assistance', array( 'controller'=>'help', 'action'=>'index'))?></li>
+	                    <li>
+	                    	<?php echo $html->link('Core', array( 'controller'=>'core', 'action'=>'index', 'admin' => true))?>
+	                    	<ul>
+	                    		<li><?php echo $html->link('Settings', array('controller' => 'core', 'action' => 'setting', 'admin' => true)); ?></li>
+	                    		<li><?php echo $html->link('Troubleshoot', array('controller' => 'core', 'action' => 'troubleshoot','admin' => true)); ?></li>
+	                    	</ul>
+	                    </li>
                     <?php endif; ?>
                     </ul>
                     </div> 
