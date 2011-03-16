@@ -87,7 +87,19 @@ class CoreController extends AppController {
 	 * Submit log, get help, etc
 	 */
 	function admin_troubleshoot () {
-	
+		
+		$log = '';
+		
+		if ($handle = opendir(LOGS)) {
+		    while (false !== ($file = readdir($handle))) {
+		        if ($file != "." && $file != "..") {
+		            $log .= file_get_contents(LOGS.$file);
+		        }
+		    }
+		    closedir($handle);
+		}
+		
+		$this->set(compact('log'));
 	}
 	
 }
