@@ -57,95 +57,79 @@ class IndexerComponent extends Object {
 		else {
 			return false;
 		}
-	}		
-	
-
-	
-	function _run () {
-		
-		if(!$this->_singular()) return false;
-		
-		$this->_begin();
-		
-		if($this->queue->isJob('indexer')) {
-			
-			$job = $this->queue->getJob('indexer');
-			
-			$this->_index($job);
-										
-			return true;			
-		}
-		else {
-			
-			$this->_end();
-			
-			return false;
-		}
-								
 	}
-	
-	/**
-	 * _start
-	 * Starts the queue processor
-	 */
-	function _start() {
+
+	private function _generateAuth () {
 		
-		if(!$this->_singular()) {
-			$this->log('Attempted to start indexer failed (ISSUE #2)');
-			return true;
-		}
-					
 		$randstr = random_string(10);
 		
 		file_put_contents(TMP.'auth.tmp', $randstr);
 		
-		start_script(
-				Router::url(
-					array(
-						'controller' => 'indices',
-						'action' => 'run',
-						'admin' => false, 
-						'?' => array(
-							'auth' => $randstr
-						)
-					),
-					true
-				)
-			);
-			
-			$time = 0;
-			
-			while($this->_singular()) {
-			
-				$time++;
-				
-				if($time > 5) return false;
-				
-				sleep(1);
-			}
-			
-			return true;
+		return $randstr;	
+		
 	}
-
-	/**
-	 * _check
-	 * Checks to see if the async request is valid
-	 */
-	function _check () {
+	
+	private function _verifyAuth ($auth_key) {
 		
 		$auth = @file_get_contents(TMP.'auth.tmp');
-					
-		if(@$this->params['url']['auth'] != $auth) return false;			
+			
+		if($auth_key != $auth) {
+			
+			return false;			
+		}
+		else{
 		
-		@unlink(TMP.'auth.tmp');
-		
-		return true;
+			@unlink(TMP.'auth.tmp');
+			
+			return true;
+		}
 	}
+
+	
+	function _run () {
+		
+		if(!$this->_singular()) {
+			return false;
+		}
+		else {
+			
+			//Register the indexer is running
+			$this->_begin();
+			
+			if($this->queue->isJob('indexer')) {
+				
+				$job = $this->queue->getJob('indexer');
+				
+				$new_job = $this->_index($job);
+				
+				if($new_job) {
+					
+					$this->queue->addJob($new_job['function_name'], $new_job['params']);
+				}
+				
+				$this->_end();
+				
+				return $this->_generateAuth();
+											
+			}
+			else {
+				
+				$this->_end();
+				
+				return false;
+			}
+		}
+								
+	}
+	
+	
+
 	
 	/**
 	 * _index
 	 * Indexes the job given
 	 * @param array $job The Job to index
+	 * @return mixed false on completion, array job to be requeued on incompletion
 	 */
 	function _index($job) {
 											
@@ -159,40 +143,42 @@ class IndexerComponent extends Object {
 
 		$this->log('Loading framework');
 		
-		if (isset($job['crawler']) && isset($job['indexer'])) {
+		$id = $job['function_name'];
+		
+		
+		if (!empty($job['params'])) {
 			
 			//We are resuming 
 			$this->log('Resuming from previous state');
 			
-			$indexer = $job['indexer'];
-			$crawler = $job['crawler'];
+			$indexer = $job['params']['indexer'];
+			$crawler = $job['params']['crawler'];
 			
-			$id = $job['id'];
 		}
 		else {
 			
 			//We are initializing
 			$this->log('Loading dependancies');
 			
-			$profile = $this->Profile->findById($job['id']);				
+			$profile = $this->controller->Profile->findById($id);				
 			
 			if(empty($profile)) {
-				$this->log('Invalid Profile Request. Indexing Failed.');
-				$this->cakeError('error500');
+				
+				$this->log('#0001 Invalid Profile Request. Indexing Failed.');
+				
+				return false;
 			}
 		
-			$stopwords = $this->Stopword->find('all');
+			$stopwords = $this->controller->Stopword->find('all');
 			
 			//TODO: Specify a different user agent for ea. indexing profile
 			
 			$crawler = new TSEPCrawler($profile['Profile']['url'], $profile['Profile']['regex'], Configure::read('UserAgent'));
 			$indexer = new TSEPIndexer($stopwords);
-			
-			$id = $job['id'];
-			
+						
 			$this->log('Deleting indexes');
 			
-			$this->Index->deleteAll(array('Index.profile_id' => $profile['Profile']['id']), false);
+			$this->controller->Index->deleteAll(array('Index.profile_id' => $id), false);
 		}
 		
 		$this->log('Beginning crawl');
@@ -201,7 +187,7 @@ class IndexerComponent extends Object {
 			
 			if($indexer->parse($page)) {
 							
-				$save = $this->Index->create(array(
+				$save = $this->controller->Index->create(array(
 					'Index' => array(
 						'profile_id' => $id,
 						'url' => $page->url,
@@ -210,71 +196,43 @@ class IndexerComponent extends Object {
 				));
 								
 				$this->log('Saving Page');
-				$this->Index->save($save);
+				$this->controller->Index->save($save);
 			
 			}
 
 			if (get_time_left() <= 10) {
 				
-				$this->_shutdown($crawler, $indexer, $id);
-				
-				return true;
+				//Return job to be requeued
+				return array(
+					'function_name' => $id,
+					'params' => array(
+						'crawler' => $crawler,
+						'indexer' => $indexer
+					)
+				);
 			}
 				
 		}
 		
 		$this->log('Indexing Complete');
 		
-		//Check if there is another job to process
-		
-		$this->log('Checking for new jobs');
-		
-		$next = $this->_get();
-		
-		if(!empty($next)) {
-			
-			$this->log('New Job detected');
-				
-			$this->_add($next);
-			$this->end();
-			$this->_start();
-				
-		}
-		
-		return true;
-	}
-	function _shutdown ($crawler, $indexer, $id) {
-		
-		$this->log('Preparing to Restart');
-							
-		$this->queue->addJob($id, array('indexer' => $indexer, 'crawler' => $crawler), 'indexer');
-		
-		$this->log('Restarting');
-		
-		$this->_end();
-		
-		$this->_start();
-		
-		return true;
+		return false;
 	}
 	
-	function processRequest () {
+	function processRequest ($auth_key) {
 		
 		$this->log('Begin Run');
-		
-		ob_start();
-		
-		if (!$this->_check()) {
+				
+		if (!$this->_verifyAuth($auth_key)) {
 			$this->log('Access Violation');
-			$this->cakeError('error403');
+			$this->controller->cakeError('error403');
 			
 			return false;
 		}
 		else {
 			$this->_import();
-			$this->_run();
-			
-			return true;
+						
+			return $this->_run();
 		}		
 	}
 
