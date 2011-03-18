@@ -48,7 +48,7 @@ class AppController extends Controller {
 
 	var $helpers = array('Html', 'Session', 'Js', 'Form', 'Paginator');
 	
-	var $components = array('RequestHandler', 'Session', 'Auth'/*, 'Security'*/);
+	var $components = array('RequestHandler', 'Session', 'Auth', 'Queue');
 	
 	var $view = 'Theme';
 	
@@ -132,6 +132,7 @@ class AppController extends Controller {
     
     /**
      * Gets the Queue object
+     * @deprecated Use $this->Queue instead
      */
     function getQueue () {
     	

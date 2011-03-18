@@ -10,8 +10,21 @@ class IndexerComponent extends Object {
 	/**
 	 * @var QueueComponent
 	 */
-	var $queue;
+	var $Queue;
 	
+	/**
+	 * @var Index
+	 */
+	var $Index;
+	
+	/**
+	 * @var Stopword 
+	 */
+	var $Stopword;
+	
+	var $components = array('Queue');
+	
+	/*
 	//called before Controller::beforeFilter()
 	function initialize(&$controller, $settings = array()) {
 		// saving the controller reference for later use
@@ -19,7 +32,16 @@ class IndexerComponent extends Object {
 		
 		$this->queue = $this->controller->getQueue();
 	}
+	*/
 	
+	function initialize (&$controller, $settings = array()) {
+		
+		$this->controller =& $controller;
+		
+		$this->Index = ClassRegistry::init('Index');
+		$this->Stopword = ClassRegsitry::init('Stopword');
+		$this->Profile = ClassRegistry::init('Profile');
+	}
 	
 	function _import()  {
 		App::import('Vendor', 'html_to_text');		
@@ -160,7 +182,7 @@ class IndexerComponent extends Object {
 			//We are initializing
 			$this->log('Loading dependancies');
 			
-			$profile = $this->controller->Profile->findById($id);				
+			$profile = $this->Profile->findById($id);				
 			
 			if(empty($profile)) {
 				
@@ -178,7 +200,7 @@ class IndexerComponent extends Object {
 						
 			$this->log('Deleting indexes');
 			
-			$this->controller->Index->deleteAll(array('Index.profile_id' => $id), false);
+			$this->Index->deleteAll(array('Index.profile_id' => $id), false);
 		}
 		
 		$this->log('Beginning crawl');
@@ -187,7 +209,7 @@ class IndexerComponent extends Object {
 			
 			if($indexer->parse($page)) {
 							
-				$save = $this->controller->Index->create(array(
+				$save = $this->Index->create(array(
 					'Index' => array(
 						'profile_id' => $id,
 						'url' => $page->url,
@@ -196,7 +218,7 @@ class IndexerComponent extends Object {
 				));
 								
 				$this->log('Saving Page');
-				$this->controller->Index->save($save);
+				$this->Index->save($save);
 			
 			}
 
@@ -219,13 +241,16 @@ class IndexerComponent extends Object {
 		return false;
 	}
 	
+	/**
+	 * Processes the Indexing Queue
+	 * @param string $auth_key The authorization key provided
+	 * @return mixed string on incompletion, false on completion
+	 */
 	function processRequest ($auth_key) {
 		
 		$this->log('Begin Run');
 				
 		if (!$this->_verifyAuth($auth_key)) {
-			$this->log('Access Violation');
-			$this->controller->cakeError('error403');
 			
 			return false;
 		}
@@ -234,6 +259,18 @@ class IndexerComponent extends Object {
 						
 			return $this->_run();
 		}		
+	}
+	
+	/**
+	 * Submit an indexing request
+	 * @param string $id The profile to index
+	 * @return string the auth key
+	 */
+	function submitRequest ($id) {
+		
+		$this->Queue->addJob($id);
+		
+		return $this->_generateAuth();
 	}
 
 }

@@ -12,7 +12,6 @@
 	*
 	*/
 
-	//TODO:Centralize all queue functions into one function
 	class IndicesController extends AppController {
 	
 		var $name = 'Indices';
@@ -22,8 +21,13 @@
 			'Profile',
 			'Search'
 		);
-
-				
+		
+		/**
+		 * @var IndexerComponent
+		 */
+		var $Indexer;
+		
+		var $components = array('Indexer');				
 		
 		
 		function search ($profile = null, $page = null) {
@@ -64,6 +68,25 @@
 			}
 		}
 		
+		function _start($auth_key) {
+			
+			App::import('Vendor', 'start_script');
+						
+			start_script(
+				Router::url(
+					array(
+						'controller' => 'indices',
+						'action' => 'run',
+						'admin' => false, 
+						'?' => array(
+							'auth' => $auth
+						)
+					),
+					true
+				)
+			);
+		}
+		
 		/**
 		 * Processes the indexing queue 
 		 */
@@ -72,30 +95,12 @@
 			$this->log('Begin Run');
 			
 			ob_start();
-
-			App::import('Component', 'Indexer');
-			
-			$this->Indexer = new IndexerComponent();
-			
-			$this->Indexer->initialize($this);
-			
+						
 			$auth = $this->Indexer->processRequest($this->params['url']['auth']);
 			
 			if($auth) { 
 			
-				start_script(
-						Router::url(
-							array(
-								'controller' => 'indices',
-								'action' => 'run',
-								'admin' => false, 
-								'?' => array(
-									'auth' => $auth
-								)
-							),
-							true
-						)
-				);
+				$this->_start($auth);
 			}
 						
 			die();
@@ -105,15 +110,9 @@
 					
 			if (!empty($id)){
 				
-				$queue = $this->getQueue();
+				$auth = $this->Indexer->submitRequest($id);
 
-				$queue->addJob($id);
-				
-				App::import('Vendor', 'start_script');
-				
-				file_put_contents(TMP.'auth.tmp', '');
-				
-				start_script(Router::url(array('controller' => 'indices', 'action' => 'run', 'admin' => false)));
+				$this->_start($auth);
 			} 
 			
 			$this->redirect(array('controller'=>'profiles', 'action' => 'index'), null, true);
