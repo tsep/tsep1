@@ -39,11 +39,11 @@ class IndexerComponent extends Object {
 		$this->controller =& $controller;
 		
 		$this->Index = ClassRegistry::init('Index');
-		$this->Stopword = ClassRegsitry::init('Stopword');
+		$this->Stopword = ClassRegistry::init('Stopword');
 		$this->Profile = ClassRegistry::init('Profile');
 	}
 	
-	function _import()  {
+	private function _import()  {
 		App::import('Vendor', 'html_to_text');		
 		App::import('Vendor','get_time_left');
 		App::import('Vendor', 'resolve_url');
@@ -57,9 +57,9 @@ class IndexerComponent extends Object {
 	 * _begin
 	 * Creates the indexer_running.tmp file
 	 */
-	function _begin() {
+	private function _begin() {
 		
-		register_shutdown_function(array($this, '_end'));
+		register_shutdown_function(array($this, 'end'));
 		
 		$fp = @fopen(TMP.'indexer_running.tmp', 'w');
 		@fclose($fp);
@@ -68,11 +68,20 @@ class IndexerComponent extends Object {
 	 * _end
 	 * removes the indexer_running.tmp file
 	 */
-	function _end () {
+	private function _end () {
 		@unlink(TMP.'indexer_running.tmp');
 	}
 	
-	function _singular () {
+	
+	/**
+	 * Helper function on PHP shutdown
+	 */
+	function end () {
+		$this->_end();
+	}
+	
+	
+	private function _singular () {
 		if(!file_exists(TMP.'indexer_running.tmp')) {
 			return true;
 		}
@@ -82,6 +91,8 @@ class IndexerComponent extends Object {
 	}
 
 	private function _generateAuth () {
+		
+		App::import('Vendor', 'random_string');
 		
 		$randstr = random_string(10);
 		
@@ -108,9 +119,11 @@ class IndexerComponent extends Object {
 	}
 
 	
-	function _run () {
+	private function _run () {
 		
 		if(!$this->_singular()) {
+			$this->log('Singular; Indexing aborted');
+			
 			return false;
 		}
 		else {
@@ -118,15 +131,19 @@ class IndexerComponent extends Object {
 			//Register the indexer is running
 			$this->_begin();
 			
-			if($this->queue->isJob('indexer')) {
+			$this->log('Checking for jobs');
+			
+			if($this->Queue->isJob('indexer')) {
 				
-				$job = $this->queue->getJob('indexer');
+				$job = $this->Queue->getJob('indexer');
+				
+				$this->log('Job found; Processing Job');
 				
 				$new_job = $this->_index($job);
 				
 				if($new_job) {
 					
-					$this->queue->addJob($new_job['function_name'], $new_job['params']);
+					$this->Queue->addJob($new_job['function_name'], $new_job['params'], 'indexer');
 				}
 				
 				$this->_end();
@@ -135,6 +152,8 @@ class IndexerComponent extends Object {
 											
 			}
 			else {
+				
+				$this->log('No jobs found; aborting');
 				
 				$this->_end();
 				
@@ -153,7 +172,7 @@ class IndexerComponent extends Object {
 	 * @param array $job The Job to index
 	 * @return mixed false on completion, array job to be requeued on incompletion
 	 */
-	function _index($job) {
+	private function _index($job) {
 											
 		$this->log('Initializing');
 		
@@ -248,13 +267,17 @@ class IndexerComponent extends Object {
 	 */
 	function processRequest ($auth_key) {
 		
-		$this->log('Begin Run');
+		$this->log('Processing Request');
 				
 		if (!$this->_verifyAuth($auth_key)) {
+			
+			$this->log('Authentication Failed');
 			
 			return false;
 		}
 		else {
+			$this->log('Authentication Success');
+			
 			$this->_import();
 						
 			return $this->_run();
@@ -268,12 +291,11 @@ class IndexerComponent extends Object {
 	 */
 	function submitRequest ($id) {
 		
-		$this->Queue->addJob($id);
+		$this->log('#0002 Request submitted');
+		
+		$this->Queue->addJob($id, array(), 'indexer');
 		
 		return $this->_generateAuth();
 	}
 
-}
-?>
-	
 }

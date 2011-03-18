@@ -79,7 +79,7 @@
 						'action' => 'run',
 						'admin' => false, 
 						'?' => array(
-							'auth' => $auth
+							'auth' => $auth_key
 						)
 					),
 					true
@@ -92,10 +92,11 @@
 		 */
 		function run () {
 			
-			$this->log('Begin Run');
+			$this->log('Run action called.');
 			
 			ob_start();
-						
+			
+					
 			$auth = $this->Indexer->processRequest($this->params['url']['auth']);
 			
 			if($auth) { 
