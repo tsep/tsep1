@@ -14,5 +14,11 @@
 class Index extends AppModel {
 
 	var $name = 'Index';
+	
 	var $belongsTo = 'Profile';
+	
+	/**
+	 * @var Profile
+	 */
+	var $Profile;
 }
