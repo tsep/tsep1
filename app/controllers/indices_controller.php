@@ -15,20 +15,40 @@
 	class IndicesController extends AppController {
 	
 		var $name = 'Indices';
-		var $uses = array(
-			'Index', 
-			'Stopword', 
-			'Profile',
-			'Search'
-		);
+		
+		var $uses = array('Index');
+		
+		var $components = array('Indexer');				
+		
 		
 		/**
 		 * @var IndexerComponent
 		 */
 		var $Indexer;
 		
-		var $components = array('Indexer');				
+		/**
+		 * @var Index
+		 */
+		var $Index;		
 		
+		function _start($auth_key) {
+			
+			App::import('Vendor', 'start_script');
+						
+			start_script(
+				Router::url(
+					array(
+						'controller' => 'indices',
+						'action' => 'run',
+						'admin' => false, 
+						'?' => array(
+							'auth' => $auth_key
+						)
+					),
+					true
+				)
+			);
+		}
 		
 		function search ($profile = null, $page = null) {
 			
@@ -37,11 +57,9 @@
 			//Don't care if the query is empty
 			$query = @$this->params['url']['q'];
 			
-			
-			
 			if(!empty($query)) {
 				
-				$this->Profile->Search->add($query);
+				$this->Index->Profile->Search->add($query);
 				
 				$this->paginate = array(
 					'conditions' => array(
@@ -66,25 +84,6 @@
 			else {
 				$this->set('matches', array());
 			}
-		}
-		
-		function _start($auth_key) {
-			
-			App::import('Vendor', 'start_script');
-						
-			start_script(
-				Router::url(
-					array(
-						'controller' => 'indices',
-						'action' => 'run',
-						'admin' => false, 
-						'?' => array(
-							'auth' => $auth_key
-						)
-					),
-					true
-				)
-			);
 		}
 		
 		/**
