@@ -1,5 +1,5 @@
 <?php 
-/* App schema generated on: 2011-03-06 23:20:12 : 1299450012*/
+/* App schema generated on: 2011-03-18 21:10:11 : 1300479011*/
 class AppSchema extends CakeSchema {
 	var $name = 'App';
 
@@ -31,12 +31,14 @@ class AppSchema extends CakeSchema {
 		'phrase' => array('type' => 'string', 'null' => false, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'count' => array('type' => 'integer', 'null' => false, 'default' => NULL),
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
+		'profile_id' => array('type' => 'integer', 'null' => false, 'default' => NULL),
 		'indexes' => array('id' => array('column' => 'id', 'unique' => 1)),
 		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'MyISAM')
 	);
 	var $stopwords = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
 		'stopword' => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 50, 'key' => 'unique', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'profile_id' => array('type' => 'integer', 'null' => false, 'default' => NULL),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'tsep_stopwords_stopword' => array('column' => 'stopword', 'unique' => 1)),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 	);
