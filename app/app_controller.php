@@ -69,6 +69,11 @@ class AppController extends Controller {
 	 */
 	var $Auth;
 			
+	/**
+	 * @var QueueComponent
+	 */
+	var $Queue;
+	
     function beforeFilter() {
     	parent::beforeFilter();
     	

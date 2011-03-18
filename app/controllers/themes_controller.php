@@ -49,50 +49,10 @@ class ThemesController extends AppController {
 			
 			if (!empty($this->data['Theme']['url'])) {
 				
-				//TODO: fix to not use set_time_limit
+				$this->Queue->addJob('theme_install');
+				$this->Queue->addJob('theme_download', array($this->data['Theme']['url']));
 				
-				set_time_limit(0);
-				
-				if(file_exists(TMP.'theme.zip')) unlink(TMP.'theme.zip');
-				
-				$file_url = $this->data['Theme']['url'];
-				
-				App::import('Vendor', 'download_file');
-				
-				download_file($file_url, TMP.'theme.zip');
-				
-				App::import('Vendor', 'delete_dir');
-				
-				if(is_dir(TMP.'theme')) delete_dir(TMP.'theme');
-								
-				$zip = new ZipArchive();
-								
-				$zip->open(TMP.'theme.zip');
-				$zip->extractTo(TMP.'theme'.DS);
-				$zip->close();
-				
-				unlink(TMP.'theme.zip');
-				
-				if(!file_exists(TMP.'theme'.DS.'theme.ini')) {
-					
-					//NOT a valid theme! Abort.
-					die();
-				}
-				
-				$themeConfig = parse_ini_file(TMP.'theme'.DS.'theme.ini');
-				
-				//TODO: Sanitize theme name
-				
-				App::import('Vendor', 'smart_copy');
-				
-				smart_copy(TMP.'theme'.DS, VIEWS.'themed'.DS.$themeConfig['themeName'].DS);
-				
-				delete_dir(TMP.'theme');
-				
-				//Success!
-				
-				$this->Session->setFlash('Theme Installed', 'flash_success');
-				$this->redirect(array('controller' => 'themes', 'action' => 'index', 'admin' => true), null, true);
+				$this->processQueue();
 			}
 			else {
 				$this->Session->setFlash('Invalid URL.', 'flash_fail');
