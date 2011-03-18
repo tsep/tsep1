@@ -13,33 +13,17 @@ class IndexerComponent extends Object {
 	var $Queue;
 	
 	/**
-	 * @var Index
+	 * @var Profile
 	 */
-	var $Index;
-	
-	/**
-	 * @var Stopword 
-	 */
-	var $Stopword;
+	var $Profile;
+
 	
 	var $components = array('Queue');
-	
-	/*
-	//called before Controller::beforeFilter()
-	function initialize(&$controller, $settings = array()) {
-		// saving the controller reference for later use
-		$this->controller =& $controller;
-		
-		$this->queue = $this->controller->getQueue();
-	}
-	*/
 	
 	function initialize (&$controller, $settings = array()) {
 		
 		$this->controller =& $controller;
 		
-		$this->Index = ClassRegistry::init('Index');
-		$this->Stopword = ClassRegistry::init('Stopword');
 		$this->Profile = ClassRegistry::init('Profile');
 	}
 	
@@ -210,7 +194,7 @@ class IndexerComponent extends Object {
 				return false;
 			}
 		
-			$stopwords = $this->controller->Stopword->find('all');
+			$stopwords = $this->Profile->Stopword->find('all');
 			
 			//TODO: Specify a different user agent for ea. indexing profile
 			
@@ -219,7 +203,7 @@ class IndexerComponent extends Object {
 						
 			$this->log('Deleting indexes');
 			
-			$this->Index->deleteAll(array('Index.profile_id' => $id), false);
+			$this->Profile->Index->deleteAll(array('Index.profile_id' => $id), false);
 		}
 		
 		$this->log('Beginning crawl');
@@ -228,7 +212,7 @@ class IndexerComponent extends Object {
 			
 			if($indexer->parse($page)) {
 							
-				$save = $this->Index->create(array(
+				$save = $this->Profile->Index->create(array(
 					'Index' => array(
 						'profile_id' => $id,
 						'url' => $page->url,
@@ -237,7 +221,7 @@ class IndexerComponent extends Object {
 				));
 								
 				$this->log('Saving Page');
-				$this->Index->save($save);
+				$this->Profile->Index->save($save);
 			
 			}
 

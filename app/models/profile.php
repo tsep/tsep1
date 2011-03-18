@@ -16,7 +16,8 @@ class Profile extends AppModel {
 	var $name = 'Profile';
 	var $hasMany = array(
 		'Index',
-		'Suggest.Search'
+		'Suggest.Search',
+		'Stopword'
 	);
 	var $validate = array(
 		'name' => 'alphaNumeric',
