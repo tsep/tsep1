@@ -32,7 +32,9 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-Configure::write('UpdateURL', 'http://tsep.sourceforge.net/updater/getUpdate.php?'); #Don't forget the question mark!
+Configure::write('UpdateURL', 'http://www.tsep.info/php/update/get.php?'); #Don't forget the question mark!
+
+Configure::write('LogURL', "http://tsep.sourceforge.net/logs/postLog.php");
 
 Configure::write('UserAgent', 'The Search Engine Project (http://www.tsep.info/home)');
 

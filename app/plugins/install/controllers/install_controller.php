@@ -146,10 +146,6 @@
 					$create = $db->createSchema($schema);
 					
 
-					/* 
-					 * CakePHP Bug
-					 * Should be execute()  
-					 */
 					
 					$db->execute($drop);
 					$db->execute($create);

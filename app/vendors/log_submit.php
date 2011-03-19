@@ -16,7 +16,7 @@ function log_submit ($controller) {
 	
 	));
 	
-	$ticket_id = do_post_request("http://tsep.sourceforge.net/logs/postLog.php", $data);
+	$ticket_id = do_post_request(Configure::read('LogURL'), $data);
 	
 	$controller->Session->setFlash('Log submitted; ticket ID:'. $ticket_id, 'flash_success');
 	
