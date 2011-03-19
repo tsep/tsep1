@@ -49,25 +49,19 @@ class CoreController extends AppController {
 			//Process the jobs
 			
 			$this->layout = 'ajax';
+						
+			if($this->Queue->isJob()) {
 			
-			$queue = $this->getQueue();
-			
-			if($queue->isJob()) {
-			
-				$job = $queue->getJob();
+				$job = $this->Queue->getJob();
 				
 				App::import('Vendor', $job['function_name']);
 				
-				$return_jobs = call_user_func_array($job['function_name'], $job['params']);
+				array_push($job['params'], $this);
 				
-				if(is_array($return_jobs)) {
-					foreach ($return_jobs as $return_job) {
-						$queue->addJob($return_job['function_name'], $return_job['params']);
-					}
-				}
-				elseif (!$return_jobs) {
+				$return = call_user_func_array($job['function_name'], $job['params']);
 					
-					//Re-queue the job
+				if (!$return) {
+					
 					$this->Session->setFlash(__('The selected operation failed', true), 'flash_fail');
 					
 					$this->log('Batch operation failed. See debug log for details');
@@ -79,7 +73,7 @@ class CoreController extends AppController {
 				}
 			}
 			
-			$this->set('done', !$queue->isJob());
+			$this->set('done', !$this->Queue->isJob());
 		}
 	}
 	
@@ -88,18 +82,36 @@ class CoreController extends AppController {
 	 */
 	function admin_troubleshoot () {
 		
-		$log = '';
+		App::import('Vendor', 'get_log_contents');
 		
-		if ($handle = opendir(LOGS)) {
-		    while (false !== ($file = readdir($handle))) {
-		        if ($file != "." && $file != "..") {
-		            $log .= file_get_contents(LOGS.$file);
-		        }
-		    }
-		    closedir($handle);
-		}
+		$log = get_log_contents();
 		
 		$this->set(compact('log'));
+		
+		if (!empty($this->data)) {
+						
+			if(!empty($this->data['ClearLogForm'])) {
+				
+				if ($handle = opendir(LOGS)) {
+				    while (false !== ($file = readdir($handle))) {
+				        if ($file != "." && $file != "..") {
+				            file_put_contents(LOGS.$file, '');
+				        }
+				    }
+				    closedir($handle);
+				}
+				
+				$this->redirect('/admin/core/troubleshoot', null, true);
+			}
+			
+			if(!empty($this->data['SubmitLogForm'])) {
+				
+				$this->Queue->addJob('log_submit');
+
+				$this->processQueue('admin/core/troubleshoot');
+			}
+			
+		}
 	}
 	
 }

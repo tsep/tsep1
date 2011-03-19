@@ -13,9 +13,9 @@ class IndexerComponent extends Object {
 	var $Queue;
 	
 	/**
-	 * @var Profile
+	 * @var Index
 	 */
-	var $Profile;
+	var $Index;
 
 	
 	var $components = array('Queue');
@@ -24,7 +24,7 @@ class IndexerComponent extends Object {
 		
 		$this->controller =& $controller;
 		
-		$this->Profile = ClassRegistry::init('Profile');
+		$this->Index = ClassRegistry::init('Index');
 	}
 	
 	private function _import()  {
@@ -158,7 +158,7 @@ class IndexerComponent extends Object {
 	 */
 	private function _index($job) {
 											
-		$this->log('Initializing');
+		$this->log('#0003 Initializing');
 		
 		if (empty($job)) {
 			
@@ -185,7 +185,7 @@ class IndexerComponent extends Object {
 			//We are initializing
 			$this->log('Loading dependancies');
 			
-			$profile = $this->Profile->findById($id);				
+			$profile = $this->Index->Profile->findById($id);				
 			
 			if(empty($profile)) {
 				
@@ -194,7 +194,7 @@ class IndexerComponent extends Object {
 				return false;
 			}
 		
-			$stopwords = $this->Profile->Stopword->find('all');
+			$stopwords = $this->Index->Profile->Stopword->find('all');
 			
 			//TODO: Specify a different user agent for ea. indexing profile
 			
@@ -203,7 +203,7 @@ class IndexerComponent extends Object {
 						
 			$this->log('Deleting indexes');
 			
-			$this->Profile->Index->deleteAll(array('Index.profile_id' => $id), false);
+			$this->Index->deleteAll(array('Index.profile_id' => $id), false);
 		}
 		
 		$this->log('Beginning crawl');
@@ -212,7 +212,7 @@ class IndexerComponent extends Object {
 			
 			if($indexer->parse($page)) {
 							
-				$save = $this->Profile->Index->create(array(
+				$save = $this->Index->create(array(
 					'Index' => array(
 						'profile_id' => $id,
 						'url' => $page->url,
@@ -221,7 +221,7 @@ class IndexerComponent extends Object {
 				));
 								
 				$this->log('Saving Page');
-				$this->Profile->Index->save($save);
+				$this->Index->save($save);
 			
 			}
 

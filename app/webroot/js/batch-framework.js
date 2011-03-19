@@ -1,3 +1,15 @@
+function getParameterByName( name )
+{
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 function process_batch() {
 	
 	$.getJSON(window.base + 'admin/core/batch', function (done) {
@@ -7,7 +19,17 @@ function process_batch() {
 		}
 		else {
 			
-			window.location = window.base + 'admin/';
+			var redirect = getParameterByName('redirect');
+			
+			if(redirect) {
+				
+				window.location = window.base + redirect;
+			}
+			else {
+			
+				window.location =  window.base + 'admin/';
+			
+			}
 		}
 		
 	});

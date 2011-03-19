@@ -149,9 +149,9 @@ class AppController extends Controller {
     /**
      * Process all objects in the Queue
      */
-    function processQueue () {
+    function processQueue ($redirect = '') {
     
-    	$this->redirect(array('controller' => 'core', 'admin' => true, 'action' => 'batch'), null, true);
+    	$this->redirect(array('controller' => 'core', 'admin' => true, 'action' => 'batch', '?' => compact('redirect')), null, true);
     }
 
 }

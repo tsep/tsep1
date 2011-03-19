@@ -6,7 +6,7 @@
 	<i>The selected operations are being performed.</i>
 	
 	<div>
-		<?php echo $html->image('ajax-loader.gif'); ?>
+		<?php echo $html->image('iprogress.gif'); ?>
 	</div>
 <?php else: ?>
 		<?php echo json_encode($done); ?>

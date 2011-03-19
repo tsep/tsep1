@@ -3,18 +3,24 @@
 <textarea rows="10" cols="75" readonly="readonly" wrap="off">
 <?php echo $log?>
 </textarea>
+
+<?php 
+	echo $form->create('SubmitLogForm', array('url' => '/admin/core/troubleshoot'));
+	echo $form->hidden('SubmitLog');
+	echo $form->end('Submit Error Log');
+ 
+	echo $form->create('ClearLogForm', array('url' => '/admin/core/troubleshoot'));
+	echo $form->hidden('ClearLog');
+	echo $form->end('Clear Error Log');
+?>
+
 <h2>Get Support</h2>
+
 <ul>
 	<li>
-		<?php echo $html->link('Submit the Error Log', array('controller'=>'help', 'action'=>'submit'))?> <br />
+		<?php echo $html->link('Visit the Help forum', 'http://www.tsep.info/p/ask', array('target' => '_blank'))?> <br />
 	</li>
 	<li>
-		<?php echo $html->link('Clear the Error Log', array('controller'=>'help', 'action' => 'clean'))?> <br />
-	</li>
-	<li>
-		<?php echo $html->link('Visit the Help forum', 'http://tsep.info/p/help', array('target' => '_blank'))?> <br />
-	</li>
-	<li>
-		<?php echo $html->link('Submit a new Ticket', 'http://tsep.info/p/newticket', array('target' => '_blank'))?> <br />
+		<?php echo $html->link('Submit a new Ticket', 'http://www.tsep.info/p/newticket', array('target' => '_blank'))?> <br />
 	</li>
 </ul>

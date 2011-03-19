@@ -6,9 +6,9 @@
 *
 * The following will be filled automatically by SubVersion!
 * Do not change by hand!
-*  $LastChangedDate$
-*  $LastChangedBy$
-*  $LastChangedRevision$
+*  $LastChangedDate: 2011-02-05 13:12:42 -0600 (Sat, 05 Feb 2011) $
+*  $LastChangedBy: geoffreyfishing@gmail.com $
+*  $LastChangedRevision: 182 $
 *
 */
 
