@@ -114,4 +114,9 @@ class CoreController extends AppController {
 		}
 	}
 	
+	function admin_index () {
+		
+		
+	}
+	
 }

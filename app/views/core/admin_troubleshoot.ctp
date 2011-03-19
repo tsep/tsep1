@@ -18,9 +18,9 @@
 
 <ul>
 	<li>
-		<?php echo $html->link('Visit the Help forum', 'http://www.tsep.info/p/ask', array('target' => '_blank'))?> <br />
+		<?php echo $html->link(__('Visit the Help forum', true), 'http://www.tsep.info/p/ask', array('target' => '_blank'))?> <br />
 	</li>
 	<li>
-		<?php echo $html->link('Submit a new Ticket', 'http://www.tsep.info/p/newticket', array('target' => '_blank'))?> <br />
+		<?php echo $html->link(__('Submit a new Ticket', true), 'http://www.tsep.info/p/newticket', array('target' => '_blank'))?> <br />
 	</li>
 </ul>
