@@ -124,7 +124,14 @@ class CoreController extends AppController {
 			'result'  => PHP_VERSION
 		);
 		
+		$statuses[] = array(
+			'message' => 'TSEP Version',
+			'result' => file_get_contents(CONFIGS.'version.txt')
+		);
 		
+		
+		
+		$this->set(compact('statuses'));		
 	}
 	
 }
