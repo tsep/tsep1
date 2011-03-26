@@ -14,6 +14,18 @@ class UpdateController extends InstallAppController {
 	}
 	
 	/**
+	 * Checks for updates
+	 */
+	function check() {
+		
+		App::import('Vendor', 'update_check');
+		
+		$update = update_check();
+		
+		$this->set(compact('update'));
+	}
+	
+	/**
 	 * Executes the update
 	 */
 	function execute() {

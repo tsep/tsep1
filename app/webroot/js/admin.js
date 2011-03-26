@@ -25,9 +25,9 @@ $(document).ready(function() {
     $('.jclock').jclock();
     
     
-    $.get(window.base + 'update/update/check', function (data) {
+    $.getJSON(window.base + 'install/update/check', function (data) {
     	
-    	if (data == 'no') {
+    	if (!data) {
     		$('#updatePanel').html('No Update');
     	}
     	else {
@@ -35,7 +35,7 @@ $(document).ready(function() {
     		$('#updatePanel').html('');
 
     		$('<a />')
-    			.attr('href', window.base + 'update/update/run')
+    			.attr('href', window.base + 'install/update/execute')
     			.html('Click To Update')
     			.appendTo('#updatePanel');
     		
