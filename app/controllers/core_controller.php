@@ -114,7 +114,15 @@ class CoreController extends AppController {
 		}
 	}
 	
+	// Displays status of installation
 	function admin_index () {
+		
+		$statuses = array();
+		
+		$statuses[] = array(
+			'message' => 'PHP Version',
+			'result'  => PHP_VERSION
+		);
 		
 		
 	}

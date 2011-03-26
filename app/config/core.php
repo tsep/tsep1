@@ -324,6 +324,8 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  *	));
  *
  */
+
+
 	Cache::config('default', array('engine' => 'File'));
 	
 	Cache::config('long', array(  
@@ -331,7 +333,6 @@ Configure::write('JobPath', TMP.'jobs.tmp');
 	    'duration'=> '+1 day',  
 	));
 	
-
 	if(file_exists(CONFIGS.'settings.php'))  {
 		
 		Configure::load('settings');
