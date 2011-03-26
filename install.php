@@ -48,19 +48,18 @@
 	</head>
 	<body>
 	<div id="main">
-		<img alt="Processing" src="http://tsep.sourceforge.net/images/loader.gif" />
-		<h3>Installing The Search Engine Project</h3>
-		<i>Closing your broswer may result in a corrupt installation.</i>
+		<p><b>[OneClick Installer]</b> Installing The Search Engine Project...</p>
+		<img alt="Processing" src="http://www.tsep.info/home/sites/default/files/u/1/iprogress.gif" />
 	</div>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
   <script type="text/javascript">
    $(window).load(function () {setTimeout(
     function install () {
-      $.get('index.php', {install : 'go'}, function (data){
+      $.get(window.location, {install : 'go'}, function (data){
         if(data != 'done')
           install();
         else
-          window.location = 'setup/';
+          window.location.reload();
       });
     }
    ,10)});
@@ -70,6 +69,8 @@
 <?php
 	die(); 	//So we don't have to wrap the install code in an if block
 	}
+	
+	//<functions>
       
 	function downloadFile ($url, $path) {	
 	             $newfname = $path;
@@ -92,7 +93,13 @@
 	            }
 	}
 	
-	$url = 'http://tsep.sourceforge.net/updater/getUpdate.php?version=latest';
+	//</functions>
+	
+	//<variables>
+	
+	$url = 'http://www.tsep.info/php/update/get.php?version=latest';
+	
+	//<variables>
 	
 	if(empty($_SESSION['step']))
 		$_SESSION['step'] = 0;
@@ -106,15 +113,15 @@
 	    	$_SESSION['path'] = $abspath;
 	    	break;
 		case 2:
-			$path = dirname(__FILE__).DIRECTORY_SEPARATOR.'Update.zip';
+			$path = dirname(__FILE__).DIRECTORY_SEPARATOR.'application.update.zip';
 			downloadFile($_SESSION['path'], $path);
 			break;
 		case 3:
 			$zip = new ZipArchive;
-			if ($zip->open(dirname(__FILE__).DIRECTORY_SEPARATOR.'Update.zip') === TRUE) {
+			if ($zip->open(dirname(__FILE__).DIRECTORY_SEPARATOR.'application.update.zip') === TRUE) {
 			    $zip->extractTo(dirname(__FILE__));
 			    $zip->close();
-			    unlink(dirname(__FILE__).DIRECTORY_SEPARATOR.'Update.zip');
+			    unlink(dirname(__FILE__).DIRECTORY_SEPARATOR.'application.update.zip');
 			}
 			echo 'done';
 			break;
