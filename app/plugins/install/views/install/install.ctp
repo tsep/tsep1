@@ -1,4 +1,4 @@
-<?php __('Please wait while the installation is performed.'); ?>
+<p><?php __('Please wait while the installation is performed.'); ?></p>
 
 <?php echo $html->image('iprogress.gif'); ?>
 
