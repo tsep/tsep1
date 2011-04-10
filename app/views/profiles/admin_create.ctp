@@ -17,7 +17,7 @@
 	<dl>
 		<dt>Regular Expression</dt>
 		<dd>
-			<?php echo $form->input('regex',array('label'=>false,'disabled' => 'disabled',))?>
+			<?php echo $form->input('regex',array('label'=>false))?>
 			<em>This field is currently automatically generated.</em>
 		</dd>
 	</dl>
@@ -33,21 +33,3 @@
 <br />
 <b>You must index the new Profile before it will appear in the search results.</b>
 
-<script type="text/javascript">
-	$("#ProfileUrl").change(function () {
-		var value = $(this).val();
-
-		var a = document.createElement('a');
-
-		a.href = value;
-
-		$("#ProfileRegex").val(a.hostname);
-	});
-
-	$("#ProfileAdminCreateForm").submit(function () {
-		$("#ProfileUrl").change();
-		$("#ProfileRegex").attr("disabled","");
-	});
-
-
-</script>

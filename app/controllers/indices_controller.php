@@ -123,7 +123,13 @@
 		 * List all of the indices
 		 */
 		function admin_index() {
-		
+			
+			$this->paginate = array(
+				'limit' => 10
+			);
+			
+			$this->set('indices', $this->paginate('Index'));
+			
 		}
 		
 		/**

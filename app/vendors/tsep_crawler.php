@@ -79,7 +79,7 @@ class TSEPCrawler {
 					
 		//Set the RegEx
 		$this->regex = $regex;
-		
+				
 		//Set the User Agent
 		$this->agent = $agent;
 					
@@ -282,16 +282,10 @@ class TSEPCrawler {
 		foreach ($this->urls as $key => $value) 	
 			if(in_array($value, $this->done))
 				unset($this->urls[$key]);
-		//TODO:Design a user friendly system of creating a regex
-		//Check the RegEx
-		//foreach ($this->urls as $key => $value) 	
-		//	if(!preg_match($this->regex, $value))
-		//		unset($this->urls[$key]);
 		
 		foreach ($this->urls as $key => $value) {
 			//Check that the URL is on the same domain
-			$parsed = parse_url($value);
-			if ($this->regex != @$parsed['host']) 
+			if (!preg_match($this->regex, $value)) 
 				unset($this->urls[$key]);
 
 			//Check that the URL is not mailto
