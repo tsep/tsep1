@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-03-26 19:07+0100\n"
+"POT-Creation-Date: 2011-04-10 23:25+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -20,6 +20,30 @@ msgstr ""
 
 #: \controllers\core_controller.php:65
 msgid "The selected operation failed"
+msgstr ""
+
+#: \controllers\profiles_controller.php:82
+msgid "Profile was not deleted because a valid id was not supplied."
+msgstr ""
+
+#: \controllers\profiles_controller.php:91
+msgid "Failed to delete profile"
+msgstr ""
+
+#: \controllers\profiles_controller.php:96
+msgid "The selected profile has been deleted"
+msgstr ""
+
+#: \controllers\profiles_controller.php:113
+msgid "The profile that you selected to view does not exist"
+msgstr ""
+
+#: \controllers\profiles_controller.php:128
+msgid "Indexing Profile Created"
+msgstr ""
+
+#: \controllers\profiles_controller.php:132
+msgid "Failed to save indexing profile"
 msgstr ""
 
 #: \plugins\install\controllers\install_controller.php:47
@@ -145,6 +169,41 @@ msgstr ""
 msgid "There appears to be a problem with the database."
 msgstr ""
 
+#: \views\indices\admin_index.ctp:1
+msgid "Indices"
+msgstr ""
+
+#: \views\indices\admin_index.ctp:6
+msgid "Index"
+msgstr ""
+
+#: \views\indices\admin_index.ctp:7
+#: \views\stopwords\admin_index.ctp:7
+msgid "Delete"
+msgstr ""
+
+#: \views\indices\admin_index.ctp:12
+msgid "Indices in the database are listed above."
+msgstr ""
+
+#: \views\indices\admin_index.ctp:41
+msgid "There are no indices in the database."
+msgstr ""
+
+#: \views\indices\admin_index.ctp:48
+#: \views\stopwords\admin_index.ctp:48
+msgid "&laquo; Previous"
+msgstr ""
+
+#: \views\indices\admin_index.ctp:49
+#: \views\stopwords\admin_index.ctp:49
+msgid "Next &raquo;"
+msgstr ""
+
+#: \views\indices\admin_index.ctp:52
+msgid "Add an index"
+msgstr ""
+
 #: \views\indices\search.ctp:21
 msgid "No Results"
 msgstr ""
@@ -170,6 +229,7 @@ msgid "View all"
 msgstr ""
 
 #: \views\layouts\admin.ctp:107
+#: \views\stopwords\admin_index.ctp:1
 msgid "Stopwords"
 msgstr ""
 
@@ -191,6 +251,22 @@ msgstr ""
 
 #: \views\stopwords\admin_add.ctp:20
 msgid "Note that the stopword will not take effect until the next indexer run."
+msgstr ""
+
+#: \views\stopwords\admin_index.ctp:6
+msgid "Stopword"
+msgstr ""
+
+#: \views\stopwords\admin_index.ctp:12
+msgid "Stopwords in the database are listed above."
+msgstr ""
+
+#: \views\stopwords\admin_index.ctp:41
+msgid "There are no stopwords in the database."
+msgstr ""
+
+#: \views\stopwords\admin_index.ctp:52
+msgid "Add a stopword"
 msgstr ""
 
 #: \webroot\test.php:88

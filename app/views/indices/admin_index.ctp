@@ -1,4 +1,4 @@
-<h2>Stopwords</h2>
+<h2><?php __('Indices'); ?></h2>
 <table id="rounded-corner" summary="Current Indexes">
     <thead>
     	<tr>
