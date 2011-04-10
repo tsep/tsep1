@@ -65,14 +65,9 @@ class ThemesController extends AppController {
 		
 		//TODO:Add security
 		
-		App::import('Vendor', 'delete_dir');
+		$this->Queue->addJob('theme_delete', array($name));
 		
-		delete_dir(VIEWS.'themed'.DS.$name);
-		
-		$this->Session->setFlash('Theme Deleted', 'flash_success');
-		
-		$this->redirect(array('controller' => 'themes', 'action' => 'index', 'admin' => true));
-		
+		$this->processQueue('admin/themes');
 	}
 	
 	function admin_activate($name) {

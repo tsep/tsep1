@@ -129,7 +129,10 @@ class CoreController extends AppController {
 			'result' => file_get_contents(CONFIGS.'version.txt')
 		);
 		
-		
+		$statuses[] = array(
+			'message' => 'Loaded Apache Modules',
+			'result' => '<ul><li>'.implode('</li><li>', apache_get_modules()).'</li></ul>'
+		);
 		
 		$this->set(compact('statuses'));		
 	}

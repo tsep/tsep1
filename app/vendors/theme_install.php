@@ -22,16 +22,17 @@ function theme_install() {
 		
 		return false;
 	}
-	
-	$theme_config = parse_ini_file(TMP.'theme'.DS.'theme.ini');
-	
-	//TODO: Sanitize theme name
-	
-	App::import('Vendor', 'smart_copy');
-	
-	smart_copy(TMP.'theme'.DS, VIEWS.'themed'.DS.$theme_config['themeName'].DS);
-	
-	delete_dir(TMP.'theme');
-	
-	return true;
+	else {
+		$theme_config = parse_ini_file(TMP.'theme'.DS.'theme.ini');
+		
+		//TODO: Sanitize theme name
+		
+		App::import('Vendor', 'smart_copy');
+		
+		smart_copy(TMP.'theme'.DS, VIEWS.'themed'.DS.$theme_config['name'].DS);
+		
+		delete_dir(TMP.'theme');
+		
+		return true;
+	}
 }

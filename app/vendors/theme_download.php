@@ -6,7 +6,7 @@ function theme_download ($theme_url) {
 	
 	App::import('Vendor', 'download_file');
 				
-	download_file($file_url, TMP.'theme.zip');
+	download_file($theme_url, TMP.'theme.zip');
 	
 	return true;
 }

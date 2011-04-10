@@ -3,9 +3,9 @@
 	
 	<h2>Please Wait</h2>
 	
-	<i>The selected operations are being performed.</i>
+	<i id="information_bar">The selected operations are being performed.</i>
 	
-	<div>
+	<div id="progress_bar">
 		<?php echo $html->image('iprogress.gif'); ?>
 	</div>
 <?php else: ?>
