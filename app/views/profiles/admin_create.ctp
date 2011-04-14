@@ -17,8 +17,9 @@
 	<dl>
 		<dt>Regular Expression</dt>
 		<dd>
-			<?php echo $form->input('regex',array('label'=>false))?>
-			<em>This field is currently automatically generated.</em>
+			<?php echo $form->input('regex',array('label'=>false, 'id' => 'regex'))?> 	
+			<a href="javascript:void(0)" id="regexLink">Generate Regex</a>
+			<em>The regular expression that URLs must match.</em>
 		</dd>
 	</dl>
 </fieldset>
@@ -33,3 +34,12 @@
 <br />
 <b>You must index the new Profile before it will appear in the search results.</b>
 
+<script type="text/javascript">
+
+	$('#regexLink').click(function (){
+
+		window.open( window.base + 'files/regexgen.html' );
+		
+	});
+
+</script>
