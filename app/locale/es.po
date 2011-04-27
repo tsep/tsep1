@@ -1,0 +1,280 @@
+# Spanish translation for tsep
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the tsep package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tsep\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-04-10 23:25+0200\n"
+"PO-Revision-Date: 2011-03-08 01:54+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2011-04-27 05:47+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
+
+#: \controllers\core_controller.php:26
+msgid "Configuration Updated"
+msgstr ""
+
+#: \controllers\core_controller.php:65
+msgid "The selected operation failed"
+msgstr ""
+
+#: \controllers\profiles_controller.php:82
+msgid "Profile was not deleted because a valid id was not supplied."
+msgstr ""
+
+#: \controllers\profiles_controller.php:91
+msgid "Failed to delete profile"
+msgstr ""
+
+#: \controllers\profiles_controller.php:96
+msgid "The selected profile has been deleted"
+msgstr ""
+
+#: \controllers\profiles_controller.php:113
+msgid "The profile that you selected to view does not exist"
+msgstr ""
+
+#: \controllers\profiles_controller.php:128
+msgid "Indexing Profile Created"
+msgstr ""
+
+#: \controllers\profiles_controller.php:132
+msgid "Failed to save indexing profile"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:47
+msgid "Welcome"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:75
+msgid "Database Configuration"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:90
+msgid "Connection to the database established."
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:95
+msgid "Could not connect to database."
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:121
+msgid "Performing the Installation"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:185
+msgid "Thanks for installing"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:1
+msgid "Please enter the database settings below."
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:15
+#: \plugins\install\views\install\settings.ctp:12
+msgid "Next"
+msgstr ""
+
+#: \plugins\install\views\install\finish.ctp:1
+msgid "Thank you installing The Search Engine Project on your site."
+msgstr ""
+
+#: \plugins\install\views\install\finish.ctp:3
+msgid "To read the documenation, click here."
+msgstr ""
+
+#: \plugins\install\views\install\finish.ctp:5
+msgid "Click here to proceed to the ACP."
+msgstr ""
+
+#: \plugins\install\views\install\index.ctp:1
+msgid "Welcome to The Search Engine Project. Select your language to begin."
+msgstr ""
+
+#: \plugins\install\views\install\install.ctp:1
+msgid "Please wait while the installation is performed."
+msgstr ""
+
+#: \plugins\install\views\install\settings.ctp:1
+msgid "Enter the initial configuration settings."
+msgstr ""
+
+#: \plugins\install\views\install\settings.ctp:6
+msgid "Enter the details for the administrator below."
+msgstr ""
+
+#: \views\core\admin_setting.ctp:1
+msgid "TSEP Configuration"
+msgstr ""
+
+#: \views\core\admin_setting.ctp:2
+msgid ""
+"Warning: for advanced users only! Entering incorrect values may corrupt your "
+"installation."
+msgstr ""
+
+#: \views\core\admin_setting.ctp:7
+msgid "Key:"
+msgstr ""
+
+#: \views\core\admin_setting.ctp:11
+msgid "Value:"
+msgstr ""
+
+#: \views\core\admin_troubleshoot.ctp:21
+msgid "Visit the Help forum"
+msgstr ""
+
+#: \views\core\admin_troubleshoot.ctp:24
+msgid "Submit a new Ticket"
+msgstr ""
+
+#: \views\elements\search_footer.ctp:1
+msgid "Powered by"
+msgstr ""
+
+#: \views\elements\search_form.ctp:12
+#: \views\elements\search_menu.ctp:2
+msgid "Search"
+msgstr ""
+
+#: \views\errors\error_403.ctp:1
+msgid "403 Access Denied"
+msgstr ""
+
+#: \views\errors\error_403.ctp:3
+#: \views\errors\missing_action.ctp:3
+#: \views\errors\missing_controller.ctp:3
+#: \views\errors\missing_table.ctp:3
+msgid "Error:"
+msgstr ""
+
+#: \views\errors\error_403.ctp:4
+msgid "You are Not Allowed to Access This Page"
+msgstr ""
+
+#: \views\errors\missing_action.ctp:1
+#: \views\errors\missing_controller.ctp:1
+msgid "404 Not Found"
+msgstr ""
+
+#: \views\errors\missing_action.ctp:4
+#: \views\errors\missing_controller.ctp:4
+msgid "The URL that you entered could not be found."
+msgstr ""
+
+#: \views\errors\missing_table.ctp:4
+msgid "There appears to be a problem with the database."
+msgstr ""
+
+#: \views\indices\admin_index.ctp:1
+msgid "Indices"
+msgstr ""
+
+#: \views\indices\admin_index.ctp:6
+msgid "Index"
+msgstr ""
+
+#: \views\indices\admin_index.ctp:7
+#: \views\stopwords\admin_index.ctp:7
+msgid "Delete"
+msgstr ""
+
+#: \views\indices\admin_index.ctp:12
+msgid "Indices in the database are listed above."
+msgstr ""
+
+#: \views\indices\admin_index.ctp:41
+msgid "There are no indices in the database."
+msgstr ""
+
+#: \views\indices\admin_index.ctp:48
+#: \views\stopwords\admin_index.ctp:48
+msgid "&laquo; Previous"
+msgstr ""
+
+#: \views\indices\admin_index.ctp:49
+#: \views\stopwords\admin_index.ctp:49
+msgid "Next &raquo;"
+msgstr ""
+
+#: \views\indices\admin_index.ctp:52
+msgid "Add an index"
+msgstr ""
+
+#: \views\indices\search.ctp:21
+msgid "No Results"
+msgstr ""
+
+#: \views\layouts\admin.ctp:39
+msgid "Visit Site"
+msgstr ""
+
+#: \views\layouts\admin.ctp:39
+msgid "Logout"
+msgstr ""
+
+#: \views\layouts\admin.ctp:65
+msgid "Profiles"
+msgstr ""
+
+#: \views\layouts\admin.ctp:67
+msgid "New IProfile"
+msgstr ""
+
+#: \views\layouts\admin.ctp:68;109;116
+msgid "View all"
+msgstr ""
+
+#: \views\layouts\admin.ctp:107
+#: \views\stopwords\admin_index.ctp:1
+msgid "Stopwords"
+msgstr ""
+
+#: \views\layouts\admin.ctp:110;117
+msgid "Add new"
+msgstr ""
+
+#: \views\layouts\admin.ctp:114
+msgid "Themes"
+msgstr ""
+
+#: \views\stopwords\admin_add.ctp:1
+msgid "Add a New Stopword"
+msgstr ""
+
+#: \views\stopwords\admin_add.ctp:7
+msgid "Stopword name:"
+msgstr ""
+
+#: \views\stopwords\admin_add.ctp:20
+msgid ""
+"Note that the stopword will not take effect until the next indexer run."
+msgstr ""
+
+#: \views\stopwords\admin_index.ctp:6
+msgid "Stopword"
+msgstr ""
+
+#: \views\stopwords\admin_index.ctp:12
+msgid "Stopwords in the database are listed above."
+msgstr ""
+
+#: \views\stopwords\admin_index.ctp:41
+msgid "There are no stopwords in the database."
+msgstr ""
+
+#: \views\stopwords\admin_index.ctp:52
+msgid "Add a stopword"
+msgstr ""
+
+#: \webroot\test.php:88
+msgid "Debug setting does not allow access to this url."
+msgstr ""
