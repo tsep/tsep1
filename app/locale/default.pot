@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-04-10 23:25+0200\n"
+"POT-Creation-Date: 2011-04-30 06:31+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -204,6 +204,23 @@ msgstr ""
 msgid "Add an index"
 msgstr ""
 
+#: \views\indices\admin_view.ctp:1
+msgid "View Index"
+msgstr ""
+
+#: \views\indices\admin_view.ctp:5
+msgid "Name:"
+msgstr ""
+
+#: \views\indices\admin_view.ctp:9
+#: \views\profiles\admin_view.ctp:9
+msgid "URL:"
+msgstr ""
+
+#: \views\indices\admin_view.ctp:13
+msgid "Regular Expression"
+msgstr ""
+
 #: \views\indices\search.ctp:21
 msgid "No Results"
 msgstr ""
@@ -239,6 +256,22 @@ msgstr ""
 
 #: \views\layouts\admin.ctp:114
 msgid "Themes"
+msgstr ""
+
+#: \views\profiles\admin_view.ctp:1
+msgid "View Indexing Profile"
+msgstr ""
+
+#: \views\profiles\admin_view.ctp:5
+msgid "Id:"
+msgstr ""
+
+#: \views\profiles\admin_view.ctp:13
+msgid "Text:"
+msgstr ""
+
+#: \views\profiles\admin_view.ctp:17
+msgid "Profile Id:"
 msgstr ""
 
 #: \views\stopwords\admin_add.ctp:1
