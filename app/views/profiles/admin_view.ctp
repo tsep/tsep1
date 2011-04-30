@@ -1,17 +1,20 @@
-<h2>View Indexing Profile</h2>
+<h2><?php __('View Indexing Profile'); ?></h2>
 
 <fieldset>
 	<dl>
-		<dt>Name:</dt>
-		<dd><span><?php echo $profile['Profile']['name']?></span></dd>
+		<dt><?php __('Id:'); ?></dt>
+		<dd><span><?php echo $index['Index']['id']; ?></span></dd>
 	</dl>
 	<dl>
-		<dt>URL:</dt>
-		<dd><span><?php echo $profile['Profile']['url']?></span></dd>
+		<dt><?php __('URL:'); ?></dt>
+		<dd><span><?php echo $index['Index']['url']; ?></span></dd>
 	</dl>
 	<dl>
-		<dt>Regular Expression</dt>
-		<dd><span><?php echo $profile['Profile']['regex']?></span></dd>
+		<dt><?php __('Text:'); ?></dt>
+		<dd><span><?php echo $index['Index']['text']; ?></span></dd>
+	</dl>
+	<dl>
+		<dt><?php __('Profile Id:'); ?></dt>
+		<dd><span><?php echo $index['Index']['profile_id']; ?></span></dd>
 	</dl>
 </fieldset>
-<h2><?php echo $html->link('Index this profile',array('controller'=>'indices','action' =>'start','admin'=>true,$profile['Profile']['id']))?></h2>
