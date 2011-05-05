@@ -120,7 +120,7 @@ class I18n extends Object {
  */
 	function translate($singular, $plural = null, $domain = null, $category = 6, $count = null) {
 		$_this =& I18n::getInstance();
-		
+
 		if (strpos($singular, "\r\n") !== false) {
 			$singular = str_replace("\r\n", "\n", $singular);
 		}
@@ -284,6 +284,7 @@ class I18n extends Object {
 			foreach ($this->l10n->languagePath as $lang) {
 				$file = $directory . $lang . DS . $this->category . DS . $domain;
 				$localeDef = $directory . $lang . DS . $this->category;
+				$lpfile = $directory . $lang; //Launchpad-translations file
 
 				if ($core) {
 					$app = $directory . $lang . DS . $this->category . DS . 'core';
@@ -305,6 +306,10 @@ class I18n extends Object {
 					$this->__loadMo($fn, $domain);
 					$this->__noLocale = false;
 					break 2;
+				} elseif (file_exists($fn = "$lpfile.po") && ($f = fopen($fn, "r"))) {
+				    $this->__loadPo($f, $domain); //Launchpad-translations
+				    $this->__noLocale = false;
+				    break 2;
 				} elseif (file_exists($fn = "$file.po") && ($f = fopen($fn, "r"))) {
 					$this->__loadPo($f, $domain);
 					$this->__noLocale = false;
