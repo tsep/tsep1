@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-04-30 06:31+0200\n"
+"POT-Creation-Date: 2011-05-05 03:30+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -218,6 +218,8 @@ msgid "URL:"
 msgstr ""
 
 #: \views\indices\admin_view.ctp:13
+#: \views\profiles\admin_create.ctp:18
+#: \views\profiles\admin_edit.ctp:18
 msgid "Regular Expression"
 msgstr ""
 
@@ -256,6 +258,51 @@ msgstr ""
 
 #: \views\layouts\admin.ctp:114
 msgid "Themes"
+msgstr ""
+
+#: \views\profiles\admin_create.ctp:1
+msgid "Create a New Indexing Profile"
+msgstr ""
+
+#: \views\profiles\admin_create.ctp:7
+#: \views\profiles\admin_edit.ctp:7
+msgid "Profile Name"
+msgstr ""
+
+#: \views\profiles\admin_create.ctp:11
+#: \views\profiles\admin_edit.ctp:11
+msgid "Start URL"
+msgstr ""
+
+#: \views\profiles\admin_create.ctp:14
+#: \views\profiles\admin_edit.ctp:14
+msgid "The URL to the document root of your website."
+msgstr ""
+
+#: \views\profiles\admin_create.ctp:21
+#: \views\profiles\admin_edit.ctp:21
+msgid "Generate Regular Expression"
+msgstr ""
+
+#: \views\profiles\admin_create.ctp:22
+#: \views\profiles\admin_edit.ctp:22
+msgid "The regular expression that URLs must match."
+msgstr ""
+
+#: \views\profiles\admin_create.ctp:31
+msgid "Create Profile"
+msgstr ""
+
+#: \views\profiles\admin_create.ctp:35
+msgid "You must index the new Profile before it will appear in the search results."
+msgstr ""
+
+#: \views\profiles\admin_edit.ctp:1
+msgid "Edit Indexing Profile"
+msgstr ""
+
+#: \views\profiles\admin_edit.ctp:33
+msgid "Submit changes"
 msgstr ""
 
 #: \views\profiles\admin_view.ctp:1
