@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tsep\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-10 23:25+0200\n"
+"POT-Creation-Date: 2011-04-30 06:31+0200\n"
 "PO-Revision-Date: 2011-04-10 13:37+0000\n"
 "Last-Translator: zeugma <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-27 05:47+0000\n"
+"X-Launchpad-Export-Date: 2011-05-01 06:04+0000\n"
 "X-Generator: Launchpad (build 12758)\n"
 
 #: \controllers\core_controller.php:26
@@ -209,6 +209,23 @@ msgstr ""
 msgid "Add an index"
 msgstr ""
 
+#: \views\indices\admin_view.ctp:1
+msgid "View Index"
+msgstr ""
+
+#: \views\indices\admin_view.ctp:5
+msgid "Name:"
+msgstr ""
+
+#: \views\indices\admin_view.ctp:9
+#: \views\profiles\admin_view.ctp:9
+msgid "URL:"
+msgstr ""
+
+#: \views\indices\admin_view.ctp:13
+msgid "Regular Expression"
+msgstr ""
+
 #: \views\indices\search.ctp:21
 msgid "No Results"
 msgstr "Sonuç Yok"
@@ -245,6 +262,22 @@ msgstr "Yeni ekle"
 #: \views\layouts\admin.ctp:114
 msgid "Themes"
 msgstr "Temalar"
+
+#: \views\profiles\admin_view.ctp:1
+msgid "View Indexing Profile"
+msgstr ""
+
+#: \views\profiles\admin_view.ctp:5
+msgid "Id:"
+msgstr ""
+
+#: \views\profiles\admin_view.ctp:13
+msgid "Text:"
+msgstr ""
+
+#: \views\profiles\admin_view.ctp:17
+msgid "Profile Id:"
+msgstr ""
 
 #: \views\stopwords\admin_add.ctp:1
 msgid "Add a New Stopword"
