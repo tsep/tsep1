@@ -1,46 +1,45 @@
-<h2>Edit Indexing Profile</h2>
-<?php 
+<h2><?php __('Edit Indexing Profile'); ?></h2>
+<?php
 	echo $form->create('Profile');
 ?>
 <fieldset>
 	<dl>
-		<dt>Profile Name</dt>
+		<dt><?php __('Profile Name'); ?></dt>
 		<dd><?php echo $form->input('name',array('value' => $profile['Profile']['name'], 'label'=> false))?></dd>
 	</dl>
 	<dl>
-		<dt>Start URL</dt>
-		<dd><?php echo $form->input('url',array('value' => $profile['Profile']['url'], 'label'=> false))?></dd>
+		<dt><?php __('Start URL'); ?></dt>
+		<dd>
+		    <?php echo $form->input('url',array('value' => $profile['Profile']['url'], 'label'=> false))?>
+			<em><?php __('The URL to the document root of your website.'); ?></em>
+		</dd>
 	</dl>
 	<dl>
-		<dt>Regular Expression</dt>
-		<dd><?php echo $form->input('regex',array('value' => $profile['Profile']['regex'],'disabled' => 'disabled', 'label'=>false))?></dd>
+		<dt><?php __('Regular Expression'); ?></dt>
+		<dd>
+		    <?php echo $form->input('regex',array('value' => $profile['Profile']['regex'],'disabled' => 'disabled', 'label'=>false, 'id' => 'regex'))?>
+			<a href="#" id="regexLink"><?php __('Generate Regular Expression'); ?></a>
+			<em><?php __('The regular expression that URLs must match.'); ?></em>
+		</dd>
 	</dl>
 	<?php echo $form->input('id', array('value' => $profile['Profile']['id'], 'type' => 'hidden', 'label' => false))?>
-	
+
 </fieldset>
-<?php 
+<?php
 	echo $form->end(array(
 		'div'=> array(
 			'class' => 'button'
 		),
-		'label' => 'Submit changes'
+		'label' => __('Submit changes', true)
 	));
 ?>
 
 <script type="text/javascript">
-	$("#ProfileUrl").change(function () {
-		var value = $(this).val();
 
-		var a = document.createElement('a');
+	$('#regexLink').click(function (){
 
-		a.href = value;
+		window.open( window.base + 'profiles/regex' );
 
-		$("#ProfileRegex").val(a.hostname);
-	});
-
-	$("#ProfileAdminEditForm").submit(function () {
-		$("#ProfileUrl").change();
-		$("#ProfileRegex").attr("disabled","");
 	});
 
 </script>

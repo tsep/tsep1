@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns = "http://www.w3.org/1999/xhtml">
-			
+
 			<head profile="http://www.w3.org/2005/10/profile">
 
               <title>Regular Expression Generator</title>
@@ -10,12 +10,14 @@
 
 <body id="toolPage">
 
-	  <script type="text/javascript" src="../js/jquery.js"></script>
-	
-  <script type="text/javascript" src="../js/regex.js"></script>
-  <script type="text/javascript" src="../js/regexpage.js"></script>
+<?php
 
-  
+//TODO: Clean-up page.
+
+    echo $html->script('jquery');
+    echo $html->script('regex');
+    echo $html->script('regexpage');
+?>
 
     <div id="content" class="content">
 
@@ -32,10 +34,10 @@
         </div>
 
       </noscript>
-		
+
 		Please create the regular expression for the URL to match to and then press submit.
 
-    </div>      
+    </div>
 
   </body>
 
