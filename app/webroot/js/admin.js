@@ -24,23 +24,24 @@ window.loading = false;
 $(document).ready(function() {
     $('.jclock').jclock();
     
-    
-    $.getJSON(window.base + 'install/update/check', function (data) {
-    	
-    	if (!data) {
-    		$('#updatePanel').html('No Update');
-    	}
-    	else {
-
-    		$('#updatePanel').html('');
-
-    		$('<a />')
-    			.attr('href', window.base + 'install/update/execute')
-    			.html('Click To Update')
-    			.appendTo('#updatePanel');
-    		
-    	}
-    });
+    if($('#updatePanel').length != 0) {
+	    $.getJSON(window.base + 'install/update/check', function (data) {
+	    	
+	    	if (!data) {
+	    		$('#updatePanel').html(window.translations.noUpdateAvaliable);
+	    	}
+	    	else {
+	
+	    		$('#updatePanel').html('');
+	
+	    		$('<a />')
+	    			.attr('href', window.base + 'install/update/execute')
+	    			.html('Click To Update')
+	    			.appendTo('#updatePanel');
+	    		
+	    	}
+	    });
+	}
     
 
     $('.ask').jConfirmAction();

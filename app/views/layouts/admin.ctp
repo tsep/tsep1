@@ -5,12 +5,13 @@
 <title><?php echo $title_for_layout?></title>
 <script type="text/javascript">
   window.base = <?php echo json_encode($html->url('/'))?>;
+  window.translations.noUpdateAvaliable = <?php echo json_encode(__('No update avaliable', true)); ?>
 </script>
-<?php 
-	
+<?php
+
 	echo $html->css('admin-panel');
 	echo $html->css('niceforms-default');
-	
+
 	echo $html->script('jquery');
 	echo $html->script('jquery-ui');
 	echo $html->script('jquery-clock');
@@ -19,36 +20,52 @@
 	//echo $html->script('niceforms');
 	echo $html->script('admin');
 
-	echo $scripts_for_layout 
-	
+	echo $scripts_for_layout
+
 ?>
 </head>
 <body>
 <div id="main_container">
 
     <div class="header">
-    <div class="logo"><?php echo $html->link( 
+    <div class="logo"><?php echo $html->link(
   $html->image("logo.gif",
     array('border' => '0')
-  ), 
-  '/', 
+  ),
+  '/',
   array('escape' => false))?></div>
-    
+
     <div class="right_header">
     	<?php if($user): ?>
-    		<?php echo $html->link(__('Visit Site', true), array('controller'=>'indices', 'action'=>'search', 'admin'=>false))?> | <?php //<a href="#" class="messages">(3) Messages</a>?><span id="updatePanel">Loading...</span> | <?php echo $html->link(__('Logout', true), array('controller' => 'users' , 'action' => 'logout'), array('class' => 'logout')) ?>
+    		<?php echo $html->link(__('Visit Site', true), array('controller'=>'indices', 'action'=>'search', 'admin'=>false))?>
+    		 |
+    		<?php if($update_needed): ?>
+				<span id="updatePanel"><?php __('Loading...'); ?></span>
+			<?php else: ?>
+				<?php __('No update avaliable'); ?>
+			<?php endif; ?>
+			 |
+			<?php
+			    if($indexer_running):
+			        echo 'Indexing in progress';
+			    else:
+			        echo 'Indexer ready';
+			    endif;
+			?>
+			 |
+			<?php echo $html->link(__('Logout', true), array('controller' => 'users' , 'action' => 'logout'), array('class' => 'logout')) ?>
    		<?php endif; ?>
    	</div>
     <div class="jclock"></div>
     </div>
-    
+
     <div class="main_content">
-    
+
                     <div class="menu">
                     <ul>
                     <?php if($user): ?>
 	                    <?php //<li><?php echo $html->link('Index Site', array('controller'=>'indexer', 'action'=>'index'))?>
-	                    <?php 
+	                    <?php
 	                    /*
 	                    <!--[if lte IE 6]><table><tr><td><![endif]-->
 	                        <ul>
@@ -69,7 +86,7 @@
 	                    	</ul>
 	                    </li>
 	                    <?php //<li><?php echo $html->link('Create a New IProfile', array('controller'=>'profiles', 'action'=>'create'))?>
-	                    <?php 
+	                    <?php
 	                    /*
 	                    <!--[if lte IE 6]><table><tr><td><![endif]-->
 	                        <ul>
@@ -82,7 +99,7 @@
 	                                <li><a href="" title="">sublevel link</a></li>
 	                                <li><a href="" title="">sulevel link</a></li>
 	                                <li><a class="sub2" href="#nogo">sublevel3<!--[if IE 7]><!--></a><!--<![endif]-->
-	                        
+
 	                                <!--[if lte IE 6]><table><tr><td><![endif]-->
 	                                    <ul>
 	                                        <li><a href="#nogo">Third level-1</a></li>
@@ -90,14 +107,14 @@
 	                                        <li><a href="#nogo">Third level-3</a></li>
 	                                        <li><a href="#nogo">Third level-4</a></li>
 	                                    </ul>
-	                        
+
 	                                <!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	                                </li>
 	                                <li><a href="" title="">sulevel link</a></li>
 	                            </ul>
 	                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	                        </li>
-	                    
+
 	                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
 	                        </ul>
 	                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
@@ -118,7 +135,7 @@
 	                    	</ul>
 	                    </li>
 	                    <?php //<li><a href="?page=users">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->?>
-	                    <?php 
+	                    <?php
 	                    /*
 	                    <!--[if lte IE 6]><table><tr><td><![endif]-->
 	                        <ul>
@@ -131,7 +148,7 @@
 	                                <li><a href="" title="">sublevel link</a></li>
 	                                <li><a href="" title="">sulevel link</a></li>
 	                                <li><a class="sub2" href="#nogo">sublevel3<!--[if IE 7]><!--></a><!--<![endif]-->
-	                        
+
 	                                <!--[if lte IE 6]><table><tr><td><![endif]-->
 	                                    <ul>
 	                                        <li><a href="#nogo">Third level-1</a></li>
@@ -139,14 +156,14 @@
 	                                        <li><a href="#nogo">Third level-3</a></li>
 	                                        <li><a href="#nogo">Third level-4</a></li>
 	                                    </ul>
-	                        
+
 	                                <!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	                                </li>
 	                                <li><a href="" title="">sulevel link</a></li>
 	                            </ul>
 	                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	                        </li>
-	                    
+
 	                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
 	                        </ul>
 	                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
@@ -154,7 +171,7 @@
 	                    ?>
 	                    <?php //</li>?>
 	                    <?php //<li><a href="?page=settings">Settings<!--[if IE 7]><!--></a><!--<![endif]-->?>
-	                    <?php 
+	                    <?php
 	                    /*
 	                    <!--[if lte IE 6]><table><tr><td><![endif]-->
 	                        <ul>
@@ -167,7 +184,7 @@
 	                                <li><a href="" title="">sublevel link</a></li>
 	                                <li><a href="" title="">sulevel link</a></li>
 	                                <li><a class="sub2" href="#nogo">sublevel3<!--[if IE 7]><!--></a><!--<![endif]-->
-	                        
+
 	                                <!--[if lte IE 6]><table><tr><td><![endif]-->
 	                                    <ul>
 	                                        <li><a href="#nogo">Third level-1</a></li>
@@ -175,14 +192,14 @@
 	                                        <li><a href="#nogo">Third level-3</a></li>
 	                                        <li><a href="#nogo">Third level-4</a></li>
 	                                    </ul>
-	                        
+
 	                                <!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	                                </li>
 	                                <li><a href="" title="">sulevel link</a></li>
 	                            </ul>
 	                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	                        </li>
-	                    
+
 	                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
 	                        </ul>
 	                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
@@ -199,23 +216,23 @@
 	                    </li>
                     <?php endif; ?>
                     </ul>
-                    </div> 
-                    
-                    
-                    
-                    
-    <div class="center_content">  
-    
-    
-    
+                    </div>
+
+
+
+
+    <div class="center_content">
+
+
+
     <div class="left_content">
            	<?php if($user): ?>
-    
+
     		<div class="sidebar_search">
-              <?php 
+              <?php
                 echo $form->create(null, array(
                   'url' => array(
-                    'controller'=>'indices', 
+                    'controller'=>'indices',
                     'action'=>'search',
                     'admin' => false
                   ),
@@ -229,7 +246,7 @@
                 echo $form->end()
              ?>
        </div>
-            
+
             <div class="sidebarmenu">
 	                <?php //<a class="menuitem //submenuheader" href="?page=main">ACP Home</a>?>
 	                <?php //echo $html->link('ACP Home', array('controller'=>'profiles', 'action'=>'index'), array('class' => 'menuitem'))?>
@@ -266,7 +283,7 @@
 	                    <li><a href="">Sidebar submenu</a></li>
 	                    <li><a href="">Sidebar submenu</a></li>
 	                    </ul>
-	                </div> 
+	                </div>
 	                <a class="menuitem" href="?page=users">Manage Users</a>
 	                <a class="menuitem" href="?page=settings">Settings</a>
 	                <a class="menuitem" href="?page=layout">Search Page Layout</a>
@@ -274,13 +291,13 @@
 	                */?>
 	                <?php /*
 	                <a class="menuitem" href="">Blue button</a>
-	                
+
 	                <a class="menuitem_green" href="">Green button</a>
-	                
+
 	                <a class="menuitem_red" href="">Red button</a>
 	                    */?>
             </div>
-            
+
             <?php /*
             <div class="sidebar_box">
                 <div class="sidebar_box_top"></div>
@@ -291,11 +308,11 @@
                 Have a problem with TSEP? Just click on the contact tab,
                 inside your admin panel, to submit a new ticket to support.
                 After that, we should be in touch with you shortly.
-                </p>                
+                </p>
                 </div>
                 <div class="sidebar_box_bottom"></div>
             </div>
-            
+
             <div class="sidebar_box">
                 <div class="sidebar_box_top"></div>
                 <div class="sidebar_box_content">
@@ -305,9 +322,9 @@
                 Please be sure and Update TSEP regularly. These updates fix
                 crucial security holes and bugs, and we would not want you
                 to remain them. We cannot assist anyone with an older version
-                of TSEP, as we may have already fixed the problem they are 
+                of TSEP, as we may have already fixed the problem they are
                 having trouble with in the new version.
-                </p>                
+                </p>
                 </div>
                 <div class="sidebar_box_bottom"></div>
             </div>
@@ -320,11 +337,11 @@
                 <img src="<?php echo TSEP_CLIENT_ROOT?>/static/img/photo.png" alt="" title="" class="sidebar_icon_right" />
                 <p>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>                
+                </p>
                 </div>
                 <div class="sidebar_box_bottom"></div>
-            </div>  
-            
+            </div>
+
             <div class="sidebar_box">
                 <div class="sidebar_box_top"></div>
                 <div class="sidebar_box_content">
@@ -337,46 +354,46 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
                     <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
                      <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                </ul>                
+                </ul>
                 </div>
                 <div class="sidebar_box_bottom"></div>
             </div>
-              
+
     		*/?>
     	<?php endif; ?>
-    </div>  
-    
-    <div class="right_content">
-    
-	    <div id="content">
-		    <?php
-		    	echo $session->flash();    		
-				echo $content_for_layout;
-			?>
-		</div>  
-		<div id="loader">
-			<?php echo $html->image('ajax-loader-large.gif')?>
-		</div>  
-    </div>
-    <!-- end of right content-->
-            
-                    
-  </div>   <!--end of center content -->               
-                    
-                    
-    
-    
-    <div class="clear"></div>
-    </div> <!--end of main content-->
-	
-    
-    <div class="footer">
-    
-    	<div class="left_footer">TSEP ACP | Powered by <a href="http://indeziner.com">INDEZINER</a></div>
-    	<div class="right_footer"><a href="http://indeziner.com"><?php echo $html->image('indeziner_logo.gif')?></a></div>
-    
     </div>
 
-</div>		
+    <div class="right_content">
+
+	    <div id="content">
+		    <?php
+		    	echo $session->flash();
+				echo $content_for_layout;
+			?>
+		</div>
+		<div id="loader">
+			<?php echo $html->image('ajax-loader-large.gif')?>
+		</div>
+    </div>
+    <!-- end of right content-->
+
+
+  </div>   <!--end of center content -->
+
+
+
+
+    <div class="clear"></div>
+    </div> <!--end of main content-->
+
+
+    <div class="footer">
+
+    	<div class="left_footer">TSEP ACP | Powered by <a href="http://indeziner.com">INDEZINER</a></div>
+    	<div class="right_footer"><a href="http://indeziner.com"><?php echo $html->image('indeziner_logo.gif')?></a></div>
+
+    </div>
+
+</div>
 </body>
 </html>

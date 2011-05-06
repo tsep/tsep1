@@ -38,7 +38,7 @@
 
 	$('#regexLink').click(function (){
 
-		window.open( window.base + 'profiles/regex' );
+		window.open( window.base + 'admin/profiles/regex' );
 
 	});
 

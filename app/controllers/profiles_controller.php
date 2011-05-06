@@ -98,23 +98,27 @@ class ProfilesController extends AppController {
 
     }
 
-    function admin_view($id = null) {
-
-        if ($id == null) {
+    function admin_view($id = null)
+    {
+        if ($id == null)
+        {
             $this->Session->setFlash('Their was no profile specified to view', 'flash_fail');
             $this->redirect(array('controller'=>'profiles', 'action' =>'index'),null, true);
         }
 
         $profile = $this->Profile->findById($id);
 
-        if(empty($profile)) {
+        if($profile)
+        {
+            $this->set('profile', $profile);
+        }
+        else
+        {
             $this->log('Empty profile supplied while trying to view the profile');
 
             $this->Session->setFlash(__('The profile that you selected to view does not exist', true), 'flash_fail');
             $this->redirect(array('controller'=>'profiles', 'action' =>'index'),null, true);
         }
-
-        $this->set('profile', $profile);
     }
 
     /**
@@ -123,7 +127,7 @@ class ProfilesController extends AppController {
      */
     function admin_create () {
 
-            if (!empty($this->data)) {
+            if ($this->data) {
                 if($this->Profile->save($this->data)) {
                     $this->Session->setFlash(__('Indexing Profile Created', true), 'flash_success');
                     $this->redirect(array('controller'=>'profiles', 'action' =>'index','admin' =>true), null, true);

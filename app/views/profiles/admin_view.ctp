@@ -3,18 +3,22 @@
 <fieldset>
 	<dl>
 		<dt><?php __('Id:'); ?></dt>
-		<dd><span><?php echo $index['Index']['id']; ?></span></dd>
+		<dd><span><?php echo $profile['Profile']['id']; ?></span></dd>
 	</dl>
 	<dl>
 		<dt><?php __('URL:'); ?></dt>
-		<dd><span><?php echo $index['Index']['url']; ?></span></dd>
+		<dd><span><?php echo $profile['Profile']['url']; ?></span></dd>
 	</dl>
 	<dl>
-		<dt><?php __('Text:'); ?></dt>
-		<dd><span><?php echo $index['Index']['text']; ?></span></dd>
+		<dt><?php __('Regular Expression:'); ?></dt>
+		<dd><span><?php echo $profile['Profile']['regex']; ?></span></dd>
 	</dl>
-	<dl>
-		<dt><?php __('Profile Id:'); ?></dt>
-		<dd><span><?php echo $index['Index']['profile_id']; ?></span></dd>
-	</dl>
+
+	<?php echo $html->link(__('Index this profile', true), array(
+	    'admin' => true,
+	    'controller' => 'indices',
+	    'action' => 'start',
+	    $profile['Profile']['id'],
+	)); ?>
+
 </fieldset>

@@ -1,7 +1,7 @@
 <?php
 /**
 * The main App Controller
-* 
+*
 * @author Geoffrey
 *
 * The following will be filled automatically by SubVersion!
@@ -47,110 +47,117 @@
 class AppController extends Controller {
 
     var $helpers = array('Html', 'Session', 'Js', 'Form', 'Paginator');
-    
+
     var $components = array('RequestHandler', 'Session', 'Auth', 'Queue');
-    
+
     var $view = 'Theme';
-    
+
     var $theme = 'default';
-    
+
     /**
      * @var RequestHandlerComponent
      */
     var $RequestHandler;
-    
+
     /**
      * @var SessionComponent
      */
-    var $Session; 
-    
+    var $Session;
+
     /**
      * @var AuthComponent
      */
     var $Auth;
-            
+
     /**
      * @var QueueComponent
      */
     var $Queue;
-    
+
     function beforeFilter() {
         parent::beforeFilter();
-        
+
         if(isset($this->Auth)) {
-            
+
             if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
                 $this->layout = 'admin';
-            
+
             }
                else {
-                   $this->Auth->allow('*');                   
-               }            
-        
+                   $this->Auth->allow('*');
+               }
+
             $this->Auth->loginAction = array('controller'=>'users', 'action' => 'login', 'admin' => 'true');
             $this->Auth->logoutRedirect = array('controller'=>'users', 'action' => 'logout', 'admin' => 'true');
             $this->Auth->loginRedirect = array('controller' => 'users', 'action' =>'login', 'admin' => 'true');
-            
+
         }
-        
+
         if(isset($this->RequestHandler)) {
-                                    
+
             if ($this->RequestHandler->isAjax())
                 $this->layout = 'ajax';
         }
-        
+
         if(!isset($this->Security)) {
             App::import('Component', 'Security');
             $this->Security = new SecurityComponent();
         }
-        
+
         $this->theme = Configure::read('ThemeName');
     }
-    
+
     function beforeRender() {
         parent::beforeRender();
-        
+
         $this->set('version', file_get_contents(CONFIGS.'version.txt'));
-        
+
         if(isset($this->Auth)) {
             $this->set('user', $this->Auth->user());
         }
         else {
             $this->set('user', false);
         }
-    
+
+        if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin')
+        {
+            $this->set('indexer_running', file_exists(TMP.'indexer_running.tmp'));
+            $this->set('update_needed', !Cache::read('CheckForUpdates', 'long'));
+        }
     }
-       
+
 
     /**
      * Save the current configuration
      */
     function saveConfiguration () {
-        
+
         $config = (array)Configure::getInstance();
-        
+
         $code = "<?php \n ";
             $code .= '$config = '.var_export($config, true).';';
-        
+
             file_put_contents(CONFIGS.'settings.php', $code);
     }
-    
+
     /**
      * Gets the Queue object
      * @deprecated Use $this->Queue instead
      */
     function getQueue () {
-        
+
         App::import('Component', 'Queue');
-        
+
         return new QueueComponent();
     }
-    
+
     /**
      * Process all objects in the Queue
      */
     function processQueue ($redirect = '') {
-    
+
+        $redirect = Router::url($redirect);
+
         $this->redirect(array('controller' => 'core', 'admin' => true, 'action' => 'batch', '?' => compact('redirect')), null, true);
     }
 
