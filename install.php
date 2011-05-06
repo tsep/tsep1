@@ -61,7 +61,7 @@
   <script type="text/javascript">
    $(window).load(function () {setTimeout(
     function install () {
-      $.get(window.location, {install : 'go'}, function (data){
+      $.get(location.href, {install : 'go'}, function (data){
         if(data != 'done')
           install();
         else
