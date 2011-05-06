@@ -62,15 +62,24 @@
             return $languages;
         }
 
+        function _resetApplication () {
+
+            Cache::clear();
+            clearCache();
+
+            @unlink(CONFIGS.'settings.php');
+
+            fclose(fopen(TMP.'install.tmp', 'w'));
+
+            Configure::write('Config.language', 'eng');
+        }
+
         /**
          * Welcome the user
          */
         function index () {
 
-            $handle = fopen(TMP.'install.tmp', 'w');
-            fclose($handle);
-
-            if($this->params['url']['language']) {
+            if(@$this->params['url']['language']) {
 
                     Configure::write('Config.language', $this->params['url']['language']);
 
@@ -81,6 +90,8 @@
             }
             else
             {
+                $this->_resetApplication();
+
                 $this->set('title_for_layout', __('Welcome', true));
 
                 $languages = $this->_getLanguages();
