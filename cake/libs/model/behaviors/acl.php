@@ -35,7 +35,7 @@ class AclBehavior extends ModelBehavior {
  * @var array
  * @access protected
  */
-	var $__typeMaps = array('requester' => 'Aro', 'controlled' => 'Aco');
+    var $__typeMaps = array('requester' => 'Aro', 'controlled' => 'Aco');
 
 /**
  * Sets up the configuation for the model, and loads ACL models if they haven't been already
@@ -44,26 +44,26 @@ class AclBehavior extends ModelBehavior {
  * @return void
  * @access public
  */
-	function setup(&$model, $config = array()) {
-		if (is_string($config)) {
-			$config = array('type' => $config);
-		}
-		$this->settings[$model->name] = array_merge(array('type' => 'requester'), (array)$config);
-		$this->settings[$model->name]['type'] = strtolower($this->settings[$model->name]['type']);
+    function setup(&$model, $config = array()) {
+        if (is_string($config)) {
+            $config = array('type' => $config);
+        }
+        $this->settings[$model->name] = array_merge(array('type' => 'requester'), (array)$config);
+        $this->settings[$model->name]['type'] = strtolower($this->settings[$model->name]['type']);
 
-		$type = $this->__typeMaps[$this->settings[$model->name]['type']];
-		if (!class_exists('AclNode')) {
-			require LIBS . 'model' . DS . 'db_acl.php';
-		}
-		if (PHP5) {
-			$model->{$type} = ClassRegistry::init($type);
-		} else {
-			$model->{$type} =& ClassRegistry::init($type);
-		}
-		if (!method_exists($model, 'parentNode')) {
-			trigger_error(sprintf(__('Callback parentNode() not defined in %s', true), $model->alias), E_USER_WARNING);
-		}
-	}
+        $type = $this->__typeMaps[$this->settings[$model->name]['type']];
+        if (!class_exists('AclNode')) {
+            require LIBS . 'model' . DS . 'db_acl.php';
+        }
+        if (PHP5) {
+            $model->{$type} = ClassRegistry::init($type);
+        } else {
+            $model->{$type} =& ClassRegistry::init($type);
+        }
+        if (!method_exists($model, 'parentNode')) {
+            trigger_error(sprintf(__('Callback parentNode() not defined in %s', true), $model->alias), E_USER_WARNING);
+        }
+    }
 
 /**
  * Retrieves the Aro/Aco node for this model
@@ -73,13 +73,13 @@ class AclBehavior extends ModelBehavior {
  * @access public
  * @link http://book.cakephp.org/view/1322/node
  */
-	function node(&$model, $ref = null) {
-		$type = $this->__typeMaps[$this->settings[$model->name]['type']];
-		if (empty($ref)) {
-			$ref = array('model' => $model->name, 'foreign_key' => $model->id);
-		}
-		return $model->{$type}->node($ref);
-	}
+    function node(&$model, $ref = null) {
+        $type = $this->__typeMaps[$this->settings[$model->name]['type']];
+        if (empty($ref)) {
+            $ref = array('model' => $model->name, 'foreign_key' => $model->id);
+        }
+        return $model->{$type}->node($ref);
+    }
 
 /**
  * Creates a new ARO/ACO node bound to this record
@@ -88,24 +88,24 @@ class AclBehavior extends ModelBehavior {
  * @return void
  * @access public
  */
-	function afterSave(&$model, $created) {
-		$type = $this->__typeMaps[$this->settings[$model->name]['type']];
-		$parent = $model->parentNode();
-		if (!empty($parent)) {
-			$parent = $this->node($model, $parent);
-		}
-		$data = array(
-			'parent_id' => isset($parent[0][$type]['id']) ? $parent[0][$type]['id'] : null,
-			'model' => $model->alias,
-			'foreign_key' => $model->id
-		);
-		if (!$created) {
-			$node = $this->node($model);
-			$data['id'] = isset($node[0][$type]['id']) ? $node[0][$type]['id'] : null;
-		}
-		$model->{$type}->create();
-		$model->{$type}->save($data);
-	}
+    function afterSave(&$model, $created) {
+        $type = $this->__typeMaps[$this->settings[$model->name]['type']];
+        $parent = $model->parentNode();
+        if (!empty($parent)) {
+            $parent = $this->node($model, $parent);
+        }
+        $data = array(
+            'parent_id' => isset($parent[0][$type]['id']) ? $parent[0][$type]['id'] : null,
+            'model' => $model->alias,
+            'foreign_key' => $model->id
+        );
+        if (!$created) {
+            $node = $this->node($model);
+            $data['id'] = isset($node[0][$type]['id']) ? $node[0][$type]['id'] : null;
+        }
+        $model->{$type}->create();
+        $model->{$type}->save($data);
+    }
 
 /**
  * Destroys the ARO/ACO node bound to the deleted record
@@ -113,11 +113,11 @@ class AclBehavior extends ModelBehavior {
  * @return void
  * @access public
  */
-	function afterDelete(&$model) {
-		$type = $this->__typeMaps[$this->settings[$model->name]['type']];
-		$node = Set::extract($this->node($model), "0.{$type}.id");
-		if (!empty($node)) {
-			$model->{$type}->delete($node);
-		}
-	}
+    function afterDelete(&$model) {
+        $type = $this->__typeMaps[$this->settings[$model->name]['type']];
+        $node = Set::extract($this->node($model), "0.{$type}.id");
+        if (!empty($node)) {
+            $model->{$type}->delete($node);
+        }
+    }
 }

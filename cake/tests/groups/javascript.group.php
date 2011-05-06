@@ -34,18 +34,18 @@ class AllCoreJavascriptHelpersGroupTest extends TestSuite {
  * @var string 'All core helpers'
  * @access public
  */
-	var $label = 'Js Helper and all Engine Helpers';
+    var $label = 'Js Helper and all Engine Helpers';
 /**
  * AllCoreHelpersGroupTest method
  *
  * @access public
  * @return void
  */
-	function AllCoreJavascriptHelpersGroupTest() {
-		$helperTestPath = CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'helpers' . DS;
-		TestManager::addTestFile($this, $helperTestPath . 'js.test.php');
-		TestManager::addTestFile($this, $helperTestPath . 'jquery_engine.test.php');
-		TestManager::addTestFile($this, $helperTestPath . 'mootools_engine.test.php');
-		TestManager::addTestFile($this, $helperTestPath . 'prototype_engine.test.php');
-	}
+    function AllCoreJavascriptHelpersGroupTest() {
+        $helperTestPath = CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'helpers' . DS;
+        TestManager::addTestFile($this, $helperTestPath . 'js.test.php');
+        TestManager::addTestFile($this, $helperTestPath . 'jquery_engine.test.php');
+        TestManager::addTestFile($this, $helperTestPath . 'mootools_engine.test.php');
+        TestManager::addTestFile($this, $helperTestPath . 'prototype_engine.test.php');
+    }
 }

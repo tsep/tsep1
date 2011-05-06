@@ -34,7 +34,7 @@ class LibGroupTest extends TestSuite {
  * @var string
  * @access public
  */
-	var $label = 'All core, non MVC element libs';
+    var $label = 'All core, non MVC element libs';
 
 /**
  * LibGroupTest method
@@ -42,22 +42,22 @@ class LibGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function LibGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'basics');
-		// TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'inflector');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cake_session');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'debugger');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'error');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'file');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'folder');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cake_log');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'log' . DS . 'file_log');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'class_registry');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'overloadable');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'sanitize');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'security');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'set');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'string');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'validation');
-	}
+    function LibGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'basics');
+        // TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'inflector');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cake_session');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'debugger');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'error');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'file');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'folder');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cake_log');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'log' . DS . 'file_log');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'class_registry');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'overloadable');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'sanitize');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'security');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'set');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'string');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'validation');
+    }
 }

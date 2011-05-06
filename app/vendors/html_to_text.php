@@ -10,8 +10,8 @@
 
 function html_to_text( $html ){
 
-	$text = strip_tags($html);
-	
-	return $text;
+    $text = strip_tags($html);
+    
+    return $text;
 
 }

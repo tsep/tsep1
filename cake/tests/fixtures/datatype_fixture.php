@@ -32,7 +32,7 @@ class DatatypeFixture extends CakeTestFixture {
  * @var string 'Datatype'
  * @access public
  */
-	var $name = 'Datatype';
+    var $name = 'Datatype';
 
 /**
  * fields property
@@ -40,10 +40,10 @@ class DatatypeFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'null'=> false, 'default'=> 0, 'key' => 'primary'),
-		'float_field' => array('type' => 'float', 'length' => '5,2', 'null' => false, 'default' => null),
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'null'=> false, 'default'=> 0, 'key' => 'primary'),
+        'float_field' => array('type' => 'float', 'length' => '5,2', 'null' => false, 'default' => null),
+    );
 
 /**
  * records property
@@ -51,7 +51,7 @@ class DatatypeFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('id' => 1, 'float_field' => 42.23),
-	);
+    var $records = array(
+        array('id' => 1, 'float_field' => 42.23),
+    );
 }

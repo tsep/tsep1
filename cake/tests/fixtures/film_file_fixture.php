@@ -32,7 +32,7 @@ class FilmFileFixture extends CakeTestFixture {
  * @var string 'FilmFile'
  * @access public
  */
-	var $name = 'FilmFile';
+    var $name = 'FilmFile';
 
 /**
  * fields property
@@ -40,10 +40,10 @@ class FilmFileFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'name' => array('type' => 'string', 'length' => 255)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'name' => array('type' => 'string', 'length' => 255)
+    );
 
 /**
  * records property
@@ -51,8 +51,8 @@ class FilmFileFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('id' => 1, 'name' => 'one'),
-		array('id' => 2, 'name' => 'two')
-	);
+    var $records = array(
+        array('id' => 1, 'name' => 'one'),
+        array('id' => 2, 'name' => 'two')
+    );
 }

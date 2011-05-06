@@ -32,7 +32,7 @@ class CacheTestModelFixture extends CakeTestFixture {
  * @var string 'CacheTestModel'
  * @access public
  */
-	var $name = 'CacheTestModel';
+    var $name = 'CacheTestModel';
 
 /**
  * fields property
@@ -40,9 +40,9 @@ class CacheTestModelFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id'		=> array('type' => 'string', 'length' => 255, 'key' => 'primary'),
-		'data'		=> array('type' => 'string', 'length' => 255, 'default' => ''),
-		'expires'	=> array('type' => 'integer', 'length' => 10, 'default' => '0'),
-	);
+    var $fields = array(
+        'id'        => array('type' => 'string', 'length' => 255, 'key' => 'primary'),
+        'data'        => array('type' => 'string', 'length' => 255, 'default' => ''),
+        'expires'    => array('type' => 'integer', 'length' => 10, 'default' => '0'),
+    );
 }

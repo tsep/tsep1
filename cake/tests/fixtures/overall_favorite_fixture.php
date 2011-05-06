@@ -32,7 +32,7 @@ class OverallFavoriteFixture extends CakeTestFixture {
  * @var string 'OverallFavorite'
  * @access public
  */
-	var $name = 'OverallFavorite';
+    var $name = 'OverallFavorite';
 
 /**
  * fields property
@@ -40,12 +40,12 @@ class OverallFavoriteFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'model_type' => array('type' => 'string', 'length' => 255),
-		'model_id' => array('type' => 'integer'),
-		'priority' => array('type' => 'integer')
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'model_type' => array('type' => 'string', 'length' => 255),
+        'model_id' => array('type' => 'integer'),
+        'priority' => array('type' => 'integer')
+    );
 
 /**
  * records property
@@ -53,8 +53,8 @@ class OverallFavoriteFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('id' => 1, 'model_type' => 'Cd', 'model_id' => '1', 'priority' => '1'),
-		array('id' => 2, 'model_type' => 'Book', 'model_id' => '1', 'priority' => '2')
-	);
+    var $records = array(
+        array('id' => 1, 'model_type' => 'Cd', 'model_id' => '1', 'priority' => '1'),
+        array('id' => 2, 'model_type' => 'Book', 'model_id' => '1', 'priority' => '2')
+    );
 }

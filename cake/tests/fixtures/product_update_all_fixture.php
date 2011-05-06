@@ -25,8 +25,8 @@
  * @subpackage    cake.tests.fixtures
  */
 class ProductUpdateAllFixture extends CakeTestFixture {
-	var $name = 'ProductUpdateAll';
-	var $table = 'product_update_all';
+    var $name = 'ProductUpdateAll';
+    var $table = 'product_update_all';
 
     var $fields = array(
             'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),

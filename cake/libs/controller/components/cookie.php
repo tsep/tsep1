@@ -44,7 +44,7 @@ class CookieComponent extends Object {
  * @var string
  * @access public
  */
-	var $name = 'CakeCookie';
+    var $name = 'CakeCookie';
 
 /**
  * The time a cookie will remain valid.
@@ -57,7 +57,7 @@ class CookieComponent extends Object {
  * @var mixed
  * @access public
  */
-	var $time = null;
+    var $time = null;
 
 /**
  * Cookie path.
@@ -73,7 +73,7 @@ class CookieComponent extends Object {
  * @var string
  * @access public
  */
-	var $path = '/';
+    var $path = '/';
 
 /**
  * Domain path.
@@ -89,7 +89,7 @@ class CookieComponent extends Object {
  * @var string
  * @access public
  */
-	var $domain = '';
+    var $domain = '';
 
 /**
  * Secure HTTPS only cookie.
@@ -103,7 +103,7 @@ class CookieComponent extends Object {
  * @var boolean
  * @access public
  */
-	var $secure = false;
+    var $secure = false;
 
 /**
  * Encryption key.
@@ -114,7 +114,7 @@ class CookieComponent extends Object {
  * @var string
  * @access protected
  */
-	var $key = null;
+    var $key = null;
 
 /**
  * Values stored in the cookie.
@@ -125,7 +125,7 @@ class CookieComponent extends Object {
  * @var string
  * @access private
  */
-	var $__values = array();
+    var $__values = array();
 
 /**
  * Type of encryption to use.
@@ -137,7 +137,7 @@ class CookieComponent extends Object {
  * @access private
  * @todo add additional encryption methods
  */
-	var $__type = 'cipher';
+    var $__type = 'cipher';
 
 /**
  * Used to reset cookie time if $expire is passed to CookieComponent::write()
@@ -145,7 +145,7 @@ class CookieComponent extends Object {
  * @var string
  * @access private
  */
-	var $__reset = null;
+    var $__reset = null;
 
 /**
  * Expire time of the cookie
@@ -155,7 +155,7 @@ class CookieComponent extends Object {
  * @var string
  * @access private
  */
-	var $__expires = 0;
+    var $__expires = 0;
 
 /**
  * Main execution method.
@@ -163,23 +163,23 @@ class CookieComponent extends Object {
  * @param object $controller A reference to the instantiating controller object
  * @access public
  */
-	function initialize(&$controller, $settings) {
-		$this->key = Configure::read('Security.salt');
-		$this->_set($settings);
-	}
+    function initialize(&$controller, $settings) {
+        $this->key = Configure::read('Security.salt');
+        $this->_set($settings);
+    }
 
 /**
  * Start CookieComponent for use in the controller
  *
  * @access public
  */
-	function startup() {
-		$this->__expire($this->time);
+    function startup() {
+        $this->__expire($this->time);
 
-		if (isset($_COOKIE[$this->name])) {
-			$this->__values = $this->__decrypt($_COOKIE[$this->name]);
-		}
-	}
+        if (isset($_COOKIE[$this->name])) {
+            $this->__values = $this->__decrypt($_COOKIE[$this->name]);
+        }
+    }
 
 /**
  * Write a value to the $_COOKIE[$key];
@@ -199,33 +199,33 @@ class CookieComponent extends Object {
  * @param string $expires Can be either Unix timestamp, or date string
  * @access public
  */
-	function write($key, $value = null, $encrypt = true, $expires = null) {
-		if (is_null($encrypt)) {
-			$encrypt = true;
-		}
-		$this->__encrypted = $encrypt;
-		$this->__expire($expires);
+    function write($key, $value = null, $encrypt = true, $expires = null) {
+        if (is_null($encrypt)) {
+            $encrypt = true;
+        }
+        $this->__encrypted = $encrypt;
+        $this->__expire($expires);
 
-		if (!is_array($key)) {
-			$key = array($key => $value);
-		}
+        if (!is_array($key)) {
+            $key = array($key => $value);
+        }
 
-		foreach ($key as $name => $value) {
-			if (strpos($name, '.') === false) {
-				$this->__values[$name] = $value;
-				$this->__write("[$name]", $value);
+        foreach ($key as $name => $value) {
+            if (strpos($name, '.') === false) {
+                $this->__values[$name] = $value;
+                $this->__write("[$name]", $value);
 
-			} else {
-				$names = explode('.', $name, 2);
-				if (!isset($this->__values[$names[0]])) {
-					$this->__values[$names[0]] = array();
-				}
-				$this->__values[$names[0]] = Set::insert($this->__values[$names[0]], $names[1], $value);
-				$this->__write('[' . implode('][', $names) . ']', $value);
-			}
-		}
-		$this->__encrypted = true;
-	}
+            } else {
+                $names = explode('.', $name, 2);
+                if (!isset($this->__values[$names[0]])) {
+                    $this->__values[$names[0]] = array();
+                }
+                $this->__values[$names[0]] = Set::insert($this->__values[$names[0]], $names[1], $value);
+                $this->__write('[' . implode('][', $names) . ']', $value);
+            }
+        }
+        $this->__encrypted = true;
+    }
 
 /**
  * Read the value of the $_COOKIE[$key];
@@ -237,28 +237,28 @@ class CookieComponent extends Object {
  * @return string or null, value for specified key
  * @access public
  */
-	function read($key = null) {
-		if (empty($this->__values) && isset($_COOKIE[$this->name])) {
-			$this->__values = $this->__decrypt($_COOKIE[$this->name]);
-		}
+    function read($key = null) {
+        if (empty($this->__values) && isset($_COOKIE[$this->name])) {
+            $this->__values = $this->__decrypt($_COOKIE[$this->name]);
+        }
 
-		if (is_null($key)) {
-			return $this->__values;
-		}
+        if (is_null($key)) {
+            return $this->__values;
+        }
 
-		if (strpos($key, '.') !== false) {
-			$names = explode('.', $key, 2);
-			$key = $names[0];
-		}
-		if (!isset($this->__values[$key])) {
-			return null;
-		}
+        if (strpos($key, '.') !== false) {
+            $names = explode('.', $key, 2);
+            $key = $names[0];
+        }
+        if (!isset($this->__values[$key])) {
+            return null;
+        }
 
-		if (!empty($names[1])) {
-			return Set::extract($this->__values[$key], $names[1]);
-		}
-		return $this->__values[$key];
-	}
+        if (!empty($names[1])) {
+            return Set::extract($this->__values[$key], $names[1]);
+        }
+        return $this->__values[$key];
+    }
 
 /**
  * Delete a cookie value
@@ -273,19 +273,19 @@ class CookieComponent extends Object {
  * @return void
  * @access public
  */
-	function delete($key) {
-		if (empty($this->__values)) {
-			$this->read();
-		}
-		if (strpos($key, '.') === false) {
-			unset($this->__values[$key]);
-			$this->__delete("[$key]");
-			return;
-		}
-		$names = explode('.', $key, 2);
-		$this->__values[$names[0]] = Set::remove($this->__values[$names[0]], $names[1]);
-		$this->__delete('[' . implode('][', $names) . ']');
-	}
+    function delete($key) {
+        if (empty($this->__values)) {
+            $this->read();
+        }
+        if (strpos($key, '.') === false) {
+            unset($this->__values[$key]);
+            $this->__delete("[$key]");
+            return;
+        }
+        $names = explode('.', $key, 2);
+        $this->__values[$names[0]] = Set::remove($this->__values[$names[0]], $names[1]);
+        $this->__delete('[' . implode('][', $names) . ']');
+    }
 
 /**
  * Destroy current cookie
@@ -296,22 +296,22 @@ class CookieComponent extends Object {
  * @return void
  * @access public
  */
-	function destroy() {
-		if (isset($_COOKIE[$this->name])) {
-			$this->__values = $this->__decrypt($_COOKIE[$this->name]);
-		}
+    function destroy() {
+        if (isset($_COOKIE[$this->name])) {
+            $this->__values = $this->__decrypt($_COOKIE[$this->name]);
+        }
 
-		foreach ($this->__values as $name => $value) {
-			if (is_array($value)) {
-				foreach ($value as $key => $val) {
-					unset($this->__values[$name][$key]);
-					$this->__delete("[$name][$key]");
-				}
-			}
-			unset($this->__values[$name]);
-			$this->__delete("[$name]");
-		}
-	}
+        foreach ($this->__values as $name => $value) {
+            if (is_array($value)) {
+                foreach ($value as $key => $val) {
+                    unset($this->__values[$name][$key]);
+                    $this->__delete("[$name][$key]");
+                }
+            }
+            unset($this->__values[$name]);
+            $this->__delete("[$name]");
+        }
+    }
 
 /**
  * Will allow overriding default encryption method.
@@ -320,9 +320,9 @@ class CookieComponent extends Object {
  * @access public
  * @todo NOT IMPLEMENTED
  */
-	function type($type = 'cipher') {
-		$this->__type = 'cipher';
-	}
+    function type($type = 'cipher') {
+        $this->__type = 'cipher';
+    }
 
 /**
  * Set the expire time for a session variable.
@@ -338,22 +338,22 @@ class CookieComponent extends Object {
  * @return int Unix timestamp
  * @access private
  */
-	function __expire($expires = null) {
-		$now = time();
-		if (is_null($expires)) {
-			return $this->__expires;
-		}
-		$this->__reset = $this->__expires;
+    function __expire($expires = null) {
+        $now = time();
+        if (is_null($expires)) {
+            return $this->__expires;
+        }
+        $this->__reset = $this->__expires;
 
-		if ($expires == 0) {
-			return $this->__expires = 0;
-		}
+        if ($expires == 0) {
+            return $this->__expires = 0;
+        }
 
-		if (is_integer($expires) || is_numeric($expires)) {
-			return $this->__expires = $now + intval($expires);
-		}
-		return $this->__expires = strtotime($expires, $now);
-	}
+        if (is_integer($expires) || is_numeric($expires)) {
+            return $this->__expires = $now + intval($expires);
+        }
+        return $this->__expires = strtotime($expires, $now);
+    }
 
 /**
  * Set cookie
@@ -362,14 +362,14 @@ class CookieComponent extends Object {
  * @param string $value Value for cookie
  * @access private
  */
-	function __write($name, $value) {
-		setcookie($this->name . $name, $this->__encrypt($value), $this->__expires, $this->path, $this->domain, $this->secure);
+    function __write($name, $value) {
+        setcookie($this->name . $name, $this->__encrypt($value), $this->__expires, $this->path, $this->domain, $this->secure);
 
-		if (!is_null($this->__reset)) {
-			$this->__expires = $this->__reset;
-			$this->__reset = null;
-		}
-	}
+        if (!is_null($this->__reset)) {
+            $this->__expires = $this->__reset;
+            $this->__reset = null;
+        }
+    }
 
 /**
  * Sets a cookie expire time to remove cookie value
@@ -377,9 +377,9 @@ class CookieComponent extends Object {
  * @param string $name Name of cookie
  * @access private
  */
-	function __delete($name) {
-		setcookie($this->name . $name, '', time() - 42000, $this->path, $this->domain, $this->secure);
-	}
+    function __delete($name) {
+        setcookie($this->name . $name, '', time() - 42000, $this->path, $this->domain, $this->secure);
+    }
 
 /**
  * Encrypts $value using var $type method in Security class
@@ -388,17 +388,17 @@ class CookieComponent extends Object {
  * @return string encrypted string
  * @access private
  */
-	function __encrypt($value) {
-		if (is_array($value)) {
-			$value = $this->__implode($value);
-		}
+    function __encrypt($value) {
+        if (is_array($value)) {
+            $value = $this->__implode($value);
+        }
 
-		if ($this->__encrypted === true) {
-			$type = $this->__type;
-			$value = "Q2FrZQ==." .base64_encode(Security::$type($value, $this->key));
-		}
-		return $value;
-	}
+        if ($this->__encrypted === true) {
+            $type = $this->__type;
+            $value = "Q2FrZQ==." .base64_encode(Security::$type($value, $this->key));
+        }
+        return $value;
+    }
 
 /**
  * Decrypts $value using var $type method in Security class
@@ -407,33 +407,33 @@ class CookieComponent extends Object {
  * @return string decrypted string
  * @access private
  */
-	function __decrypt($values) {
-		$decrypted = array();
-		$type = $this->__type;
+    function __decrypt($values) {
+        $decrypted = array();
+        $type = $this->__type;
 
-		foreach ((array)$values as $name => $value) {
-			if (is_array($value)) {
-				foreach ($value as $key => $val) {
-					$pos = strpos($val, 'Q2FrZQ==.');
-					$decrypted[$name][$key] = $this->__explode($val);
+        foreach ((array)$values as $name => $value) {
+            if (is_array($value)) {
+                foreach ($value as $key => $val) {
+                    $pos = strpos($val, 'Q2FrZQ==.');
+                    $decrypted[$name][$key] = $this->__explode($val);
 
-					if ($pos !== false) {
-						$val = substr($val, 8);
-						$decrypted[$name][$key] = $this->__explode(Security::$type(base64_decode($val), $this->key));
-					}
-				}
-			} else {
-				$pos = strpos($value, 'Q2FrZQ==.');
-				$decrypted[$name] = $this->__explode($value);
+                    if ($pos !== false) {
+                        $val = substr($val, 8);
+                        $decrypted[$name][$key] = $this->__explode(Security::$type(base64_decode($val), $this->key));
+                    }
+                }
+            } else {
+                $pos = strpos($value, 'Q2FrZQ==.');
+                $decrypted[$name] = $this->__explode($value);
 
-				if ($pos !== false) {
-					$value = substr($value, 8);
-					$decrypted[$name] = $this->__explode(Security::$type(base64_decode($value), $this->key));
-				}
-			}
-		}
-		return $decrypted;
-	}
+                if ($pos !== false) {
+                    $value = substr($value, 8);
+                    $decrypted[$name] = $this->__explode(Security::$type(base64_decode($value), $this->key));
+                }
+            }
+        }
+        return $decrypted;
+    }
 
 /**
  * Implode method to keep keys are multidimensional arrays
@@ -442,13 +442,13 @@ class CookieComponent extends Object {
  * @return string String in the form key1|value1,key2|value2
  * @access private
  */
-	function __implode($array) {
-		$string = '';
-		foreach ($array as $key => $value) {
-			$string .= ',' . $key . '|' . $value;
-		}
-		return substr($string, 1);
-	}
+    function __implode($array) {
+        $string = '';
+        foreach ($array as $key => $value) {
+            $string .= ',' . $key . '|' . $value;
+        }
+        return substr($string, 1);
+    }
 
 /**
  * Explode method to return array from string set in CookieComponent::__implode()
@@ -457,15 +457,15 @@ class CookieComponent extends Object {
  * @return array Map of key and values
  * @access private
  */
-	function __explode($string) {
-		$array = array();
-		foreach (explode(',', $string) as $pair) {
-			$key = explode('|', $pair);
-			if (!isset($key[1])) {
-				return $key[0];
-			}
-			$array[$key[0]] = $key[1];
-		}
-		return $array;
-	}
+    function __explode($string) {
+        $array = array();
+        foreach (explode(',', $string) as $pair) {
+            $key = explode('|', $pair);
+            if (!isset($key[1])) {
+                return $key[0];
+            }
+            $array[$key[0]] = $key[1];
+        }
+        return $array;
+    }
 }

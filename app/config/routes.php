@@ -27,25 +27,25 @@
  * to use (in this case, /app/views/pages/home.ctp)...
  */
 if (file_exists(CONFIGS.'settings.php') && !file_exists(TMP.'install.tmp')){
-	Router::connect('/', array('controller' => 'indices', 'action' => 'search'));
-	/**
+    Router::connect('/', array('controller' => 'indices', 'action' => 'search'));
+    /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-	
+    Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+    
 /**
  * The Default 'admin' page
  */
-	Router::connect('/admin', array('controller' => 'profiles', 'action' =>'index', 'admin' => true));
+    Router::connect('/admin', array('controller' => 'profiles', 'action' =>'index', 'admin' => true));
 }
 else{  
-	//Not installed yet
-	
-	Router::connect('/install', array('action' => 'index', 'plugin' => 'install'));
-	Router::connect('/install/:controller', array('action' => 'index', 'plugin' => 'install'));
-	Router::connect('/install/:controller/:action/*', array('plugin' => 'install'));
-	
-	Router::connect('/*', array('plugin' => 'install', 'controller' => 'install'));
-	
+    //Not installed yet
+    
+    Router::connect('/install', array('action' => 'index', 'plugin' => 'install'));
+    Router::connect('/install/:controller', array('action' => 'index', 'plugin' => 'install'));
+    Router::connect('/install/:controller/:action/*', array('plugin' => 'install'));
+    
+    Router::connect('/*', array('plugin' => 'install', 'controller' => 'install'));
+    
 }
-	
+    

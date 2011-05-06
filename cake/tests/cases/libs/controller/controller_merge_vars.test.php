@@ -27,23 +27,23 @@ if (!class_exists('AppController')) {
  * @package cake
  * @subpackage cake.tests.cases.libs.controller
  */
-	class AppController extends Controller {
+    class AppController extends Controller {
 
 /**
  * components
  *
  * @var array
  */
-		var $components = array('MergeVar' => array('flag', 'otherFlag', 'redirect' => false));
+        var $components = array('MergeVar' => array('flag', 'otherFlag', 'redirect' => false));
 /**
  * helpers
  *
  * @var array
  */
-		var $helpers = array('MergeVar' => array('format' => 'html', 'terse'));
-	}
+        var $helpers = array('MergeVar' => array('format' => 'html', 'terse'));
+    }
 } elseif (!defined('APP_CONTROLLER_EXISTS')) {
-	define('APP_CONTROLLER_EXISTS', true);
+    define('APP_CONTROLLER_EXISTS', true);
 }
 
 /**
@@ -67,14 +67,14 @@ class MergeVariablesController extends AppController {
  *
  * @var string
  */
-	var $name = 'MergeVariables';
+    var $name = 'MergeVariables';
 
 /**
  * uses
  *
  * @var arrays
  */
-	var $uses = array();
+    var $uses = array();
 }
 
 /**
@@ -89,14 +89,14 @@ class MergeVarPluginAppController extends AppController {
  *
  * @var array
  */
-	var $components = array('Auth' => array('setting' => 'val', 'otherVal'));
+    var $components = array('Auth' => array('setting' => 'val', 'otherVal'));
 
 /**
  * helpers
  *
  * @var array
  */
-	var $helpers = array('Javascript');
+    var $helpers = array('Javascript');
 }
 
 /**
@@ -111,14 +111,14 @@ class MergePostsController extends MergeVarPluginAppController {
  *
  * @var string
  */
-	var $name = 'MergePosts';
+    var $name = 'MergePosts';
 
 /**
  * uses
  *
  * @var array
  */
-	var $uses = array();
+    var $uses = array();
 }
 
 
@@ -133,57 +133,57 @@ class ControllerMergeVarsTestCase extends CakeTestCase {
  *
  * @return void
  */
-	function skip() {
-		$this->skipIf(defined('APP_CONTROLLER_EXISTS'), 'APP_CONTROLLER_EXISTS cannot run. %s');
-	}
+    function skip() {
+        $this->skipIf(defined('APP_CONTROLLER_EXISTS'), 'APP_CONTROLLER_EXISTS cannot run. %s');
+    }
 /**
  * end test
  *
  * @return void
  */
-	function endTest() {
-		ClassRegistry::flush();
-	}
+    function endTest() {
+        ClassRegistry::flush();
+    }
 
 /**
  * test that component settings are not duplicated when merging component settings
  *
  * @return void
  */
-	function testComponentParamMergingNoDuplication() {
-		$Controller =& new MergeVariablesController();
-		$Controller->constructClasses();
+    function testComponentParamMergingNoDuplication() {
+        $Controller =& new MergeVariablesController();
+        $Controller->constructClasses();
 
-		$expected = array('MergeVar' => array('flag', 'otherFlag', 'redirect' => false));
-		$this->assertEqual($Controller->components, $expected, 'Duplication of settings occured. %s');
-	}
+        $expected = array('MergeVar' => array('flag', 'otherFlag', 'redirect' => false));
+        $this->assertEqual($Controller->components, $expected, 'Duplication of settings occured. %s');
+    }
 
 /**
  * test component merges with redeclared components
  *
  * @return void
  */
-	function testComponentMergingWithRedeclarations() {
-		$Controller =& new MergeVariablesController();
-		$Controller->components['MergeVar'] = array('remote', 'redirect' => true);
-		$Controller->constructClasses();
+    function testComponentMergingWithRedeclarations() {
+        $Controller =& new MergeVariablesController();
+        $Controller->components['MergeVar'] = array('remote', 'redirect' => true);
+        $Controller->constructClasses();
 
-		$expected = array('MergeVar' => array('flag', 'otherFlag', 'redirect' => true, 'remote'));
-		$this->assertEqual($Controller->components, $expected, 'Merging of settings is wrong. %s');
-	}
+        $expected = array('MergeVar' => array('flag', 'otherFlag', 'redirect' => true, 'remote'));
+        $this->assertEqual($Controller->components, $expected, 'Merging of settings is wrong. %s');
+    }
 
 /**
  * test merging of helpers array, ensure no duplication occurs
  *
  * @return void
  */
-	function testHelperSettingMergingNoDuplication() {
-		$Controller =& new MergeVariablesController();
-		$Controller->constructClasses();
+    function testHelperSettingMergingNoDuplication() {
+        $Controller =& new MergeVariablesController();
+        $Controller->constructClasses();
 
-		$expected = array('MergeVar' => array('format' => 'html', 'terse'));
-		$this->assertEqual($Controller->helpers, $expected, 'Duplication of settings occured. %s');
-	}
+        $expected = array('MergeVar' => array('format' => 'html', 'terse'));
+        $this->assertEqual($Controller->helpers, $expected, 'Duplication of settings occured. %s');
+    }
 
 /**
  * Test that helpers declared in appcontroller come before those in the subclass
@@ -191,54 +191,54 @@ class ControllerMergeVarsTestCase extends CakeTestCase {
  *
  * @return void
  */
-	function testHelperOrderPrecedence() {
-		$Controller =& new MergeVariablesController();
-		$Controller->helpers = array('Custom', 'Foo' => array('something'));
-		$Controller->constructClasses();
+    function testHelperOrderPrecedence() {
+        $Controller =& new MergeVariablesController();
+        $Controller->helpers = array('Custom', 'Foo' => array('something'));
+        $Controller->constructClasses();
 
-		$expected = array(
-			'MergeVar' => array('format' => 'html', 'terse'),
-			'Custom' => null,
-			'Foo' => array('something')
-		);
-		$this->assertIdentical($Controller->helpers, $expected, 'Order is incorrect. %s');
-	}
+        $expected = array(
+            'MergeVar' => array('format' => 'html', 'terse'),
+            'Custom' => null,
+            'Foo' => array('something')
+        );
+        $this->assertIdentical($Controller->helpers, $expected, 'Order is incorrect. %s');
+    }
 
 /**
  * test merging of vars with plugin
  *
  * @return void
  */
-	function testMergeVarsWithPlugin() {
-		$Controller =& new MergePostsController();
-		$Controller->components = array('Email' => array('ports' => 'open'));
-		$Controller->plugin = 'MergeVarPlugin';
-		$Controller->constructClasses();
+    function testMergeVarsWithPlugin() {
+        $Controller =& new MergePostsController();
+        $Controller->components = array('Email' => array('ports' => 'open'));
+        $Controller->plugin = 'MergeVarPlugin';
+        $Controller->constructClasses();
 
-		$expected = array(
-			'MergeVar' => array('flag', 'otherFlag', 'redirect' => false),
-			'Auth' => array('setting' => 'val', 'otherVal'),
-			'Email' => array('ports' => 'open')
-		);
-		$this->assertEqual($Controller->components, $expected, 'Components are unexpected %s');
+        $expected = array(
+            'MergeVar' => array('flag', 'otherFlag', 'redirect' => false),
+            'Auth' => array('setting' => 'val', 'otherVal'),
+            'Email' => array('ports' => 'open')
+        );
+        $this->assertEqual($Controller->components, $expected, 'Components are unexpected %s');
 
-		$expected = array(
-			'MergeVar' => array('format' => 'html', 'terse'),
-			'Javascript' => null
-		);
-		$this->assertEqual($Controller->helpers, $expected, 'Helpers are unexpected %s');
+        $expected = array(
+            'MergeVar' => array('format' => 'html', 'terse'),
+            'Javascript' => null
+        );
+        $this->assertEqual($Controller->helpers, $expected, 'Helpers are unexpected %s');
 
-		$Controller =& new MergePostsController();
-		$Controller->components = array();
-		$Controller->plugin = 'MergeVarPlugin';
-		$Controller->constructClasses();
+        $Controller =& new MergePostsController();
+        $Controller->components = array();
+        $Controller->plugin = 'MergeVarPlugin';
+        $Controller->constructClasses();
 
-		$expected = array(
-			'MergeVar' => array('flag', 'otherFlag', 'redirect' => false),
-			'Auth' => array('setting' => 'val', 'otherVal'),
-		);
-		$this->assertEqual($Controller->components, $expected, 'Components are unexpected %s');
-	}
+        $expected = array(
+            'MergeVar' => array('flag', 'otherFlag', 'redirect' => false),
+            'Auth' => array('setting' => 'val', 'otherVal'),
+        );
+        $this->assertEqual($Controller->components, $expected, 'Components are unexpected %s');
+    }
 
 /**
  * Ensure that __mergeVars is not being greedy and merging with
@@ -246,12 +246,12 @@ class ControllerMergeVarsTestCase extends CakeTestCase {
  *
  * @return void
  */
-	function testMergeVarsNotGreedy() {
-		$Controller =& new Controller();
-		$Controller->components = array();
-		$Controller->uses = array();
-		$Controller->constructClasses();
+    function testMergeVarsNotGreedy() {
+        $Controller =& new Controller();
+        $Controller->components = array();
+        $Controller->uses = array();
+        $Controller->constructClasses();
 
-		$this->assertFalse(isset($Controller->Session));
-	}
+        $this->assertFalse(isset($Controller->Session));
+    }
 }

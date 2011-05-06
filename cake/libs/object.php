@@ -40,19 +40,19 @@ class Object {
  *
  * @return Object
  */
-	function Object() {
-		$args = func_get_args();
-		if (method_exists($this, '__destruct')) {
-			register_shutdown_function (array(&$this, '__destruct'));
-		}
-		call_user_func_array(array(&$this, '__construct'), $args);
-	}
+    function Object() {
+        $args = func_get_args();
+        if (method_exists($this, '__destruct')) {
+            register_shutdown_function (array(&$this, '__destruct'));
+        }
+        call_user_func_array(array(&$this, '__construct'), $args);
+    }
 
 /**
  * Class constructor, overridden in descendant classes.
  */
-	function __construct() {
-	}
+    function __construct() {
+    }
 
 /**
  * Object-to-string conversion.
@@ -61,10 +61,10 @@ class Object {
  * @return string The name of this class
  * @access public
  */
-	function toString() {
-		$class = get_class($this);
-		return $class;
-	}
+    function toString() {
+        $class = get_class($this);
+        return $class;
+    }
 
 /**
  * Calls a controller's method from any location. Can be used to connect controllers together
@@ -77,23 +77,23 @@ class Object {
  *    of rendered action if 'return' is set in $extra.
  * @access public
  */
-	function requestAction($url, $extra = array()) {
-		if (empty($url)) {
-			return false;
-		}
-		if (!class_exists('dispatcher')) {
-			require CAKE . 'dispatcher.php';
-		}
-		if (in_array('return', $extra, true)) {
-			$extra = array_merge($extra, array('return' => 0, 'autoRender' => 1));
-		}
-		if (is_array($url) && !isset($extra['url'])) {
-			$extra['url'] = array();
-		}
-		$params = array_merge(array('autoRender' => 0, 'return' => 1, 'bare' => 1, 'requested' => 1), $extra);
-		$dispatcher = new Dispatcher;
-		return $dispatcher->dispatch($url, $params);
-	}
+    function requestAction($url, $extra = array()) {
+        if (empty($url)) {
+            return false;
+        }
+        if (!class_exists('dispatcher')) {
+            require CAKE . 'dispatcher.php';
+        }
+        if (in_array('return', $extra, true)) {
+            $extra = array_merge($extra, array('return' => 0, 'autoRender' => 1));
+        }
+        if (is_array($url) && !isset($extra['url'])) {
+            $extra['url'] = array();
+        }
+        $params = array_merge(array('autoRender' => 0, 'return' => 1, 'bare' => 1, 'requested' => 1), $extra);
+        $dispatcher = new Dispatcher;
+        return $dispatcher->dispatch($url, $params);
+    }
 
 /**
  * Calls a method on this object with the given parameters. Provides an OO wrapper
@@ -104,25 +104,25 @@ class Object {
  * @return mixed  Returns the result of the method call
  * @access public
  */
-	function dispatchMethod($method, $params = array()) {
-		switch (count($params)) {
-			case 0:
-				return $this->{$method}();
-			case 1:
-				return $this->{$method}($params[0]);
-			case 2:
-				return $this->{$method}($params[0], $params[1]);
-			case 3:
-				return $this->{$method}($params[0], $params[1], $params[2]);
-			case 4:
-				return $this->{$method}($params[0], $params[1], $params[2], $params[3]);
-			case 5:
-				return $this->{$method}($params[0], $params[1], $params[2], $params[3], $params[4]);
-			default:
-				return call_user_func_array(array(&$this, $method), $params);
-			break;
-		}
-	}
+    function dispatchMethod($method, $params = array()) {
+        switch (count($params)) {
+            case 0:
+                return $this->{$method}();
+            case 1:
+                return $this->{$method}($params[0]);
+            case 2:
+                return $this->{$method}($params[0], $params[1]);
+            case 3:
+                return $this->{$method}($params[0], $params[1], $params[2]);
+            case 4:
+                return $this->{$method}($params[0], $params[1], $params[2], $params[3]);
+            case 5:
+                return $this->{$method}($params[0], $params[1], $params[2], $params[3], $params[4]);
+            default:
+                return call_user_func_array(array(&$this, $method), $params);
+            break;
+        }
+    }
 
 /**
  * Stop execution of the current script.  Wraps exit() making 
@@ -132,9 +132,9 @@ class Object {
  * @return void
  * @access public
  */
-	function _stop($status = 0) {
-		exit($status);
-	}
+    function _stop($status = 0) {
+        exit($status);
+    }
 
 /**
  * Convience method to write a message to CakeLog.  See CakeLog::write()
@@ -145,15 +145,15 @@ class Object {
  * @return boolean Success of log write
  * @access public
  */
-	function log($msg, $type = LOG_ERROR) {
-		if (!class_exists('CakeLog')) {
-			require LIBS . 'cake_log.php';
-		}
-		if (!is_string($msg)) {
-			$msg = print_r($msg, true);
-		}
-		return CakeLog::write($type, $msg);
-	}
+    function log($msg, $type = LOG_ERROR) {
+        if (!class_exists('CakeLog')) {
+            require LIBS . 'cake_log.php';
+        }
+        if (!is_string($msg)) {
+            $msg = print_r($msg, true);
+        }
+        return CakeLog::write($type, $msg);
+    }
 
 /**
  * Allows setting of multiple properties of the object in a single line of code.  Will only set 
@@ -163,16 +163,16 @@ class Object {
  * @return void
  * @access protected
  */
-	function _set($properties = array()) {
-		if (is_array($properties) && !empty($properties)) {
-			$vars = get_object_vars($this);
-			foreach ($properties as $key => $val) {
-				if (array_key_exists($key, $vars)) {
-					$this->{$key} = $val;
-				}
-			}
-		}
-	}
+    function _set($properties = array()) {
+        if (is_array($properties) && !empty($properties)) {
+            $vars = get_object_vars($this);
+            foreach ($properties as $key => $val) {
+                if (array_key_exists($key, $vars)) {
+                    $this->{$key} = $val;
+                }
+            }
+        }
+    }
 
 /**
  * Used to report user friendly errors.
@@ -184,24 +184,24 @@ class Object {
  * @return error message
  * @access public
  */
-	function cakeError($method, $messages = array()) {
-		if (!class_exists('ErrorHandler')) {
-			App::import('Core', 'Error');
+    function cakeError($method, $messages = array()) {
+        if (!class_exists('ErrorHandler')) {
+            App::import('Core', 'Error');
 
-			if (file_exists(APP . 'error.php')) {
-				include_once (APP . 'error.php');
-			} elseif (file_exists(APP . 'app_error.php')) {
-				include_once (APP . 'app_error.php');
-			}
-		}
+            if (file_exists(APP . 'error.php')) {
+                include_once (APP . 'error.php');
+            } elseif (file_exists(APP . 'app_error.php')) {
+                include_once (APP . 'app_error.php');
+            }
+        }
 
-		if (class_exists('AppError')) {
-			$error = new AppError($method, $messages);
-		} else {
-			$error = new ErrorHandler($method, $messages);
-		}
-		return $error;
-	}
+        if (class_exists('AppError')) {
+            $error = new AppError($method, $messages);
+        } else {
+            $error = new ErrorHandler($method, $messages);
+        }
+        return $error;
+    }
 
 /**
  * Checks for a persistent class file, if found file is opened and true returned
@@ -215,24 +215,24 @@ class Object {
  * @access protected
  * @todo add examples to manual
  */
-	function _persist($name, $return = null, &$object, $type = null) {
-		$file = CACHE . 'persistent' . DS . strtolower($name) . '.php';
-		if ($return === null) {
-			if (!file_exists($file)) {
-				return false;
-			} else {
-				return true;
-			}
-		}
+    function _persist($name, $return = null, &$object, $type = null) {
+        $file = CACHE . 'persistent' . DS . strtolower($name) . '.php';
+        if ($return === null) {
+            if (!file_exists($file)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
 
-		if (!file_exists($file)) {
-			$this->_savePersistent($name, $object);
-			return false;
-		} else {
-			$this->__openPersistent($name, $type);
-			return true;
-		}
-	}
+        if (!file_exists($file)) {
+            $this->_savePersistent($name, $object);
+            return false;
+        } else {
+            $this->__openPersistent($name, $type);
+            return true;
+        }
+    }
 
 /**
  * You should choose a unique name for the persistent file
@@ -244,17 +244,17 @@ class Object {
  * @return boolean true on save, throws error if file can not be created
  * @access protected
  */
-	function _savePersistent($name, &$object) {
-		$file = 'persistent' . DS . strtolower($name) . '.php';
-		$objectArray = array(&$object);
-		$data = str_replace('\\', '\\\\', serialize($objectArray));
-		$data = '<?php $' . $name . ' = \'' . str_replace('\'', '\\\'', $data) . '\' ?>';
-		$duration = '+999 days';
-		if (Configure::read() >= 1) {
-			$duration = '+10 seconds';
-		}
-		cache($file, $data, $duration);
-	}
+    function _savePersistent($name, &$object) {
+        $file = 'persistent' . DS . strtolower($name) . '.php';
+        $objectArray = array(&$object);
+        $data = str_replace('\\', '\\\\', serialize($objectArray));
+        $data = '<?php $' . $name . ' = \'' . str_replace('\'', '\\\'', $data) . '\' ?>';
+        $duration = '+999 days';
+        if (Configure::read() >= 1) {
+            $duration = '+10 seconds';
+        }
+        cache($file, $data, $duration);
+    }
 
 /**
  * Open the persistent class file for reading
@@ -265,34 +265,34 @@ class Object {
  * @return void
  * @access private
  */
-	function __openPersistent($name, $type = null) {
-		$file = CACHE . 'persistent' . DS . strtolower($name) . '.php';
-		include($file);
+    function __openPersistent($name, $type = null) {
+        $file = CACHE . 'persistent' . DS . strtolower($name) . '.php';
+        include($file);
 
-		switch ($type) {
-			case 'registry':
-				$vars = unserialize(${$name});
-				foreach ($vars['0'] as $key => $value) {
-					if (strpos($key, '_behavior') !== false) {
-						App::import('Behavior', Inflector::classify(substr($key, 0, -9)));
-					} else {
-						App::import('Model', Inflector::camelize($key));
-					}
-					unset ($value);
-				}
-				unset($vars);
-				$vars = unserialize(${$name});
-				foreach ($vars['0'] as $key => $value) {
-					ClassRegistry::addObject($key, $value);
-					unset ($value);
-				}
-				unset($vars);
-			break;
-			default:
-				$vars = unserialize(${$name});
-				$this->{$name} = $vars['0'];
-				unset($vars);
-			break;
-		}
-	}
+        switch ($type) {
+            case 'registry':
+                $vars = unserialize(${$name});
+                foreach ($vars['0'] as $key => $value) {
+                    if (strpos($key, '_behavior') !== false) {
+                        App::import('Behavior', Inflector::classify(substr($key, 0, -9)));
+                    } else {
+                        App::import('Model', Inflector::camelize($key));
+                    }
+                    unset ($value);
+                }
+                unset($vars);
+                $vars = unserialize(${$name});
+                foreach ($vars['0'] as $key => $value) {
+                    ClassRegistry::addObject($key, $value);
+                    unset ($value);
+                }
+                unset($vars);
+            break;
+            default:
+                $vars = unserialize(${$name});
+                $this->{$name} = $vars['0'];
+                unset($vars);
+            break;
+        }
+    }
 }

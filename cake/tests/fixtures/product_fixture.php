@@ -32,7 +32,7 @@ class ProductFixture extends CakeTestFixture {
  * @var string 'Product'
  * @access public
  */
-	var $name = 'Product';
+    var $name = 'Product';
 
 /**
  * fields property
@@ -40,12 +40,12 @@ class ProductFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'name' => array('type' => 'string', 'length' => 255, 'null' => false),
-		'type' => array('type' => 'string', 'length' => 255, 'null' => false),
-		'price' => array('type' => 'integer', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'name' => array('type' => 'string', 'length' => 255, 'null' => false),
+        'type' => array('type' => 'string', 'length' => 255, 'null' => false),
+        'price' => array('type' => 'integer', 'null' => false)
+    );
 
 /**
  * records property
@@ -53,14 +53,14 @@ class ProductFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('name' => 'Park\'s Great Hits', 'type' => 'Music', 'price' => 19),
-		array('name' => 'Silly Puddy', 'type' => 'Toy', 'price' => 3),
-		array('name' => 'Playstation', 'type' => 'Toy', 'price' => 89),
-		array('name' => 'Men\'s T-Shirt', 'type' => 'Clothing', 'price' => 32),
-		array('name' => 'Blouse', 'type' => 'Clothing', 'price' => 34),
-		array('name' => 'Electronica 2002', 'type' => 'Music', 'price' => 4),
-		array('name' => 'Country Tunes', 'type' => 'Music', 'price' => 21),
-		array('name' => 'Watermelon', 'type' => 'Food', 'price' => 9)
-	);
+    var $records = array(
+        array('name' => 'Park\'s Great Hits', 'type' => 'Music', 'price' => 19),
+        array('name' => 'Silly Puddy', 'type' => 'Toy', 'price' => 3),
+        array('name' => 'Playstation', 'type' => 'Toy', 'price' => 89),
+        array('name' => 'Men\'s T-Shirt', 'type' => 'Clothing', 'price' => 32),
+        array('name' => 'Blouse', 'type' => 'Clothing', 'price' => 34),
+        array('name' => 'Electronica 2002', 'type' => 'Music', 'price' => 4),
+        array('name' => 'Country Tunes', 'type' => 'Music', 'price' => 21),
+        array('name' => 'Watermelon', 'type' => 'Food', 'price' => 9)
+    );
 }

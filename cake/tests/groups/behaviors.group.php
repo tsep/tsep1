@@ -34,7 +34,7 @@ class BehaviorsGroupTest extends TestSuite {
  * @var string
  * @access public
  */
-	var $label = 'All core behavior test cases.';
+    var $label = 'All core behavior test cases.';
 
 /**
  * BehaviorsGroupTest method
@@ -42,7 +42,7 @@ class BehaviorsGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function BehaviorsGroupTest() {
-		TestManager::addTestCasesFromDirectory($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'behaviors');
-	}
+    function BehaviorsGroupTest() {
+        TestManager::addTestCasesFromDirectory($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'behaviors');
+    }
 }

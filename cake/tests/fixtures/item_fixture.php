@@ -32,7 +32,7 @@ class ItemFixture extends CakeTestFixture {
  * @var string 'Item'
  * @access public
  */
-	var $name = 'Item';
+    var $name = 'Item';
 
 /**
  * fields property
@@ -40,12 +40,12 @@ class ItemFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'syfile_id' => array('type' => 'integer', 'null' => false),
-		'published' => array('type' => 'boolean', 'null' => false),
-		'name' => array('type' => 'string', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'syfile_id' => array('type' => 'integer', 'null' => false),
+        'published' => array('type' => 'boolean', 'null' => false),
+        'name' => array('type' => 'string', 'null' => false)
+    );
 
 /**
  * records property
@@ -53,12 +53,12 @@ class ItemFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('syfile_id' => 1, 'published' => 0, 'name' => 'Item 1'),
-		array('syfile_id' => 2, 'published' => 0, 'name' => 'Item 2'),
-		array('syfile_id' => 3, 'published' => 0, 'name' => 'Item 3'),
-		array('syfile_id' => 4, 'published' => 0, 'name' => 'Item 4'),
-		array('syfile_id' => 5, 'published' => 0, 'name' => 'Item 5'),
-		array('syfile_id' => 6, 'published' => 0, 'name' => 'Item 6')
-	);
+    var $records = array(
+        array('syfile_id' => 1, 'published' => 0, 'name' => 'Item 1'),
+        array('syfile_id' => 2, 'published' => 0, 'name' => 'Item 2'),
+        array('syfile_id' => 3, 'published' => 0, 'name' => 'Item 3'),
+        array('syfile_id' => 4, 'published' => 0, 'name' => 'Item 4'),
+        array('syfile_id' => 5, 'published' => 0, 'name' => 'Item 5'),
+        array('syfile_id' => 6, 'published' => 0, 'name' => 'Item 6')
+    );
 }

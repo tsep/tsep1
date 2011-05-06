@@ -32,7 +32,7 @@ class Shell extends Object {
  * @var ShellDispatcher
  * @access public
  */
-	var $Dispatch = null;
+    var $Dispatch = null;
 
 /**
  * If true, the script will ask for permission to perform actions.
@@ -40,7 +40,7 @@ class Shell extends Object {
  * @var boolean
  * @access public
  */
-	var $interactive = true;
+    var $interactive = true;
 
 /**
  * Holds the DATABASE_CONFIG object for the app. Null if database.php could not be found,
@@ -49,7 +49,7 @@ class Shell extends Object {
  * @var DATABASE_CONFIG
  * @access public
  */
-	var $DbConfig = null;
+    var $DbConfig = null;
 
 /**
  * Contains command switches parsed from the command line.
@@ -57,7 +57,7 @@ class Shell extends Object {
  * @var array
  * @access public
  */
-	var $params = array();
+    var $params = array();
 
 /**
  * Contains arguments parsed from the command line.
@@ -65,7 +65,7 @@ class Shell extends Object {
  * @var array
  * @access public
  */
-	var $args = array();
+    var $args = array();
 
 /**
  * The file name of the shell that was invoked.
@@ -73,7 +73,7 @@ class Shell extends Object {
  * @var string
  * @access public
  */
-	var $shell = null;
+    var $shell = null;
 
 /**
  * The class name of the shell that was invoked.
@@ -81,7 +81,7 @@ class Shell extends Object {
  * @var string
  * @access public
  */
-	var $className = null;
+    var $className = null;
 
 /**
  * The command called if public methods are available.
@@ -89,7 +89,7 @@ class Shell extends Object {
  * @var string
  * @access public
  */
-	var $command = null;
+    var $command = null;
 
 /**
  * The name of the shell in camelized.
@@ -97,7 +97,7 @@ class Shell extends Object {
  * @var string
  * @access public
  */
-	var $name = null;
+    var $name = null;
 
 /**
  * An alias for the shell
@@ -105,7 +105,7 @@ class Shell extends Object {
  * @var string
  * @access public
  */
-	var $alias = null;
+    var $alias = null;
 
 /**
  * Contains tasks to load and instantiate
@@ -113,7 +113,7 @@ class Shell extends Object {
  * @var array
  * @access public
  */
-	var $tasks = array();
+    var $tasks = array();
 
 /**
  * Contains the loaded tasks
@@ -121,7 +121,7 @@ class Shell extends Object {
  * @var array
  * @access public
  */
-	var $taskNames = array();
+    var $taskNames = array();
 
 /**
  * Contains models to load and instantiate
@@ -129,45 +129,45 @@ class Shell extends Object {
  * @var array
  * @access public
  */
-	var $uses = array();
+    var $uses = array();
 
 /**
  *  Constructs this Shell instance.
  *
  */
-	function __construct(&$dispatch) {
-		$vars = array('params', 'args', 'shell', 'shellCommand' => 'command');
+    function __construct(&$dispatch) {
+        $vars = array('params', 'args', 'shell', 'shellCommand' => 'command');
 
-		foreach ($vars as $key => $var) {
-			if (is_string($key)) {
-				$this->{$var} =& $dispatch->{$key};
-			} else {
-				$this->{$var} =& $dispatch->{$var};
-			}
-		}
+        foreach ($vars as $key => $var) {
+            if (is_string($key)) {
+                $this->{$var} =& $dispatch->{$key};
+            } else {
+                $this->{$var} =& $dispatch->{$var};
+            }
+        }
 
-		if ($this->name == null) {
-			$this->name = get_class($this);
-		}
+        if ($this->name == null) {
+            $this->name = get_class($this);
+        }
 
-		if ($this->alias == null) {
-			$this->alias = $this->name;
-		}
+        if ($this->alias == null) {
+            $this->alias = $this->name;
+        }
 
-		ClassRegistry::addObject($this->name, $this);
-		ClassRegistry::map($this->name, $this->alias);
+        ClassRegistry::addObject($this->name, $this);
+        ClassRegistry::map($this->name, $this->alias);
 
-		if (!PHP5 && isset($this->args[0])) {
-			if (strpos($this->name, strtolower(Inflector::camelize($this->args[0]))) !== false) {
-				$dispatch->shiftArgs();
-			}
-			if (strtolower($this->command) == strtolower(Inflector::variable($this->args[0])) && method_exists($this, $this->command)) {
-				$dispatch->shiftArgs();
-			}
-		}
+        if (!PHP5 && isset($this->args[0])) {
+            if (strpos($this->name, strtolower(Inflector::camelize($this->args[0]))) !== false) {
+                $dispatch->shiftArgs();
+            }
+            if (strtolower($this->command) == strtolower(Inflector::variable($this->args[0])) && method_exists($this, $this->command)) {
+                $dispatch->shiftArgs();
+            }
+        }
 
-		$this->Dispatch =& $dispatch;
-	}
+        $this->Dispatch =& $dispatch;
+    }
 
 /**
  * Initializes the Shell
@@ -176,9 +176,9 @@ class Shell extends Object {
  *
  * @access public
  */
-	function initialize() {
-		$this->_loadModels();
-	}
+    function initialize() {
+        $this->_loadModels();
+    }
 
 /**
  * Starts up the Shell
@@ -187,24 +187,24 @@ class Shell extends Object {
  *
  * @access public
  */
-	function startup() {
-		$this->_welcome();
-	}
+    function startup() {
+        $this->_welcome();
+    }
 
 /**
  * Displays a header for the shell
  *
  * @access protected
  */
-	function _welcome() {
-		$this->Dispatch->clear();
-		$this->out();
-		$this->out('Welcome to CakePHP v' . Configure::version() . ' Console');
-		$this->hr();
-		$this->out('App : '. $this->params['app']);
-		$this->out('Path: '. $this->params['working']);
-		$this->hr();
-	}
+    function _welcome() {
+        $this->Dispatch->clear();
+        $this->out();
+        $this->out('Welcome to CakePHP v' . Configure::version() . ' Console');
+        $this->hr();
+        $this->out('App : '. $this->params['app']);
+        $this->out('Path: '. $this->params['working']);
+        $this->hr();
+    }
 
 /**
  * Loads database file and constructs DATABASE_CONFIG class
@@ -213,15 +213,15 @@ class Shell extends Object {
  * @return bool
  * @access protected
  */
-	function _loadDbConfig() {
-		if (config('database') && class_exists('DATABASE_CONFIG')) {
-			$this->DbConfig =& new DATABASE_CONFIG();
-			return true;
-		}
-		$this->err('Database config could not be loaded.');
-		$this->out('Run `bake` to create the database configuration.');
-		return false;
-	}
+    function _loadDbConfig() {
+        if (config('database') && class_exists('DATABASE_CONFIG')) {
+            $this->DbConfig =& new DATABASE_CONFIG();
+            return true;
+        }
+        $this->err('Database config could not be loaded.');
+        $this->out('Run `bake` to create the database configuration.');
+        return false;
+    }
 
 /**
  * if var $uses = true
@@ -232,37 +232,37 @@ class Shell extends Object {
  * @return bool
  * @access protected
  */
-	function _loadModels() {
-		if ($this->uses === null || $this->uses === false) {
-			return;
-		}
+    function _loadModels() {
+        if ($this->uses === null || $this->uses === false) {
+            return;
+        }
 
-		if ($this->uses === true && App::import('Model', 'AppModel')) {
-			$this->AppModel =& new AppModel(false, false, false);
-			return true;
-		}
+        if ($this->uses === true && App::import('Model', 'AppModel')) {
+            $this->AppModel =& new AppModel(false, false, false);
+            return true;
+        }
 
-		if ($this->uses !== true && !empty($this->uses)) {
-			$uses = is_array($this->uses) ? $this->uses : array($this->uses);
+        if ($this->uses !== true && !empty($this->uses)) {
+            $uses = is_array($this->uses) ? $this->uses : array($this->uses);
 
-			$modelClassName = $uses[0];
-			if (strpos($uses[0], '.') !== false) {
-				list($plugin, $modelClassName) = explode('.', $uses[0]);
-			}
-			$this->modelClass = $modelClassName;
+            $modelClassName = $uses[0];
+            if (strpos($uses[0], '.') !== false) {
+                list($plugin, $modelClassName) = explode('.', $uses[0]);
+            }
+            $this->modelClass = $modelClassName;
 
-			foreach ($uses as $modelClass) {
-				list($plugin, $modelClass) = pluginSplit($modelClass, true);
-				if (PHP5) {
-					$this->{$modelClass} = ClassRegistry::init($plugin . $modelClass);
-				} else {
-					$this->{$modelClass} =& ClassRegistry::init($plugin . $modelClass);
-				}
-			}
-			return true;
-		}
-		return false;
-	}
+            foreach ($uses as $modelClass) {
+                list($plugin, $modelClass) = pluginSplit($modelClass, true);
+                if (PHP5) {
+                    $this->{$modelClass} = ClassRegistry::init($plugin . $modelClass);
+                } else {
+                    $this->{$modelClass} =& ClassRegistry::init($plugin . $modelClass);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
 /**
  * Loads tasks defined in var $tasks
@@ -270,57 +270,57 @@ class Shell extends Object {
  * @return bool
  * @access public
  */
-	function loadTasks() {
-		if ($this->tasks === null || $this->tasks === false || $this->tasks === true || empty($this->tasks)) {
-			return true;
-		}
+    function loadTasks() {
+        if ($this->tasks === null || $this->tasks === false || $this->tasks === true || empty($this->tasks)) {
+            return true;
+        }
 
-		$tasks = $this->tasks;
-		if (!is_array($tasks)) {
-			$tasks = array($tasks);
-		}
+        $tasks = $this->tasks;
+        if (!is_array($tasks)) {
+            $tasks = array($tasks);
+        }
 
-		foreach ($tasks as $taskName) {
-			$task = Inflector::underscore($taskName);
-			$taskClass = Inflector::camelize($taskName . 'Task');
+        foreach ($tasks as $taskName) {
+            $task = Inflector::underscore($taskName);
+            $taskClass = Inflector::camelize($taskName . 'Task');
 
-			if (!class_exists($taskClass)) {
-				foreach ($this->Dispatch->shellPaths as $path) {
-					$taskPath = $path . 'tasks' . DS . $task . '.php';
-					if (file_exists($taskPath)) {
-						require_once $taskPath;
-						break;
-					}
-				}
-			}
-			$taskClassCheck = $taskClass;
-			if (!PHP5) {
-				$taskClassCheck = strtolower($taskClass);
-			}
-			if (ClassRegistry::isKeySet($taskClassCheck)) {
-				$this->taskNames[] = $taskName;
-				if (!PHP5) {
-					$this->{$taskName} =& ClassRegistry::getObject($taskClassCheck);
-				} else {
-					$this->{$taskName} = ClassRegistry::getObject($taskClassCheck);
-				}
-			} else {
-				$this->taskNames[] = $taskName;
-				if (!PHP5) {
-					$this->{$taskName} =& new $taskClass($this->Dispatch);
-				} else {
-					$this->{$taskName} = new $taskClass($this->Dispatch);
-				}
-			}
+            if (!class_exists($taskClass)) {
+                foreach ($this->Dispatch->shellPaths as $path) {
+                    $taskPath = $path . 'tasks' . DS . $task . '.php';
+                    if (file_exists($taskPath)) {
+                        require_once $taskPath;
+                        break;
+                    }
+                }
+            }
+            $taskClassCheck = $taskClass;
+            if (!PHP5) {
+                $taskClassCheck = strtolower($taskClass);
+            }
+            if (ClassRegistry::isKeySet($taskClassCheck)) {
+                $this->taskNames[] = $taskName;
+                if (!PHP5) {
+                    $this->{$taskName} =& ClassRegistry::getObject($taskClassCheck);
+                } else {
+                    $this->{$taskName} = ClassRegistry::getObject($taskClassCheck);
+                }
+            } else {
+                $this->taskNames[] = $taskName;
+                if (!PHP5) {
+                    $this->{$taskName} =& new $taskClass($this->Dispatch);
+                } else {
+                    $this->{$taskName} = new $taskClass($this->Dispatch);
+                }
+            }
 
-			if (!isset($this->{$taskName})) {
-				$this->err("Task `{$taskName}` could not be loaded");
-				$this->_stop();
-			}
-		}
+            if (!isset($this->{$taskName})) {
+                $this->err("Task `{$taskName}` could not be loaded");
+                $this->_stop();
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 
 /**
  * Prompts the user for input, and returns it.
@@ -331,30 +331,30 @@ class Shell extends Object {
  * @return Either the default value, or the user-provided input.
  * @access public
  */
-	function in($prompt, $options = null, $default = null) {
-		if (!$this->interactive) {
-			return $default;
-		}
-		$in = $this->Dispatch->getInput($prompt, $options, $default);
+    function in($prompt, $options = null, $default = null) {
+        if (!$this->interactive) {
+            return $default;
+        }
+        $in = $this->Dispatch->getInput($prompt, $options, $default);
 
-		if ($options && is_string($options)) {
-			if (strpos($options, ',')) {
-				$options = explode(',', $options);
-			} elseif (strpos($options, '/')) {
-				$options = explode('/', $options);
-			} else {
-				$options = array($options);
-			}
-		}
-		if (is_array($options)) {
-			while ($in == '' || ($in && (!in_array(strtolower($in), $options) && !in_array(strtoupper($in), $options)) && !in_array($in, $options))) {
-				$in = $this->Dispatch->getInput($prompt, $options, $default);
-			}
-		}
-		if ($in) {
-			return $in;
-		}
-	}
+        if ($options && is_string($options)) {
+            if (strpos($options, ',')) {
+                $options = explode(',', $options);
+            } elseif (strpos($options, '/')) {
+                $options = explode('/', $options);
+            } else {
+                $options = array($options);
+            }
+        }
+        if (is_array($options)) {
+            while ($in == '' || ($in && (!in_array(strtolower($in), $options) && !in_array(strtoupper($in), $options)) && !in_array($in, $options))) {
+                $in = $this->Dispatch->getInput($prompt, $options, $default);
+            }
+        }
+        if ($in) {
+            return $in;
+        }
+    }
 
 /**
  * Outputs a single or multiple messages to stdout. If no parameters
@@ -365,12 +365,12 @@ class Shell extends Object {
  * @return integer Returns the number of bytes returned from writing to stdout.
  * @access public
  */
-	function out($message = null, $newlines = 1) {
-		if (is_array($message)) {
-			$message = implode($this->nl(), $message);
-		}
-		return $this->Dispatch->stdout($message . $this->nl($newlines), false);
-	}
+    function out($message = null, $newlines = 1) {
+        if (is_array($message)) {
+            $message = implode($this->nl(), $message);
+        }
+        return $this->Dispatch->stdout($message . $this->nl($newlines), false);
+    }
 
 /**
  * Outputs a single or multiple error messages to stderr. If no parameters
@@ -380,12 +380,12 @@ class Shell extends Object {
  * @param integer $newlines Number of newlines to append
  * @access public
  */
-	function err($message = null, $newlines = 1) {
-		if (is_array($message)) {
-			$message = implode($this->nl(), $message);
-		}
-		$this->Dispatch->stderr($message . $this->nl($newlines));
-	}
+    function err($message = null, $newlines = 1) {
+        if (is_array($message)) {
+            $message = implode($this->nl(), $message);
+        }
+        $this->Dispatch->stderr($message . $this->nl($newlines));
+    }
 
 /**
  * Returns a single or multiple linefeeds sequences.
@@ -394,9 +394,9 @@ class Shell extends Object {
  * @access public
  * @return string
  */
-	function nl($multiplier = 1) {
-		return str_repeat("\n", $multiplier);
-	}
+    function nl($multiplier = 1) {
+        return str_repeat("\n", $multiplier);
+    }
 
 /**
  * Outputs a series of minus characters to the standard output, acts as a visual separator.
@@ -404,11 +404,11 @@ class Shell extends Object {
  * @param integer $newlines Number of newlines to pre- and append
  * @access public
  */
-	function hr($newlines = 0) {
-		$this->out(null, $newlines);
-		$this->out('---------------------------------------------------------------');
-		$this->out(null, $newlines);
-	}
+    function hr($newlines = 0) {
+        $this->out(null, $newlines);
+        $this->out('---------------------------------------------------------------');
+        $this->out(null, $newlines);
+    }
 
 /**
  * Displays a formatted error message
@@ -418,14 +418,14 @@ class Shell extends Object {
  * @param string $message An optional error message
  * @access public
  */
-	function error($title, $message = null) {
-		$this->err(sprintf(__('Error: %s', true), $title));
+    function error($title, $message = null) {
+        $this->err(sprintf(__('Error: %s', true), $title));
 
-		if (!empty($message)) {
-			$this->err($message);
-		}
-		$this->_stop(1);
-	}
+        if (!empty($message)) {
+            $this->err($message);
+        }
+        $this->_stop(1);
+    }
 
 /**
  * Will check the number args matches otherwise throw an error
@@ -434,18 +434,18 @@ class Shell extends Object {
  * @param string $command Command
  * @access protected
  */
-	function _checkArgs($expectedNum, $command = null) {
-		if (!$command) {
-			$command = $this->command;
-		}
-		if (count($this->args) < $expectedNum) {
-			$message[] = "Got: " . count($this->args);
-			$message[] = "Expected: {$expectedNum}";
-			$message[] = "Please type `cake {$this->shell} help` for help";
-			$message[] = "on usage of the {$this->name} {$command}.";
-			$this->error('Wrong number of parameters', $message);
-		}
-	}
+    function _checkArgs($expectedNum, $command = null) {
+        if (!$command) {
+            $command = $this->command;
+        }
+        if (count($this->args) < $expectedNum) {
+            $message[] = "Got: " . count($this->args);
+            $message[] = "Expected: {$expectedNum}";
+            $message[] = "Please type `cake {$this->shell} help` for help";
+            $message[] = "on usage of the {$this->name} {$command}.";
+            $this->error('Wrong number of parameters', $message);
+        }
+    }
 
 /**
  * Creates a file at given path
@@ -455,52 +455,52 @@ class Shell extends Object {
  * @return boolean Success
  * @access public
  */
-	function createFile($path, $contents) {
-		$path = str_replace(DS . DS, DS, $path);
+    function createFile($path, $contents) {
+        $path = str_replace(DS . DS, DS, $path);
 
-		$this->out();
-		$this->out(sprintf(__("Creating file %s", true), $path));
+        $this->out();
+        $this->out(sprintf(__("Creating file %s", true), $path));
 
-		if (is_file($path) && $this->interactive === true) {
-			$prompt = sprintf(__('File `%s` exists, overwrite?', true), $path);
-			$key = $this->in($prompt,  array('y', 'n', 'q'), 'n');
+        if (is_file($path) && $this->interactive === true) {
+            $prompt = sprintf(__('File `%s` exists, overwrite?', true), $path);
+            $key = $this->in($prompt,  array('y', 'n', 'q'), 'n');
 
-			if (strtolower($key) == 'q') {
-				$this->out(__('Quitting.', true), 2);
-				$this->_stop();
-			} elseif (strtolower($key) != 'y') {
-				$this->out(sprintf(__('Skip `%s`', true), $path), 2);
-				return false;
-			}
-		}
-		if (!class_exists('File')) {
-			require LIBS . 'file.php';
-		}
+            if (strtolower($key) == 'q') {
+                $this->out(__('Quitting.', true), 2);
+                $this->_stop();
+            } elseif (strtolower($key) != 'y') {
+                $this->out(sprintf(__('Skip `%s`', true), $path), 2);
+                return false;
+            }
+        }
+        if (!class_exists('File')) {
+            require LIBS . 'file.php';
+        }
 
-		if ($File = new File($path, true)) {
-			$data = $File->prepare($contents);
-			$File->write($data);
-			$this->out(sprintf(__('Wrote `%s`', true), $path));
-			return true;
-		} else {
-			$this->err(sprintf(__('Could not write to `%s`.', true), $path), 2);
-			return false;
-		}
-	}
+        if ($File = new File($path, true)) {
+            $data = $File->prepare($contents);
+            $File->write($data);
+            $this->out(sprintf(__('Wrote `%s`', true), $path));
+            return true;
+        } else {
+            $this->err(sprintf(__('Could not write to `%s`.', true), $path), 2);
+            return false;
+        }
+    }
 
 /**
  * Outputs usage text on the standard output. Implement it in subclasses.
  *
  * @access public
  */
-	function help() {
-		if ($this->command != null) {
-			$this->err("Unknown {$this->name} command `{$this->command}`.");
-			$this->err("For usage, try `cake {$this->shell} help`.", 2);
-		} else {
-			$this->Dispatch->help();
-		}
-	}
+    function help() {
+        if ($this->command != null) {
+            $this->err("Unknown {$this->name} command `{$this->command}`.");
+            $this->err("For usage, try `cake {$this->shell} help`.", 2);
+        } else {
+            $this->Dispatch->help();
+        }
+    }
 
 /**
  * Action to create a Unit Test
@@ -508,20 +508,20 @@ class Shell extends Object {
  * @return boolean Success
  * @access protected
  */
-	function _checkUnitTest() {
-		if (App::import('vendor', 'simpletest' . DS . 'simpletest')) {
-			return true;
-		}
-		$prompt = 'SimpleTest is not installed. Do you want to bake unit test files anyway?';
-		$unitTest = $this->in($prompt, array('y','n'), 'y');
-		$result = strtolower($unitTest) == 'y' || strtolower($unitTest) == 'yes';
+    function _checkUnitTest() {
+        if (App::import('vendor', 'simpletest' . DS . 'simpletest')) {
+            return true;
+        }
+        $prompt = 'SimpleTest is not installed. Do you want to bake unit test files anyway?';
+        $unitTest = $this->in($prompt, array('y','n'), 'y');
+        $result = strtolower($unitTest) == 'y' || strtolower($unitTest) == 'yes';
 
-		if ($result) {
-			$this->out();
-			$this->out('You can download SimpleTest from http://simpletest.org');
-		}
-		return $result;
-	}
+        if ($result) {
+            $this->out();
+            $this->out('You can download SimpleTest from http://simpletest.org');
+        }
+        return $result;
+    }
 
 /**
  * Makes absolute file path easier to read
@@ -530,11 +530,11 @@ class Shell extends Object {
  * @return sting short path
  * @access public
  */
-	function shortPath($file) {
-		$shortPath = str_replace(ROOT, null, $file);
-		$shortPath = str_replace('..' . DS, '', $shortPath);
-		return str_replace(DS . DS, DS, $shortPath);
-	}
+    function shortPath($file) {
+        $shortPath = str_replace(ROOT, null, $file);
+        $shortPath = str_replace('..' . DS, '', $shortPath);
+        return str_replace(DS . DS, DS, $shortPath);
+    }
 
 /**
  * Creates the proper controller path for the specified controller class name
@@ -543,9 +543,9 @@ class Shell extends Object {
  * @return string Path to controller
  * @access protected
  */
-	function _controllerPath($name) {
-		return strtolower(Inflector::underscore($name));
-	}
+    function _controllerPath($name) {
+        return strtolower(Inflector::underscore($name));
+    }
 
 /**
  * Creates the proper controller plural name for the specified controller class name
@@ -554,9 +554,9 @@ class Shell extends Object {
  * @return string Controller plural name
  * @access protected
  */
-	function _controllerName($name) {
-		return Inflector::pluralize(Inflector::camelize($name));
-	}
+    function _controllerName($name) {
+        return Inflector::pluralize(Inflector::camelize($name));
+    }
 
 /**
  * Creates the proper controller camelized name (singularized) for the specified name
@@ -565,9 +565,9 @@ class Shell extends Object {
  * @return string Camelized and singularized controller name
  * @access protected
  */
-	function _modelName($name) {
-		return Inflector::camelize(Inflector::singularize($name));
-	}
+    function _modelName($name) {
+        return Inflector::camelize(Inflector::singularize($name));
+    }
 
 /**
  * Creates the proper underscored model key for associations
@@ -576,9 +576,9 @@ class Shell extends Object {
  * @return string Singular model key
  * @access protected
  */
-	function _modelKey($name) {
-		return Inflector::underscore($name) . '_id';
-	}
+    function _modelKey($name) {
+        return Inflector::underscore($name) . '_id';
+    }
 
 /**
  * Creates the proper model name from a foreign key
@@ -587,9 +587,9 @@ class Shell extends Object {
  * @return string Model name
  * @access protected
  */
-	function _modelNameFromKey($key) {
-		return Inflector::camelize(str_replace('_id', '', $key));
-	}
+    function _modelNameFromKey($key) {
+        return Inflector::camelize(str_replace('_id', '', $key));
+    }
 
 /**
  * creates the singular name for use in views.
@@ -598,9 +598,9 @@ class Shell extends Object {
  * @return string $name
  * @access protected
  */
-	function _singularName($name) {
-		return Inflector::variable(Inflector::singularize($name));
-	}
+    function _singularName($name) {
+        return Inflector::variable(Inflector::singularize($name));
+    }
 
 /**
  * Creates the plural name for views
@@ -609,9 +609,9 @@ class Shell extends Object {
  * @return string Plural name for views
  * @access protected
  */
-	function _pluralName($name) {
-		return Inflector::variable(Inflector::pluralize($name));
-	}
+    function _pluralName($name) {
+        return Inflector::variable(Inflector::pluralize($name));
+    }
 
 /**
  * Creates the singular human name used in views
@@ -620,9 +620,9 @@ class Shell extends Object {
  * @return string Singular human name
  * @access protected
  */
-	function _singularHumanName($name) {
-		return Inflector::humanize(Inflector::underscore(Inflector::singularize($name)));
-	}
+    function _singularHumanName($name) {
+        return Inflector::humanize(Inflector::underscore(Inflector::singularize($name)));
+    }
 
 /**
  * Creates the plural human name used in views
@@ -631,9 +631,9 @@ class Shell extends Object {
  * @return string Plural human name
  * @access protected
  */
-	function _pluralHumanName($name) {
-		return Inflector::humanize(Inflector::underscore($name));
-	}
+    function _pluralHumanName($name) {
+        return Inflector::humanize(Inflector::underscore($name));
+    }
 
 /**
  * Find the correct path for a plugin. Scans $pluginPaths for the plugin you want.
@@ -641,7 +641,7 @@ class Shell extends Object {
  * @param string $pluginName Name of the plugin you want ie. DebugKit
  * @return string $path path to the correct plugin.
  */
-	function _pluginPath($pluginName) {
-		return App::pluginPath($pluginName);
-	}
+    function _pluginPath($pluginName) {
+        return App::pluginPath($pluginName);
+    }
 }

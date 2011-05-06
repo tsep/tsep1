@@ -1,418 +1,418 @@
 <?php
 
-	/* Robots.txt interpreter. Version 1.2
+    /* Robots.txt interpreter. Version 1.2
 
-		Change Log
+        Change Log
 
-		1.2	* Bug fix for dumb author(!)
-		1.1	* Bug fix for domain names that have non-word and/or non-digit characters
-			* Added doxygen documentation
-		1.0	Original Release
+        1.2    * Bug fix for dumb author(!)
+        1.1    * Bug fix for domain names that have non-word and/or non-digit characters
+            * Added doxygen documentation
+        1.0    Original Release
 
-		Copyright (c) Andy Pieters <Pieters.Andy@gmail.com>
+        Copyright (c) Andy Pieters <Pieters.Andy@gmail.com>
 
-		This software is released under the terms of the GPL v3, as found on http://www.gnu.org/licenses/gpl-3.0.txt
-		
-		Abstract
+        This software is released under the terms of the GPL v3, as found on http://www.gnu.org/licenses/gpl-3.0.txt
+        
+        Abstract
 
-		Robots exclusion standard is considered propper netiquette, so any kind of script that exhibits
-		crawling-like behavior is expected to abide by it.
+        Robots exclusion standard is considered propper netiquette, so any kind of script that exhibits
+        crawling-like behavior is expected to abide by it.
 
-		The intended use of this class is to feed it a url before you intend to visit it. The class will
-		automatically attempt to read the robots.txt file and will return a boolean value to indicate if
-		you are allowed to visit this url.
+        The intended use of this class is to feed it a url before you intend to visit it. The class will
+        automatically attempt to read the robots.txt file and will return a boolean value to indicate if
+        you are allowed to visit this url.
 
-		Maximum Crawl-delays and request-rates maxed-out at 60seconds.
+        Maximum Crawl-delays and request-rates maxed-out at 60seconds.
 
-		The class will block until the detected crawl-delay (or request-rate) allows visiting the url.
+        The class will block until the detected crawl-delay (or request-rate) allows visiting the url.
 
-		For instance, if Crawl-delay is set to 3, the Robots_txt::urlAllowed() method will block for 3
-		seconds when called a second time. An internal clock is kept with the last visited time, so if
-		the delay is already expired, the method will not block.
+        For instance, if Crawl-delay is set to 3, the Robots_txt::urlAllowed() method will block for 3
+        seconds when called a second time. An internal clock is kept with the last visited time, so if
+        the delay is already expired, the method will not block.
 
-		Example usage
+        Example usage
 
-		foreach($arrUrlsToVisit as $strUrlToVisit) {
+        foreach($arrUrlsToVisit as $strUrlToVisit) {
 
-			if(Robots_txt::urlAllowed($strUrlToVisit,$strUserAgent)) {
+            if(Robots_txt::urlAllowed($strUrlToVisit,$strUserAgent)) {
 
-				#visit url, do processing. . . 
-			}
-		}
+                #visit url, do processing. . . 
+            }
+        }
 
-		The simple example above will ensure you abide by the wishes of the site owners.
+        The simple example above will ensure you abide by the wishes of the site owners.
 
-		Note: an unofficial non-standard extension exists, that limits the times that crawlers
-			  are allowed to visit a site. I choose to ignore this extension because I feel it
-			  is unreasonable.
+        Note: an unofficial non-standard extension exists, that limits the times that crawlers
+              are allowed to visit a site. I choose to ignore this extension because I feel it
+              is unreasonable.
 
-		Note: You are only *required* to specify your userAgent the first time you call the urlAllowed method, and
-			  only the first value is ever used.
+        Note: You are only *required* to specify your userAgent the first time you call the urlAllowed method, and
+              only the first value is ever used.
 
-		For the real geeks out there, note that the way I set it up, I require the use of a public method, but only
-		inside the class can an instance be created, and no instance is ever returned to the outside. So, is it still
-		a public method? */
+        For the real geeks out there, note that the way I set it up, I require the use of a public method, but only
+        inside the class can an instance be created, and no instance is ever returned to the outside. So, is it still
+        a public method? */
 
-	/** @brief Robots_txt class
-		@author Andy Pieters @a Pieters.Andy@gmail.com
+    /** @brief Robots_txt class
+        @author Andy Pieters @a Pieters.Andy@gmail.com
 
-		The intended use of this class is to feed it a url before you intend to visit it. The class will
-		automatically attempt to read the robots.txt file and will return a boolean value to indicate if
-		you are allowed to visit this url. */
-	class Robots_txt {
+        The intended use of this class is to feed it a url before you intend to visit it. The class will
+        automatically attempt to read the robots.txt file and will return a boolean value to indicate if
+        you are allowed to visit this url. */
+    class Robots_txt {
 
-		/** @brief The useragent name to use when evaluating robots.txt files */
-		protected $strUserAgent;
+        /** @brief The useragent name to use when evaluating robots.txt files */
+        protected $strUserAgent;
 
-		/** @brief Internal array to cache some rules. The '-' index is for disallows, the '+' index is for allows */
-		protected $arrRules=array('-'=>array(), '+'=>array());
+        /** @brief Internal array to cache some rules. The '-' index is for disallows, the '+' index is for allows */
+        protected $arrRules=array('-'=>array(), '+'=>array());
 
-		/** @brief Cached crawl delay */
-		protected $intDelay=0;
+        /** @brief Cached crawl delay */
+        protected $intDelay=0;
 
-		/** @brief Internal variable to log last visit date/time */
-		protected $intLastVisit=null;
+        /** @brief Internal variable to log last visit date/time */
+        protected $intLastVisit=null;
 
-		/** @brief Cached hostname  to crawl */
-		protected $strHost=null;
+        /** @brief Cached hostname  to crawl */
+        protected $strHost=null;
 
-		/** @brief Internal variable to cache instances of this class */
-		protected static $arrInstances=array();
+        /** @brief Internal variable to cache instances of this class */
+        protected static $arrInstances=array();
 
-		/** @brief Internal variable to store useragent name */
-		protected static $strReportedUserAgent=null;
+        /** @brief Internal variable to store useragent name */
+        protected static $strReportedUserAgent=null;
 
-		/** @brief Class constructor, can only be called from inside the class (or its children)
-			@param $strUrl the url that robots.txt is located on
-			@param $strUserAgent the useragent name */
-		protected function __construct($strUrl,$strUserAgent) {
+        /** @brief Class constructor, can only be called from inside the class (or its children)
+            @param $strUrl the url that robots.txt is located on
+            @param $strUserAgent the useragent name */
+        protected function __construct($strUrl,$strUserAgent) {
 
-			$parsed = parse_url($strUrl);
-			
-			$this->init($parsed['scheme'],$parsed['host'],$strUserAgent);
-		}
-		
-		/** @brief Initializes this instance, retrieves the robots.txt file and parses it
-			@param $strScheme the protocol the host is on (http,https)
-			@param $strHost the host to crawl,check robots.txt
-			@param $strUserAgent the useragent name
-			@throws Exception in case empty parameters are passed */
-		protected function init($strScheme,$strHost,$strUserAgent) {
+            $parsed = parse_url($strUrl);
+            
+            $this->init($parsed['scheme'],$parsed['host'],$strUserAgent);
+        }
+        
+        /** @brief Initializes this instance, retrieves the robots.txt file and parses it
+            @param $strScheme the protocol the host is on (http,https)
+            @param $strHost the host to crawl,check robots.txt
+            @param $strUserAgent the useragent name
+            @throws Exception in case empty parameters are passed */
+        protected function init($strScheme,$strHost,$strUserAgent) {
 
-			if( (strlen(($this->strUserAgent=$strUserAgent))) && (strlen(($this->strScheme=$strScheme))) && (strlen(($this->strHost=$strHost)))) {
+            if( (strlen(($this->strUserAgent=$strUserAgent))) && (strlen(($this->strScheme=$strScheme))) && (strlen(($this->strHost=$strHost)))) {
 
-				$this->parseFile($strUserAgent,file_get_contents("$strScheme://$strHost/robots.txt"));
-				
-			} else {
+                $this->parseFile($strUserAgent,file_get_contents("$strScheme://$strHost/robots.txt"));
+                
+            } else {
 
-				throw new Exception('Syntax Error');
-			}
-			
-		}
+                throw new Exception('Syntax Error');
+            }
+            
+        }
 
-		/** @brief Parses a robots.txt file
-			@param $strUserAgent The useragent name to use when looking for matches
-			@param $strRobotsFile The contents of a robots.txt file */
-		protected function parseFile($strUserAgent,$strRobotsFile) {
+        /** @brief Parses a robots.txt file
+            @param $strUserAgent The useragent name to use when looking for matches
+            @param $strRobotsFile The contents of a robots.txt file */
+        protected function parseFile($strUserAgent,$strRobotsFile) {
 
-			if(strlen($strRobotsFile)) {
+            if(strlen($strRobotsFile)) {
 
-				#convert end of line markers. Expected: CR or CR/LF, or LF
-				#What it does: it converts all CR/LF to LF, and then converts all CR to LF. So the expected output always has LF as line endings
+                #convert end of line markers. Expected: CR or CR/LF, or LF
+                #What it does: it converts all CR/LF to LF, and then converts all CR to LF. So the expected output always has LF as line endings
 
-				$strRobotsFile=str_replace(array("\r\n","\r"),"\n",$strRobotsFile);
-			
-				if((($intCount=count((($arrRules=explode("\n",$strRobotsFile))))))) {
+                $strRobotsFile=str_replace(array("\r\n","\r"),"\n",$strRobotsFile);
+            
+                if((($intCount=count((($arrRules=explode("\n",$strRobotsFile))))))) {
 
-					$blUserAgentMatched=$blReadAgent=false;
-					
-					for($intCounter=0; $intCounter<$intCount; $intCounter++) {
+                    $blUserAgentMatched=$blReadAgent=false;
+                    
+                    for($intCounter=0; $intCounter<$intCount; $intCounter++) {
 
-						if( (strlen(($strLine=trim($arrRules[$intCounter])))) && (!(preg_match('/^\s*#.*$/',$strLine)))) {
+                        if( (strlen(($strLine=trim($arrRules[$intCounter])))) && (!(preg_match('/^\s*#.*$/',$strLine)))) {
 
-							#I know, the strpos function may return 0, but if the : is the first character, I can't use the input anyway
+                            #I know, the strpos function may return 0, but if the : is the first character, I can't use the input anyway
 
-							if(strpos($strLine,':')) {
+                            if(strpos($strLine,':')) {
 
-								$arrNameValuePair=explode(':',$strLine);
+                                $arrNameValuePair=explode(':',$strLine);
 
-								$strCommand=trim(strtolower($arrNameValuePair[0]));
+                                $strCommand=trim(strtolower($arrNameValuePair[0]));
 
-								$strArgument=trim($arrNameValuePair[1]);
+                                $strArgument=trim($arrNameValuePair[1]);
 
-								switch($strCommand) {
+                                switch($strCommand) {
 
-									case 'user-agent': {
+                                    case 'user-agent': {
 
-										/** ``The value of this field is the name of the robot the record is describing access policy for.
-											  If more than one User-agent field is present the record describes an identical access policy
-											  for more than one robot. At least one field needs to be present per record.
+                                        /** ``The value of this field is the name of the robot the record is describing access policy for.
+                                              If more than one User-agent field is present the record describes an identical access policy
+                                              for more than one robot. At least one field needs to be present per record.
 
-											  The robot should be liberal in interpreting this field. A case insensitive substring match of
-											  the name without version information is recommended.
+                                              The robot should be liberal in interpreting this field. A case insensitive substring match of
+                                              the name without version information is recommended.
 
-											  If the value is '*', the record describes the default access policy for any robot that has not
-											  matched any of the other records. It is not allowed to have multiple such records in the "/robots.txt" file.
-										*/
+                                              If the value is '*', the record describes the default access policy for any robot that has not
+                                              matched any of the other records. It is not allowed to have multiple such records in the "/robots.txt" file.
+                                        */
 
-										#Replace non-standards extension of using * inside the User-agent string, like Mediapartners-Google*
-										#since we are already doing a substring match, it is not needed anyway
+                                        #Replace non-standards extension of using * inside the User-agent string, like Mediapartners-Google*
+                                        #since we are already doing a substring match, it is not needed anyway
 
-										$strArgument=preg_replace('#\w\*#',null,$strArgument);
+                                        $strArgument=preg_replace('#\w\*#',null,$strArgument);
 
-										#case insensitive substring match it is then
+                                        #case insensitive substring match it is then
 
-										if( (!$blReadAgent) && (!$blUserAgentMatched) && (($strArgument=='*') || (stripos($strUserAgent,$strArgument)!==false))) {
+                                        if( (!$blReadAgent) && (!$blUserAgentMatched) && (($strArgument=='*') || (stripos($strUserAgent,$strArgument)!==false))) {
 
-											$blUserAgentMatched=true;
-										}
+                                            $blUserAgentMatched=true;
+                                        }
 
-										break;
-									}
+                                        break;
+                                    }
 
-									case 'disallow': {
+                                    case 'disallow': {
 
-										if($blUserAgentMatched && ($strArgument)) {
+                                        if($blUserAgentMatched && ($strArgument)) {
 
-											/** @NOTE 	Although it is not a stable standard extension to use * to mean exclude all pages,
-														We will add support for it here */
-														
-											$this->arrRules['-'][]=($strArgument=='*'?'/':$strArgument);
-										}
+                                            /** @NOTE     Although it is not a stable standard extension to use * to mean exclude all pages,
+                                                        We will add support for it here */
+                                                        
+                                            $this->arrRules['-'][]=($strArgument=='*'?'/':$strArgument);
+                                        }
 
-										break;
-									}
+                                        break;
+                                    }
 
-									/* non-standard extension */
+                                    /* non-standard extension */
 
-									case 'allow': {
-									
-										if($blUserAgentMatched && ($strArgument)) {
+                                    case 'allow': {
+                                    
+                                        if($blUserAgentMatched && ($strArgument)) {
 
-											/** @NOTE 	Although it is not a stable standard extension to use * to mean exclude all pages,
-														We will add support for it here */
-														
-											$this->arrRules['+'][]=($strArgument=='*'?'/':$strArgument);
-										}
+                                            /** @NOTE     Although it is not a stable standard extension to use * to mean exclude all pages,
+                                                        We will add support for it here */
+                                                        
+                                            $this->arrRules['+'][]=($strArgument=='*'?'/':$strArgument);
+                                        }
 
-										break;
-									}
+                                        break;
+                                    }
 
-									/* non-standard extension */
-									case 'request-rate': {
+                                    /* non-standard extension */
+                                    case 'request-rate': {
 
-										if(preg_match('#^(\d+)\s*/\s*(\d+)$#',$strArgument,$arrMatches)) {
+                                        if(preg_match('#^(\d+)\s*/\s*(\d+)$#',$strArgument,$arrMatches)) {
 
-											if((int) $arrMatches[2]) {
+                                            if((int) $arrMatches[2]) {
 
-												$fltDelay=abs((int) $arrMatches[2]/(int) $arrMatches[1]);
+                                                $fltDelay=abs((int) $arrMatches[2]/(int) $arrMatches[1]);
 
-												if((int) $fltDelay!=$fltDelay) {
+                                                if((int) $fltDelay!=$fltDelay) {
 
-													$fltDelay=((int) $fltDelay)+1;
-												}
-											}
-										}
-									}
+                                                    $fltDelay=((int) $fltDelay)+1;
+                                                }
+                                            }
+                                        }
+                                    }
 
-									#fall through to crawl-delay
-									
-									case 'crawl-delay': {
+                                    #fall through to crawl-delay
+                                    
+                                    case 'crawl-delay': {
 
-										if($blUserAgentMatched && ((int) $strArgument)) {
+                                        if($blUserAgentMatched && ((int) $strArgument)) {
 
-											#a delay of more then a minute is in my humble opinion unreasonable
-											#so anything above 60 seconds is truncated
+                                            #a delay of more then a minute is in my humble opinion unreasonable
+                                            #so anything above 60 seconds is truncated
 
-											$intDelay=abs((int) $strArgument);
+                                            $intDelay=abs((int) $strArgument);
 
-											$intDelay=($intDelay>59?60:$intDelay);
+                                            $intDelay=($intDelay>59?60:$intDelay);
 
-											$this->intDelay=$intDelay;
+                                            $this->intDelay=$intDelay;
 
-										}
+                                        }
 
-									}
+                                    }
 
-									break;
-								}
-							}
-							
-						} else {
+                                    break;
+                                }
+                            }
+                            
+                        } else {
 
-							#anything that is not a directive, means end of matched userAgent
+                            #anything that is not a directive, means end of matched userAgent
 
-							if($blUserAgentMatched) {
+                            if($blUserAgentMatched) {
 
-								$blReadAgent=true;
-							}
-							
-							$blUserAgentMatched=false;
-						}
-					}
-				}
-			}
-		}
+                                $blReadAgent=true;
+                            }
+                            
+                            $blUserAgentMatched=false;
+                        }
+                    }
+                }
+            }
+        }
 
-		/** @brief Internal backend for static member urlAllowed
-			@param $strUrl The url to check */
-		public function __urlAllowed($strUrl) {
+        /** @brief Internal backend for static member urlAllowed
+            @param $strUrl The url to check */
+        public function __urlAllowed($strUrl) {
 
-			$blOut=false;
+            $blOut=false;
 
-			#check if we are allowed to crawl this url. CASE MATTERS
+            #check if we are allowed to crawl this url. CASE MATTERS
 
-			$blMatched=false;
+            $blMatched=false;
 
-			# Order: Deny,Allow (Deny has priority over Allow)
-			if(count($this->arrRules['-'])) {
+            # Order: Deny,Allow (Deny has priority over Allow)
+            if(count($this->arrRules['-'])) {
 
-				foreach($this->arrRules['-'] as $strRule) {
+                foreach($this->arrRules['-'] as $strRule) {
 
-					#To Exclude, we check if the url starts with the rule
-					
-					if($strRule=='/' || (strpos($strUrl,$strRule)===0)) {
-							
-						$blMatched=true;
+                    #To Exclude, we check if the url starts with the rule
+                    
+                    if($strRule=='/' || (strpos($strUrl,$strRule)===0)) {
+                            
+                        $blMatched=true;
 
-						break;
-					}
-				}
-			}
-								
-			if(($blMatched) && (count($this->arrRules['+']))) {
+                        break;
+                    }
+                }
+            }
+                                
+            if(($blMatched) && (count($this->arrRules['+']))) {
 
-				foreach($this->arrRules['+'] as $strRule) {
+                foreach($this->arrRules['+'] as $strRule) {
 
-					#To override an exclude, an exact match is required in the include
+                    #To override an exclude, an exact match is required in the include
 
-					if($strRule=='/' || ($strUrl==$strRule)) {
+                    if($strRule=='/' || ($strUrl==$strRule)) {
 
-						$blMatched=$blOut=true;
+                        $blMatched=$blOut=true;
 
-						break;
-					}
-				}
-				
-			}
+                        break;
+                    }
+                }
+                
+            }
 
-			$blOut=(!$blMatched?true:$blOut);
+            $blOut=(!$blMatched?true:$blOut);
 
-			$intExpire=$this->intLastVisit+$this->intDelay;
+            $intExpire=$this->intLastVisit+$this->intDelay;
 
-			if($blOut) {
+            if($blOut) {
 
-				#blocking is only necessary if we ARE allowed to visit
-					
-				while($intExpire>time()) {
+                #blocking is only necessary if we ARE allowed to visit
+                    
+                while($intExpire>time()) {
 
-					usleep(100000);
-				}
+                    usleep(100000);
+                }
 
-				$this->intLastVisit=time();
-			}
+                $this->intLastVisit=time();
+            }
 
-			return $blOut;
-		}
+            return $blOut;
+        }
 
-		/** @brief Check if the scheme (protocol is supported)
-			@param $strUrl The url to check
-			@param $arrResult The url split in its components (scheme,host,url); passed by reference
-			@returns boolean */
-		public static function isSupportedScheme($strUrl,array &$arrResult=null) {
+        /** @brief Check if the scheme (protocol is supported)
+            @param $strUrl The url to check
+            @param $arrResult The url split in its components (scheme,host,url); passed by reference
+            @returns boolean */
+        public static function isSupportedScheme($strUrl,array &$arrResult=null) {
 
-			$blOut=false;
+            $blOut=false;
 
-			if(strlen(($strUrl=trim(strtolower($strUrl))))) {
+            if(strlen(($strUrl=trim(strtolower($strUrl))))) {
 
-				# Version 1.1: added -_ as supported characters in domain name, and added 'u' (unicode) pattern modifier
-				if(preg_match('#^(https?)://([\w\d\-_]+(\.[\w\d\-_]+)+)(/*.*)$#u',$strUrl,$arrMatches)) {
+                # Version 1.1: added -_ as supported characters in domain name, and added 'u' (unicode) pattern modifier
+                if(preg_match('#^(https?)://([\w\d\-_]+(\.[\w\d\-_]+)+)(/*.*)$#u',$strUrl,$arrMatches)) {
 
-					$strUrl=trim($arrMatches[4]);
+                    $strUrl=trim($arrMatches[4]);
 
-					$strUrl=($strUrl==''?'/':$strUrl);
-					
-					$arrResult=array('scheme'=>$arrMatches[1],
-									 'host'=>$arrMatches[2],
-									 'url'=>$strUrl);
+                    $strUrl=($strUrl==''?'/':$strUrl);
+                    
+                    $arrResult=array('scheme'=>$arrMatches[1],
+                                     'host'=>$arrMatches[2],
+                                     'url'=>$strUrl);
 
-					$blOut=true;
-				}
-			}
+                    $blOut=true;
+                }
+            }
 
-			return $blOut;
-		}
+            return $blOut;
+        }
 
-		/** @brief Class factory
-			@param $strScheme the protocol the host is on (http,https)
-			@param $strHost the host to crawl,check robots.txt
-			@param $strUserAgent the useragent name
-			@returns instance of Robots_txt class */
-		protected static function &getInstance($strScheme,$strHost,$strUserAgent) {
+        /** @brief Class factory
+            @param $strScheme the protocol the host is on (http,https)
+            @param $strHost the host to crawl,check robots.txt
+            @param $strUserAgent the useragent name
+            @returns instance of Robots_txt class */
+        protected static function &getInstance($strScheme,$strHost,$strUserAgent) {
 
-			$objOut=null;
+            $objOut=null;
 
-			if((($intCount=count(self::$arrInstances)))) {
+            if((($intCount=count(self::$arrInstances)))) {
 
-				for($intCounter=0; $intCounter<$intCount; $intCounter++) {
+                for($intCounter=0; $intCounter<$intCount; $intCounter++) {
 
-					if(self::$arrInstances[$intCounter]->strHost==$strHost && self::$arrInstances[$intCounter]->strScheme==$strScheme) {
+                    if(self::$arrInstances[$intCounter]->strHost==$strHost && self::$arrInstances[$intCounter]->strScheme==$strScheme) {
 
-						$objOut=self::$arrInstances[$intCounter];
+                        $objOut=self::$arrInstances[$intCounter];
 
-						break;
-					}
-				}
-			}
+                        break;
+                    }
+                }
+            }
 
-			if(!$objOut) {
+            if(!$objOut) {
 
-				$objOut=new Robots_txt($strScheme,$strHost,$strUserAgent);
+                $objOut=new Robots_txt($strScheme,$strHost,$strUserAgent);
 
-				self::$arrInstances[]=$objOut;
-			}
+                self::$arrInstances[]=$objOut;
+            }
 
-			return $objOut;
-		}
+            return $objOut;
+        }
 
-		/** @brief Checks if the url may be crawled
-			@param $strUrl the url to check
-			@param $strUserAgent the useragent name
-			@returns boolean
-			@throws Exception if $strUserAgent is missing on first call, if an instance cannot be created, or if an invalid url is passed */
-		public static final function urlAllowed($strUrl,$strUserAgent=null) {
+        /** @brief Checks if the url may be crawled
+            @param $strUrl the url to check
+            @param $strUserAgent the useragent name
+            @returns boolean
+            @throws Exception if $strUserAgent is missing on first call, if an instance cannot be created, or if an invalid url is passed */
+        public static final function urlAllowed($strUrl,$strUserAgent=null) {
 
-			$blOut=null;
-			
-			//check userAgent
+            $blOut=null;
+            
+            //check userAgent
 
-			$strUserAgent=trim($strUserAgent);
+            $strUserAgent=trim($strUserAgent);
 
-			if(is_null(self::$strReportedUserAgent) && (strlen($strUserAgent))) {
+            if(is_null(self::$strReportedUserAgent) && (strlen($strUserAgent))) {
 
-				self::$strReportedUserAgent=$strUserAgent;
-			}
+                self::$strReportedUserAgent=$strUserAgent;
+            }
 
-			if(is_null(self::$strReportedUserAgent)) {
+            if(is_null(self::$strReportedUserAgent)) {
 
-				throw new Exception('strUserAgent is required on first call to Robots_txt::urlAllowed()');
-			}
+                throw new Exception('strUserAgent is required on first call to Robots_txt::urlAllowed()');
+            }
 
-			if(self::isSupportedScheme($strUrl,$arrResult)) {
+            if(self::isSupportedScheme($strUrl,$arrResult)) {
 
-				if((($objEngine=self::getInstance($arrResult['scheme'],$arrResult['host'],self::$strReportedUserAgent)))) {
+                if((($objEngine=self::getInstance($arrResult['scheme'],$arrResult['host'],self::$strReportedUserAgent)))) {
 
-					$blOut=$objEngine->__urlAllowed($arrResult['url']);
-					
-				} else {
+                    $blOut=$objEngine->__urlAllowed($arrResult['url']);
+                    
+                } else {
 
-					throw new Exception('Cannot get Robots_txt instance.');
-				}
-			} else {
+                    throw new Exception('Cannot get Robots_txt instance.');
+                }
+            } else {
 
-				throw new Exception('Invalid URL');
-			}
+                throw new Exception('Invalid URL');
+            }
 
-			return $blOut;
-		}
-	}
+            return $blOut;
+        }
+    }

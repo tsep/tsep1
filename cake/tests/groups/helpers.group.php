@@ -34,7 +34,7 @@ class HelpersGroupTest extends TestSuite {
  * @var string 'All core helpers'
  * @access public
  */
-	var $label = 'All Helpers';
+    var $label = 'All Helpers';
 
 /**
  * HelpersGroupTest method
@@ -42,8 +42,8 @@ class HelpersGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function HelpersGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'helper');
-		TestManager::addTestCasesFromDirectory($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'helpers');
-	}
+    function HelpersGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'helper');
+        TestManager::addTestCasesFromDirectory($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'helpers');
+    }
 }

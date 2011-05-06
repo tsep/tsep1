@@ -18,5 +18,5 @@
  * @license       http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
  */
 class PluggedHelperHelper extends AppHelper {
-	var $helpers = array('TestPlugin.OtherHelper');
+    var $helpers = array('TestPlugin.OtherHelper');
 }

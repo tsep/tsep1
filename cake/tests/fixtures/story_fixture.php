@@ -32,7 +32,7 @@ class StoryFixture extends CakeTestFixture {
  * @var string 'Story'
  * @access public
  */
-	var $name = 'Story';
+    var $name = 'Story';
 
 /**
  * fields property
@@ -40,10 +40,10 @@ class StoryFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'story' => array('type' => 'integer', 'key' => 'primary'),
-		'title' => array('type' => 'string', 'null' => false)
-	);
+    var $fields = array(
+        'story' => array('type' => 'integer', 'key' => 'primary'),
+        'title' => array('type' => 'string', 'null' => false)
+    );
 
 /**
  * records property
@@ -51,8 +51,8 @@ class StoryFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('title' => 'First Story'),
-		array('title' => 'Second Story')
-	);
+    var $records = array(
+        array('title' => 'First Story'),
+        array('title' => 'Second Story')
+    );
 }

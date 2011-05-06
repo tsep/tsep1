@@ -32,8 +32,8 @@ class ContentAccountFixture extends CakeTestFixture {
  * @var string 'Aco'
  * @access public
  */
-	var $name = 'ContentAccount';
-	var $table = 'ContentAccounts';
+    var $name = 'ContentAccount';
+    var $table = 'ContentAccounts';
 
 /**
  * fields property
@@ -41,11 +41,11 @@ class ContentAccountFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'iContentAccountsId' => array('type' => 'integer', 'key' => 'primary'),
-		'iContentId'		=> array('type' => 'integer'),
-		'iAccountId'		=> array('type' => 'integer')
-	);
+    var $fields = array(
+        'iContentAccountsId' => array('type' => 'integer', 'key' => 'primary'),
+        'iContentId'        => array('type' => 'integer'),
+        'iAccountId'        => array('type' => 'integer')
+    );
 
 /**
  * records property
@@ -53,12 +53,12 @@ class ContentAccountFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('iContentId' => 1, 'iAccountId' => 1),
-		array('iContentId' => 2, 'iAccountId' => 2),
-		array('iContentId' => 3, 'iAccountId' => 3),
-		array('iContentId' => 4, 'iAccountId' => 4),
-		array('iContentId' => 1, 'iAccountId' => 2),
-		array('iContentId' => 2, 'iAccountId' => 3),
-	);
+    var $records = array(
+        array('iContentId' => 1, 'iAccountId' => 1),
+        array('iContentId' => 2, 'iAccountId' => 2),
+        array('iContentId' => 3, 'iAccountId' => 3),
+        array('iContentId' => 4, 'iAccountId' => 4),
+        array('iContentId' => 1, 'iAccountId' => 2),
+        array('iContentId' => 2, 'iAccountId' => 3),
+    );
 }

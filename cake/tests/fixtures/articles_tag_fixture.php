@@ -32,7 +32,7 @@ class ArticlesTagFixture extends CakeTestFixture {
  * @var string 'ArticlesTag'
  * @access public
  */
-	var $name = 'ArticlesTag';
+    var $name = 'ArticlesTag';
 
 /**
  * fields property
@@ -40,11 +40,11 @@ class ArticlesTagFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'article_id' => array('type' => 'integer', 'null' => false),
-		'tag_id' => array('type' => 'integer', 'null' => false),
-		'indexes' => array('UNIQUE_TAG' => array('column'=> array('article_id', 'tag_id'), 'unique'=>1))
-	);
+    var $fields = array(
+        'article_id' => array('type' => 'integer', 'null' => false),
+        'tag_id' => array('type' => 'integer', 'null' => false),
+        'indexes' => array('UNIQUE_TAG' => array('column'=> array('article_id', 'tag_id'), 'unique'=>1))
+    );
 
 /**
  * records property
@@ -52,10 +52,10 @@ class ArticlesTagFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('article_id' => 1, 'tag_id' => 1),
-		array('article_id' => 1, 'tag_id' => 2),
-		array('article_id' => 2, 'tag_id' => 1),
-		array('article_id' => 2, 'tag_id' => 3)
-	);
+    var $records = array(
+        array('article_id' => 1, 'tag_id' => 1),
+        array('article_id' => 1, 'tag_id' => 2),
+        array('article_id' => 2, 'tag_id' => 1),
+        array('article_id' => 2, 'tag_id' => 3)
+    );
 }

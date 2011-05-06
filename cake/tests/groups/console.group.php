@@ -34,7 +34,7 @@ class ConsoleGroupTest extends TestSuite {
  * @var string 'All core cache engines'
  * @access public
  */
-	var $label = 'ShellDispatcher, Shell and all Tasks';
+    var $label = 'ShellDispatcher, Shell and all Tasks';
 
 /**
  * ConsoleGroupTest method
@@ -42,24 +42,24 @@ class ConsoleGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function ConsoleGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'cake');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'acl');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'api');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'bake');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'schema');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'shell');
+    function ConsoleGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'cake');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'acl');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'api');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'bake');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'schema');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'shell');
 
-		$path = CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'tasks' . DS;
-		
-		TestManager::addTestFile($this, $path . 'controller');
-		TestManager::addTestFile($this, $path . 'db_config');
-		TestManager::addTestFile($this, $path . 'extract');
-		TestManager::addTestFile($this, $path . 'fixture');
-		TestManager::addTestFile($this, $path . 'model');
-		TestManager::addTestFile($this, $path . 'plugin');
-		TestManager::addTestFile($this, $path . 'project');
-		TestManager::addTestFile($this, $path . 'test');
-		TestManager::addTestFile($this, $path . 'view');
-	}
+        $path = CORE_TEST_CASES . DS . 'console' . DS . 'libs' . DS . 'tasks' . DS;
+        
+        TestManager::addTestFile($this, $path . 'controller');
+        TestManager::addTestFile($this, $path . 'db_config');
+        TestManager::addTestFile($this, $path . 'extract');
+        TestManager::addTestFile($this, $path . 'fixture');
+        TestManager::addTestFile($this, $path . 'model');
+        TestManager::addTestFile($this, $path . 'plugin');
+        TestManager::addTestFile($this, $path . 'project');
+        TestManager::addTestFile($this, $path . 'test');
+        TestManager::addTestFile($this, $path . 'view');
+    }
 }

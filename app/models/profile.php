@@ -12,34 +12,34 @@
 *
 */
 class Profile extends AppModel {
-	
-	var $name = 'Profile';
-	
-	var $hasMany = array(
-		'Index',
-		'Stopword',
-		'Suggest.Search',
-	);
-	
-	var $validate = array(
-		'name' => 'alphaNumeric',
-		'url' => 'url'
-	);
-	
-	/**
-	 * @var Index
-	 */
-	var $Index;
-	
-	/**
-	 * @var Stopword
-	 */
-	var $Stopword;
-	
-	/**
-	 * @var Search
-	 */
-	var $Search;
-	
-	
+    
+    var $name = 'Profile';
+    
+    var $hasMany = array(
+        'Index',
+        'Stopword',
+        'Suggest.Search',
+    );
+    
+    var $validate = array(
+        'name' => 'alphaNumeric',
+        'url' => 'url'
+    );
+    
+    /**
+     * @var Index
+     */
+    var $Index;
+    
+    /**
+     * @var Stopword
+     */
+    var $Stopword;
+    
+    /**
+     * @var Search
+     */
+    var $Search;
+    
+    
 }

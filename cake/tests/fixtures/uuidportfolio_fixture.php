@@ -32,7 +32,7 @@ class UuidportfolioFixture extends CakeTestFixture {
  * @var string 'Uuidportfolio'
  * @access public
  */
-	var $name = 'Uuidportfolio';
+    var $name = 'Uuidportfolio';
 
 /**
  * fields property
@@ -40,10 +40,10 @@ class UuidportfolioFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'string', 'length' => 36, 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'string', 'length' => 36, 'key' => 'primary'),
+        'name' => array('type' => 'string', 'null' => false)
+    );
 
 /**
  * records property
@@ -51,8 +51,8 @@ class UuidportfolioFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('id' => '4806e091-6940-4d2b-b227-303740cf8569', 'name' => 'Portfolio 1'),
-		array('id' => '480af662-eb8c-47d3-886b-230540cf8569', 'name' => 'Portfolio 2'),
-	);
+    var $records = array(
+        array('id' => '4806e091-6940-4d2b-b227-303740cf8569', 'name' => 'Portfolio 1'),
+        array('id' => '480af662-eb8c-47d3-886b-230540cf8569', 'name' => 'Portfolio 2'),
+    );
 }

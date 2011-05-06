@@ -34,7 +34,7 @@ class ViewsGroupTest extends TestSuite {
  * @var string 'All core views'
  * @access public
  */
-	var $label = 'View and ThemeView';
+    var $label = 'View and ThemeView';
 
 /**
  * ViewsGroupTest method
@@ -42,8 +42,8 @@ class ViewsGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function ViewsGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'view');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'theme');
-	}
+    function ViewsGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'view');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'theme');
+    }
 }

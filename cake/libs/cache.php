@@ -35,7 +35,7 @@ class Cache {
  * @var array
  * @access private
  */
-	var $__config = array();
+    var $__config = array();
 
 /**
  * Holds name of the current configuration name being used.
@@ -43,7 +43,7 @@ class Cache {
  * @var array
  * @access private
  */
-	var $__name = 'default';
+    var $__name = 'default';
 
 /**
  * Whether to reset the settings with the next call to Cache::set();
@@ -51,14 +51,14 @@ class Cache {
  * @var array
  * @access private
  */
-	var $__reset = false;
+    var $__reset = false;
 
 /**
  * Engine instances keyed by configuration name.
  *
  * @var array
  */
-	var $_engines = array();
+    var $_engines = array();
 
 /**
  * Returns a singleton instance
@@ -67,13 +67,13 @@ class Cache {
  * @access public
  * @static
  */
-	function &getInstance() {
-		static $instance = array();
-		if (!$instance) {
-			$instance[0] =& new Cache();
-		}
-		return $instance[0];
-	}
+    function &getInstance() {
+        static $instance = array();
+        if (!$instance) {
+            $instance[0] =& new Cache();
+        }
+        return $instance[0];
+    }
 
 /**
  * Set the cache configuration to use.  config() can
@@ -96,40 +96,40 @@ class Cache {
  * @access public
  * @static
  */
-	function config($name = null, $settings = array()) {
-		$self =& Cache::getInstance();
-		if (is_array($name)) {
-			$settings = $name;
-		}
+    function config($name = null, $settings = array()) {
+        $self =& Cache::getInstance();
+        if (is_array($name)) {
+            $settings = $name;
+        }
 
-		if ($name === null || !is_string($name)) {
-			$name = $self->__name;
-		}
+        if ($name === null || !is_string($name)) {
+            $name = $self->__name;
+        }
 
-		$current = array();
-		if (isset($self->__config[$name])) {
-			$current = $self->__config[$name];
-		}
+        $current = array();
+        if (isset($self->__config[$name])) {
+            $current = $self->__config[$name];
+        }
 
-		if (!empty($settings)) {
-			$self->__config[$name] = array_merge($current, $settings);
-		}
+        if (!empty($settings)) {
+            $self->__config[$name] = array_merge($current, $settings);
+        }
 
-		if (empty($self->__config[$name]['engine'])) {
-			return false;
-		}
+        if (empty($self->__config[$name]['engine'])) {
+            return false;
+        }
 
-		$engine = $self->__config[$name]['engine'];
-		$self->__name = $name;
+        $engine = $self->__config[$name]['engine'];
+        $self->__name = $name;
 
-		if (!isset($self->_engines[$name])) {
-			$self->_buildEngine($name);
-			$settings = $self->__config[$name] = $self->settings($name);
-		} elseif ($settings = $self->set($self->__config[$name])) {
-			$self->__config[$name] = $settings;
-		}
-		return compact('engine', 'settings');
-	}
+        if (!isset($self->_engines[$name])) {
+            $self->_buildEngine($name);
+            $settings = $self->__config[$name] = $self->settings($name);
+        } elseif ($settings = $self->set($self->__config[$name])) {
+            $self->__config[$name] = $settings;
+        }
+        return compact('engine', 'settings');
+    }
 
 /**
  * Finds and builds the instance of the required engine class.
@@ -138,34 +138,34 @@ class Cache {
  * @return void
  * @access protected
  */
-	function _buildEngine($name) {
-		$config = $this->__config[$name];
+    function _buildEngine($name) {
+        $config = $this->__config[$name];
 
-		list($plugin, $class) = pluginSplit($config['engine']);
-		$cacheClass = $class . 'Engine';
-		if (!class_exists($cacheClass) && $this->__loadEngine($class, $plugin) === false) {
-			return false;
-		}
-		$cacheClass = $class . 'Engine';
-		$this->_engines[$name] =& new $cacheClass();
-		if ($this->_engines[$name]->init($config)) {
-			if (time() % $this->_engines[$name]->settings['probability'] === 0) {
-				$this->_engines[$name]->gc();
-			}
-			return true;
-		}
-		return false;
-	}
+        list($plugin, $class) = pluginSplit($config['engine']);
+        $cacheClass = $class . 'Engine';
+        if (!class_exists($cacheClass) && $this->__loadEngine($class, $plugin) === false) {
+            return false;
+        }
+        $cacheClass = $class . 'Engine';
+        $this->_engines[$name] =& new $cacheClass();
+        if ($this->_engines[$name]->init($config)) {
+            if (time() % $this->_engines[$name]->settings['probability'] === 0) {
+                $this->_engines[$name]->gc();
+            }
+            return true;
+        }
+        return false;
+    }
 
 /**
  * Returns an array containing the currently configured Cache settings.
  *
  * @return array Array of configured Cache config names.
  */
-	function configured() {
-		$self =& Cache::getInstance();
-		return array_keys($self->__config);
-	}
+    function configured() {
+        $self =& Cache::getInstance();
+        return array_keys($self->__config);
+    }
 
 /**
  * Drops a cache engine.  Deletes the cache configuration information
@@ -175,15 +175,15 @@ class Cache {
  * @param string $name A currently configured cache config you wish to remove.
  * @return boolen success of the removal, returns false when the config does not exist.
  */
-	function drop($name) {
-		$self =& Cache::getInstance();
-		if (!isset($self->__config[$name])) {
-			return false;
-		}
-		unset($self->__config[$name]);
-		unset($self->_engines[$name]);
-		return true;
-	}
+    function drop($name) {
+        $self =& Cache::getInstance();
+        if (!isset($self->__config[$name])) {
+            return false;
+        }
+        unset($self->__config[$name]);
+        unset($self->_engines[$name]);
+        return true;
+    }
 
 /**
  * Tries to find and include a file for a cache engine and returns object instance
@@ -192,19 +192,19 @@ class Cache {
  * @return mixed $engine object or null
  * @access private
  */
-	function __loadEngine($name, $plugin = null) {
-		if ($plugin) {
-			return App::import('Lib', $plugin . '.cache' . DS . $name, false);
-		} else {
-			$core = App::core();
-			$path = $core['libs'][0] . 'cache' . DS . strtolower($name) . '.php';
-			if (file_exists($path)) {
-				require $path;
-				return true;
-			}
-			return App::import('Lib', 'cache' . DS . $name, false);
-		}
-	}
+    function __loadEngine($name, $plugin = null) {
+        if ($plugin) {
+            return App::import('Lib', $plugin . '.cache' . DS . $name, false);
+        } else {
+            $core = App::core();
+            $path = $core['libs'][0] . 'cache' . DS . strtolower($name) . '.php';
+            if (file_exists($path)) {
+                require $path;
+                return true;
+            }
+            return App::import('Lib', 'cache' . DS . $name, false);
+        }
+    }
 
 /**
  * Temporarily change settings to current config options. if no params are passed, resets settings if needed
@@ -216,33 +216,33 @@ class Cache {
  * @access public
  * @static
  */
-	function set($settings = array(), $value = null) {
-		$self =& Cache::getInstance();
-		if (!isset($self->__config[$self->__name]) || !isset($self->_engines[$self->__name])) {
-			return false;
-		}
-		$name = $self->__name;
-		if (!empty($settings)) {
-			$self->__reset = true;
-		}
+    function set($settings = array(), $value = null) {
+        $self =& Cache::getInstance();
+        if (!isset($self->__config[$self->__name]) || !isset($self->_engines[$self->__name])) {
+            return false;
+        }
+        $name = $self->__name;
+        if (!empty($settings)) {
+            $self->__reset = true;
+        }
 
-		if ($self->__reset === true) {
-			if (empty($settings)) {
-				$self->__reset = false;
-				$settings = $self->__config[$name];
-			} else {
-				if (is_string($settings) && $value !== null) {
-					$settings = array($settings => $value);
-				}
-				$settings = array_merge($self->__config[$name], $settings);
-				if (isset($settings['duration']) && !is_numeric($settings['duration'])) {
-					$settings['duration'] = strtotime($settings['duration']) - time();
-				}
-			}
-			$self->_engines[$name]->settings = $settings;
-		}
-		return $self->settings($name);
-	}
+        if ($self->__reset === true) {
+            if (empty($settings)) {
+                $self->__reset = false;
+                $settings = $self->__config[$name];
+            } else {
+                if (is_string($settings) && $value !== null) {
+                    $settings = array($settings => $value);
+                }
+                $settings = array_merge($self->__config[$name], $settings);
+                if (isset($settings['duration']) && !is_numeric($settings['duration'])) {
+                    $settings['duration'] = strtotime($settings['duration']) - time();
+                }
+            }
+            $self->_engines[$name]->settings = $settings;
+        }
+        return $self->settings($name);
+    }
 
 /**
  * Garbage collection
@@ -253,10 +253,10 @@ class Cache {
  * @access public
  * @static
  */
-	function gc() {
-		$self =& Cache::getInstance();
-		$self->_engines[$self->__name]->gc();
-	}
+    function gc() {
+        $self =& Cache::getInstance();
+        $self->_engines[$self->__name]->gc();
+    }
 
 /**
  * Write data for key into cache. Will automatically use the currently
@@ -280,30 +280,30 @@ class Cache {
  * @access public
  * @static
  */
-	function write($key, $value, $config = null) {
-		$self =& Cache::getInstance();
+    function write($key, $value, $config = null) {
+        $self =& Cache::getInstance();
 
-		if (!$config) {
-			$config = $self->__name;
-		}
-		$settings = $self->settings($config);
+        if (!$config) {
+            $config = $self->__name;
+        }
+        $settings = $self->settings($config);
 
-		if (empty($settings)) {
-			return null;
-		}
-		if (!$self->isInitialized($config)) {
-			return false;
-		}
-		$key = $self->_engines[$config]->key($key);
+        if (empty($settings)) {
+            return null;
+        }
+        if (!$self->isInitialized($config)) {
+            return false;
+        }
+        $key = $self->_engines[$config]->key($key);
 
-		if (!$key || is_resource($value)) {
-			return false;
-		}
+        if (!$key || is_resource($value)) {
+            return false;
+        }
 
-		$success = $self->_engines[$config]->write($settings['prefix'] . $key, $value, $settings['duration']);
-		$self->set();
-		return $success;
-	}
+        $success = $self->_engines[$config]->write($settings['prefix'] . $key, $value, $settings['duration']);
+        $self->set();
+        return $success;
+    }
 
 /**
  * Read a key from the cache.  Will automatically use the currently
@@ -326,31 +326,31 @@ class Cache {
  * @access public
  * @static
  */
-	function read($key, $config = null) {
-		$self =& Cache::getInstance();
+    function read($key, $config = null) {
+        $self =& Cache::getInstance();
 
-		if (!$config) {
-			$config = $self->__name;
-		}
-		$settings = $self->settings($config);
+        if (!$config) {
+            $config = $self->__name;
+        }
+        $settings = $self->settings($config);
 
-		if (empty($settings)) {
-			return null;
-		}
-		if (!$self->isInitialized($config)) {
-			return false;
-		}
-		$key = $self->_engines[$config]->key($key);
-		if (!$key) {
-			return false;
-		}
-		$success = $self->_engines[$config]->read($settings['prefix'] . $key);
+        if (empty($settings)) {
+            return null;
+        }
+        if (!$self->isInitialized($config)) {
+            return false;
+        }
+        $key = $self->_engines[$config]->key($key);
+        if (!$key) {
+            return false;
+        }
+        $success = $self->_engines[$config]->read($settings['prefix'] . $key);
 
-		if ($config !== null && $config !== $self->__name) {
-			$self->set();
-		}
-		return $success;
-	}
+        if ($config !== null && $config !== $self->__name) {
+            $self->set();
+        }
+        return $success;
+    }
 
 /**
  * Increment a number under the key and return incremented value.
@@ -363,29 +363,29 @@ class Cache {
  *    or if there was an error fetching it.
  * @access public
  */
-	function increment($key, $offset = 1, $config = null) {
-		$self =& Cache::getInstance();
+    function increment($key, $offset = 1, $config = null) {
+        $self =& Cache::getInstance();
 
-		if (!$config) {
-			$config = $self->__name;
-		}
-		$settings = $self->settings($config);
+        if (!$config) {
+            $config = $self->__name;
+        }
+        $settings = $self->settings($config);
 
-		if (empty($settings)) {
-			return null;
-		}
-		if (!$self->isInitialized($config)) {
-			return false;
-		}
-		$key = $self->_engines[$config]->key($key);
+        if (empty($settings)) {
+            return null;
+        }
+        if (!$self->isInitialized($config)) {
+            return false;
+        }
+        $key = $self->_engines[$config]->key($key);
 
-		if (!$key || !is_integer($offset) || $offset < 0) {
-			return false;
-		}
-		$success = $self->_engines[$config]->increment($settings['prefix'] . $key, $offset);
-		$self->set();
-		return $success;
-	}
+        if (!$key || !is_integer($offset) || $offset < 0) {
+            return false;
+        }
+        $success = $self->_engines[$config]->increment($settings['prefix'] . $key, $offset);
+        $self->set();
+        return $success;
+    }
 /**
  * Decrement a number under the key and return decremented value.
  *
@@ -397,29 +397,29 @@ class Cache {
  *   or if there was an error fetching it
  * @access public
  */
-	function decrement($key, $offset = 1, $config = null) {
-		$self =& Cache::getInstance();
+    function decrement($key, $offset = 1, $config = null) {
+        $self =& Cache::getInstance();
 
-		if (!$config) {
-			$config = $self->__name;
-		}
-		$settings = $self->settings($config);
+        if (!$config) {
+            $config = $self->__name;
+        }
+        $settings = $self->settings($config);
 
-		if (empty($settings)) {
-			return null;
-		}
-		if (!$self->isInitialized($config)) {
-			return false;
-		}
-		$key = $self->_engines[$config]->key($key);
+        if (empty($settings)) {
+            return null;
+        }
+        if (!$self->isInitialized($config)) {
+            return false;
+        }
+        $key = $self->_engines[$config]->key($key);
 
-		if (!$key || !is_integer($offset) || $offset < 0) {
-			return false;
-		}
-		$success = $self->_engines[$config]->decrement($settings['prefix'] . $key, $offset);
-		$self->set();
-		return $success;
-	}
+        if (!$key || !is_integer($offset) || $offset < 0) {
+            return false;
+        }
+        $success = $self->_engines[$config]->decrement($settings['prefix'] . $key, $offset);
+        $self->set();
+        return $success;
+    }
 /**
  * Delete a key from the cache. Will automatically use the currently
  * active cache configuration.  To set the currently active configuration use
@@ -441,28 +441,28 @@ class Cache {
  * @access public
  * @static
  */
-	function delete($key, $config = null) {
-		$self =& Cache::getInstance();
-		if (!$config) {
-			$config = $self->__name;
-		}
-		$settings = $self->settings($config);
+    function delete($key, $config = null) {
+        $self =& Cache::getInstance();
+        if (!$config) {
+            $config = $self->__name;
+        }
+        $settings = $self->settings($config);
 
-		if (empty($settings)) {
-			return null;
-		}
-		if (!$self->isInitialized($config)) {
-			return false;
-		}
-		$key = $self->_engines[$config]->key($key);
-		if (!$key) {
-			return false;
-		}
+        if (empty($settings)) {
+            return null;
+        }
+        if (!$self->isInitialized($config)) {
+            return false;
+        }
+        $key = $self->_engines[$config]->key($key);
+        if (!$key) {
+            return false;
+        }
 
-		$success = $self->_engines[$config]->delete($settings['prefix'] . $key);
-		$self->set();
-		return $success;
-	}
+        $success = $self->_engines[$config]->delete($settings['prefix'] . $key);
+        $self->set();
+        return $success;
+    }
 
 /**
  * Delete all keys from the cache.
@@ -473,24 +473,24 @@ class Cache {
  * @access public
  * @static
  */
-	function clear($check = false, $config = null) {
-		$self =& Cache::getInstance();
-		if (!$config) {
-			$config = $self->__name;
-		}
-		$settings = $self->settings($config);
+    function clear($check = false, $config = null) {
+        $self =& Cache::getInstance();
+        if (!$config) {
+            $config = $self->__name;
+        }
+        $settings = $self->settings($config);
 
-		if (empty($settings)) {
-			return null;
-		}
+        if (empty($settings)) {
+            return null;
+        }
 
-		if (!$self->isInitialized($config)) {
-			return false;
-		}
-		$success = $self->_engines[$config]->clear($check);
-		$self->set();
-		return $success;
-	}
+        if (!$self->isInitialized($config)) {
+            return false;
+        }
+        $success = $self->_engines[$config]->clear($check);
+        $self->set();
+        return $success;
+    }
 
 /**
  * Check if Cache has initialized a working config for the given name.
@@ -501,16 +501,16 @@ class Cache {
  * @access public
  * @static
  */
-	function isInitialized($name = null) {
-		if (Configure::read('Cache.disable')) {
-			return false;
-		}
-		$self =& Cache::getInstance();
-		if (!$name && isset($self->__config[$self->__name])) {
-			$name = $self->__name;
-		}
-		return isset($self->_engines[$name]);
-	}
+    function isInitialized($name = null) {
+        if (Configure::read('Cache.disable')) {
+            return false;
+        }
+        $self =& Cache::getInstance();
+        if (!$name && isset($self->__config[$self->__name])) {
+            $name = $self->__name;
+        }
+        return isset($self->_engines[$name]);
+    }
 
 /**
  * Return the settings for current cache engine. If no name is supplied the settings
@@ -523,16 +523,16 @@ class Cache {
  * @access public
  * @static
  */
-	function settings($name = null) {
-		$self =& Cache::getInstance();
-		if (!$name && isset($self->__config[$self->__name])) {
-			$name = $self->__name;
-		}
-		if (!empty($self->_engines[$name])) {
-			return $self->_engines[$name]->settings();
-		}
-		return array();
-	}
+    function settings($name = null) {
+        $self =& Cache::getInstance();
+        if (!$name && isset($self->__config[$self->__name])) {
+            $name = $self->__name;
+        }
+        if (!empty($self->_engines[$name])) {
+            return $self->_engines[$name]->settings();
+        }
+        return array();
+    }
 }
 
 /**
@@ -549,7 +549,7 @@ class CacheEngine {
  * @var int
  * @access public
  */
-	var $settings = array();
+    var $settings = array();
 
 /**
  * Initialize the cache engine
@@ -560,17 +560,17 @@ class CacheEngine {
  * @return boolean True if the engine has been succesfully initialized, false if not
  * @access public
  */
-	function init($settings = array()) {
-		$this->settings = array_merge(
-			array('prefix' => 'cake_', 'duration'=> 3600, 'probability'=> 100),
-			$this->settings,
-			$settings
-		);
-		if (!is_numeric($this->settings['duration'])) {
-			$this->settings['duration'] = strtotime($this->settings['duration']) - time();
-		}
-		return true;
-	}
+    function init($settings = array()) {
+        $this->settings = array_merge(
+            array('prefix' => 'cake_', 'duration'=> 3600, 'probability'=> 100),
+            $this->settings,
+            $settings
+        );
+        if (!is_numeric($this->settings['duration'])) {
+            $this->settings['duration'] = strtotime($this->settings['duration']) - time();
+        }
+        return true;
+    }
 
 /**
  * Garbage collection
@@ -579,8 +579,8 @@ class CacheEngine {
  *
  * @access public
  */
-	function gc() {
-	}
+    function gc() {
+    }
 
 /**
  * Write value for a key into cache
@@ -591,9 +591,9 @@ class CacheEngine {
  * @return boolean True if the data was succesfully cached, false on failure
  * @access public
  */
-	function write($key, &$value, $duration) {
-		trigger_error(sprintf(__('Method write() not implemented in %s', true), get_class($this)), E_USER_ERROR);
-	}
+    function write($key, &$value, $duration) {
+        trigger_error(sprintf(__('Method write() not implemented in %s', true), get_class($this)), E_USER_ERROR);
+    }
 
 /**
  * Read a key from the cache
@@ -602,9 +602,9 @@ class CacheEngine {
  * @return mixed The cached data, or false if the data doesn't exist, has expired, or if there was an error fetching it
  * @access public
  */
-	function read($key) {
-		trigger_error(sprintf(__('Method read() not implemented in %s', true), get_class($this)), E_USER_ERROR);
-	}
+    function read($key) {
+        trigger_error(sprintf(__('Method read() not implemented in %s', true), get_class($this)), E_USER_ERROR);
+    }
 
 /**
  * Increment a number under the key and return incremented value
@@ -614,9 +614,9 @@ class CacheEngine {
  * @return New incremented value, false otherwise
  * @access public
  */
-	function increment($key, $offset = 1) {
-		trigger_error(sprintf(__('Method increment() not implemented in %s', true), get_class($this)), E_USER_ERROR);
-	}
+    function increment($key, $offset = 1) {
+        trigger_error(sprintf(__('Method increment() not implemented in %s', true), get_class($this)), E_USER_ERROR);
+    }
 /**
  * Decrement a number under the key and return decremented value
  *
@@ -625,9 +625,9 @@ class CacheEngine {
  * @return New incremented value, false otherwise
  * @access public
  */
-	function decrement($key, $offset = 1) {
-		trigger_error(sprintf(__('Method decrement() not implemented in %s', true), get_class($this)), E_USER_ERROR);
-	}
+    function decrement($key, $offset = 1) {
+        trigger_error(sprintf(__('Method decrement() not implemented in %s', true), get_class($this)), E_USER_ERROR);
+    }
 /**
  * Delete a key from the cache
  *
@@ -635,8 +635,8 @@ class CacheEngine {
  * @return boolean True if the value was succesfully deleted, false if it didn't exist or couldn't be removed
  * @access public
  */
-	function delete($key) {
-	}
+    function delete($key) {
+    }
 
 /**
  * Delete all keys from the cache
@@ -645,8 +645,8 @@ class CacheEngine {
  * @return boolean True if the cache was succesfully cleared, false otherwise
  * @access public
  */
-	function clear($check) {
-	}
+    function clear($check) {
+    }
 
 /**
  * Cache Engine settings
@@ -654,9 +654,9 @@ class CacheEngine {
  * @return array settings
  * @access public
  */
-	function settings() {
-		return $this->settings;
-	}
+    function settings() {
+        return $this->settings;
+    }
 
 /**
  * Generates a safe key for use with cache engine storage engines.
@@ -665,11 +665,11 @@ class CacheEngine {
  * @return mixed string $key or false
  * @access public
  */
-	function key($key) {
-		if (empty($key)) {
-			return false;
-		}
-		$key = Inflector::underscore(str_replace(array(DS, '/', '.'), '_', strval($key)));
-		return $key;
-	}
+    function key($key) {
+        if (empty($key)) {
+            return false;
+        }
+        $key = Inflector::underscore(str_replace(array(DS, '/', '.'), '_', strval($key)));
+        return $key;
+    }
 }

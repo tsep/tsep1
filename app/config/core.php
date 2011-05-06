@@ -48,16 +48,16 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  * CakePHP Debug Level:
  *
  * Production Mode:
- * 	0: No error messages, errors, or warnings shown. Flash messages redirect.
+ *     0: No error messages, errors, or warnings shown. Flash messages redirect.
  *
  * Development Mode:
- * 	1: Errors and warnings shown, model caches refreshed, flash messages halted.
- * 	2: As in 1, but also with full debug messages and SQL output.
+ *     1: Errors and warnings shown, model caches refreshed, flash messages halted.
+ *     2: As in 1, but also with full debug messages and SQL output.
  *
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 1);
+    Configure::write('debug', 1);
 
 /**
  * CakePHP Log Level:
@@ -72,12 +72,12 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  *    Configure::write('log', E_ERROR | E_WARNING);
  *    Configure::write('log', E_ALL ^ E_NOTICE);
  */
-	Configure::write('log', true);
+    Configure::write('log', true);
 
 /**
  * Application wide charset encoding
  */
-	Configure::write('App.encoding', 'UTF-8');
+    Configure::write('App.encoding', 'UTF-8');
 
 /**
  * To configure CakePHP *not* to use mod_rewrite and to
@@ -90,7 +90,7 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  *
  * And uncomment the App.baseUrl below:
  */
-	//Configure::write('App.baseUrl', env('SCRIPT_NAME'));
+    //Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 
 /**
  * Uncomment the define below to use CakePHP prefix routes.
@@ -101,21 +101,21 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  * Set to an array of prefixes you want to use in your application. Use for
  * admin or other prefixed routes.
  *
- * 	Routing.prefixes = array('admin', 'manager');
+ *     Routing.prefixes = array('admin', 'manager');
  *
  * Enables:
- *	`admin_index()` and `/admin/controller/index`
- *	`manager_index()` and `/manager/controller/index`
+ *    `admin_index()` and `/admin/controller/index`
+ *    `manager_index()` and `/manager/controller/index`
  *
  * [Note Routing.admin is deprecated in 1.3.  Use Routing.prefixes instead]
  */
-	Configure::write('Routing.prefixes', array('admin'));
+    Configure::write('Routing.prefixes', array('admin'));
 
 /**
  * Turn off all caching application-wide.
  *
  */
-	//Configure::write('Cache.disable', true);
+    //Configure::write('Cache.disable', true);
 
 /**
  * Enable cache checking.
@@ -126,20 +126,20 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  * or in each action using $this->cacheAction = true.
  *
  */
-	//Configure::write('Cache.check', true);
+    //Configure::write('Cache.check', true);
 
 /**
  * Defines the default error type when using the log() function. Used for
  * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
  */
-	define('LOG_ERROR', 2);
+    define('LOG_ERROR', 2);
 
 /**
  * The preferred session handling method. Valid values:
  *
- * 'php'	 		Uses settings defined in your php.ini.
- * 'cake'		Saves session files in CakePHP's /tmp directory.
- * 'database'	Uses CakePHP's database sessions.
+ * 'php'             Uses settings defined in your php.ini.
+ * 'cake'        Saves session files in CakePHP's /tmp directory.
+ * 'database'    Uses CakePHP's database sessions.
  *
  * To define a custom session handler, save it at /app/config/<name>.php.
  * Set the value of 'Session.save' to <name> to utilize it in CakePHP.
@@ -148,7 +148,7 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  * the cake shell command: cake schema create Sessions
  *
  */
-	Configure::write('Session.save', 'php');
+    Configure::write('Session.save', 'php');
 
 /**
  * The model name to be used for the session model.
@@ -157,7 +157,7 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  *
  * The model name set here should *not* be used elsewhere in your application.
  */
-	//Configure::write('Session.model', 'Session');
+    //Configure::write('Session.model', 'Session');
 
 /**
  * The name of the table used to store CakePHP database sessions.
@@ -171,14 +171,14 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  *
  * [Note: Session.table is deprecated as of CakePHP 1.3]
  */
-	//Configure::write('Session.table', 'cake_sessions');
+    //Configure::write('Session.table', 'cake_sessions');
 
 /**
  * The DATABASE_CONFIG::$var to use for database session handling.
  *
  * 'Session.save' must be set to 'database' in order to utilize this constant.
  */
-	//Configure::write('Session.database', 'default');
+    //Configure::write('Session.database', 'default');
 
 /**
  * The name of CakePHP's session cookie.
@@ -188,24 +188,24 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  * characters."
  * @link http://php.net/session_name
  */
-	Configure::write('Session.cookie', 'TheSearchEngineProject');
+    Configure::write('Session.cookie', 'TheSearchEngineProject');
 
 /**
  * Session time out time (in minutes).
  * Actual value depends on 'Security.level' setting.
  */
-	Configure::write('Session.timeout', '120');
+    Configure::write('Session.timeout', '120');
 
 /**
  * If set to false, sessions are not automatically started.
  */
-	Configure::write('Session.start', true);
+    Configure::write('Session.start', true);
 
 /**
  * When set to false, HTTP_USER_AGENT will not be checked
  * in the session
  */
-	Configure::write('Session.checkAgent', true);
+    Configure::write('Session.checkAgent', true);
 
 /**
  * The level of CakePHP security. The session timeout time defined
@@ -219,18 +219,18 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  * CakePHP session IDs are also regenerated between requests if
  * 'Security.level' is set to 'high'.
  */
-	Configure::write('Security.level', 'medium');
+    Configure::write('Security.level', 'medium');
 
 /**
  * A random string used in security hashing methods.
  */
 
-	Configure::write('Security.salt', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    Configure::write('Security.salt', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '1234567890');
+    Configure::write('Security.cipherSeed', '1234567890');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -240,7 +240,7 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  * Set to `true` to apply timestamps, when debug = 0, or set to 'force' to always enable
  * timestamping.
  */
-	//Configure::write('Asset.timestamp', true);
+    //Configure::write('Asset.timestamp', true);
 /**
  * Compress CSS output by removing comments, whitespace, repeating tags, etc.
  * This requires a/var/cache directory to be writable by the web server for caching.
@@ -248,7 +248,7 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  *
  * To use, prefix the CSS link URL with '/ccss/' instead of '/css/' or use HtmlHelper::css().
  */
-	//Configure::write('Asset.filter.css', 'css.php');
+    //Configure::write('Asset.filter.css', 'css.php');
 
 /**
  * Plug in your own custom JavaScript compressor by dropping a script in your webroot to handle the
@@ -256,20 +256,20 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  *
  * To use, prefix your JavaScript link URLs with '/cjs/' instead of '/js/' or use JavaScriptHelper::link().
  */
-	//Configure::write('Asset.filter.js', 'custom_javascript_output_filter.php');
+    //Configure::write('Asset.filter.js', 'custom_javascript_output_filter.php');
 
 /**
  * The classname and database used in CakePHP's
  * access control lists.
  */
-	Configure::write('Acl.classname', 'DbAcl');
-	Configure::write('Acl.database', 'default');
+    Configure::write('Acl.classname', 'DbAcl');
+    Configure::write('Acl.database', 'default');
 
 /**
  * If you are on PHP 5.3 uncomment this line and correct your server timezone
  * to fix the date & time related errors.
  */
-	//date_default_timezone_set('UTC');
+    //date_default_timezone_set('UTC');
 
 /**
  *
@@ -278,64 +278,64 @@ Configure::write('JobPath', TMP.'jobs.tmp');
  *
  * File storage engine.
  *
- * 	 Cache::config('default', array(
- *		'engine' => 'File', //[required]
- *		'duration'=> 3600, //[optional]
- *		'probability'=> 100, //[optional]
- * 		'path' => CACHE, //[optional] use system tmp directory - remember to use absolute path
- * 		'prefix' => 'cake_', //[optional]  prefix every cache file with this string
- * 		'lock' => false, //[optional]  use file locking
- * 		'serialize' => true, [optional]
- *	));
+ *      Cache::config('default', array(
+ *        'engine' => 'File', //[required]
+ *        'duration'=> 3600, //[optional]
+ *        'probability'=> 100, //[optional]
+ *         'path' => CACHE, //[optional] use system tmp directory - remember to use absolute path
+ *         'prefix' => 'cake_', //[optional]  prefix every cache file with this string
+ *         'lock' => false, //[optional]  use file locking
+ *         'serialize' => true, [optional]
+ *    ));
  *
  *
  * APC (http://pecl.php.net/package/APC)
  *
- * 	 Cache::config('default', array(
- *		'engine' => 'Apc', //[required]
- *		'duration'=> 3600, //[optional]
- *		'probability'=> 100, //[optional]
- * 		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
- *	));
+ *      Cache::config('default', array(
+ *        'engine' => 'Apc', //[required]
+ *        'duration'=> 3600, //[optional]
+ *        'probability'=> 100, //[optional]
+ *         'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
+ *    ));
  *
  * Xcache (http://xcache.lighttpd.net/)
  *
- * 	 Cache::config('default', array(
- *		'engine' => 'Xcache', //[required]
- *		'duration'=> 3600, //[optional]
- *		'probability'=> 100, //[optional]
- * 		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional] prefix every cache file with this string
- *		'user' => 'user', //user from xcache.admin.user settings
+ *      Cache::config('default', array(
+ *        'engine' => 'Xcache', //[required]
+ *        'duration'=> 3600, //[optional]
+ *        'probability'=> 100, //[optional]
+ *         'prefix' => Inflector::slug(APP_DIR) . '_', //[optional] prefix every cache file with this string
+ *        'user' => 'user', //user from xcache.admin.user settings
  *      'password' => 'password', //plaintext password (xcache.admin.pass)
- *	));
+ *    ));
  *
  *
  * Memcache (http://www.danga.com/memcached/)
  *
- * 	 Cache::config('default', array(
- *		'engine' => 'Memcache', //[required]
- *		'duration'=> 3600, //[optional]
- *		'probability'=> 100, //[optional]
- * 		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
- * 		'servers' => array(
- * 			'127.0.0.1:11211' // localhost, default port 11211
- * 		), //[optional]
- * 		'compress' => false, // [optional] compress data in Memcache (slower, but uses less memory)
- *	));
+ *      Cache::config('default', array(
+ *        'engine' => 'Memcache', //[required]
+ *        'duration'=> 3600, //[optional]
+ *        'probability'=> 100, //[optional]
+ *         'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
+ *         'servers' => array(
+ *             '127.0.0.1:11211' // localhost, default port 11211
+ *         ), //[optional]
+ *         'compress' => false, // [optional] compress data in Memcache (slower, but uses less memory)
+ *    ));
  *
  */
 
 
-	Cache::config('default', array('engine' => 'File'));
-	
-	Cache::config('long', array(  
-	    'engine' => 'File',  
-	    'duration'=> '+1 day',  
-	));
-	
-	if(file_exists(CONFIGS.'settings.php'))  {
-		
-		Configure::load('settings');
+    Cache::config('default', array('engine' => 'File'));
+    
+    Cache::config('long', array(  
+        'engine' => 'File',  
+        'duration'=> '+1 day',  
+    ));
+    
+    if(file_exists(CONFIGS.'settings.php'))  {
+        
+        Configure::load('settings');
 
-	}
+    }
 

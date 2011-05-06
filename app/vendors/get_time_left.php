@@ -18,17 +18,17 @@
  */
 function get_time_left () {
 
-	$start = $_SERVER['REQUEST_TIME'];
-	
-	$max = ini_get('max_execution_time');
-	
-	$now = microtime(true);
-	
-	$spent = ($now - $start);
+    $start = $_SERVER['REQUEST_TIME'];
+    
+    $max = ini_get('max_execution_time');
+    
+    $now = microtime(true);
+    
+    $spent = ($now - $start);
 
-	$left = $max - $spent;
-	
-	@set_time_limit($left);
-	
-	return $left;
+    $left = $max - $spent;
+    
+    @set_time_limit($left);
+    
+    return $left;
 }

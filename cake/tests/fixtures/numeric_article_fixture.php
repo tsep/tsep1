@@ -32,7 +32,7 @@ class NumericArticleFixture extends CakeTestFixture {
  * @var string 'NumericArticle'
  * @access public
  */
-	var $name = 'NumericArticle';
+    var $name = 'NumericArticle';
 
 /**
  * fields property
@@ -40,12 +40,12 @@ class NumericArticleFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'title' => array('type' => 'string', 'null' => false),
-		'created' => 'datetime',
-		'updated' => 'datetime'
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'title' => array('type' => 'string', 'null' => false),
+        'created' => 'datetime',
+        'updated' => 'datetime'
+    );
 
 /**
  * records property
@@ -53,8 +53,8 @@ class NumericArticleFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('title' => 'First Article', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-		array('title' => '12345abcde', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-	);
+    var $records = array(
+        array('title' => 'First Article', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
+        array('title' => '12345abcde', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
+    );
 }

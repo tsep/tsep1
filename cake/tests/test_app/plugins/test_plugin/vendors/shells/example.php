@@ -25,7 +25,7 @@ class ExampleShell extends Shell {
  * @access public
  * @return void
  */
-	function main() {
-		$this->out('This is the main method called from TestPlugin.ExampleShell');
-	}
+    function main() {
+        $this->out('This is the main method called from TestPlugin.ExampleShell');
+    }
 }

@@ -35,7 +35,7 @@ class CakeSocket extends Object {
  * @var string
  * @access public
  */
-	var $description = 'Remote DataSource Network Socket Interface';
+    var $description = 'Remote DataSource Network Socket Interface';
 
 /**
  * Base configuration settings for the socket connection
@@ -43,13 +43,13 @@ class CakeSocket extends Object {
  * @var array
  * @access protected
  */
-	var $_baseConfig = array(
-		'persistent'	=> false,
-		'host'			=> 'localhost',
-		'protocol'		=> 'tcp',
-		'port'			=> 80,
-		'timeout'		=> 30
-	);
+    var $_baseConfig = array(
+        'persistent'    => false,
+        'host'            => 'localhost',
+        'protocol'        => 'tcp',
+        'port'            => 80,
+        'timeout'        => 30
+    );
 
 /**
  * Configuration settings for the socket connection
@@ -57,7 +57,7 @@ class CakeSocket extends Object {
  * @var array
  * @access public
  */
-	var $config = array();
+    var $config = array();
 
 /**
  * Reference to socket connection resource
@@ -65,7 +65,7 @@ class CakeSocket extends Object {
  * @var resource
  * @access public
  */
-	var $connection = null;
+    var $connection = null;
 
 /**
  * This boolean contains the current state of the CakeSocket class
@@ -73,7 +73,7 @@ class CakeSocket extends Object {
  * @var boolean
  * @access public
  */
-	var $connected = false;
+    var $connected = false;
 
 /**
  * This variable contains an array with the last error number (num) and string (str)
@@ -81,7 +81,7 @@ class CakeSocket extends Object {
  * @var array
  * @access public
  */
-	var $lastError = array();
+    var $lastError = array();
 
 /**
  * Constructor.
@@ -89,14 +89,14 @@ class CakeSocket extends Object {
  * @param array $config Socket configuration, which will be merged with the base configuration
  * @see CakeSocket::$_baseConfig
  */
-	function __construct($config = array()) {
-		parent::__construct();
+    function __construct($config = array()) {
+        parent::__construct();
 
-		$this->config = array_merge($this->_baseConfig, $config);
-		if (!is_numeric($this->config['protocol'])) {
-			$this->config['protocol'] = getprotobyname($this->config['protocol']);
-		}
-	}
+        $this->config = array_merge($this->_baseConfig, $config);
+        if (!is_numeric($this->config['protocol'])) {
+            $this->config['protocol'] = getprotobyname($this->config['protocol']);
+        }
+    }
 
 /**
  * Connect the socket to the given host and port.
@@ -104,33 +104,33 @@ class CakeSocket extends Object {
  * @return boolean Success
  * @access public
  */
-	function connect() {
-		if ($this->connection != null) {
-			$this->disconnect();
-		}
+    function connect() {
+        if ($this->connection != null) {
+            $this->disconnect();
+        }
 
-		$scheme = null;
-		if (isset($this->config['request']) && $this->config['request']['uri']['scheme'] == 'https') {
-			$scheme = 'ssl://';
-		}
+        $scheme = null;
+        if (isset($this->config['request']) && $this->config['request']['uri']['scheme'] == 'https') {
+            $scheme = 'ssl://';
+        }
 
-		if ($this->config['persistent'] == true) {
-			$tmp = null;
-			$this->connection = @pfsockopen($scheme.$this->config['host'], $this->config['port'], $errNum, $errStr, $this->config['timeout']);
-		} else {
-			$this->connection = @fsockopen($scheme.$this->config['host'], $this->config['port'], $errNum, $errStr, $this->config['timeout']);
-		}
+        if ($this->config['persistent'] == true) {
+            $tmp = null;
+            $this->connection = @pfsockopen($scheme.$this->config['host'], $this->config['port'], $errNum, $errStr, $this->config['timeout']);
+        } else {
+            $this->connection = @fsockopen($scheme.$this->config['host'], $this->config['port'], $errNum, $errStr, $this->config['timeout']);
+        }
 
-		if (!empty($errNum) || !empty($errStr)) {
-			$this->setLastError($errStr, $errNum);
-		}
+        if (!empty($errNum) || !empty($errStr)) {
+            $this->setLastError($errStr, $errNum);
+        }
 
-		$this->connected = is_resource($this->connection);
-		if ($this->connected) {
-			stream_set_timeout($this->connection, $this->config['timeout']);
-		}
-		return $this->connected;
-	}
+        $this->connected = is_resource($this->connection);
+        if ($this->connected) {
+            stream_set_timeout($this->connection, $this->config['timeout']);
+        }
+        return $this->connected;
+    }
 
 /**
  * Get the host name of the current connection.
@@ -138,13 +138,13 @@ class CakeSocket extends Object {
  * @return string Host name
  * @access public
  */
-	function host() {
-		if (Validation::ip($this->config['host'])) {
-			return gethostbyaddr($this->config['host']);
-		} else {
-			return gethostbyaddr($this->address());
-		}
-	}
+    function host() {
+        if (Validation::ip($this->config['host'])) {
+            return gethostbyaddr($this->config['host']);
+        } else {
+            return gethostbyaddr($this->address());
+        }
+    }
 
 /**
  * Get the IP address of the current connection.
@@ -152,13 +152,13 @@ class CakeSocket extends Object {
  * @return string IP address
  * @access public
  */
-	function address() {
-		if (Validation::ip($this->config['host'])) {
-			return $this->config['host'];
-		} else {
-			return gethostbyname($this->config['host']);
-		}
-	}
+    function address() {
+        if (Validation::ip($this->config['host'])) {
+            return $this->config['host'];
+        } else {
+            return gethostbyname($this->config['host']);
+        }
+    }
 
 /**
  * Get all IP addresses associated with the current connection.
@@ -166,13 +166,13 @@ class CakeSocket extends Object {
  * @return array IP addresses
  * @access public
  */
-	function addresses() {
-		if (Validation::ip($this->config['host'])) {
-			return array($this->config['host']);
-		} else {
-			return gethostbynamel($this->config['host']);
-		}
-	}
+    function addresses() {
+        if (Validation::ip($this->config['host'])) {
+            return array($this->config['host']);
+        } else {
+            return gethostbynamel($this->config['host']);
+        }
+    }
 
 /**
  * Get the last error as a string.
@@ -180,13 +180,13 @@ class CakeSocket extends Object {
  * @return string Last error
  * @access public
  */
-	function lastError() {
-		if (!empty($this->lastError)) {
-			return $this->lastError['num'] . ': ' . $this->lastError['str'];
-		} else {
-			return null;
-		}
-	}
+    function lastError() {
+        if (!empty($this->lastError)) {
+            return $this->lastError['num'] . ': ' . $this->lastError['str'];
+        } else {
+            return null;
+        }
+    }
 
 /**
  * Set the last error.
@@ -195,9 +195,9 @@ class CakeSocket extends Object {
  * @param string $errStr Error string
  * @access public
  */
-	function setLastError($errNum, $errStr) {
-		$this->lastError = array('num' => $errNum, 'str' => $errStr);
-	}
+    function setLastError($errNum, $errStr) {
+        $this->lastError = array('num' => $errNum, 'str' => $errStr);
+    }
 
 /**
  * Write data to the socket.
@@ -206,15 +206,15 @@ class CakeSocket extends Object {
  * @return boolean Success
  * @access public
  */
-	function write($data) {
-		if (!$this->connected) {
-			if (!$this->connect()) {
-				return false;
-			}
-		}
+    function write($data) {
+        if (!$this->connected) {
+            if (!$this->connect()) {
+                return false;
+            }
+        }
 
-		return fwrite($this->connection, $data, strlen($data));
-	}
+        return fwrite($this->connection, $data, strlen($data));
+    }
 
 /**
  * Read data from the socket. Returns false if no data is available or no connection could be
@@ -224,25 +224,25 @@ class CakeSocket extends Object {
  * @return mixed Socket data
  * @access public
  */
-	function read($length = 1024) {
-		if (!$this->connected) {
-			if (!$this->connect()) {
-				return false;
-			}
-		}
+    function read($length = 1024) {
+        if (!$this->connected) {
+            if (!$this->connect()) {
+                return false;
+            }
+        }
 
-		if (!feof($this->connection)) {
-			$buffer = fread($this->connection, $length);
-			$info = stream_get_meta_data($this->connection);
-			if ($info['timed_out']) {
-				$this->setLastError(E_WARNING, __('Connection timed out', true));
-				return false;
-			}
-			return $buffer;
-		} else {
-			return false;
-		}
-	}
+        if (!feof($this->connection)) {
+            $buffer = fread($this->connection, $length);
+            $info = stream_get_meta_data($this->connection);
+            if ($info['timed_out']) {
+                $this->setLastError(E_WARNING, __('Connection timed out', true));
+                return false;
+            }
+            return $buffer;
+        } else {
+            return false;
+        }
+    }
 
 /**
  * Abort socket operation.
@@ -250,8 +250,8 @@ class CakeSocket extends Object {
  * @return boolean Success
  * @access public
  */
-	function abort() {
-	}
+    function abort() {
+    }
 
 /**
  * Disconnect the socket from the current connection.
@@ -259,27 +259,27 @@ class CakeSocket extends Object {
  * @return boolean Success
  * @access public
  */
-	function disconnect() {
-		if (!is_resource($this->connection)) {
-			$this->connected = false;
-			return true;
-		}
-		$this->connected = !fclose($this->connection);
+    function disconnect() {
+        if (!is_resource($this->connection)) {
+            $this->connected = false;
+            return true;
+        }
+        $this->connected = !fclose($this->connection);
 
-		if (!$this->connected) {
-			$this->connection = null;
-		}
-		return !$this->connected;
-	}
+        if (!$this->connected) {
+            $this->connection = null;
+        }
+        return !$this->connected;
+    }
 
 /**
  * Destructor, used to disconnect from current connection.
  *
  * @access private
  */
-	function __destruct() {
-		$this->disconnect();
-	}
+    function __destruct() {
+        $this->disconnect();
+    }
 
 /**
  * Resets the state of this Socket instance to it's initial state (before Object::__construct got executed)
@@ -287,18 +287,18 @@ class CakeSocket extends Object {
  * @return boolean True on success
  * @access public
  */
-	function reset($state = null) {
-		if (empty($state)) {
-			static $initalState = array();
-			if (empty($initalState)) {
-				$initalState = get_class_vars(__CLASS__);
-			}
-			$state = $initalState;
-		}
+    function reset($state = null) {
+        if (empty($state)) {
+            static $initalState = array();
+            if (empty($initalState)) {
+                $initalState = get_class_vars(__CLASS__);
+            }
+            $state = $initalState;
+        }
 
-		foreach ($state as $property => $value) {
-			$this->{$property} = $value;
-		}
-		return true;
-	}
+        foreach ($state as $property => $value) {
+            $this->{$property} = $value;
+        }
+        return true;
+    }
 }

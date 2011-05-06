@@ -34,7 +34,7 @@ class RoutingSystemGroupTest extends TestSuite {
  * @var string 'Routing system'
  * @access public
  */
-	var $label = 'Router and Dispatcher';
+    var $label = 'Router and Dispatcher';
 
 /**
  * RoutingSystemGroupTest method
@@ -42,8 +42,8 @@ class RoutingSystemGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function RoutingSystemGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'dispatcher');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'router');
-	}
+    function RoutingSystemGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'dispatcher');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'router');
+    }
 }

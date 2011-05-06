@@ -34,7 +34,7 @@ class CacheGroupTest extends TestSuite {
  * @var string 'All core cache engines'
  * @access public
  */
-	var $label = 'Cache and all CacheEngines';
+    var $label = 'Cache and all CacheEngines';
 
 /**
  * CacheGroupTest method
@@ -42,8 +42,8 @@ class CacheGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function CacheGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cache');
-		TestManager::addTestCasesFromDirectory($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cache');
-	}
+    function CacheGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cache');
+        TestManager::addTestCasesFromDirectory($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cache');
+    }
 }

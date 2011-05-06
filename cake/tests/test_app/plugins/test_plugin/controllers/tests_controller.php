@@ -18,15 +18,15 @@
  * @license       http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
  */
 class TestsController extends TestPluginAppController {
-	var $name = 'Tests';
-	var $uses = array();
-	var $helpers = array('TestPlugin.OtherHelper', 'Html');
-	var $components = array('TestPlugin.PluginsComponent');
+    var $name = 'Tests';
+    var $uses = array();
+    var $helpers = array('TestPlugin.OtherHelper', 'Html');
+    var $components = array('TestPlugin.PluginsComponent');
 
-	function index() {
-	}
+    function index() {
+    }
 
-	function some_method() {
-		return 25;
-	}
+    function some_method() {
+        return 25;
+    }
 }

@@ -21,7 +21,7 @@
 /**
  * Ignore base class.
  */
-	SimpleTest::ignore('CakeWebTestCase');
+    SimpleTest::ignore('CakeWebTestCase');
 
 /**
  * Simple wrapper for the WebTestCase provided by SimpleTest

@@ -32,7 +32,7 @@ class DataSource extends Object {
  * @var boolean
  * @access public
  */
-	var $connected = false;
+    var $connected = false;
 
 /**
  * Print full query debug info?
@@ -40,7 +40,7 @@ class DataSource extends Object {
  * @var boolean
  * @access public
  */
-	var $fullDebug = false;
+    var $fullDebug = false;
 
 /**
  * Error description of last query
@@ -48,7 +48,7 @@ class DataSource extends Object {
  * @var unknown_type
  * @access public
  */
-	var $error = null;
+    var $error = null;
 
 /**
  * String to hold how many rows were affected by the last SQL operation.
@@ -56,7 +56,7 @@ class DataSource extends Object {
  * @var string
  * @access public
  */
-	var $affected = null;
+    var $affected = null;
 
 /**
  * Number of rows in current resultset
@@ -64,7 +64,7 @@ class DataSource extends Object {
  * @var int
  * @access public
  */
-	var $numRows = null;
+    var $numRows = null;
 
 /**
  * Time the last query took
@@ -72,7 +72,7 @@ class DataSource extends Object {
  * @var int
  * @access public
  */
-	var $took = null;
+    var $took = null;
 
 /**
  * The starting character that this DataSource uses for quoted identifiers.
@@ -80,7 +80,7 @@ class DataSource extends Object {
  * @var string
  * @access public
  */
-	var $startQuote = null;
+    var $startQuote = null;
 
 /**
  * The ending character that this DataSource uses for quoted identifiers.
@@ -88,7 +88,7 @@ class DataSource extends Object {
  * @var string
  * @access public
  */
-	var $endQuote = null;
+    var $endQuote = null;
 
 /**
  * Result
@@ -96,7 +96,7 @@ class DataSource extends Object {
  * @var array
  * @access protected
  */
-	var $_result = null;
+    var $_result = null;
 
 /**
  * Queries count.
@@ -104,7 +104,7 @@ class DataSource extends Object {
  * @var int
  * @access protected
  */
-	var $_queriesCnt = 0;
+    var $_queriesCnt = 0;
 
 /**
  * Total duration of all queries.
@@ -112,7 +112,7 @@ class DataSource extends Object {
  * @var unknown_type
  * @access protected
  */
-	var $_queriesTime = null;
+    var $_queriesTime = null;
 
 /**
  * Log of queries executed by this DataSource
@@ -120,7 +120,7 @@ class DataSource extends Object {
  * @var unknown_type
  * @access protected
  */
-	var $_queriesLog = array();
+    var $_queriesLog = array();
 
 /**
  * Maximum number of items in query log
@@ -130,7 +130,7 @@ class DataSource extends Object {
  * @var int Maximum number of queries in the queries log.
  * @access protected
  */
-	var $_queriesLogMax = 200;
+    var $_queriesLogMax = 200;
 
 /**
  * Caches serialzed results of executed queries
@@ -138,7 +138,7 @@ class DataSource extends Object {
  * @var array Maximum number of queries in the queries log.
  * @access protected
  */
-	var $_queryCache = array();
+    var $_queryCache = array();
 
 /**
  * The default configuration of a specific DataSource
@@ -146,7 +146,7 @@ class DataSource extends Object {
  * @var array
  * @access protected
  */
-	var $_baseConfig = array();
+    var $_baseConfig = array();
 
 /**
  * Holds references to descriptions loaded by the DataSource
@@ -154,7 +154,7 @@ class DataSource extends Object {
  * @var array
  * @access private
  */
-	var $__descriptions = array();
+    var $__descriptions = array();
 
 /**
  * Holds a list of sources (tables) contained in the DataSource
@@ -162,7 +162,7 @@ class DataSource extends Object {
  * @var array
  * @access protected
  */
-	var $_sources = null;
+    var $_sources = null;
 
 /**
  * A reference to the physical connection of this DataSource
@@ -170,7 +170,7 @@ class DataSource extends Object {
  * @var array
  * @access public
  */
-	var $connection = null;
+    var $connection = null;
 
 /**
  * The DataSource configuration
@@ -178,7 +178,7 @@ class DataSource extends Object {
  * @var array
  * @access public
  */
-	var $config = array();
+    var $config = array();
 
 /**
  * The DataSource configuration key name
@@ -186,7 +186,7 @@ class DataSource extends Object {
  * @var string
  * @access public
  */
-	var $configKeyName = null;
+    var $configKeyName = null;
 
 /**
  * Whether or not this DataSource is in the middle of a transaction
@@ -194,7 +194,7 @@ class DataSource extends Object {
  * @var boolean
  * @access protected
  */
-	var $_transactionStarted = false;
+    var $_transactionStarted = false;
 
 /**
  * Whether or not source data like available tables and schema descriptions
@@ -203,7 +203,7 @@ class DataSource extends Object {
  * @var boolean
  * @access public
  */
-	var $cacheSources = true;
+    var $cacheSources = true;
 
 /**
  * Constructor.
@@ -211,10 +211,10 @@ class DataSource extends Object {
  * @param array $config Array of configuration information for the datasource.
  * @return void.
  */
-	function __construct($config = array()) {
-		parent::__construct();
-		$this->setConfig($config);
-	}
+    function __construct($config = array()) {
+        parent::__construct();
+        $this->setConfig($config);
+    }
 
 /**
  * Caches/returns cached results for child instances
@@ -223,27 +223,27 @@ class DataSource extends Object {
  * @return array Array of sources available in this datasource.
  * @access public
  */
-	function listSources($data = null) {
-		if ($this->cacheSources === false) {
-			return null;
-		}
+    function listSources($data = null) {
+        if ($this->cacheSources === false) {
+            return null;
+        }
 
-		if ($this->_sources !== null) {
-			return $this->_sources;
-		}
+        if ($this->_sources !== null) {
+            return $this->_sources;
+        }
 
-		$key = ConnectionManager::getSourceName($this) . '_' . $this->config['database'] . '_list';
-		$key = preg_replace('/[^A-Za-z0-9_\-.+]/', '_', $key);
-		$sources = Cache::read($key, '_cake_model_');
+        $key = ConnectionManager::getSourceName($this) . '_' . $this->config['database'] . '_list';
+        $key = preg_replace('/[^A-Za-z0-9_\-.+]/', '_', $key);
+        $sources = Cache::read($key, '_cake_model_');
 
-		if (empty($sources)) {
-			$sources = $data;
-			Cache::write($key, $data, '_cake_model_');
-		}
+        if (empty($sources)) {
+            $sources = $data;
+            Cache::write($key, $data, '_cake_model_');
+        }
 
-		$this->_sources = $sources;
-		return $sources;
-	}
+        $this->_sources = $sources;
+        return $sources;
+    }
 
 /**
  * Convenience method for DboSource::listSources().  Returns source names in lowercase.
@@ -252,12 +252,12 @@ class DataSource extends Object {
  * @return array Array of sources available in this datasource
  * @access public
  */
-	function sources($reset = false) {
-		if ($reset === true) {
-			$this->_sources = null;
-		}
-		return array_map('strtolower', $this->listSources());
-	}
+    function sources($reset = false) {
+        if ($reset === true) {
+            $this->_sources = null;
+        }
+        return array_map('strtolower', $this->listSources());
+    }
 
 /**
  * Returns a Model description (metadata) or null if none found.
@@ -266,23 +266,23 @@ class DataSource extends Object {
  * @return array Array of Metadata for the $model
  * @access public
  */
-	function describe(&$model) {
-		if ($this->cacheSources === false) {
-			return null;
-		}
-		$table = $model->tablePrefix . $model->table;
+    function describe(&$model) {
+        if ($this->cacheSources === false) {
+            return null;
+        }
+        $table = $model->tablePrefix . $model->table;
 
-		if (isset($this->__descriptions[$table])) {
-			return $this->__descriptions[$table];
-		}
-		$cache = $this->__cacheDescription($table);
+        if (isset($this->__descriptions[$table])) {
+            return $this->__descriptions[$table];
+        }
+        $cache = $this->__cacheDescription($table);
 
-		if ($cache !== null) {
-			$this->__descriptions[$table] =& $cache;
-			return $cache;
-		}
-		return null;
-	}
+        if ($cache !== null) {
+            $this->__descriptions[$table] =& $cache;
+            return $cache;
+        }
+        return null;
+    }
 
 /**
  * Begin a transaction
@@ -290,9 +290,9 @@ class DataSource extends Object {
  * @return boolean Returns true if a transaction is not in progress
  * @access public
  */
-	function begin(&$model) {
-		return !$this->_transactionStarted;
-	}
+    function begin(&$model) {
+        return !$this->_transactionStarted;
+    }
 
 /**
  * Commit a transaction
@@ -300,9 +300,9 @@ class DataSource extends Object {
  * @return boolean Returns true if a transaction is in progress
  * @access public
  */
-	function commit(&$model) {
-		return $this->_transactionStarted;
-	}
+    function commit(&$model) {
+        return $this->_transactionStarted;
+    }
 
 /**
  * Rollback a transaction
@@ -310,9 +310,9 @@ class DataSource extends Object {
  * @return boolean Returns true if a transaction is in progress
  * @access public
  */
-	function rollback(&$model) {
-		return $this->_transactionStarted;
-	}
+    function rollback(&$model) {
+        return $this->_transactionStarted;
+    }
 
 /**
  * Converts column types to basic types
@@ -321,9 +321,9 @@ class DataSource extends Object {
  * @return string Abstract column type (i.e. "string")
  * @access public
  */
-	function column($real) {
-		return false;
-	}
+    function column($real) {
+        return false;
+    }
 
 /**
  * Used to create new records. The "C" CRUD.
@@ -336,9 +336,9 @@ class DataSource extends Object {
  * @return boolean success
  * @access public
  */
-	function create(&$model, $fields = null, $values = null) {
-		return false;
-	}
+    function create(&$model, $fields = null, $values = null) {
+        return false;
+    }
 
 /**
  * Used to read records from the Datasource. The "R" in CRUD
@@ -350,9 +350,9 @@ class DataSource extends Object {
  * @return mixed
  * @access public
  */
-	function read(&$model, $queryData = array()) {
-		return false;
-	}
+    function read(&$model, $queryData = array()) {
+        return false;
+    }
 
 /**
  * Update a record(s) in the datasource.
@@ -365,9 +365,9 @@ class DataSource extends Object {
  * @return boolean Success
  * @access public
  */
-	function update(&$model, $fields = null, $values = null) {
-		return false;
-	}
+    function update(&$model, $fields = null, $values = null) {
+        return false;
+    }
 
 /**
  * Delete a record(s) in the datasource.
@@ -378,11 +378,11 @@ class DataSource extends Object {
  * @param mixed $id Primary key of the model
  * @access public
  */
-	function delete(&$model, $id = null) {
-		if ($id == null) {
-			$id = $model->id;
-		}
-	}
+    function delete(&$model, $id = null) {
+        if ($id == null) {
+            $id = $model->id;
+        }
+    }
 
 /**
  * Returns the ID generated from the previous INSERT operation.
@@ -391,9 +391,9 @@ class DataSource extends Object {
  * @return mixed Last ID key generated in previous INSERT
  * @access public
  */
-	function lastInsertId($source = null) {
-		return false;
-	}
+    function lastInsertId($source = null) {
+        return false;
+    }
 
 /**
  * Returns the number of rows returned by last operation.
@@ -402,9 +402,9 @@ class DataSource extends Object {
  * @return integer Number of rows returned by last operation
  * @access public
  */
-	function lastNumRows($source = null) {
-		return false;
-	}
+    function lastNumRows($source = null) {
+        return false;
+    }
 
 /**
  * Returns the number of rows affected by last query.
@@ -413,9 +413,9 @@ class DataSource extends Object {
  * @return integer Number of rows affected by last query.
  * @access public
  */
-	function lastAffected($source = null) {
-		return false;
-	}
+    function lastAffected($source = null) {
+        return false;
+    }
 
 /**
  * Check whether the conditions for the Datasource being available
@@ -425,9 +425,9 @@ class DataSource extends Object {
  * @return boolean Whether or not the Datasources conditions for use are met.
  * @access public
  */
-	function enabled() {
-		return true;
-	}
+    function enabled() {
+        return true;
+    }
 
 /**
  * Returns true if the DataSource supports the given interface (method)
@@ -436,13 +436,13 @@ class DataSource extends Object {
  * @return boolean True on success
  * @access public
  */
-	function isInterfaceSupported($interface) {
-		static $methods = false;
-		if ($methods === false) {
-			$methods = array_map('strtolower', get_class_methods($this));
-		}
-		return in_array(strtolower($interface), $methods);
-	}
+    function isInterfaceSupported($interface) {
+        static $methods = false;
+        if ($methods === false) {
+            $methods = array_map('strtolower', get_class_methods($this));
+        }
+        return in_array(strtolower($interface), $methods);
+    }
 
 /**
  * Sets the configuration for the DataSource.
@@ -452,9 +452,9 @@ class DataSource extends Object {
  * @return void
  * @access public
  */
-	function setConfig($config = array()) {
-		$this->config = array_merge($this->_baseConfig, $this->config, $config);
-	}
+    function setConfig($config = array()) {
+        $this->config = array_merge($this->_baseConfig, $this->config, $config);
+    }
 
 /**
  * Cache the DataSource description
@@ -464,25 +464,25 @@ class DataSource extends Object {
  * @return mixed
  * @access private
  */
-	function __cacheDescription($object, $data = null) {
-		if ($this->cacheSources === false) {
-			return null;
-		}
+    function __cacheDescription($object, $data = null) {
+        if ($this->cacheSources === false) {
+            return null;
+        }
 
-		if ($data !== null) {
-			$this->__descriptions[$object] =& $data;
-		}
+        if ($data !== null) {
+            $this->__descriptions[$object] =& $data;
+        }
 
-		$key = ConnectionManager::getSourceName($this) . '_' . $object;
-		$cache = Cache::read($key, '_cake_model_');
+        $key = ConnectionManager::getSourceName($this) . '_' . $object;
+        $cache = Cache::read($key, '_cake_model_');
 
-		if (empty($cache)) {
-			$cache = $data;
-			Cache::write($key, $cache, '_cake_model_');
-		}
+        if (empty($cache)) {
+            $cache = $data;
+            Cache::write($key, $cache, '_cake_model_');
+        }
 
-		return $cache;
-	}
+        return $cache;
+    }
 
 /**
  * Replaces `{$__cakeID__$}` and `{$__cakeForeignKey__$}` placeholders in query data.
@@ -498,78 +498,78 @@ class DataSource extends Object {
  * @access public
  * @todo Remove and refactor $assocData, ensure uses of the method have the param removed too.
  */
-	function insertQueryData($query, $data, $association, $assocData, &$model, &$linkModel, $stack) {
-		$keys = array('{$__cakeID__$}', '{$__cakeForeignKey__$}');
+    function insertQueryData($query, $data, $association, $assocData, &$model, &$linkModel, $stack) {
+        $keys = array('{$__cakeID__$}', '{$__cakeForeignKey__$}');
 
-		foreach ($keys as $key) {
-			$val = null;
-			$type = null;
+        foreach ($keys as $key) {
+            $val = null;
+            $type = null;
 
-			if (strpos($query, $key) !== false) {
-				switch ($key) {
-					case '{$__cakeID__$}':
-						if (isset($data[$model->alias]) || isset($data[$association])) {
-							if (isset($data[$model->alias][$model->primaryKey])) {
-								$val = $data[$model->alias][$model->primaryKey];
-							} elseif (isset($data[$association][$model->primaryKey])) {
-								$val = $data[$association][$model->primaryKey];
-							}
-						} else {
-							$found = false;
-							foreach (array_reverse($stack) as $assoc) {
-								if (isset($data[$assoc]) && isset($data[$assoc][$model->primaryKey])) {
-									$val = $data[$assoc][$model->primaryKey];
-									$found = true;
-									break;
-								}
-							}
-							if (!$found) {
-								$val = '';
-							}
-						}
-						$type = $model->getColumnType($model->primaryKey);
-					break;
-					case '{$__cakeForeignKey__$}':
-						foreach ($model->__associations as $id => $name) {
-							foreach ($model->$name as $assocName => $assoc) {
-								if ($assocName === $association) {
-									if (isset($assoc['foreignKey'])) {
-										$foreignKey = $assoc['foreignKey'];
-										$assocModel = $model->$assocName;
-										$type = $assocModel->getColumnType($assocModel->primaryKey);
+            if (strpos($query, $key) !== false) {
+                switch ($key) {
+                    case '{$__cakeID__$}':
+                        if (isset($data[$model->alias]) || isset($data[$association])) {
+                            if (isset($data[$model->alias][$model->primaryKey])) {
+                                $val = $data[$model->alias][$model->primaryKey];
+                            } elseif (isset($data[$association][$model->primaryKey])) {
+                                $val = $data[$association][$model->primaryKey];
+                            }
+                        } else {
+                            $found = false;
+                            foreach (array_reverse($stack) as $assoc) {
+                                if (isset($data[$assoc]) && isset($data[$assoc][$model->primaryKey])) {
+                                    $val = $data[$assoc][$model->primaryKey];
+                                    $found = true;
+                                    break;
+                                }
+                            }
+                            if (!$found) {
+                                $val = '';
+                            }
+                        }
+                        $type = $model->getColumnType($model->primaryKey);
+                    break;
+                    case '{$__cakeForeignKey__$}':
+                        foreach ($model->__associations as $id => $name) {
+                            foreach ($model->$name as $assocName => $assoc) {
+                                if ($assocName === $association) {
+                                    if (isset($assoc['foreignKey'])) {
+                                        $foreignKey = $assoc['foreignKey'];
+                                        $assocModel = $model->$assocName;
+                                        $type = $assocModel->getColumnType($assocModel->primaryKey);
 
-										if (isset($data[$model->alias][$foreignKey])) {
-											$val = $data[$model->alias][$foreignKey];
-										} elseif (isset($data[$association][$foreignKey])) {
-											$val = $data[$association][$foreignKey];
-										} else {
-											$found = false;
-											foreach (array_reverse($stack) as $assoc) {
-												if (isset($data[$assoc]) && isset($data[$assoc][$foreignKey])) {
-													$val = $data[$assoc][$foreignKey];
-													$found = true;
-													break;
-												}
-											}
-											if (!$found) {
-												$val = '';
-											}
-										}
-									}
-									break 3;
-								}
-							}
-						}
-					break;
-				}
-				if (empty($val) && $val !== '0') {
-					return false;
-				}
-				$query = str_replace($key, $this->value($val, $type), $query);
-			}
-		}
-		return $query;
-	}
+                                        if (isset($data[$model->alias][$foreignKey])) {
+                                            $val = $data[$model->alias][$foreignKey];
+                                        } elseif (isset($data[$association][$foreignKey])) {
+                                            $val = $data[$association][$foreignKey];
+                                        } else {
+                                            $found = false;
+                                            foreach (array_reverse($stack) as $assoc) {
+                                                if (isset($data[$assoc]) && isset($data[$assoc][$foreignKey])) {
+                                                    $val = $data[$assoc][$foreignKey];
+                                                    $found = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (!$found) {
+                                                $val = '';
+                                            }
+                                        }
+                                    }
+                                    break 3;
+                                }
+                            }
+                        }
+                    break;
+                }
+                if (empty($val) && $val !== '0') {
+                    return false;
+                }
+                $query = str_replace($key, $this->value($val, $type), $query);
+            }
+        }
+        return $query;
+    }
 
 /**
  * To-be-overridden in subclasses.
@@ -579,9 +579,9 @@ class DataSource extends Object {
  * @return string Key name for model.
  * @access public
  */
-	function resolveKey(&$model, $key) {
-		return $model->alias . $key;
-	}
+    function resolveKey(&$model, $key) {
+        return $model->alias . $key;
+    }
 
 /**
  * Closes the current datasource.
@@ -589,13 +589,13 @@ class DataSource extends Object {
  * @return void
  * @access public
  */
-	function __destruct() {
-		if ($this->_transactionStarted) {
-			$null = null;
-			$this->rollback($null);
-		}
-		if ($this->connected) {
-			$this->close();
-		}
-	}
+    function __destruct() {
+        if ($this->_transactionStarted) {
+            $null = null;
+            $this->rollback($null);
+        }
+        if ($this->connected) {
+            $this->close();
+        }
+    }
 }

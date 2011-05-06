@@ -26,16 +26,16 @@
  */
 class CounterCacheUserFixture extends CakeTestFixture {
 
-	var $name = 'CounterCacheUser';
+    var $name = 'CounterCacheUser';
 
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'name' => array('type' => 'string', 'length' => 255, 'null' => false),
-		'post_count' => array('type' => 'integer', 'null' => true)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'name' => array('type' => 'string', 'length' => 255, 'null' => false),
+        'post_count' => array('type' => 'integer', 'null' => true)
+    );
 
-	var $records = array(
-		array('id' => 66, 'name' => 'Alexander','post_count' => 2),
-		array('id' => 301, 'name' => 'Steven','post_count' => 1),
-	);
+    var $records = array(
+        array('id' => 66, 'name' => 'Alexander','post_count' => 2),
+        array('id' => 301, 'name' => 'Steven','post_count' => 1),
+    );
 }

@@ -6,8 +6,8 @@
  *
  * CakePHP(tm) Tests <http://book.cakephp.org/view/1196/Testing>
  * Copyright 2005-2010, Cake Software Foundation, Inc.
- *								1785 E. Sahara Avenue, Suite 490-204
- *								Las Vegas, Nevada 89104
+ *                                1785 E. Sahara Avenue, Suite 490-204
+ *                                Las Vegas, Nevada 89104
  *
  *  Licensed under The Open Group Test Suite License
  *  Redistributions of files must retain the above copyright notice.
@@ -34,10 +34,10 @@ class TestManagerTest extends CakeTestCase {
  * @return void
  * @access public
  */
-	function setUp() {
-		$this->TestManager =& new TestManager();
-		$this->Reporter =& new CakeHtmlReporter();
-	}
+    function setUp() {
+        $this->TestManager =& new TestManager();
+        $this->Reporter =& new CakeHtmlReporter();
+    }
 
 /**
  * testRunAllTests method
@@ -45,16 +45,16 @@ class TestManagerTest extends CakeTestCase {
  * @return void
  * @access public
  */
-	function testRunAllTests() {
-		$folder =& new Folder($this->TestManager->_getTestsPath());
-		$extension = str_replace('.', '\.', $this->TestManager->getExtension('test'));
-		$out = $folder->findRecursive('.*' . $extension);
+    function testRunAllTests() {
+        $folder =& new Folder($this->TestManager->_getTestsPath());
+        $extension = str_replace('.', '\.', $this->TestManager->getExtension('test'));
+        $out = $folder->findRecursive('.*' . $extension);
 
-		$reporter =& new CakeHtmlReporter();
-		$list = $this->TestManager->runAllTests($reporter, true);
+        $reporter =& new CakeHtmlReporter();
+        $list = $this->TestManager->runAllTests($reporter, true);
 
-		$this->assertEqual(count($out), count($list));
-	}
+        $this->assertEqual(count($out), count($list));
+    }
 
 /**
  * testRunTestCase method
@@ -62,16 +62,16 @@ class TestManagerTest extends CakeTestCase {
  * @return void
  * @access public
  */
-	function testRunTestCase() {
-		$file = md5(time());
-		$result = $this->TestManager->runTestCase($file, $this->Reporter);
-		$this->assertError('Test case ' . $file . ' cannot be found');
-		$this->assertFalse($result);
+    function testRunTestCase() {
+        $file = md5(time());
+        $result = $this->TestManager->runTestCase($file, $this->Reporter);
+        $this->assertError('Test case ' . $file . ' cannot be found');
+        $this->assertFalse($result);
 
-		$file = str_replace(CORE_TEST_CASES, '', __FILE__);
-		$result = $this->TestManager->runTestCase($file, $this->Reporter, true);
-		$this->assertTrue($result);
-	}
+        $file = str_replace(CORE_TEST_CASES, '', __FILE__);
+        $result = $this->TestManager->runTestCase($file, $this->Reporter, true);
+        $this->assertTrue($result);
+    }
 
 /**
  * testRunGroupTest method
@@ -79,8 +79,8 @@ class TestManagerTest extends CakeTestCase {
  * @return void
  * @access public
  */
-	function testRunGroupTest() {
-	}
+    function testRunGroupTest() {
+    }
 
 /**
  * testAddTestCasesFromDirectory method
@@ -88,8 +88,8 @@ class TestManagerTest extends CakeTestCase {
  * @return void
  * @access public
  */
-	function testAddTestCasesFromDirectory() {
-	}
+    function testAddTestCasesFromDirectory() {
+    }
 
 /**
  * testAddTestFile method
@@ -97,8 +97,8 @@ class TestManagerTest extends CakeTestCase {
  * @return void
  * @access public
  */
-	function testAddTestFile() {
-	}
+    function testAddTestFile() {
+    }
 
 /**
  * testGetTestCaseList method
@@ -106,8 +106,8 @@ class TestManagerTest extends CakeTestCase {
  * @return void
  * @access public
  */
-	function testGetTestCaseList() {
-	}
+    function testGetTestCaseList() {
+    }
 
 /**
  * testGetGroupTestList method
@@ -115,6 +115,6 @@ class TestManagerTest extends CakeTestCase {
  * @return void
  * @access public
  */
-	function testGetGroupTestList() {
-	}
+    function testGetGroupTestList() {
+    }
 }

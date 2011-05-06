@@ -23,7 +23,7 @@ function do_post_request($url, $data, $optional_headers = null)
   }
   $ctx = stream_context_create($params);
   ob_start();
-  	$fp = fopen($url, 'rb', false, $ctx);
+      $fp = fopen($url, 'rb', false, $ctx);
   if (!$fp) {
     throw new Exception("Problem with $url; ".ob_get_clean());
   }

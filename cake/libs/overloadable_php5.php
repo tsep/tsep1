@@ -33,7 +33,7 @@ class Overloadable extends Object {
  *
  * @access public
  */
-	function overload() { }
+    function overload() { }
 
 /**
  * Magic method handler.
@@ -43,12 +43,12 @@ class Overloadable extends Object {
  * @return mixed Return value from method
  * @access private
  */
-	function __call($method, $params) {
-		if (!method_exists($this, 'call__')) {
-			trigger_error(sprintf(__('Magic method handler call__ not defined in %s', true), get_class($this)), E_USER_ERROR);
-		}
-		return $this->call__($method, $params);
-	}
+    function __call($method, $params) {
+        if (!method_exists($this, 'call__')) {
+            trigger_error(sprintf(__('Magic method handler call__ not defined in %s', true), get_class($this)), E_USER_ERROR);
+        }
+        return $this->call__($method, $params);
+    }
 }
 
 /**
@@ -65,7 +65,7 @@ class Overloadable2 extends Object {
  *
  * @access public
  */
-	function overload() { }
+    function overload() { }
 
 /**
  * Magic method handler.
@@ -75,12 +75,12 @@ class Overloadable2 extends Object {
  * @return mixed Return value from method
  * @access private
  */
-	function __call($method, $params) {
-		if (!method_exists($this, 'call__')) {
-			trigger_error(sprintf(__('Magic method handler call__ not defined in %s', true), get_class($this)), E_USER_ERROR);
-		}
-		return $this->call__($method, $params);
-	}
+    function __call($method, $params) {
+        if (!method_exists($this, 'call__')) {
+            trigger_error(sprintf(__('Magic method handler call__ not defined in %s', true), get_class($this)), E_USER_ERROR);
+        }
+        return $this->call__($method, $params);
+    }
 
 /**
  * Getter.
@@ -90,9 +90,9 @@ class Overloadable2 extends Object {
  * @return boolean Success
  * @access private
  */
-	function __get($name) {
-		return $this->get__($name);
-	}
+    function __get($name) {
+        return $this->get__($name);
+    }
 
 /**
  * Setter.
@@ -102,7 +102,7 @@ class Overloadable2 extends Object {
  * @return boolean Success
  * @access private
  */
-	function __set($name, $value) {
-		return $this->set__($name, $value);
-	}
+    function __set($name, $value) {
+        return $this->set__($name, $value);
+    }
 }

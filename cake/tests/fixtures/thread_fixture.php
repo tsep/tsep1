@@ -32,7 +32,7 @@ class ThreadFixture extends CakeTestFixture {
  * @var string 'Thread'
  * @access public
  */
-	var $name = 'Thread';
+    var $name = 'Thread';
 
 /**
  * fields property
@@ -40,11 +40,11 @@ class ThreadFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'project_id' => array('type' => 'integer', 'null' => false),
-		'name' => array('type' => 'string', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'project_id' => array('type' => 'integer', 'null' => false),
+        'name' => array('type' => 'string', 'null' => false)
+    );
 
 /**
  * records property
@@ -52,9 +52,9 @@ class ThreadFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('project_id' => 1, 'name' => 'Project 1, Thread 1'),
-		array('project_id' => 1, 'name' => 'Project 1, Thread 2'),
-		array('project_id' => 2, 'name' => 'Project 2, Thread 1')
-	);
+    var $records = array(
+        array('project_id' => 1, 'name' => 'Project 1, Thread 1'),
+        array('project_id' => 1, 'name' => 'Project 1, Thread 2'),
+        array('project_id' => 2, 'name' => 'Project 2, Thread 1')
+    );
 }

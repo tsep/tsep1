@@ -33,7 +33,7 @@ class NodeFixture extends CakeTestFixture {
  * @var string 'Node'
  * @access public
  */
-	var $name = 'Node';
+    var $name = 'Node';
 
 /**
  * fields property
@@ -41,11 +41,11 @@ class NodeFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'name' => 'string',
-		'state' => 'integer'
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'name' => 'string',
+        'state' => 'integer'
+    );
 
 /**
  * records property
@@ -53,8 +53,8 @@ class NodeFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('id' => 1, 'name' => 'First', 'state' => 50),
-		array('id' => 2, 'name' => 'Second', 'state' => 60),
-	);
+    var $records = array(
+        array('id' => 1, 'name' => 'First', 'state' => 50),
+        array('id' => 2, 'name' => 'Second', 'state' => 60),
+    );
 }

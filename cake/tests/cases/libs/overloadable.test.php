@@ -33,7 +33,7 @@ class OverloadableTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function skip() {
-		$this->skipIf(true, ' %s OverloadableTest not implemented');
-	}
+    function skip() {
+        $this->skipIf(true, ' %s OverloadableTest not implemented');
+    }
 }

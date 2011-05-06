@@ -20,7 +20,7 @@
  */
 
 if (!class_exists('File')) {
-	require LIBS . 'file.php';
+    require LIBS . 'file.php';
 }
 /**
  * File Storage engine for cache
@@ -37,7 +37,7 @@ class FileEngine extends CacheEngine {
  * @var File
  * @access protected
  */
-	var $_File = null;
+    var $_File = null;
 
 /**
  * Settings
@@ -51,7 +51,7 @@ class FileEngine extends CacheEngine {
  * @see CacheEngine::__defaults
  * @access public
  */
-	var $settings = array();
+    var $settings = array();
 
 /**
  * True unless FileEngine::__active(); fails
@@ -59,7 +59,7 @@ class FileEngine extends CacheEngine {
  * @var boolean
  * @access protected
  */
-	var $_init = true;
+    var $_init = true;
 
 /**
  * Initialize the Cache Engine
@@ -71,28 +71,28 @@ class FileEngine extends CacheEngine {
  * @return boolean True if the engine has been successfully initialized, false if not
  * @access public
  */
-	function init($settings = array()) {
-		parent::init(array_merge(
-			array(
-				'engine' => 'File', 'path' => CACHE, 'prefix'=> 'cake_', 'lock'=> false,
-				'serialize'=> true, 'isWindows' => false
-			),
-			$settings
-		));
-		if (!isset($this->_File)) {
-			$this->_File =& new File($this->settings['path'] . DS . 'cake');
-		}
+    function init($settings = array()) {
+        parent::init(array_merge(
+            array(
+                'engine' => 'File', 'path' => CACHE, 'prefix'=> 'cake_', 'lock'=> false,
+                'serialize'=> true, 'isWindows' => false
+            ),
+            $settings
+        ));
+        if (!isset($this->_File)) {
+            $this->_File =& new File($this->settings['path'] . DS . 'cake');
+        }
 
-		if (DIRECTORY_SEPARATOR === '\\') {
-			$this->settings['isWindows'] = true;
-		}
+        if (DIRECTORY_SEPARATOR === '\\') {
+            $this->settings['isWindows'] = true;
+        }
 
-		$path = $this->_File->Folder->cd($this->settings['path']);
-		if ($path) {
-			$this->settings['path'] = $path;
-		}
-		return $this->__active();
-	}
+        $path = $this->_File->Folder->cd($this->settings['path']);
+        if ($path) {
+            $this->settings['path'] = $path;
+        }
+        return $this->__active();
+    }
 
 /**
  * Garbage collection. Permanently remove all expired and deleted data
@@ -100,9 +100,9 @@ class FileEngine extends CacheEngine {
  * @return boolean True if garbage collection was succesful, false on failure
  * @access public
  */
-	function gc() {
-		return $this->clear(true);
-	}
+    function gc() {
+        return $this->clear(true);
+    }
 
 /**
  * Write data for key into cache
@@ -113,38 +113,38 @@ class FileEngine extends CacheEngine {
  * @return boolean True if the data was succesfully cached, false on failure
  * @access public
  */
-	function write($key, &$data, $duration) {
-		if ($data === '' || !$this->_init) {
-			return false;
-		}
+    function write($key, &$data, $duration) {
+        if ($data === '' || !$this->_init) {
+            return false;
+        }
 
-		if ($this->_setKey($key) === false) {
-			return false;
-		}
+        if ($this->_setKey($key) === false) {
+            return false;
+        }
 
-		$lineBreak = "\n";
+        $lineBreak = "\n";
 
-		if ($this->settings['isWindows']) {
-			$lineBreak = "\r\n";
-		}
+        if ($this->settings['isWindows']) {
+            $lineBreak = "\r\n";
+        }
 
-		if (!empty($this->settings['serialize'])) {
-			if ($this->settings['isWindows']) {
-				$data = str_replace('\\', '\\\\\\\\', serialize($data));
-			} else {
-				$data = serialize($data);
-			}
-		}
+        if (!empty($this->settings['serialize'])) {
+            if ($this->settings['isWindows']) {
+                $data = str_replace('\\', '\\\\\\\\', serialize($data));
+            } else {
+                $data = serialize($data);
+            }
+        }
 
-		if ($this->settings['lock']) {
-			$this->_File->lock = true;
-		}
-		$expires = time() + $duration;
-		$contents = $expires . $lineBreak . $data . $lineBreak;
-		$success = $this->_File->write($contents);
-		$this->_File->close();
-		return $success;
-	}
+        if ($this->settings['lock']) {
+            $this->_File->lock = true;
+        }
+        $expires = time() + $duration;
+        $contents = $expires . $lineBreak . $data . $lineBreak;
+        $success = $this->_File->write($contents);
+        $this->_File->close();
+        return $success;
+    }
 
 /**
  * Read a key from the cache
@@ -153,31 +153,31 @@ class FileEngine extends CacheEngine {
  * @return mixed The cached data, or false if the data doesn't exist, has expired, or if there was an error fetching it
  * @access public
  */
-	function read($key) {
-		if ($this->_setKey($key) === false || !$this->_init || !$this->_File->exists()) {
-			return false;
-		}
-		if ($this->settings['lock']) {
-			$this->_File->lock = true;
-		}
-		$time = time();
-		$cachetime = intval($this->_File->read(11));
+    function read($key) {
+        if ($this->_setKey($key) === false || !$this->_init || !$this->_File->exists()) {
+            return false;
+        }
+        if ($this->settings['lock']) {
+            $this->_File->lock = true;
+        }
+        $time = time();
+        $cachetime = intval($this->_File->read(11));
 
-		if ($cachetime !== false && ($cachetime < $time || ($time + $this->settings['duration']) < $cachetime)) {
-			$this->_File->close();
-			return false;
-		}
-		$data = $this->_File->read(true);
+        if ($cachetime !== false && ($cachetime < $time || ($time + $this->settings['duration']) < $cachetime)) {
+            $this->_File->close();
+            return false;
+        }
+        $data = $this->_File->read(true);
 
-		if ($data !== '' && !empty($this->settings['serialize'])) {
-			if ($this->settings['isWindows']) {
-				$data = str_replace('\\\\\\\\', '\\', $data);
-			}
-			$data = unserialize((string)$data);
-		}
-		$this->_File->close();
-		return $data;
-	}
+        if ($data !== '' && !empty($this->settings['serialize'])) {
+            if ($this->settings['isWindows']) {
+                $data = str_replace('\\\\\\\\', '\\', $data);
+            }
+            $data = unserialize((string)$data);
+        }
+        $this->_File->close();
+        return $data;
+    }
 
 /**
  * Delete a key from the cache
@@ -186,12 +186,12 @@ class FileEngine extends CacheEngine {
  * @return boolean True if the value was successfully deleted, false if it didn't exist or couldn't be removed
  * @access public
  */
-	function delete($key) {
-		if ($this->_setKey($key) === false || !$this->_init) {
-			return false;
-		}
-		return $this->_File->delete();
-	}
+    function delete($key) {
+        if ($this->_setKey($key) === false || !$this->_init) {
+            return false;
+        }
+        return $this->_File->delete();
+    }
 
 /**
  * Delete all values from the cache
@@ -200,42 +200,42 @@ class FileEngine extends CacheEngine {
  * @return boolean True if the cache was succesfully cleared, false otherwise
  * @access public
  */
-	function clear($check) {
-		if (!$this->_init) {
-			return false;
-		}
-		$dir = dir($this->settings['path']);
-		if ($check) {
-			$now = time();
-			$threshold = $now - $this->settings['duration'];
-		}
-		$prefixLength = strlen($this->settings['prefix']);
-		while (($entry = $dir->read()) !== false) {
-			if (substr($entry, 0, $prefixLength) !== $this->settings['prefix']) {
-				continue;
-			}
-			if ($this->_setKey($entry) === false) {
-				continue;
-			}
-			if ($check) {
-				$mtime = $this->_File->lastChange();
+    function clear($check) {
+        if (!$this->_init) {
+            return false;
+        }
+        $dir = dir($this->settings['path']);
+        if ($check) {
+            $now = time();
+            $threshold = $now - $this->settings['duration'];
+        }
+        $prefixLength = strlen($this->settings['prefix']);
+        while (($entry = $dir->read()) !== false) {
+            if (substr($entry, 0, $prefixLength) !== $this->settings['prefix']) {
+                continue;
+            }
+            if ($this->_setKey($entry) === false) {
+                continue;
+            }
+            if ($check) {
+                $mtime = $this->_File->lastChange();
 
-				if ($mtime === false || $mtime > $threshold) {
-					continue;
-				}
+                if ($mtime === false || $mtime > $threshold) {
+                    continue;
+                }
 
-				$expires = $this->_File->read(11);
-				$this->_File->close();
+                $expires = $this->_File->read(11);
+                $this->_File->close();
 
-				if ($expires > $now) {
-					continue;
-				}
-			}
-			$this->_File->delete();
-		}
-		$dir->close();
-		return true;
-	}
+                if ($expires > $now) {
+                    continue;
+                }
+            }
+            $this->_File->delete();
+        }
+        $dir->close();
+        return true;
+    }
 
 /**
  * Get absolute file for a given key
@@ -244,16 +244,16 @@ class FileEngine extends CacheEngine {
  * @return mixed Absolute cache file for the given key or false if erroneous
  * @access private
  */
-	function _setKey($key) {
-		$this->_File->Folder->cd($this->settings['path']);
-		if ($key !== $this->_File->name) {
-			$this->_File->name = $key;
-			$this->_File->path = null;
-		}
-		if (!$this->_File->Folder->inPath($this->_File->pwd(), true)) {
-			return false;
-		}
-	}
+    function _setKey($key) {
+        $this->_File->Folder->cd($this->settings['path']);
+        if ($key !== $this->_File->name) {
+            $this->_File->name = $key;
+            $this->_File->path = null;
+        }
+        if (!$this->_File->Folder->inPath($this->_File->pwd(), true)) {
+            return false;
+        }
+    }
 
 /**
  * Determine is cache directory is writable
@@ -261,11 +261,11 @@ class FileEngine extends CacheEngine {
  * @return boolean
  * @access private
  */
-	function __active() {
-		if ($this->_init && !is_writable($this->settings['path'])) {
+    function __active() {
+        if ($this->_init && !is_writable($this->settings['path'])) {
 
-			mkdir($this->settings['path'], 0777, TRUE);
-		}
-		return true;
-	}
+            mkdir($this->settings['path'], 0777, TRUE);
+        }
+        return true;
+    }
 }

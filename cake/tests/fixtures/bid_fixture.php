@@ -32,7 +32,7 @@ class BidFixture extends CakeTestFixture {
  * @var string 'Bid'
  * @access public
  */
-	var $name = 'Bid';
+    var $name = 'Bid';
 
 /**
  * fields property
@@ -40,11 +40,11 @@ class BidFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'message_id' => array('type' => 'integer', 'null' => false),
-		'name' => array('type' => 'string', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'message_id' => array('type' => 'integer', 'null' => false),
+        'name' => array('type' => 'string', 'null' => false)
+    );
 
 /**
  * records property
@@ -52,11 +52,11 @@ class BidFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('message_id' => 1, 'name' => 'Bid 1.1'),
-		array('message_id' => 1, 'name' => 'Bid 1.2'),
-		array('message_id' => 3, 'name' => 'Bid 3.1'),
-		array('message_id' => 2, 'name' => 'Bid 2.1'),
-		array('message_id' => 2, 'name' => 'Bid 2.2')
-	);
+    var $records = array(
+        array('message_id' => 1, 'name' => 'Bid 1.1'),
+        array('message_id' => 1, 'name' => 'Bid 1.2'),
+        array('message_id' => 3, 'name' => 'Bid 3.1'),
+        array('message_id' => 2, 'name' => 'Bid 2.1'),
+        array('message_id' => 2, 'name' => 'Bid 2.2')
+    );
 }

@@ -32,7 +32,7 @@ class AttachmentFixture extends CakeTestFixture {
  * @var string 'Attachment'
  * @access public
  */
-	var $name = 'Attachment';
+    var $name = 'Attachment';
 
 /**
  * fields property
@@ -40,13 +40,13 @@ class AttachmentFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'comment_id' => array('type' => 'integer', 'null' => false),
-		'attachment' => array('type' => 'string', 'null' => false),
-		'created' => 'datetime',
-		'updated' => 'datetime'
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'comment_id' => array('type' => 'integer', 'null' => false),
+        'attachment' => array('type' => 'string', 'null' => false),
+        'created' => 'datetime',
+        'updated' => 'datetime'
+    );
 
 /**
  * records property
@@ -54,7 +54,7 @@ class AttachmentFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('comment_id' => 5, 'attachment' => 'attachment.zip',  'created' => '2007-03-18 10:51:23', 'updated' => '2007-03-18 10:53:31')
-	);
+    var $records = array(
+        array('comment_id' => 5, 'attachment' => 'attachment.zip',  'created' => '2007-03-18 10:51:23', 'updated' => '2007-03-18 10:53:31')
+    );
 }

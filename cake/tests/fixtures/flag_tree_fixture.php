@@ -36,7 +36,7 @@ class FlagTreeFixture extends CakeTestFixture {
  * @var string 'FlagTree'
  * @access public
  */
-	var $name = 'FlagTree';
+    var $name = 'FlagTree';
 
 /**
  * fields property
@@ -44,12 +44,12 @@ class FlagTreeFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id'	=> array('type' => 'integer','key' => 'primary'),
-		'name'	=> array('type' => 'string','null' => false),
-		'parent_id' => 'integer',
-		'lft'	=> array('type' => 'integer','null' => false),
-		'rght'	=> array('type' => 'integer','null' => false),
-		'flag'	=> array('type' => 'integer','null' => false, 'length' => 1, 'default' => 0)
-	);
+    var $fields = array(
+        'id'    => array('type' => 'integer','key' => 'primary'),
+        'name'    => array('type' => 'string','null' => false),
+        'parent_id' => 'integer',
+        'lft'    => array('type' => 'integer','null' => false),
+        'rght'    => array('type' => 'integer','null' => false),
+        'flag'    => array('type' => 'integer','null' => false, 'length' => 1, 'default' => 0)
+    );
 }

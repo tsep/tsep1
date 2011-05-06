@@ -18,7 +18,7 @@
  * @license       http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
  */
 if (!class_exists('Cache')) {
-	require LIBS . 'cache.php';
+    require LIBS . 'cache.php';
 }
 
 /**
@@ -35,13 +35,13 @@ class ApcEngineTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function skip() {
-		$skip = true;
-		if (function_exists('apc_store')) {
-			$skip = false;
-		}
-		$this->skipIf($skip, '%s Apc is not installed or configured properly');
-	}
+    function skip() {
+        $skip = true;
+        if (function_exists('apc_store')) {
+            $skip = false;
+        }
+        $this->skipIf($skip, '%s Apc is not installed or configured properly');
+    }
 
 /**
  * setUp method
@@ -49,11 +49,11 @@ class ApcEngineTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function setUp() {
-		$this->_cacheDisable = Configure::read('Cache.disable');
-		Configure::write('Cache.disable', false);
-		Cache::config('apc', array('engine' => 'Apc', 'prefix' => 'cake_'));
-	}
+    function setUp() {
+        $this->_cacheDisable = Configure::read('Cache.disable');
+        Configure::write('Cache.disable', false);
+        Cache::config('apc', array('engine' => 'Apc', 'prefix' => 'cake_'));
+    }
 
 /**
  * tearDown method
@@ -61,11 +61,11 @@ class ApcEngineTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function tearDown() {
-		Configure::write('Cache.disable', $this->_cacheDisable);
-		Cache::drop('apc');
-		Cache::config('default');
-	}
+    function tearDown() {
+        Configure::write('Cache.disable', $this->_cacheDisable);
+        Cache::drop('apc');
+        Cache::config('default');
+    }
 
 /**
  * testReadAndWriteCache method
@@ -73,23 +73,23 @@ class ApcEngineTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function testReadAndWriteCache() {
-		Cache::set(array('duration' => 1));
+    function testReadAndWriteCache() {
+        Cache::set(array('duration' => 1));
 
-		$result = Cache::read('test');
-		$expecting = '';
-		$this->assertEqual($result, $expecting);
+        $result = Cache::read('test');
+        $expecting = '';
+        $this->assertEqual($result, $expecting);
 
-		$data = 'this is a test of the emergency broadcasting system';
-		$result = Cache::write('test', $data);
-		$this->assertTrue($result);
+        $data = 'this is a test of the emergency broadcasting system';
+        $result = Cache::write('test', $data);
+        $this->assertTrue($result);
 
-		$result = Cache::read('test');
-		$expecting = $data;
-		$this->assertEqual($result, $expecting);
+        $result = Cache::read('test');
+        $expecting = $data;
+        $this->assertEqual($result, $expecting);
 
-		Cache::delete('test');
-	}
+        Cache::delete('test');
+    }
 
 /**
  * testExpiry method
@@ -97,34 +97,34 @@ class ApcEngineTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function testExpiry() {
-		Cache::set(array('duration' => 1));
+    function testExpiry() {
+        Cache::set(array('duration' => 1));
 
-		$result = Cache::read('test');
-		$this->assertFalse($result);
+        $result = Cache::read('test');
+        $this->assertFalse($result);
 
-		$data = 'this is a test of the emergency broadcasting system';
-		$result = Cache::write('other_test', $data);
-		$this->assertTrue($result);
+        $data = 'this is a test of the emergency broadcasting system';
+        $result = Cache::write('other_test', $data);
+        $this->assertTrue($result);
 
-		sleep(2);
-		$result = Cache::read('other_test');
-		$this->assertFalse($result);
+        sleep(2);
+        $result = Cache::read('other_test');
+        $this->assertFalse($result);
 
-		Cache::set(array('duration' =>  1));
+        Cache::set(array('duration' =>  1));
 
-		$data = 'this is a test of the emergency broadcasting system';
-		$result = Cache::write('other_test', $data);
-		$this->assertTrue($result);
+        $data = 'this is a test of the emergency broadcasting system';
+        $result = Cache::write('other_test', $data);
+        $this->assertTrue($result);
 
-		sleep(2);
-		$result = Cache::read('other_test');
-		$this->assertFalse($result);
+        sleep(2);
+        $result = Cache::read('other_test');
+        $this->assertFalse($result);
 
-		sleep(2);
-		$result = Cache::read('other_test');
-		$this->assertFalse($result);
-	}
+        sleep(2);
+        $result = Cache::read('other_test');
+        $this->assertFalse($result);
+    }
 
 /**
  * testDeleteCache method
@@ -132,14 +132,14 @@ class ApcEngineTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function testDeleteCache() {
-		$data = 'this is a test of the emergency broadcasting system';
-		$result = Cache::write('delete_test', $data);
-		$this->assertTrue($result);
+    function testDeleteCache() {
+        $data = 'this is a test of the emergency broadcasting system';
+        $result = Cache::write('delete_test', $data);
+        $this->assertTrue($result);
 
-		$result = Cache::delete('delete_test');
-		$this->assertTrue($result);
-	}
+        $result = Cache::delete('delete_test');
+        $this->assertTrue($result);
+    }
 
 /**
  * testDecrement method
@@ -147,26 +147,26 @@ class ApcEngineTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function testDecrement() {
-		if ($this->skipIf(!function_exists('apc_dec'), 'No apc_dec() function, cannot test decrement() %s')) {
-			return;
-		}
-		$result = Cache::write('test_decrement', 5);
-		$this->assertTrue($result);
+    function testDecrement() {
+        if ($this->skipIf(!function_exists('apc_dec'), 'No apc_dec() function, cannot test decrement() %s')) {
+            return;
+        }
+        $result = Cache::write('test_decrement', 5);
+        $this->assertTrue($result);
 
-		$result = Cache::decrement('test_decrement');
-		$this->assertEqual(4, $result);
+        $result = Cache::decrement('test_decrement');
+        $this->assertEqual(4, $result);
 
-		$result = Cache::read('test_decrement');
-		$this->assertEqual(4, $result);
+        $result = Cache::read('test_decrement');
+        $this->assertEqual(4, $result);
 
-		$result = Cache::decrement('test_decrement', 2);
-		$this->assertEqual(2, $result);
+        $result = Cache::decrement('test_decrement', 2);
+        $this->assertEqual(2, $result);
 
-		$result = Cache::read('test_decrement');
-		$this->assertEqual(2, $result);
-		
-	}
+        $result = Cache::read('test_decrement');
+        $this->assertEqual(2, $result);
+        
+    }
 
 /**
  * testIncrement method
@@ -174,23 +174,23 @@ class ApcEngineTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function testIncrement() {
-		if ($this->skipIf(!function_exists('apc_inc'), 'No apc_inc() function, cannot test increment() %s')) {
-			return;
-		}
-		$result = Cache::write('test_increment', 5);
-		$this->assertTrue($result);
+    function testIncrement() {
+        if ($this->skipIf(!function_exists('apc_inc'), 'No apc_inc() function, cannot test increment() %s')) {
+            return;
+        }
+        $result = Cache::write('test_increment', 5);
+        $this->assertTrue($result);
 
-		$result = Cache::increment('test_increment');
-		$this->assertEqual(6, $result);
+        $result = Cache::increment('test_increment');
+        $this->assertEqual(6, $result);
 
-		$result = Cache::read('test_increment');
-		$this->assertEqual(6, $result);
+        $result = Cache::read('test_increment');
+        $this->assertEqual(6, $result);
 
-		$result = Cache::increment('test_increment', 2);
-		$this->assertEqual(8, $result);
+        $result = Cache::increment('test_increment', 2);
+        $this->assertEqual(8, $result);
 
-		$result = Cache::read('test_increment');
-		$this->assertEqual(8, $result);
-	}
+        $result = Cache::read('test_increment');
+        $this->assertEqual(8, $result);
+    }
 }

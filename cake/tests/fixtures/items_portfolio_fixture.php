@@ -32,7 +32,7 @@ class ItemsPortfolioFixture extends CakeTestFixture {
  * @var string 'ItemsPortfolio'
  * @access public
  */
-	var $name = 'ItemsPortfolio';
+    var $name = 'ItemsPortfolio';
 
 /**
  * fields property
@@ -40,11 +40,11 @@ class ItemsPortfolioFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'item_id' => array('type' => 'integer', 'null' => false),
-		'portfolio_id' => array('type' => 'integer', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'item_id' => array('type' => 'integer', 'null' => false),
+        'portfolio_id' => array('type' => 'integer', 'null' => false)
+    );
 
 /**
  * records property
@@ -52,12 +52,12 @@ class ItemsPortfolioFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('item_id' => 1, 'portfolio_id' => 1),
-		array('item_id' => 2, 'portfolio_id' => 2),
-		array('item_id' => 3, 'portfolio_id' => 1),
-		array('item_id' => 4, 'portfolio_id' => 1),
-		array('item_id' => 5, 'portfolio_id' => 1),
-		array('item_id' => 6, 'portfolio_id' => 2)
-	);
+    var $records = array(
+        array('item_id' => 1, 'portfolio_id' => 1),
+        array('item_id' => 2, 'portfolio_id' => 2),
+        array('item_id' => 3, 'portfolio_id' => 1),
+        array('item_id' => 4, 'portfolio_id' => 1),
+        array('item_id' => 5, 'portfolio_id' => 1),
+        array('item_id' => 6, 'portfolio_id' => 2)
+    );
 }

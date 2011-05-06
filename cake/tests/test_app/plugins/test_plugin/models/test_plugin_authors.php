@@ -24,6 +24,6 @@
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 class TestPluginAuthors extends TestPluginAppModel {
-	var $useTable = 'authors';
-	var $name = 'TestPluginAuthors';
+    var $useTable = 'authors';
+    var $name = 'TestPluginAuthors';
 }

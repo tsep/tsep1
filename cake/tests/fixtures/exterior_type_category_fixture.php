@@ -32,7 +32,7 @@ class ExteriorTypeCategoryFixture extends CakeTestFixture {
  * @var string 'ExteriorTypeCategory'
  * @access public
  */
-	var $name = 'ExteriorTypeCategory';
+    var $name = 'ExteriorTypeCategory';
 
 /**
  * fields property
@@ -40,11 +40,11 @@ class ExteriorTypeCategoryFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'image_id' => array('type' => 'integer', 'null' => false),
-		'name' => array('type' => 'string', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'image_id' => array('type' => 'integer', 'null' => false),
+        'name' => array('type' => 'string', 'null' => false)
+    );
 
 /**
  * records property
@@ -52,7 +52,7 @@ class ExteriorTypeCategoryFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('image_id' => 1, 'name' => 'ExteriorTypeCategory 1')
-	);
+    var $records = array(
+        array('image_id' => 1, 'name' => 'ExteriorTypeCategory 1')
+    );
 }

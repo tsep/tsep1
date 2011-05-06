@@ -34,7 +34,7 @@ class AclAndAuthGroupTest extends TestSuite {
  * @var string 'Acl and Auth Tests'
  * @access public
  */
-	var $label = 'Acl and Auth';
+    var $label = 'Acl and Auth';
 
 /**
  * AclAndAuthGroupTest method
@@ -42,9 +42,9 @@ class AclAndAuthGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function AclAndAuthGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'db_acl');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'controller' . DS . 'components' . DS . 'acl');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'controller' . DS . 'components' . DS . 'auth');
-	}
+    function AclAndAuthGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'db_acl');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'controller' . DS . 'components' . DS . 'acl');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'controller' . DS . 'components' . DS . 'auth');
+    }
 }

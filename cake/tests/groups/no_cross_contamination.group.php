@@ -36,7 +36,7 @@ class NoCrossContaminationGroupTest extends TestSuite {
  * @var string
  * @access public
  */
-	var $label = 'No Cross Contamination';
+    var $label = 'No Cross Contamination';
 
 /**
  * blacklist property
@@ -44,7 +44,7 @@ class NoCrossContaminationGroupTest extends TestSuite {
  * @var string
  * @access public
  */
-	var $blacklist = array('cake_test_case.test.php', 'object.test.php');
+    var $blacklist = array('cake_test_case.test.php', 'object.test.php');
 
 /**
  * NoCrossContaminationGroupTest method
@@ -52,16 +52,16 @@ class NoCrossContaminationGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function NoCrossContaminationGroupTest() {
-		App::import('Core', 'Folder');
+    function NoCrossContaminationGroupTest() {
+        App::import('Core', 'Folder');
 
-		$Folder = new Folder(CORE_TEST_CASES);
+        $Folder = new Folder(CORE_TEST_CASES);
 
-		foreach ($Folder->findRecursive('.*\.test\.php', true) as $file) {
-			if (in_array(basename($file), $this->blacklist)) {
-				continue;
-			}
-			TestManager::addTestFile($this, $file);
-		}
-	}
+        foreach ($Folder->findRecursive('.*\.test\.php', true) as $file) {
+            if (in_array(basename($file), $this->blacklist)) {
+                continue;
+            }
+            TestManager::addTestFile($this, $file);
+        }
+    }
 }

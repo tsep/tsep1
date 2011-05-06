@@ -34,7 +34,7 @@ class ComponentsGroupTest extends TestSuite {
  * @var string 'All core components'
  * @access public
  */
-	var $label = 'All Components';
+    var $label = 'All Components';
 
 /**
  * CoreComponentsGroupTest method
@@ -42,7 +42,7 @@ class ComponentsGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function ComponentsGroupTest() {
-		TestManager::addTestCasesFromDirectory($this, CORE_TEST_CASES . DS . 'libs' . DS . 'controller' . DS . 'components');
-	}
+    function ComponentsGroupTest() {
+        TestManager::addTestCasesFromDirectory($this, CORE_TEST_CASES . DS . 'libs' . DS . 'controller' . DS . 'components');
+    }
 }

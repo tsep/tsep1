@@ -32,8 +32,8 @@ class AccountFixture extends CakeTestFixture {
  * @var string 'Aco'
  * @access public
  */
-	var $name = 'Account';
-	var $table = 'Accounts';
+    var $name = 'Account';
+    var $table = 'Accounts';
 
 /**
  * fields property
@@ -41,10 +41,10 @@ class AccountFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'iAccountId'		=> array('type' => 'integer', 'key' => 'primary'),
-		'cDescription'	=> array('type' => 'string', 'length' => 10, 'null' => true)
-	);
+    var $fields = array(
+        'iAccountId'        => array('type' => 'integer', 'key' => 'primary'),
+        'cDescription'    => array('type' => 'string', 'length' => 10, 'null' => true)
+    );
 
 /**
  * records property
@@ -52,10 +52,10 @@ class AccountFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('cDescription' => 'gwoo'),
-		array('cDescription' => 'phpnut'),
-		array('cDescription' => 'schreck'),
-		array('cDescription' => 'dude')
-	);
+    var $records = array(
+        array('cDescription' => 'gwoo'),
+        array('cDescription' => 'phpnut'),
+        array('cDescription' => 'schreck'),
+        array('cDescription' => 'dude')
+    );
 }

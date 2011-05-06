@@ -33,83 +33,83 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  *
  * @var array
  */
-	var $_optionMap = array(
-		'request' => array(
-			'complete' => 'onComplete',
-			'success' => 'onSuccess',
-			'before' => 'onRequest',
-			'error' => 'onFailure'
-		),
-		'sortable' => array(
-			'distance' => 'snap',
-			'containment' => 'constrain',
-			'sort' => 'onSort',
-			'complete' => 'onComplete',
-			'start' => 'onStart',
-		),
-		'drag' => array(
-			'snapGrid' => 'snap',
-			'start' => 'onStart',
-			'drag' => 'onDrag',
-			'stop' => 'onComplete',
-		),
-		'drop' => array(
-			'drop' => 'onDrop',
-			'hover' => 'onEnter',
-			'leave' => 'onLeave',
-		),
-		'slider' => array(
-			'complete' => 'onComplete',
-			'change' => 'onChange',
-			'direction' => 'mode',
-			'step' => 'steps'
-		)
-	);
+    var $_optionMap = array(
+        'request' => array(
+            'complete' => 'onComplete',
+            'success' => 'onSuccess',
+            'before' => 'onRequest',
+            'error' => 'onFailure'
+        ),
+        'sortable' => array(
+            'distance' => 'snap',
+            'containment' => 'constrain',
+            'sort' => 'onSort',
+            'complete' => 'onComplete',
+            'start' => 'onStart',
+        ),
+        'drag' => array(
+            'snapGrid' => 'snap',
+            'start' => 'onStart',
+            'drag' => 'onDrag',
+            'stop' => 'onComplete',
+        ),
+        'drop' => array(
+            'drop' => 'onDrop',
+            'hover' => 'onEnter',
+            'leave' => 'onLeave',
+        ),
+        'slider' => array(
+            'complete' => 'onComplete',
+            'change' => 'onChange',
+            'direction' => 'mode',
+            'step' => 'steps'
+        )
+    );
 
 /**
  * Contains a list of callback names -> default arguments.
  *
  * @var array
  */
-	var $_callbackArguments = array(
-		'slider' => array(
-			'onTick' => 'position',
-			'onChange' => 'step',
-			'onComplete' => 'event'
-		),
-		'request' => array(
-			'onRequest' => '',
-			'onComplete' => '',
-			'onCancel' => '',
-			'onSuccess' => 'responseText, responseXML',
-			'onFailure' => 'xhr',
-			'onException' => 'headerName, value',
-		),
-		'drag' => array(
-			'onBeforeStart' => 'element',
-			'onStart' => 'element',
-			'onSnap' => 'element',
-			'onDrag' => 'element, event',
-			'onComplete' => 'element, event',
-			'onCancel' => 'element',
-		),
-		'drop' => array(
-			'onBeforeStart' => 'element',
-			'onStart' => 'element',
-			'onSnap' => 'element',
-			'onDrag' => 'element, event',
-			'onComplete' => 'element, event',
-			'onCancel' => 'element',
-			'onDrop' => 'element, droppable, event',
-			'onLeave' => 'element, droppable',
-			'onEnter' => 'element, droppable',
-		),
-		'sortable' => array(
-			'onStart' => 'element, clone',
-			'onSort' => 'element, clone',
-			'onComplete' => 'element',
-		)
-	);
+    var $_callbackArguments = array(
+        'slider' => array(
+            'onTick' => 'position',
+            'onChange' => 'step',
+            'onComplete' => 'event'
+        ),
+        'request' => array(
+            'onRequest' => '',
+            'onComplete' => '',
+            'onCancel' => '',
+            'onSuccess' => 'responseText, responseXML',
+            'onFailure' => 'xhr',
+            'onException' => 'headerName, value',
+        ),
+        'drag' => array(
+            'onBeforeStart' => 'element',
+            'onStart' => 'element',
+            'onSnap' => 'element',
+            'onDrag' => 'element, event',
+            'onComplete' => 'element, event',
+            'onCancel' => 'element',
+        ),
+        'drop' => array(
+            'onBeforeStart' => 'element',
+            'onStart' => 'element',
+            'onSnap' => 'element',
+            'onDrag' => 'element, event',
+            'onComplete' => 'element, event',
+            'onCancel' => 'element',
+            'onDrop' => 'element, droppable, event',
+            'onLeave' => 'element, droppable',
+            'onEnter' => 'element, droppable',
+        ),
+        'sortable' => array(
+            'onStart' => 'element, clone',
+            'onSort' => 'element, clone',
+            'onComplete' => 'element',
+        )
+    );
 
 /**
  * Create javascript selector for a CSS rule
@@ -117,20 +117,20 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  * @param string $selector The selector that is targeted
  * @return object instance of $this. Allows chained methods.
  */
-	function get($selector) {
-		$this->_multipleSelection = false;
-		if ($selector == 'window' || $selector == 'document') {
-			$this->selection = "$(" . $selector .")";
-			return $this;
-		}
-		if (preg_match('/^#[^\s.]+$/', $selector)) {
-			$this->selection = '$("' . substr($selector, 1) . '")';
-			return $this;
-		}
-		$this->_multipleSelection = true;
-		$this->selection = '$$("' . $selector . '")';
-		return $this;
-	}
+    function get($selector) {
+        $this->_multipleSelection = false;
+        if ($selector == 'window' || $selector == 'document') {
+            $this->selection = "$(" . $selector .")";
+            return $this;
+        }
+        if (preg_match('/^#[^\s.]+$/', $selector)) {
+            $this->selection = '$("' . substr($selector, 1) . '")';
+            return $this;
+        }
+        $this->_multipleSelection = true;
+        $this->selection = '$$("' . $selector . '")';
+        return $this;
+    }
 
 /**
  * Add an event to the script cache. Operates on the currently selected elements.
@@ -145,20 +145,20 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  * @param array $options Options for the event.
  * @return string completed event handler
  */
-	function event($type, $callback, $options = array()) {
-		$defaults = array('wrap' => true, 'stop' => true);
-		$options = array_merge($defaults, $options);
+    function event($type, $callback, $options = array()) {
+        $defaults = array('wrap' => true, 'stop' => true);
+        $options = array_merge($defaults, $options);
 
-		$function = 'function (event) {%s}';
-		if ($options['wrap'] && $options['stop']) {
-			$callback = "event.stop();\n" . $callback;
-		}
-		if ($options['wrap']) {
-			$callback = sprintf($function, $callback);
-		}
-		$out = $this->selection . ".addEvent(\"{$type}\", $callback);";
-		return $out;
-	}
+        $function = 'function (event) {%s}';
+        if ($options['wrap'] && $options['stop']) {
+            $callback = "event.stop();\n" . $callback;
+        }
+        if ($options['wrap']) {
+            $callback = sprintf($function, $callback);
+        }
+        $out = $this->selection . ".addEvent(\"{$type}\", $callback);";
+        return $out;
+    }
 
 /**
  * Create a domReady event. This is a special event in many libraries
@@ -166,10 +166,10 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  * @param string $functionBody The code to run on domReady
  * @return string completed domReady method
  */
-	function domReady($functionBody) {
-		$this->selection = 'window';
-		return $this->event('domready', $functionBody, array('stop' => false));
-	}
+    function domReady($functionBody) {
+        $this->selection = 'window';
+        return $this->event('domready', $functionBody, array('stop' => false));
+    }
 
 /**
  * Create an iteration over the current selection result.
@@ -178,9 +178,9 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  * @param string $callback The function body you wish to apply during the iteration.
  * @return string completed iteration
  */
-	function each($callback) {
-		return $this->selection . '.each(function (item, index) {' . $callback . '});';
-	}
+    function each($callback) {
+        return $this->selection . '.each(function (item, index) {' . $callback . '});';
+    }
 
 /**
  * Trigger an Effect.
@@ -190,37 +190,37 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  * @return string completed string with effect.
  * @see JsBaseEngineHelper::effect()
  */
-	function effect($name, $options = array()) {
-		$speed = null;
-		if (isset($options['speed']) && in_array($options['speed'], array('fast', 'slow'))) {
-			if ($options['speed'] == 'fast') {
-				$speed = '"short"';
-			} elseif ($options['speed'] == 'slow') {
-				$speed = '"long"';
-			}
-		}
-		$effect = '';
-		switch ($name) {
-			case 'hide':
-				$effect = 'setStyle("display", "none")';
-			break;
-			case 'show':
-				$effect = 'setStyle("display", "")';
-			break;
-			case 'fadeIn':
-			case 'fadeOut':
-			case 'slideIn':
-			case 'slideOut':
-				list($effectName, $direction) = preg_split('/([A-Z][a-z]+)/', $name, -1, PREG_SPLIT_DELIM_CAPTURE);
-				$direction = strtolower($direction);
-				if ($speed) {
-					$effect .= "set(\"$effectName\", {duration:$speed}).";
-				}
-				$effect .= "$effectName(\"$direction\")";
-			break;
-		}
-		return $this->selection . '.' . $effect . ';';
-	}
+    function effect($name, $options = array()) {
+        $speed = null;
+        if (isset($options['speed']) && in_array($options['speed'], array('fast', 'slow'))) {
+            if ($options['speed'] == 'fast') {
+                $speed = '"short"';
+            } elseif ($options['speed'] == 'slow') {
+                $speed = '"long"';
+            }
+        }
+        $effect = '';
+        switch ($name) {
+            case 'hide':
+                $effect = 'setStyle("display", "none")';
+            break;
+            case 'show':
+                $effect = 'setStyle("display", "")';
+            break;
+            case 'fadeIn':
+            case 'fadeOut':
+            case 'slideIn':
+            case 'slideOut':
+                list($effectName, $direction) = preg_split('/([A-Z][a-z]+)/', $name, -1, PREG_SPLIT_DELIM_CAPTURE);
+                $direction = strtolower($direction);
+                if ($speed) {
+                    $effect .= "set(\"$effectName\", {duration:$speed}).";
+                }
+                $effect .= "$effectName(\"$direction\")";
+            break;
+        }
+        return $this->selection . '.' . $effect . ';';
+    }
 
 /**
  * Create an new Request.
@@ -232,35 +232,35 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  * @param array $options
  * @return string The completed ajax call.
  */
-	function request($url, $options = array()) {
-		$url = $this->url($url);
-		$options = $this->_mapOptions('request', $options);
-		$type = $data = null;
-		if (isset($options['type']) || isset($options['update'])) {
-			if (isset($options['type']) && strtolower($options['type']) == 'json') {
-				$type = '.JSON';
-			}
-			if (isset($options['update'])) {
-				$options['update'] = str_replace('#', '', $options['update']);
-				$type = '.HTML';
-			}
-			unset($options['type']);
-		}
-		if (!empty($options['data'])) {
-			$data = $options['data'];
-			unset($options['data']);
-		}
-		$options['url'] = $url;
-		$options = $this->_prepareCallbacks('request', $options);
-		if (isset($options['dataExpression'])) {
-			$callbacks[] = 'data';
-			unset($options['dataExpression']);
-		} elseif (!empty($data)) {
-			$data = $this->object($data);
-		}
-		$options = $this->_parseOptions($options, array_keys($this->_callbackArguments['request']));
-		return "var jsRequest = new Request$type({{$options}}).send($data);";
-	}
+    function request($url, $options = array()) {
+        $url = $this->url($url);
+        $options = $this->_mapOptions('request', $options);
+        $type = $data = null;
+        if (isset($options['type']) || isset($options['update'])) {
+            if (isset($options['type']) && strtolower($options['type']) == 'json') {
+                $type = '.JSON';
+            }
+            if (isset($options['update'])) {
+                $options['update'] = str_replace('#', '', $options['update']);
+                $type = '.HTML';
+            }
+            unset($options['type']);
+        }
+        if (!empty($options['data'])) {
+            $data = $options['data'];
+            unset($options['data']);
+        }
+        $options['url'] = $url;
+        $options = $this->_prepareCallbacks('request', $options);
+        if (isset($options['dataExpression'])) {
+            $callbacks[] = 'data';
+            unset($options['dataExpression']);
+        } elseif (!empty($data)) {
+            $data = $this->object($data);
+        }
+        $options = $this->_parseOptions($options, array_keys($this->_callbackArguments['request']));
+        return "var jsRequest = new Request$type({{$options}}).send($data);";
+    }
 
 /**
  * Create a sortable element.
@@ -271,10 +271,10 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  * @return string Completed sortable script.
  * @see JsBaseEngineHelper::sortable() for options list.
  */
-	function sortable($options = array()) {
-		$options = $this->_processOptions('sortable', $options);
-		return 'var jsSortable = new Sortables(' . $this->selection . ', {' . $options . '});';
-	}
+    function sortable($options = array()) {
+        $options = $this->_processOptions('sortable', $options);
+        return 'var jsSortable = new Sortables(' . $this->selection . ', {' . $options . '});';
+    }
 
 /**
  * Create a Draggable element.
@@ -285,10 +285,10 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  * @return string Completed draggable script.
  * @see JsHelper::drag() for options list.
  */
-	function drag($options = array()) {
-		$options = $this->_processOptions('drag', $options);
-		return $this->selection . '.makeDraggable({' . $options . '});';
-	}
+    function drag($options = array()) {
+        $options = $this->_processOptions('drag', $options);
+        return $this->selection . '.makeDraggable({' . $options . '});';
+    }
 
 /**
  * Create a Droppable element.
@@ -304,26 +304,26 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  * @return string Completed droppable script.
  * @see JsBaseEngineHelper::drop() for options list.
  */
-	function drop($options = array()) {
-		if (empty($options['drag'])) {
-			trigger_error(
-				__('MootoolsEngine::drop() requires a "drag" option to properly function', true), E_USER_WARNING
-			);
-			return false;
-		}
-		$options['droppables'] = $this->selection;
+    function drop($options = array()) {
+        if (empty($options['drag'])) {
+            trigger_error(
+                __('MootoolsEngine::drop() requires a "drag" option to properly function', true), E_USER_WARNING
+            );
+            return false;
+        }
+        $options['droppables'] = $this->selection;
 
-		$this->get($options['drag']);
-		unset($options['drag']);
+        $this->get($options['drag']);
+        unset($options['drag']);
 
-		$options = $this->_mapOptions('drag', $this->_mapOptions('drop', $options));
-		$options = $this->_prepareCallbacks('drop', $options);
-		$safe = array_merge(array_keys($this->_callbackArguments['drop']), array('droppables'));
-		$optionString = $this->_parseOptions($options, $safe);
-		$out = $this->selection . '.makeDraggable({' . $optionString . '});';
-		$this->selection = $options['droppables'];
-		return $out;
-	}
+        $options = $this->_mapOptions('drag', $this->_mapOptions('drop', $options));
+        $options = $this->_prepareCallbacks('drop', $options);
+        $safe = array_merge(array_keys($this->_callbackArguments['drop']), array('droppables'));
+        $optionString = $this->_parseOptions($options, $safe);
+        $out = $this->selection . '.makeDraggable({' . $optionString . '});';
+        $this->selection = $options['droppables'];
+        return $out;
+    }
 
 /**
  * Create a slider control
@@ -334,23 +334,23 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  * @return string Completed slider script.
  * @see JsBaseEngineHelper::slider() for options list.
  */
-	function slider($options = array()) {
-		$slider = $this->selection;
-		$this->get($options['handle']);
-		unset($options['handle']);
+    function slider($options = array()) {
+        $slider = $this->selection;
+        $this->get($options['handle']);
+        unset($options['handle']);
 
-		if (isset($options['min']) && isset($options['max'])) {
-			$options['range'] = array($options['min'], $options['max']);
-			unset($options['min'], $options['max']);
-		}
-		$optionString = $this->_processOptions('slider', $options);
-		if (!empty($optionString)) {
-			$optionString = ', {' . $optionString . '}';
-		}
-		$out = 'var jsSlider = new Slider(' . $slider . ', ' . $this->selection . $optionString . ');';
-		$this->selection = $slider;
-		return $out;
-	}
+        if (isset($options['min']) && isset($options['max'])) {
+            $options['range'] = array($options['min'], $options['max']);
+            unset($options['min'], $options['max']);
+        }
+        $optionString = $this->_processOptions('slider', $options);
+        if (!empty($optionString)) {
+            $optionString = ', {' . $optionString . '}';
+        }
+        $out = 'var jsSlider = new Slider(' . $slider . ', ' . $this->selection . $optionString . ');';
+        $this->selection = $slider;
+        return $out;
+    }
 
 /**
  * Serialize the form attached to $selector.
@@ -359,16 +359,16 @@ class MootoolsEngineHelper extends JsBaseEngineHelper {
  * @return string Completed serializeForm() snippet
  * @see JsBaseEngineHelper::serializeForm()
  */
-	function serializeForm($options = array()) {
-		$options = array_merge(array('isForm' => false, 'inline' => false), $options);
-		$selection = $this->selection;
-		if (!$options['isForm']) {
-			$selection = '$(' . $this->selection . '.form)';
-		}
-		$method = '.toQueryString()';
-		if (!$options['inline']) {
-			$method .= ';';
-		}
-		return $selection . $method;
-	}
+    function serializeForm($options = array()) {
+        $options = array_merge(array('isForm' => false, 'inline' => false), $options);
+        $selection = $this->selection;
+        if (!$options['isForm']) {
+            $selection = '$(' . $this->selection . '.form)';
+        }
+        $method = '.toQueryString()';
+        if (!$options['inline']) {
+            $method .= ';';
+        }
+        return $selection . $method;
+    }
 }

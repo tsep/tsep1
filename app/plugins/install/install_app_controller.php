@@ -1,4 +1,4 @@
 <?php 
-	class InstallAppController extends AppController {
-			
-	}
+    class InstallAppController extends AppController {
+            
+    }

@@ -40,7 +40,7 @@ class SocketGroupTest extends TestSuite {
  * @var string 'Socket and HttpSocket tests'
  * @access public
  */
-	var $label = 'CakeSocket and HttpSocket tests';
+    var $label = 'CakeSocket and HttpSocket tests';
 
 /**
  * SocketGroupTest method
@@ -48,8 +48,8 @@ class SocketGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function SocketGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cake_socket');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'http_socket');
-	}
+    function SocketGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cake_socket');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'http_socket');
+    }
 }

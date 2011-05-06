@@ -34,7 +34,7 @@ class JsHelper extends AppHelper {
  * @var boolean
  * @access public
  */
-	var $bufferScripts = true;
+    var $bufferScripts = true;
 
 /**
  * helpers
@@ -42,7 +42,7 @@ class JsHelper extends AppHelper {
  * @var array
  * @access public
  */
-	var $helpers = array('Html', 'Form');
+    var $helpers = array('Html', 'Form');
 
 /**
  * Variables to pass to Javascript.
@@ -51,7 +51,7 @@ class JsHelper extends AppHelper {
  * @see JsHelper::set()
  * @access private
  */
-	var $__jsVars = array();
+    var $__jsVars = array();
 
 /**
  * Scripts that are queued for output
@@ -60,7 +60,7 @@ class JsHelper extends AppHelper {
  * @see JsHelper::buffer()
  * @access private
  */
-	var $__bufferedScripts = array();
+    var $__bufferedScripts = array();
 
 /**
  * Current Javascript Engine that is being used
@@ -68,7 +68,7 @@ class JsHelper extends AppHelper {
  * @var string
  * @access private
  */
-	var $__engineName;
+    var $__engineName;
 
 /**
  * The javascript variable created by set() variables.
@@ -76,7 +76,7 @@ class JsHelper extends AppHelper {
  * @var string
  * @access public
  */
-	var $setVariable = APP_DIR;
+    var $setVariable = APP_DIR;
 
 /**
  * Constructor - determines engine helper
@@ -85,21 +85,21 @@ class JsHelper extends AppHelper {
  * @return void
  * @access public
  */
-	function __construct($settings = array()) {
-		$className = 'Jquery';
-		if (is_array($settings) && isset($settings[0])) {
-			$className = $settings[0];
-		} elseif (is_string($settings)) {
-			$className = $settings;
-		}
-		$engineName = $className;
-		list($plugin, $className) = pluginSplit($className);
+    function __construct($settings = array()) {
+        $className = 'Jquery';
+        if (is_array($settings) && isset($settings[0])) {
+            $className = $settings[0];
+        } elseif (is_string($settings)) {
+            $className = $settings;
+        }
+        $engineName = $className;
+        list($plugin, $className) = pluginSplit($className);
 
-		$this->__engineName = $className . 'Engine';
-		$engineClass = $engineName . 'Engine';
-		$this->helpers[] = $engineClass;
-		parent::__construct();
-	}
+        $this->__engineName = $className . 'Engine';
+        $engineClass = $engineName . 'Engine';
+        $this->helpers[] = $engineClass;
+        parent::__construct();
+    }
 
 /**
  * call__ Allows for dispatching of methods to the Engine Helper.
@@ -121,38 +121,38 @@ class JsHelper extends AppHelper {
  * @return mixed Depends on the return of the dispatched method, or it could be an instance of the EngineHelper
  * @access public
  */
-	function call__($method, $params) {
-		if (isset($this->{$this->__engineName}) && method_exists($this->{$this->__engineName}, $method)) {
-			$buffer = false;
-			if (in_array(strtolower($method), $this->{$this->__engineName}->bufferedMethods)) {
-				$buffer = true;
-			}
-			if (count($params) > 0) {
-				$lastParam = $params[count($params) - 1];
-				$hasBufferParam = (is_bool($lastParam) || is_array($lastParam) && isset($lastParam['buffer']));
-				if ($hasBufferParam && is_bool($lastParam)) {
-					$buffer = $lastParam;
-					unset($params[count($params) - 1]);
-				} elseif ($hasBufferParam && is_array($lastParam)) {
-					$buffer = $lastParam['buffer'];
-					unset($params['buffer']);
-				}
-			}
-			$out = $this->{$this->__engineName}->dispatchMethod($method, $params);
-			if ($this->bufferScripts && $buffer && is_string($out)) {
-				$this->buffer($out);
-				return null;
-			}
-			if (is_object($out) && is_a($out, 'JsBaseEngineHelper')) {
-				return $this;
-			}
-			return $out;
-		}
-		if (method_exists($this, $method . '_')) {
-			return $this->dispatchMethod($method . '_', $params);
-		}
-		trigger_error(sprintf(__('JsHelper:: Missing Method %s is undefined', true), $method), E_USER_WARNING);
-	}
+    function call__($method, $params) {
+        if (isset($this->{$this->__engineName}) && method_exists($this->{$this->__engineName}, $method)) {
+            $buffer = false;
+            if (in_array(strtolower($method), $this->{$this->__engineName}->bufferedMethods)) {
+                $buffer = true;
+            }
+            if (count($params) > 0) {
+                $lastParam = $params[count($params) - 1];
+                $hasBufferParam = (is_bool($lastParam) || is_array($lastParam) && isset($lastParam['buffer']));
+                if ($hasBufferParam && is_bool($lastParam)) {
+                    $buffer = $lastParam;
+                    unset($params[count($params) - 1]);
+                } elseif ($hasBufferParam && is_array($lastParam)) {
+                    $buffer = $lastParam['buffer'];
+                    unset($params['buffer']);
+                }
+            }
+            $out = $this->{$this->__engineName}->dispatchMethod($method, $params);
+            if ($this->bufferScripts && $buffer && is_string($out)) {
+                $this->buffer($out);
+                return null;
+            }
+            if (is_object($out) && is_a($out, 'JsBaseEngineHelper')) {
+                return $this;
+            }
+            return $out;
+        }
+        if (method_exists($this, $method . '_')) {
+            return $this->dispatchMethod($method . '_', $params);
+        }
+        trigger_error(sprintf(__('JsHelper:: Missing Method %s is undefined', true), $method), E_USER_WARNING);
+    }
 
 /**
  * Workaround for Object::Object() existing. Since Object::object exists, it does not
@@ -165,9 +165,9 @@ class JsHelper extends AppHelper {
  * @deprecated Remove when support for PHP4 and Object::object are removed.
  * @access public
  */
-	function object($data = array(), $options = array()) {
-		return $this->{$this->__engineName}->object($data, $options);
-	}
+    function object($data = array(), $options = array()) {
+        return $this->{$this->__engineName}->object($data, $options);
+    }
 
 /**
  * Overwrite inherited Helper::value()
@@ -178,9 +178,9 @@ class JsHelper extends AppHelper {
  * @return string a JavaScript-safe/JSON representation of $val
  * @access public
  **/
-	function value($val, $quoteString = true) {
-		return $this->{$this->__engineName}->value($val, $quoteString);
-	}
+    function value($val, $quoteString = true) {
+        return $this->{$this->__engineName}->value($val, $quoteString);
+    }
 
 /**
  * Writes all Javascript generated so far to a code block or
@@ -202,39 +202,39 @@ class JsHelper extends AppHelper {
  *   scripts null will be returned.
  * @access public
  */
-	function writeBuffer($options = array()) {
-		$domReady = isset($this->params['isAjax']) ? !$this->params['isAjax'] : true;
-		$defaults = array(
-			'onDomReady' => $domReady, 'inline' => true, 
-			'cache' => false, 'clear' => true, 'safe' => true
-		);
-		$options = array_merge($defaults, $options);
-		$script = implode("\n", $this->getBuffer($options['clear']));
+    function writeBuffer($options = array()) {
+        $domReady = isset($this->params['isAjax']) ? !$this->params['isAjax'] : true;
+        $defaults = array(
+            'onDomReady' => $domReady, 'inline' => true, 
+            'cache' => false, 'clear' => true, 'safe' => true
+        );
+        $options = array_merge($defaults, $options);
+        $script = implode("\n", $this->getBuffer($options['clear']));
 
-		if (empty($script)) {
-			return null;
-		}
+        if (empty($script)) {
+            return null;
+        }
 
-		if ($options['onDomReady']) {
-			$script = $this->{$this->__engineName}->domReady($script);
-		}
-		$opts = $options;
-		unset($opts['onDomReady'], $opts['cache'], $opts['clear']);
+        if ($options['onDomReady']) {
+            $script = $this->{$this->__engineName}->domReady($script);
+        }
+        $opts = $options;
+        unset($opts['onDomReady'], $opts['cache'], $opts['clear']);
 
-		if (!$options['cache'] && $options['inline']) {
-			return $this->Html->scriptBlock($script, $opts);
-		}
+        if (!$options['cache'] && $options['inline']) {
+            return $this->Html->scriptBlock($script, $opts);
+        }
 
-		if ($options['cache'] && $options['inline']) {
-			$filename = md5($script);
-			if (!file_exists(JS . $filename . '.js')) {
-				cache(str_replace(WWW_ROOT, '', JS) . $filename . '.js', $script, '+999 days', 'public');
-			}
-			return $this->Html->script($filename);
-		}
-		$this->Html->scriptBlock($script, $opts);
-		return null;
-	}
+        if ($options['cache'] && $options['inline']) {
+            $filename = md5($script);
+            if (!file_exists(JS . $filename . '.js')) {
+                cache(str_replace(WWW_ROOT, '', JS) . $filename . '.js', $script, '+999 days', 'public');
+            }
+            return $this->Html->script($filename);
+        }
+        $this->Html->scriptBlock($script, $opts);
+        return null;
+    }
 
 /**
  * Write a script to the buffered scripts.
@@ -245,13 +245,13 @@ class JsHelper extends AppHelper {
  * @return void
  * @access public
  */
-	function buffer($script, $top = false) {
-		if ($top) {
-			array_unshift($this->__bufferedScripts, $script);
-		} else {
-			$this->__bufferedScripts[] = $script;
-		}
-	}
+    function buffer($script, $top = false) {
+        if ($top) {
+            array_unshift($this->__bufferedScripts, $script);
+        } else {
+            $this->__bufferedScripts[] = $script;
+        }
+    }
 
 /**
  * Get all the buffered scripts
@@ -260,15 +260,15 @@ class JsHelper extends AppHelper {
  * @return array Array of scripts added to the request.
  * @access public
  */
-	function getBuffer($clear = true) {
-		$this->_createVars();
-		$scripts = $this->__bufferedScripts;
-		if ($clear) {
-			$this->__bufferedScripts = array();
-			$this->__jsVars = array();
-		}
-		return $scripts;
-	}
+    function getBuffer($clear = true) {
+        $this->_createVars();
+        $scripts = $this->__bufferedScripts;
+        if ($clear) {
+            $this->__bufferedScripts = array();
+            $this->__jsVars = array();
+        }
+        return $scripts;
+    }
 
 /**
  * Generates the object string for variables passed to javascript.
@@ -276,12 +276,12 @@ class JsHelper extends AppHelper {
  * @return string Generated JSON object of all set vars
  * @access protected
  */
-	function _createVars() {
-		if (!empty($this->__jsVars)) {
-			$setVar = (strpos($this->setVariable, '.')) ? $this->setVariable : 'window.' . $this->setVariable;
-			$this->buffer($setVar . ' = ' . $this->object($this->__jsVars) . ';', true);
-		}
-	}
+    function _createVars() {
+        if (!empty($this->__jsVars)) {
+            $setVar = (strpos($this->setVariable, '.')) ? $this->setVariable : 'window.' . $this->setVariable;
+            $this->buffer($setVar . ' = ' . $this->object($this->__jsVars) . ';', true);
+        }
+    }
 
 /**
  * Generate an 'Ajax' link.  Uses the selected JS engine to create a link
@@ -302,33 +302,33 @@ class JsHelper extends AppHelper {
  * @return string Completed link. If buffering is disabled a script tag will be returned as well.
  * @access public
  */
-	function link($title, $url = null, $options = array()) {
-		if (!isset($options['id'])) {
-			$options['id'] = 'link-' . intval(mt_rand());
-		}
-		list($options, $htmlOptions) = $this->_getHtmlOptions($options);
-		$out = $this->Html->link($title, $url, $htmlOptions);
-		$this->get('#' . $htmlOptions['id']);
-		$requestString = $event = '';
-		if (isset($options['confirm'])) {
-			$requestString = $this->confirmReturn($options['confirm']);
-			unset($options['confirm']);
-		}
-		$buffer = isset($options['buffer']) ? $options['buffer'] : null;
-		$safe = isset($options['safe']) ? $options['safe'] : true;
-		unset($options['buffer'], $options['safe']);
+    function link($title, $url = null, $options = array()) {
+        if (!isset($options['id'])) {
+            $options['id'] = 'link-' . intval(mt_rand());
+        }
+        list($options, $htmlOptions) = $this->_getHtmlOptions($options);
+        $out = $this->Html->link($title, $url, $htmlOptions);
+        $this->get('#' . $htmlOptions['id']);
+        $requestString = $event = '';
+        if (isset($options['confirm'])) {
+            $requestString = $this->confirmReturn($options['confirm']);
+            unset($options['confirm']);
+        }
+        $buffer = isset($options['buffer']) ? $options['buffer'] : null;
+        $safe = isset($options['safe']) ? $options['safe'] : true;
+        unset($options['buffer'], $options['safe']);
 
-		$requestString .= $this->request($url, $options);
+        $requestString .= $this->request($url, $options);
 
-		if (!empty($requestString)) {
-			$event = $this->event('click', $requestString, $options + array('buffer' => $buffer));
-		}
-		if (isset($buffer) && !$buffer) {
-			$opts = array('safe' => $safe);
-			$out .= $this->Html->scriptBlock($event, $opts);
-		}
-		return $out;
-	}
+        if (!empty($requestString)) {
+            $event = $this->event('click', $requestString, $options + array('buffer' => $buffer));
+        }
+        if (isset($buffer) && !$buffer) {
+            $opts = array('safe' => $safe);
+            $out .= $this->Html->scriptBlock($event, $opts);
+        }
+        return $out;
+    }
 
 /**
  * Pass variables into Javascript.  Allows you to set variables that will be
@@ -340,22 +340,22 @@ class JsHelper extends AppHelper {
  * @return void
  * @access public
  */
-	function set($one, $two = null) {
-		$data = null;
-		if (is_array($one)) {
-			if (is_array($two)) {
-				$data = array_combine($one, $two);
-			} else {
-				$data = $one;
-			}
-		} else {
-			$data = array($one => $two);
-		}
-		if ($data == null) {
-			return false;
-		}
-		$this->__jsVars = array_merge($this->__jsVars, $data);
-	}
+    function set($one, $two = null) {
+        $data = null;
+        if (is_array($one)) {
+            if (is_array($two)) {
+                $data = array_combine($one, $two);
+            } else {
+                $data = $one;
+            }
+        } else {
+            $data = array($one => $two);
+        }
+        if ($data == null) {
+            return false;
+        }
+        $this->__jsVars = array_merge($this->__jsVars, $data);
+    }
 
 /**
  * Uses the selected JS engine to create a submit input
@@ -378,45 +378,45 @@ class JsHelper extends AppHelper {
  * @return string Completed submit button.
  * @access public
  */
-	function submit($caption = null, $options = array()) {
-		if (!isset($options['id'])) {
-			$options['id'] = 'submit-' . intval(mt_rand());
-		}
-		$formOptions = array('div');
-		list($options, $htmlOptions) = $this->_getHtmlOptions($options, $formOptions);
-		$out = $this->Form->submit($caption, $htmlOptions);
+    function submit($caption = null, $options = array()) {
+        if (!isset($options['id'])) {
+            $options['id'] = 'submit-' . intval(mt_rand());
+        }
+        $formOptions = array('div');
+        list($options, $htmlOptions) = $this->_getHtmlOptions($options, $formOptions);
+        $out = $this->Form->submit($caption, $htmlOptions);
 
-		$this->get('#' . $htmlOptions['id']);
+        $this->get('#' . $htmlOptions['id']);
 
-		$options['data'] = $this->serializeForm(array('isForm' => false, 'inline' => true));
-		$requestString = $url = '';
-		if (isset($options['confirm'])) {
-			$requestString = $this->confirmReturn($options['confirm']);
-			unset($options['confirm']);
-		}
-		if (isset($options['url'])) {
-			$url = $options['url'];
-			unset($options['url']);
-		}
-		if (!isset($options['method'])) {
-			$options['method'] = 'post';
-		}
-		$options['dataExpression'] = true;
+        $options['data'] = $this->serializeForm(array('isForm' => false, 'inline' => true));
+        $requestString = $url = '';
+        if (isset($options['confirm'])) {
+            $requestString = $this->confirmReturn($options['confirm']);
+            unset($options['confirm']);
+        }
+        if (isset($options['url'])) {
+            $url = $options['url'];
+            unset($options['url']);
+        }
+        if (!isset($options['method'])) {
+            $options['method'] = 'post';
+        }
+        $options['dataExpression'] = true;
 
-		$buffer = isset($options['buffer']) ? $options['buffer'] : null;
-		$safe = isset($options['safe']) ? $options['safe'] : true;
-		unset($options['buffer'], $options['safe']);
+        $buffer = isset($options['buffer']) ? $options['buffer'] : null;
+        $safe = isset($options['safe']) ? $options['safe'] : true;
+        unset($options['buffer'], $options['safe']);
 
-		$requestString .= $this->request($url, $options);
-		if (!empty($requestString)) {
-			$event = $this->event('click', $requestString, $options + array('buffer' => $buffer));
-		}
-		if (isset($buffer) && !$buffer) {
-			$opts = array('safe' => $safe);
-			$out .= $this->Html->scriptBlock($event, $opts);
-		}
-		return $out;
-	}
+        $requestString .= $this->request($url, $options);
+        if (!empty($requestString)) {
+            $event = $this->event('click', $requestString, $options + array('buffer' => $buffer));
+        }
+        if (isset($buffer) && !$buffer) {
+            $opts = array('safe' => $safe);
+            $out .= $this->Html->scriptBlock($event, $opts);
+        }
+        return $out;
+    }
 
 /**
  * Parse a set of Options and extract the Html options.
@@ -427,21 +427,21 @@ class JsHelper extends AppHelper {
  * @return array Array of js options and Htmloptions
  * @access protected
  */
-	function _getHtmlOptions($options, $additional = array()) {
-		$htmlKeys = array_merge(array('class', 'id', 'escape', 'onblur', 'onfocus', 'rel', 'title'), $additional);
-		$htmlOptions = array();
-		foreach ($htmlKeys as $key) {
-			if (isset($options[$key])) {
-				$htmlOptions[$key] = $options[$key];
-			}
-			unset($options[$key]);
-		}
-		if (isset($options['htmlAttributes'])) {
-			$htmlOptions = array_merge($htmlOptions, $options['htmlAttributes']);
-			unset($options['htmlAttributes']);
-		}
-		return array($options, $htmlOptions);
-	}
+    function _getHtmlOptions($options, $additional = array()) {
+        $htmlKeys = array_merge(array('class', 'id', 'escape', 'onblur', 'onfocus', 'rel', 'title'), $additional);
+        $htmlOptions = array();
+        foreach ($htmlKeys as $key) {
+            if (isset($options[$key])) {
+                $htmlOptions[$key] = $options[$key];
+            }
+            unset($options[$key]);
+        }
+        if (isset($options['htmlAttributes'])) {
+            $htmlOptions = array_merge($htmlOptions, $options['htmlAttributes']);
+            unset($options['htmlAttributes']);
+        }
+        return array($options, $htmlOptions);
+    }
 }
 
 /**
@@ -458,7 +458,7 @@ class JsBaseEngineHelper extends AppHelper {
  * @var boolean
  * @access public
  */
-	var $useNative = false;
+    var $useNative = false;
 
 /**
  * The js snippet for the current selection.
@@ -466,7 +466,7 @@ class JsBaseEngineHelper extends AppHelper {
  * @var string
  * @access public
  */
-	var $selection;
+    var $selection;
 
 /**
  * Collection of option maps. Option maps allow other helpers to use generic names for engine
@@ -476,7 +476,7 @@ class JsBaseEngineHelper extends AppHelper {
  * @var array
  * @access protected
  */
-	var $_optionMap = array();
+    var $_optionMap = array();
 
 /**
  * An array of lowercase method names in the Engine that are buffered unless otherwise disabled.
@@ -485,7 +485,7 @@ class JsBaseEngineHelper extends AppHelper {
  * @var array
  * @access public
  */
-	var $bufferedMethods = array('event', 'sortable', 'drag', 'drop', 'slider');
+    var $bufferedMethods = array('event', 'sortable', 'drag', 'drop', 'slider');
 
 /**
  * Contains a list of callback names -> default arguments.
@@ -493,17 +493,17 @@ class JsBaseEngineHelper extends AppHelper {
  * @var array
  * @access protected
  */
-	var $_callbackArguments = array();
+    var $_callbackArguments = array();
 
 /**
  * Constructor.
  *
  * @return void
  */
-	function __construct() {
-		parent::__construct();
-		$this->useNative = function_exists('json_encode');
-	}
+    function __construct() {
+        parent::__construct();
+        $this->useNative = function_exists('json_encode');
+    }
 
 /**
  * Create an `alert()` message in Javascript
@@ -512,9 +512,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string completed alert()
  * @access public
  */
-	function alert($message) {
-		return 'alert("' . $this->escape($message) . '");';
-	}
+    function alert($message) {
+        return 'alert("' . $this->escape($message) . '");';
+    }
 
 /**
  * Redirects to a URL.  Creates a window.location modification snippet
@@ -525,9 +525,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string completed redirect in javascript
  * @access public
  */
-	function redirect($url = null) {
-		return 'window.location = "' . Router::url($url) . '";';
-	}
+    function redirect($url = null) {
+        return 'window.location = "' . Router::url($url) . '";';
+    }
 
 /**
  * Create a `confirm()` message
@@ -536,9 +536,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string completed confirm()
  * @access public
  */
-	function confirm($message) {
-		return 'confirm("' . $this->escape($message) . '");';
-	}
+    function confirm($message) {
+        return 'confirm("' . $this->escape($message) . '");';
+    }
 
 /**
  * Generate a confirm snippet that returns false from the current
@@ -548,11 +548,11 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string completed confirm with return script
  * @access public
  */
-	function confirmReturn($message) {
-		$out = 'var _confirm = ' . $this->confirm($message);
-		$out .= "if (!_confirm) {\n\treturn false;\n}";
-		return $out;
-	}
+    function confirmReturn($message) {
+        $out = 'var _confirm = ' . $this->confirm($message);
+        $out .= "if (!_confirm) {\n\treturn false;\n}";
+        return $out;
+    }
 
 /**
  * Create a `prompt()` Javascript function
@@ -562,9 +562,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string completed prompt()
  * @access public
  */
-	function prompt($message, $default = '') {
-		return 'prompt("' . $this->escape($message) . '", "' . $this->escape($default) . '");';
-	}
+    function prompt($message, $default = '') {
+        return 'prompt("' . $this->escape($message) . '", "' . $this->escape($default) . '");';
+    }
 
 /**
  * Generates a JavaScript object in JavaScript Object Notation (JSON)
@@ -580,57 +580,57 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string A JSON code block
  * @access public
  */
-	function object($data = array(), $options = array()) {
-		$defaultOptions = array(
-			'prefix' => '', 'postfix' => '',
-		);
-		$options = array_merge($defaultOptions, $options);
+    function object($data = array(), $options = array()) {
+        $defaultOptions = array(
+            'prefix' => '', 'postfix' => '',
+        );
+        $options = array_merge($defaultOptions, $options);
 
-		if (is_object($data)) {
-			$data = get_object_vars($data);
-		}
+        if (is_object($data)) {
+            $data = get_object_vars($data);
+        }
 
-		$out = $keys = array();
-		$numeric = true;
+        $out = $keys = array();
+        $numeric = true;
 
-		if ($this->useNative && function_exists('json_encode')) {
-			$rt = json_encode($data);
-		} else {
-			if (is_null($data)) {
-				return 'null';
-			}
-			if (is_bool($data)) {
-				return $data ? 'true' : 'false';
-			}
-			if (is_array($data)) {
-				$keys = array_keys($data);
-			}
+        if ($this->useNative && function_exists('json_encode')) {
+            $rt = json_encode($data);
+        } else {
+            if (is_null($data)) {
+                return 'null';
+            }
+            if (is_bool($data)) {
+                return $data ? 'true' : 'false';
+            }
+            if (is_array($data)) {
+                $keys = array_keys($data);
+            }
 
-			if (!empty($keys)) {
-				$numeric = (array_values($keys) === array_keys(array_values($keys)));
-			}
+            if (!empty($keys)) {
+                $numeric = (array_values($keys) === array_keys(array_values($keys)));
+            }
 
-			foreach ($data as $key => $val) {
-				if (is_array($val) || is_object($val)) {
-					$val = $this->object($val);
-				} else {
-					$val = $this->value($val);
-				}
-				if (!$numeric) {
-					$val = '"' . $this->value($key, false) . '":' . $val;
-				}
-				$out[] = $val;
-			}
+            foreach ($data as $key => $val) {
+                if (is_array($val) || is_object($val)) {
+                    $val = $this->object($val);
+                } else {
+                    $val = $this->value($val);
+                }
+                if (!$numeric) {
+                    $val = '"' . $this->value($key, false) . '":' . $val;
+                }
+                $out[] = $val;
+            }
 
-			if (!$numeric) {
-				$rt = '{' . join(',', $out) . '}';
-			} else {
-				$rt = '[' . join(',', $out) . ']';
-			}
-		}
-		$rt = $options['prefix'] . $rt . $options['postfix'];
-		return $rt;
-	}
+            if (!$numeric) {
+                $rt = '{' . join(',', $out) . '}';
+            } else {
+                $rt = '[' . join(',', $out) . ']';
+            }
+        }
+        $rt = $options['prefix'] . $rt . $options['postfix'];
+        return $rt;
+    }
 
 /**
  * Converts a PHP-native variable of any type to a JSON-equivalent representation
@@ -640,32 +640,32 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string a JavaScript-safe/JSON representation of $val
  * @access public
  */
-	function value($val, $quoteString = true) {
-		switch (true) {
-			case (is_array($val) || is_object($val)):
-				$val = $this->object($val);
-			break;
-			case ($val === null):
-				$val = 'null';
-			break;
-			case (is_bool($val)):
-				$val = ($val === true) ? 'true' : 'false';
-			break;
-			case (is_int($val)):
-				$val = $val;
-			break;
-			case (is_float($val)):
-				$val = sprintf("%.11f", $val);
-			break;
-			default:
-				$val = $this->escape($val);
-				if ($quoteString) {
-					$val = '"' . $val . '"';
-				}
-			break;
-		}
-		return $val;
-	}
+    function value($val, $quoteString = true) {
+        switch (true) {
+            case (is_array($val) || is_object($val)):
+                $val = $this->object($val);
+            break;
+            case ($val === null):
+                $val = 'null';
+            break;
+            case (is_bool($val)):
+                $val = ($val === true) ? 'true' : 'false';
+            break;
+            case (is_int($val)):
+                $val = $val;
+            break;
+            case (is_float($val)):
+                $val = sprintf("%.11f", $val);
+            break;
+            default:
+                $val = $this->escape($val);
+                if ($quoteString) {
+                    $val = '"' . $val . '"';
+                }
+            break;
+        }
+        return $val;
+    }
 
 /**
  * Escape a string to be JSON friendly.
@@ -680,10 +680,10 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string Escaped string.
  * @access public
  */
-	function escape($string) {
-		App::import('Core', 'Multibyte');
-		return $this->_utf8ToHex($string);
-	}
+    function escape($string) {
+        App::import('Core', 'Multibyte');
+        return $this->_utf8ToHex($string);
+    }
 
 /**
  * Encode a string into JSON.  Converts and escapes necessary characters.
@@ -692,94 +692,94 @@ class JsBaseEngineHelper extends AppHelper {
  * @return void
  * @access protected
  */
-	function _utf8ToHex($string) {
-		$length = strlen($string);
-		$return = '';
-		for ($i = 0; $i < $length; ++$i) {
-			$ord = ord($string{$i});
-			switch (true) {
-				case $ord == 0x08:
-					$return .= '\b';
-					break;
-				case $ord == 0x09:
-					$return .= '\t';
-					break;
-				case $ord == 0x0A:
-					$return .= '\n';
-					break;
-				case $ord == 0x0C:
-					$return .= '\f';
-					break;
-				case $ord == 0x0D:
-					$return .= '\r';
-					break;
-				case $ord == 0x22:
-				case $ord == 0x2F:
-				case $ord == 0x5C:
-					$return .= '\\' . $string{$i};
-					break;
-				case (($ord >= 0x20) && ($ord <= 0x7F)):
-					$return .= $string{$i};
-					break;
-				case (($ord & 0xE0) == 0xC0):
-					if ($i + 1 >= $length) {
-						$i += 1;
-						$return .= '?';
-						break;
-					}
-					$charbits = $string{$i} . $string{$i + 1};
-					$char = Multibyte::utf8($charbits);
-					$return .= sprintf('\u%04s', dechex($char[0]));
-					$i += 1;
-					break;
-				case (($ord & 0xF0) == 0xE0):
-					if ($i + 2 >= $length) {
-						$i += 2;
-						$return .= '?';
-						break;
-					}
-					$charbits = $string{$i} . $string{$i + 1} . $string{$i + 2};
-					$char = Multibyte::utf8($charbits);
-					$return .= sprintf('\u%04s', dechex($char[0]));
-					$i += 2;
-					break;
-				case (($ord & 0xF8) == 0xF0):
-					if ($i + 3 >= $length) {
-					   $i += 3;
-					   $return .= '?';
-					   break;
-					}
-					$charbits = $string{$i} . $string{$i + 1} . $string{$i + 2} . $string{$i + 3};
-					$char = Multibyte::utf8($charbits);
-					$return .= sprintf('\u%04s', dechex($char[0]));
-					$i += 3;
-					break;
-				case (($ord & 0xFC) == 0xF8):
-					if ($i + 4 >= $length) {
-					   $i += 4;
-					   $return .= '?';
-					   break;
-					}
-					$charbits = $string{$i} . $string{$i + 1} . $string{$i + 2} . $string{$i + 3} . $string{$i + 4};
-					$char = Multibyte::utf8($charbits);
-					$return .= sprintf('\u%04s', dechex($char[0]));
-					$i += 4;
-					break;
-				case (($ord & 0xFE) == 0xFC):
-					if ($i + 5 >= $length) {
-					   $i += 5;
-					   $return .= '?';
-					   break;
-					}
-					$charbits = $string{$i} . $string{$i + 1} . $string{$i + 2} . $string{$i + 3} . $string{$i + 4} . $string{$i + 5};
-					$char = Multibyte::utf8($charbits);
-					$return .= sprintf('\u%04s', dechex($char[0]));
-					$i += 5;
-					break;
-			}
-		}
-		return $return;
-	}
+    function _utf8ToHex($string) {
+        $length = strlen($string);
+        $return = '';
+        for ($i = 0; $i < $length; ++$i) {
+            $ord = ord($string{$i});
+            switch (true) {
+                case $ord == 0x08:
+                    $return .= '\b';
+                    break;
+                case $ord == 0x09:
+                    $return .= '\t';
+                    break;
+                case $ord == 0x0A:
+                    $return .= '\n';
+                    break;
+                case $ord == 0x0C:
+                    $return .= '\f';
+                    break;
+                case $ord == 0x0D:
+                    $return .= '\r';
+                    break;
+                case $ord == 0x22:
+                case $ord == 0x2F:
+                case $ord == 0x5C:
+                    $return .= '\\' . $string{$i};
+                    break;
+                case (($ord >= 0x20) && ($ord <= 0x7F)):
+                    $return .= $string{$i};
+                    break;
+                case (($ord & 0xE0) == 0xC0):
+                    if ($i + 1 >= $length) {
+                        $i += 1;
+                        $return .= '?';
+                        break;
+                    }
+                    $charbits = $string{$i} . $string{$i + 1};
+                    $char = Multibyte::utf8($charbits);
+                    $return .= sprintf('\u%04s', dechex($char[0]));
+                    $i += 1;
+                    break;
+                case (($ord & 0xF0) == 0xE0):
+                    if ($i + 2 >= $length) {
+                        $i += 2;
+                        $return .= '?';
+                        break;
+                    }
+                    $charbits = $string{$i} . $string{$i + 1} . $string{$i + 2};
+                    $char = Multibyte::utf8($charbits);
+                    $return .= sprintf('\u%04s', dechex($char[0]));
+                    $i += 2;
+                    break;
+                case (($ord & 0xF8) == 0xF0):
+                    if ($i + 3 >= $length) {
+                       $i += 3;
+                       $return .= '?';
+                       break;
+                    }
+                    $charbits = $string{$i} . $string{$i + 1} . $string{$i + 2} . $string{$i + 3};
+                    $char = Multibyte::utf8($charbits);
+                    $return .= sprintf('\u%04s', dechex($char[0]));
+                    $i += 3;
+                    break;
+                case (($ord & 0xFC) == 0xF8):
+                    if ($i + 4 >= $length) {
+                       $i += 4;
+                       $return .= '?';
+                       break;
+                    }
+                    $charbits = $string{$i} . $string{$i + 1} . $string{$i + 2} . $string{$i + 3} . $string{$i + 4};
+                    $char = Multibyte::utf8($charbits);
+                    $return .= sprintf('\u%04s', dechex($char[0]));
+                    $i += 4;
+                    break;
+                case (($ord & 0xFE) == 0xFC):
+                    if ($i + 5 >= $length) {
+                       $i += 5;
+                       $return .= '?';
+                       break;
+                    }
+                    $charbits = $string{$i} . $string{$i + 1} . $string{$i + 2} . $string{$i + 3} . $string{$i + 4} . $string{$i + 5};
+                    $char = Multibyte::utf8($charbits);
+                    $return .= sprintf('\u%04s', dechex($char[0]));
+                    $i += 5;
+                    break;
+            }
+        }
+        return $return;
+    }
 
 /**
  * Create javascript selector for a CSS rule
@@ -788,10 +788,10 @@ class JsBaseEngineHelper extends AppHelper {
  * @return object instance of $this. Allows chained methods.
  * @access public
  */
-	function get($selector) {
-		trigger_error(sprintf(__('%s does not have get() implemented', true), get_class($this)), E_USER_WARNING);
-		return $this;
-	}
+    function get($selector) {
+        trigger_error(sprintf(__('%s does not have get() implemented', true), get_class($this)), E_USER_WARNING);
+        return $this;
+    }
 
 /**
  * Add an event to the script cache. Operates on the currently selected elements.
@@ -807,9 +807,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string completed event handler
  * @access public
  */
-	function event($type, $callback, $options = array()) {
-		trigger_error(sprintf(__('%s does not have event() implemented', true), get_class($this)), E_USER_WARNING);
-	}
+    function event($type, $callback, $options = array()) {
+        trigger_error(sprintf(__('%s does not have event() implemented', true), get_class($this)), E_USER_WARNING);
+    }
 
 /**
  * Create a domReady event. This is a special event in many libraries
@@ -818,9 +818,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string completed domReady method
  * @access public
  */
-	function domReady($functionBody) {
-		trigger_error(sprintf(__('%s does not have domReady() implemented', true), get_class($this)), E_USER_WARNING);
-	}
+    function domReady($functionBody) {
+        trigger_error(sprintf(__('%s does not have domReady() implemented', true), get_class($this)), E_USER_WARNING);
+    }
 
 /**
  * Create an iteration over the current selection result.
@@ -828,9 +828,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @param string $callback The function body you wish to apply during the iteration.
  * @return string completed iteration
  */
-	function each($callback) {
-		trigger_error(sprintf(__('%s does not have each() implemented', true), get_class($this)), E_USER_WARNING);
-	}
+    function each($callback) {
+        trigger_error(sprintf(__('%s does not have each() implemented', true), get_class($this)), E_USER_WARNING);
+    }
 
 /**
  * Trigger an Effect.
@@ -856,9 +856,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string completed string with effect.
  * @access public
  */
-	function effect($name, $options) {
-		trigger_error(sprintf(__('%s does not have effect() implemented', true), get_class($this)), E_USER_WARNING);
-	}
+    function effect($name, $options) {
+        trigger_error(sprintf(__('%s does not have effect() implemented', true), get_class($this)), E_USER_WARNING);
+    }
 
 /**
  * Make an XHR request
@@ -886,9 +886,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string XHR request.
  * @access public
  */
-	function request($url, $options = array()) {
-		trigger_error(sprintf(__('%s does not have request() implemented', true), get_class($this)), E_USER_WARNING);
-	}
+    function request($url, $options = array()) {
+        trigger_error(sprintf(__('%s does not have request() implemented', true), get_class($this)), E_USER_WARNING);
+    }
 
 /**
  * Create a draggable element.  Works on the currently selected element.
@@ -910,9 +910,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string Completed drag script
  * @access public
  */
-	function drag($options = array()) {
-		trigger_error(sprintf(__('%s does not have drag() implemented', true), get_class($this)), E_USER_WARNING);
-	}
+    function drag($options = array()) {
+        trigger_error(sprintf(__('%s does not have drag() implemented', true), get_class($this)), E_USER_WARNING);
+    }
 
 /**
  * Create a droppable element. Allows for draggable elements to be dropped on it.
@@ -932,9 +932,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string Completed drop script
  * @access public
  */
-	function drop($options = array()) {
-		trigger_error(sprintf(__('%s does not have drop() implemented', true), get_class($this)), E_USER_WARNING);
-	}
+    function drop($options = array()) {
+        trigger_error(sprintf(__('%s does not have drop() implemented', true), get_class($this)), E_USER_WARNING);
+    }
 
 /**
  * Create a sortable element.
@@ -958,9 +958,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string Completed sortable script.
  * @access public
  */
-	function sortable() {
-		trigger_error(sprintf(__('%s does not have sortable() implemented', true), get_class($this)), E_USER_WARNING);
-	}
+    function sortable() {
+        trigger_error(sprintf(__('%s does not have sortable() implemented', true), get_class($this)), E_USER_WARNING);
+    }
 
 /**
  * Create a slider UI widget.  Comprised of a track and knob.
@@ -983,9 +983,9 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string Completed slider script
  * @access public
  */
-	function slider() {
-		trigger_error(sprintf(__('%s does not have slider() implemented', true), get_class($this)), E_USER_WARNING);
-	}
+    function slider() {
+        trigger_error(sprintf(__('%s does not have slider() implemented', true), get_class($this)), E_USER_WARNING);
+    }
 
 /**
  * Serialize the form attached to $selector.
@@ -1002,11 +1002,11 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string completed form serialization script
  * @access public
  */
-	function serializeForm() {
-		trigger_error(
-			sprintf(__('%s does not have serializeForm() implemented', true), get_class($this)), E_USER_WARNING
-		);
-	}
+    function serializeForm() {
+        trigger_error(
+            sprintf(__('%s does not have serializeForm() implemented', true), get_class($this)), E_USER_WARNING
+        );
+    }
 
 /**
  * Parse an options assoc array into an Javascript object literal.
@@ -1018,18 +1018,18 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string Parsed JSON options without enclosing { }.
  * @access protected
  */
-	function _parseOptions($options, $safeKeys = array()) {
-		$out = array();
-		$safeKeys = array_flip($safeKeys);
-		foreach ($options as $key => $value) {
-			if (!is_int($value) && !isset($safeKeys[$key])) {
-				$value = $this->value($value);
-			}
-			$out[] = $key . ':' . $value;
-		}
-		sort($out);
-		return join(', ', $out);
-	}
+    function _parseOptions($options, $safeKeys = array()) {
+        $out = array();
+        $safeKeys = array_flip($safeKeys);
+        foreach ($options as $key => $value) {
+            if (!is_int($value) && !isset($safeKeys[$key])) {
+                $value = $this->value($value);
+            }
+            $out[] = $key . ':' . $value;
+        }
+        sort($out);
+        return join(', ', $out);
+    }
 
 /**
  * Maps Abstract options to engine specific option names.
@@ -1040,18 +1040,18 @@ class JsBaseEngineHelper extends AppHelper {
  * @return array Array of mapped options.
  * @access protected
  */
-	function _mapOptions($method, $options) {
-		if (!isset($this->_optionMap[$method])) {
-			return $options;
-		}
-		foreach ($this->_optionMap[$method] as $abstract => $concrete) {
-			if (isset($options[$abstract])) {
-				$options[$concrete] = $options[$abstract];
-				unset($options[$abstract]);
-			}
-		}
-		return $options;
-	}
+    function _mapOptions($method, $options) {
+        if (!isset($this->_optionMap[$method])) {
+            return $options;
+        }
+        foreach ($this->_optionMap[$method] as $abstract => $concrete) {
+            if (isset($options[$abstract])) {
+                $options[$concrete] = $options[$abstract];
+                unset($options[$abstract]);
+            }
+        }
+        return $options;
+    }
 
 /**
  * Prepare callbacks and wrap them with function ([args]) { } as defined in
@@ -1063,33 +1063,33 @@ class JsBaseEngineHelper extends AppHelper {
  * @return array Array of options with callbacks added.
  * @access protected
  */
-	function _prepareCallbacks($method, $options, $callbacks = array()) {
-		$wrapCallbacks = true;
-		if (isset($options['wrapCallbacks'])) {
-			$wrapCallbacks = $options['wrapCallbacks'];
-		}
-		unset($options['wrapCallbacks']);
-		if (!$wrapCallbacks) {
-			return $options;
-		}
-		$callbackOptions = array();
-		if (isset($this->_callbackArguments[$method])) {
-			$callbackOptions = $this->_callbackArguments[$method];
-		}
-		$callbacks = array_unique(array_merge(array_keys($callbackOptions), (array)$callbacks));
+    function _prepareCallbacks($method, $options, $callbacks = array()) {
+        $wrapCallbacks = true;
+        if (isset($options['wrapCallbacks'])) {
+            $wrapCallbacks = $options['wrapCallbacks'];
+        }
+        unset($options['wrapCallbacks']);
+        if (!$wrapCallbacks) {
+            return $options;
+        }
+        $callbackOptions = array();
+        if (isset($this->_callbackArguments[$method])) {
+            $callbackOptions = $this->_callbackArguments[$method];
+        }
+        $callbacks = array_unique(array_merge(array_keys($callbackOptions), (array)$callbacks));
 
-		foreach ($callbacks as $callback) {
-			if (empty($options[$callback])) {
-				continue;
-			}
-			$args = null;
-			if (!empty($callbackOptions[$callback])) {
-				$args = $callbackOptions[$callback];
-			}
-			$options[$callback] = 'function (' . $args . ') {' . $options[$callback] . '}';
-		}
-		return $options;
-	}
+        foreach ($callbacks as $callback) {
+            if (empty($options[$callback])) {
+                continue;
+            }
+            $args = null;
+            if (!empty($callbackOptions[$callback])) {
+                $args = $callbackOptions[$callback];
+            }
+            $options[$callback] = 'function (' . $args . ') {' . $options[$callback] . '}';
+        }
+        return $options;
+    }
 
 /**
  * Conveinence wrapper method for all common option processing steps.
@@ -1100,12 +1100,12 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string Parsed options string.
  * @access protected
  */
-	function _processOptions($method, $options) {
-		$options = $this->_mapOptions($method, $options);
-		$options = $this->_prepareCallbacks($method, $options);
-		$options = $this->_parseOptions($options, array_keys($this->_callbackArguments[$method]));
-		return $options;
-	}
+    function _processOptions($method, $options) {
+        $options = $this->_mapOptions($method, $options);
+        $options = $this->_prepareCallbacks($method, $options);
+        $options = $this->_parseOptions($options, array_keys($this->_callbackArguments[$method]));
+        return $options;
+    }
 
 /**
  * Convert an array of data into a query string
@@ -1114,16 +1114,16 @@ class JsBaseEngineHelper extends AppHelper {
  * @return string Querystring fragment
  * @access protected
  */
-	function _toQuerystring($parameters) {
-		$out = '';
-		$keys = array_keys($parameters);
-		$count = count($parameters);
-		for ($i = 0; $i < $count; $i++) {
-			$out .= $keys[$i] . '=' . $parameters[$keys[$i]];
-			if ($i < $count - 1) {
-				$out .= '&';
-			}
-		}
-		return $out;
-	}
+    function _toQuerystring($parameters) {
+        $out = '';
+        $keys = array_keys($parameters);
+        $count = count($parameters);
+        for ($i = 0; $i < $count; $i++) {
+            $out .= $keys[$i] . '=' . $parameters[$keys[$i]];
+            if ($i < $count - 1) {
+                $out .= '&';
+            }
+        }
+        return $out;
+    }
 }

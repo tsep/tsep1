@@ -32,7 +32,7 @@ class DataTestFixture extends CakeTestFixture {
  * @var string 'DataTest'
  * @access public
  */
-	var $name = 'DataTest';
+    var $name = 'DataTest';
 
 /**
  * fields property
@@ -40,14 +40,14 @@ class DataTestFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'count' => array('type' => 'integer', 'default' => 0),
-		'float' => array('type' => 'float', 'default' => 0),
-		//'timestamp' => array('type' => 'timestamp', 'default' => null, 'null' => true),
-		'created' => array('type' => 'datetime', 'default' => null),
-		'updated' => array('type' => 'datetime', 'default' => null)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'count' => array('type' => 'integer', 'default' => 0),
+        'float' => array('type' => 'float', 'default' => 0),
+        //'timestamp' => array('type' => 'timestamp', 'default' => null, 'null' => true),
+        'created' => array('type' => 'datetime', 'default' => null),
+        'updated' => array('type' => 'datetime', 'default' => null)
+    );
 
 /**
  * records property
@@ -55,12 +55,12 @@ class DataTestFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array(
-			'count' => 2,
-			'float' => 2.4,
-			'created' => '2010-09-06 12:28:00',
-			'updated' => '2010-09-06 12:28:00'
-		)
-	);
+    var $records = array(
+        array(
+            'count' => 2,
+            'float' => 2.4,
+            'created' => '2010-09-06 12:28:00',
+            'updated' => '2010-09-06 12:28:00'
+        )
+    );
 }

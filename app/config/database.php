@@ -30,17 +30,17 @@
  * You can specify multiple configurations for production, development and testing.
  *
  * driver => The name of a supported driver; valid options are as follows:
- *		mysql 		- MySQL 4 & 5,
- *		mysqli 		- MySQL 4 & 5 Improved Interface (PHP5 only),
- *		sqlite		- SQLite (PHP5 only),
- *		postgres	- PostgreSQL 7 and higher,
- *		mssql		- Microsoft SQL Server 2000 and higher,
- *		db2			- IBM DB2, Cloudscape, and Apache Derby (http://php.net/ibm-db2)
- *		oracle		- Oracle 8 and higher
- *		firebird	- Firebird/Interbase
- *		sybase		- Sybase ASE
- *		adodb-[drivername]	- ADOdb interface wrapper (see below),
- *		odbc		- ODBC DBO driver
+ *        mysql         - MySQL 4 & 5,
+ *        mysqli         - MySQL 4 & 5 Improved Interface (PHP5 only),
+ *        sqlite        - SQLite (PHP5 only),
+ *        postgres    - PostgreSQL 7 and higher,
+ *        mssql        - Microsoft SQL Server 2000 and higher,
+ *        db2            - IBM DB2, Cloudscape, and Apache Derby (http://php.net/ibm-db2)
+ *        oracle        - Oracle 8 and higher
+ *        firebird    - Firebird/Interbase
+ *        sybase        - Sybase ASE
+ *        adodb-[drivername]    - ADOdb interface wrapper (see below),
+ *        odbc        - ODBC DBO driver
  *
  * You can add custom database drivers (or override existing drivers) by adding the
  * appropriate file to app/models/datasources/dbo.  Drivers should be named 'dbo_x.php',
@@ -51,8 +51,8 @@
  *
  * connect =>
  * ADOdb set the connect to one of these
- *	(http://phplens.com/adodb/supported.databases.html) and
- *	append it '|p' for persistent connection. (mssql|p for example, or just mssql for not persistent)
+ *    (http://phplens.com/adodb/supported.databases.html) and
+ *    append it '|p' for persistent connection. (mssql|p for example, or just mssql for not persistent)
  * For all other databases, this setting is deprecated.
  *
  * host =>
@@ -73,10 +73,10 @@
  */
 
 class DATABASE_CONFIG {
-	
-	function __construct() {
-		
-		$this->default = Configure::read('Database');
+    
+    function __construct() {
+        
+        $this->default = Configure::read('Database');
 
-	}
+    }
 }

@@ -18,7 +18,7 @@
  * @license       http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
  */
 if (!defined('CAKEPHP_UNIT_TEST_EXECUTION')) {
-	define('CAKEPHP_UNIT_TEST_EXECUTION', 1);
+    define('CAKEPHP_UNIT_TEST_EXECUTION', 1);
 }
 App::import('Component', 'Acl');
 App::import('Core', 'db_acl');
@@ -37,7 +37,7 @@ class DbAclNodeTestBase extends AclNode {
  * @var string 'test_suite'
  * @access public
  */
-	var $useDbConfig = 'test_suite';
+    var $useDbConfig = 'test_suite';
 
 /**
  * cacheSources property
@@ -45,7 +45,7 @@ class DbAclNodeTestBase extends AclNode {
  * @var bool false
  * @access public
  */
-	var $cacheSources = false;
+    var $cacheSources = false;
 }
 
 /**
@@ -62,7 +62,7 @@ class DbAroTest extends DbAclNodeTestBase {
  * @var string 'DbAroTest'
  * @access public
  */
-	var $name = 'DbAroTest';
+    var $name = 'DbAroTest';
 
 /**
  * useTable property
@@ -70,7 +70,7 @@ class DbAroTest extends DbAclNodeTestBase {
  * @var string 'aros'
  * @access public
  */
-	var $useTable = 'aros';
+    var $useTable = 'aros';
 
 /**
  * hasAndBelongsToMany property
@@ -78,7 +78,7 @@ class DbAroTest extends DbAclNodeTestBase {
  * @var array
  * @access public
  */
-	var $hasAndBelongsToMany = array('DbAcoTest' => array('with' => 'DbPermissionTest'));
+    var $hasAndBelongsToMany = array('DbAcoTest' => array('with' => 'DbPermissionTest'));
 }
 
 /**
@@ -95,7 +95,7 @@ class DbAcoTest extends DbAclNodeTestBase {
  * @var string 'DbAcoTest'
  * @access public
  */
-	var $name = 'DbAcoTest';
+    var $name = 'DbAcoTest';
 
 /**
  * useTable property
@@ -103,7 +103,7 @@ class DbAcoTest extends DbAclNodeTestBase {
  * @var string 'acos'
  * @access public
  */
-	var $useTable = 'acos';
+    var $useTable = 'acos';
 
 /**
  * hasAndBelongsToMany property
@@ -111,7 +111,7 @@ class DbAcoTest extends DbAclNodeTestBase {
  * @var array
  * @access public
  */
-	var $hasAndBelongsToMany = array('DbAroTest' => array('with' => 'DbPermissionTest'));
+    var $hasAndBelongsToMany = array('DbAroTest' => array('with' => 'DbPermissionTest'));
 }
 
 /**
@@ -128,7 +128,7 @@ class DbPermissionTest extends CakeTestModel {
  * @var string 'DbPermissionTest'
  * @access public
  */
-	var $name = 'DbPermissionTest';
+    var $name = 'DbPermissionTest';
 
 /**
  * useTable property
@@ -136,7 +136,7 @@ class DbPermissionTest extends CakeTestModel {
  * @var string 'aros_acos'
  * @access public
  */
-	var $useTable = 'aros_acos';
+    var $useTable = 'aros_acos';
 
 /**
  * cacheQueries property
@@ -144,7 +144,7 @@ class DbPermissionTest extends CakeTestModel {
  * @var bool false
  * @access public
  */
-	var $cacheQueries = false;
+    var $cacheQueries = false;
 
 /**
  * belongsTo property
@@ -152,7 +152,7 @@ class DbPermissionTest extends CakeTestModel {
  * @var array
  * @access public
  */
-	var $belongsTo = array('DbAroTest' => array('foreignKey' => 'aro_id'), 'DbAcoTest' => array('foreignKey' => 'aco_id'));
+    var $belongsTo = array('DbAroTest' => array('foreignKey' => 'aro_id'), 'DbAcoTest' => array('foreignKey' => 'aco_id'));
 }
 
 /**
@@ -169,7 +169,7 @@ class DbAcoActionTest extends CakeTestModel {
  * @var string 'DbAcoActionTest'
  * @access public
  */
-	var $name = 'DbAcoActionTest';
+    var $name = 'DbAcoActionTest';
 
 /**
  * useTable property
@@ -177,7 +177,7 @@ class DbAcoActionTest extends CakeTestModel {
  * @var string 'aco_actions'
  * @access public
  */
-	var $useTable = 'aco_actions';
+    var $useTable = 'aco_actions';
 
 /**
  * belongsTo property
@@ -185,7 +185,7 @@ class DbAcoActionTest extends CakeTestModel {
  * @var array
  * @access public
  */
-	var $belongsTo = array('DbAcoTest' => array('foreignKey' => 'aco_id'));
+    var $belongsTo = array('DbAcoTest' => array('foreignKey' => 'aco_id'));
 }
 
 /**
@@ -202,7 +202,7 @@ class DbAroUserTest extends CakeTestModel {
  * @var string 'AuthUser'
  * @access public
  */
-	var $name = 'AuthUser';
+    var $name = 'AuthUser';
 
 /**
  * useTable property
@@ -210,7 +210,7 @@ class DbAroUserTest extends CakeTestModel {
  * @var string 'auth_users'
  * @access public
  */
-	var $useTable = 'auth_users';
+    var $useTable = 'auth_users';
 
 /**
  * bindNode method
@@ -219,13 +219,13 @@ class DbAroUserTest extends CakeTestModel {
  * @access public
  * @return void
  */
-	function bindNode($ref = null) {
-		if (Configure::read('DbAclbindMode') == 'string') {
-			return 'ROOT/admins/Gandalf';
-		} elseif (Configure::read('DbAclbindMode') == 'array') {
-			return array('DbAroTest' => array('DbAroTest.model' => 'AuthUser', 'DbAroTest.foreign_key' => 2));
-		}
-	}
+    function bindNode($ref = null) {
+        if (Configure::read('DbAclbindMode') == 'string') {
+            return 'ROOT/admins/Gandalf';
+        } elseif (Configure::read('DbAclbindMode') == 'array') {
+            return array('DbAroTest' => array('DbAroTest.model' => 'AuthUser', 'DbAroTest.foreign_key' => 2));
+        }
+    }
 }
 
 /**
@@ -242,12 +242,12 @@ class DbAclTest extends DbAcl {
  * @access private
  * @return void
  */
-	function __construct() {
-		$this->Aro =& new DbAroTest();
-		$this->Aro->Permission =& new DbPermissionTest();
-		$this->Aco =& new DbAcoTest();
-		$this->Aro->Permission =& new DbPermissionTest();
-	}
+    function __construct() {
+        $this->Aro =& new DbAroTest();
+        $this->Aro->Permission =& new DbPermissionTest();
+        $this->Aco =& new DbAcoTest();
+        $this->Aro->Permission =& new DbPermissionTest();
+    }
 }
 
 /**
@@ -264,7 +264,7 @@ class AclNodeTest extends CakeTestCase {
  * @var array
  * @access public
  */
-	var $fixtures = array('core.aro', 'core.aco', 'core.aros_aco', 'core.aco_action', 'core.auth_user');
+    var $fixtures = array('core.aro', 'core.aco', 'core.aros_aco', 'core.aco_action', 'core.auth_user');
 
 /**
  * setUp method
@@ -272,10 +272,10 @@ class AclNodeTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function setUp() {
-		Configure::write('Acl.classname', 'DbAclTest');
-		Configure::write('Acl.database', 'test_suite');
-	}
+    function setUp() {
+        Configure::write('Acl.classname', 'DbAclTest');
+        Configure::write('Acl.database', 'test_suite');
+    }
 
 /**
  * testNode method
@@ -283,52 +283,52 @@ class AclNodeTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function testNode() {
-		$Aco =& new DbAcoTest();
-		$result = Set::extract($Aco->node('Controller1'), '{n}.DbAcoTest.id');
-		$expected = array(2, 1);
-		$this->assertEqual($result, $expected);
+    function testNode() {
+        $Aco =& new DbAcoTest();
+        $result = Set::extract($Aco->node('Controller1'), '{n}.DbAcoTest.id');
+        $expected = array(2, 1);
+        $this->assertEqual($result, $expected);
 
-		$result = Set::extract($Aco->node('Controller1/action1'), '{n}.DbAcoTest.id');
-		$expected = array(3, 2, 1);
-		$this->assertEqual($result, $expected);
+        $result = Set::extract($Aco->node('Controller1/action1'), '{n}.DbAcoTest.id');
+        $expected = array(3, 2, 1);
+        $this->assertEqual($result, $expected);
 
-		$result = Set::extract($Aco->node('Controller2/action1'), '{n}.DbAcoTest.id');
-		$expected = array(7, 6, 1);
-		$this->assertEqual($result, $expected);
+        $result = Set::extract($Aco->node('Controller2/action1'), '{n}.DbAcoTest.id');
+        $expected = array(7, 6, 1);
+        $this->assertEqual($result, $expected);
 
-		$result = Set::extract($Aco->node('Controller1/action2'), '{n}.DbAcoTest.id');
-		$expected = array(5, 2, 1);
-		$this->assertEqual($result, $expected);
+        $result = Set::extract($Aco->node('Controller1/action2'), '{n}.DbAcoTest.id');
+        $expected = array(5, 2, 1);
+        $this->assertEqual($result, $expected);
 
-		$result = Set::extract($Aco->node('Controller1/action1/record1'), '{n}.DbAcoTest.id');
-		$expected = array(4, 3, 2, 1);
-		$this->assertEqual($result, $expected);
+        $result = Set::extract($Aco->node('Controller1/action1/record1'), '{n}.DbAcoTest.id');
+        $expected = array(4, 3, 2, 1);
+        $this->assertEqual($result, $expected);
 
-		$result = Set::extract($Aco->node('Controller2/action1/record1'), '{n}.DbAcoTest.id');
-		$expected = array(8, 7, 6, 1);
-		$this->assertEqual($result, $expected);
+        $result = Set::extract($Aco->node('Controller2/action1/record1'), '{n}.DbAcoTest.id');
+        $expected = array(8, 7, 6, 1);
+        $this->assertEqual($result, $expected);
 
-		$result = Set::extract($Aco->node('Controller2/action3'), '{n}.DbAcoTest.id');
-		$this->assertFalse($result);
+        $result = Set::extract($Aco->node('Controller2/action3'), '{n}.DbAcoTest.id');
+        $this->assertFalse($result);
 
-		$result = Set::extract($Aco->node('Controller2/action3/record5'), '{n}.DbAcoTest.id');
-		$this->assertFalse($result);
+        $result = Set::extract($Aco->node('Controller2/action3/record5'), '{n}.DbAcoTest.id');
+        $this->assertFalse($result);
 
-		$result = $Aco->node('');
-		$this->assertEqual($result, null);
-	}
+        $result = $Aco->node('');
+        $this->assertEqual($result, null);
+    }
 
 /**
  * test that node() doesn't dig deeper than it should.
  *
  * @return void
  */
-	function testNodeWithDuplicatePathSegments() {
-		$Aco =& new DbAcoTest();
-		$nodes = $Aco->node('ROOT/Users');
-		$this->assertEqual($nodes[0]['DbAcoTest']['parent_id'], 1, 'Parent id does not point at ROOT. %s');
-	}
+    function testNodeWithDuplicatePathSegments() {
+        $Aco =& new DbAcoTest();
+        $nodes = $Aco->node('ROOT/Users');
+        $this->assertEqual($nodes[0]['DbAcoTest']['parent_id'], 1, 'Parent id does not point at ROOT. %s');
+    }
 
 /**
  * testNodeArrayFind method
@@ -336,38 +336,38 @@ class AclNodeTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function testNodeArrayFind() {
-		$Aro = new DbAroTest();
-		Configure::write('DbAclbindMode', 'string');
-		$result = Set::extract($Aro->node(array('DbAroUserTest' => array('id' => '1', 'foreign_key' => '1'))), '{n}.DbAroTest.id');
-		$expected = array(3, 2, 1);
-		$this->assertEqual($result, $expected);
+    function testNodeArrayFind() {
+        $Aro = new DbAroTest();
+        Configure::write('DbAclbindMode', 'string');
+        $result = Set::extract($Aro->node(array('DbAroUserTest' => array('id' => '1', 'foreign_key' => '1'))), '{n}.DbAroTest.id');
+        $expected = array(3, 2, 1);
+        $this->assertEqual($result, $expected);
 
-		Configure::write('DbAclbindMode', 'array');
-		$result = Set::extract($Aro->node(array('DbAroUserTest' => array('id' => 4, 'foreign_key' => 2))), '{n}.DbAroTest.id');
-		$expected = array(4);
-		$this->assertEqual($result, $expected);
-	}
-	/**
+        Configure::write('DbAclbindMode', 'array');
+        $result = Set::extract($Aro->node(array('DbAroUserTest' => array('id' => 4, 'foreign_key' => 2))), '{n}.DbAroTest.id');
+        $expected = array(4);
+        $this->assertEqual($result, $expected);
+    }
+    /**
  * testNodeObjectFind method
  *
  * @access public
  * @return void
  */
-	function testNodeObjectFind() {
-		$Aro = new DbAroTest();
-		$Model = new DbAroUserTest();
-		$Model->id = 1;
-		$result = Set::extract($Aro->node($Model), '{n}.DbAroTest.id');
-		$expected = array(3, 2, 1);
-		$this->assertEqual($result, $expected);
+    function testNodeObjectFind() {
+        $Aro = new DbAroTest();
+        $Model = new DbAroUserTest();
+        $Model->id = 1;
+        $result = Set::extract($Aro->node($Model), '{n}.DbAroTest.id');
+        $expected = array(3, 2, 1);
+        $this->assertEqual($result, $expected);
 
-		$Model->id = 2;
-		$result = Set::extract($Aro->node($Model), '{n}.DbAroTest.id');
-		$expected = array(4, 2, 1);
-		$this->assertEqual($result, $expected);
+        $Model->id = 2;
+        $result = Set::extract($Aro->node($Model), '{n}.DbAroTest.id');
+        $expected = array(4, 2, 1);
+        $this->assertEqual($result, $expected);
 
-	}
+    }
 
 /**
  * testNodeAliasParenting method
@@ -375,23 +375,23 @@ class AclNodeTest extends CakeTestCase {
  * @access public
  * @return void
  */
-	function testNodeAliasParenting() {
-		$Aco = new DbAcoTest();
-		$db =& ConnectionManager::getDataSource('test_suite');
-		$db->truncate($Aco);
-		$db->_queriesLog = array();
+    function testNodeAliasParenting() {
+        $Aco = new DbAcoTest();
+        $db =& ConnectionManager::getDataSource('test_suite');
+        $db->truncate($Aco);
+        $db->_queriesLog = array();
 
-		$Aco->create(array('model' => null, 'foreign_key' => null, 'parent_id' => null, 'alias' => 'Application'));
-		$Aco->save();
+        $Aco->create(array('model' => null, 'foreign_key' => null, 'parent_id' => null, 'alias' => 'Application'));
+        $Aco->save();
 
-		$Aco->create(array('model' => null, 'foreign_key' => null, 'parent_id' => $Aco->id, 'alias' => 'Pages'));
-		$Aco->save();
+        $Aco->create(array('model' => null, 'foreign_key' => null, 'parent_id' => $Aco->id, 'alias' => 'Pages'));
+        $Aco->save();
 
-		$result = $Aco->find('all');
-		$expected = array(
-			array('DbAcoTest' => array('id' => '1', 'parent_id' => null, 'model' => null, 'foreign_key' => null, 'alias' => 'Application', 'lft' => '1', 'rght' => '4'), 'DbAroTest' => array()),
-			array('DbAcoTest' => array('id' => '2', 'parent_id' => '1', 'model' => null, 'foreign_key' => null, 'alias' => 'Pages', 'lft' => '2', 'rght' => '3', ), 'DbAroTest' => array())
-		);
-		$this->assertEqual($result, $expected);
-	}
+        $result = $Aco->find('all');
+        $expected = array(
+            array('DbAcoTest' => array('id' => '1', 'parent_id' => null, 'model' => null, 'foreign_key' => null, 'alias' => 'Application', 'lft' => '1', 'rght' => '4'), 'DbAroTest' => array()),
+            array('DbAcoTest' => array('id' => '2', 'parent_id' => '1', 'model' => null, 'foreign_key' => null, 'alias' => 'Pages', 'lft' => '2', 'rght' => '3', ), 'DbAroTest' => array())
+        );
+        $this->assertEqual($result, $expected);
+    }
 }

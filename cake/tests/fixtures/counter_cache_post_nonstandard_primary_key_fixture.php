@@ -26,17 +26,17 @@
  */
 class CounterCachePostNonstandardPrimaryKeyFixture extends CakeTestFixture {
 
-	var $name = 'CounterCachePostNonstandardPrimaryKey';
+    var $name = 'CounterCachePostNonstandardPrimaryKey';
 
-	var $fields = array(
-		'pid' => array('type' => 'integer', 'key' => 'primary'),
-		'title' => array('type' => 'string', 'length' => 255, 'null' => false),
-		'uid' => array('type' => 'integer', 'null' => true),
-	);
+    var $fields = array(
+        'pid' => array('type' => 'integer', 'key' => 'primary'),
+        'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+        'uid' => array('type' => 'integer', 'null' => true),
+    );
 
     var $records = array(
-		array('pid' => 1, 'title' => 'Rock and Roll',  'uid' => 66),
-		array('pid' => 2, 'title' => 'Music',   'uid' => 66),
-		array('pid' => 3, 'title' => 'Food',   'uid' => 301),
+        array('pid' => 1, 'title' => 'Rock and Roll',  'uid' => 66),
+        array('pid' => 2, 'title' => 'Music',   'uid' => 66),
+        array('pid' => 3, 'title' => 'Food',   'uid' => 301),
     );
 }

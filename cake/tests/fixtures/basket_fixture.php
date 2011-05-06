@@ -32,7 +32,7 @@ class BasketFixture extends CakeTestFixture {
  * @var string 'Basket'
  * @access public
  */
-	var $name = 'Basket';
+    var $name = 'Basket';
 
 /**
  * fields property
@@ -40,13 +40,13 @@ class BasketFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'type' => array('type' => 'string', 'length' => 255),
-		'name' => array('type' => 'string', 'length' => 255),
-		'object_id' => array('type' => 'integer'),
-		'user_id' => array('type' => 'integer'),
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'type' => array('type' => 'string', 'length' => 255),
+        'name' => array('type' => 'string', 'length' => 255),
+        'object_id' => array('type' => 'integer'),
+        'user_id' => array('type' => 'integer'),
+    );
 
 /**
  * records property
@@ -54,8 +54,8 @@ class BasketFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('id' => 1, 'type' => 'nonfile', 'name' => 'basket1', 'object_id' => 1, 'user_id' => 1),
-		array('id' => 2, 'type' => 'file', 'name' => 'basket2', 'object_id' => 2, 'user_id' => 1),
-	);
+    var $records = array(
+        array('id' => 1, 'type' => 'nonfile', 'name' => 'basket1', 'object_id' => 1, 'user_id' => 1),
+        array('id' => 2, 'type' => 'file', 'name' => 'basket2', 'object_id' => 2, 'user_id' => 1),
+    );
 }

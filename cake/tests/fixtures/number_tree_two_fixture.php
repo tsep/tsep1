@@ -36,7 +36,7 @@ class NumberTreeTwoFixture extends CakeTestFixture {
  * @var string 'NumberTree'
  * @access public
  */
-	var $name = 'NumberTreeTwo';
+    var $name = 'NumberTreeTwo';
 
 /**
  * fields property
@@ -44,12 +44,12 @@ class NumberTreeTwoFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id'	=> array('type' => 'integer','key' => 'primary'),
-		'name'	=> array('type' => 'string','null' => false),
-		'number_tree_id' => array('type' => 'integer', 'null' => false),
-		'parent_id' => 'integer',
-		'lft'	=> array('type' => 'integer','null' => false),
-		'rght'	=> array('type' => 'integer','null' => false)
-	);
+    var $fields = array(
+        'id'    => array('type' => 'integer','key' => 'primary'),
+        'name'    => array('type' => 'string','null' => false),
+        'number_tree_id' => array('type' => 'integer', 'null' => false),
+        'parent_id' => 'integer',
+        'lft'    => array('type' => 'integer','null' => false),
+        'rght'    => array('type' => 'integer','null' => false)
+    );
 }

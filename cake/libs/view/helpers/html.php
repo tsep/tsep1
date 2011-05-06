@@ -33,64 +33,64 @@ class HtmlHelper extends AppHelper {
  * @var array
  * @access public
  */
-	var $tags = array(
-		'meta' => '<meta%s/>',
-		'metalink' => '<link href="%s"%s/>',
-		'link' => '<a href="%s"%s>%s</a>',
-		'mailto' => '<a href="mailto:%s" %s>%s</a>',
-		'form' => '<form %s>',
-		'formend' => '</form>',
-		'input' => '<input name="%s" %s/>',
-		'textarea' => '<textarea name="%s" %s>%s</textarea>',
-		'hidden' => '<input type="hidden" name="%s" %s/>',
-		'checkbox' => '<input type="checkbox" name="%s" %s/>',
-		'checkboxmultiple' => '<input type="checkbox" name="%s[]"%s />',
-		'radio' => '<input type="radio" name="%s" id="%s" %s />%s',
-		'selectstart' => '<select name="%s"%s>',
-		'selectmultiplestart' => '<select name="%s[]"%s>',
-		'selectempty' => '<option value=""%s>&nbsp;</option>',
-		'selectoption' => '<option value="%s"%s>%s</option>',
-		'selectend' => '</select>',
-		'optiongroup' => '<optgroup label="%s"%s>',
-		'optiongroupend' => '</optgroup>',
-		'checkboxmultiplestart' => '',
-		'checkboxmultipleend' => '',
-		'password' => '<input type="password" name="%s" %s/>',
-		'file' => '<input type="file" name="%s" %s/>',
-		'file_no_model' => '<input type="file" name="%s" %s/>',
-		'submit' => '<input %s/>',
-		'submitimage' => '<input type="image" src="%s" %s/>',
-		'button' => '<button type="%s"%s>%s</button>',
-		'image' => '<img src="%s" %s/>',
-		'tableheader' => '<th%s>%s</th>',
-		'tableheaderrow' => '<tr%s>%s</tr>',
-		'tablecell' => '<td%s>%s</td>',
-		'tablerow' => '<tr%s>%s</tr>',
-		'block' => '<div%s>%s</div>',
-		'blockstart' => '<div%s>',
-		'blockend' => '</div>',
-		'tag' => '<%s%s>%s</%s>',
-		'tagstart' => '<%s%s>',
-		'tagend' => '</%s>',
-		'para' => '<p%s>%s</p>',
-		'parastart' => '<p%s>',
-		'label' => '<label for="%s"%s>%s</label>',
-		'fieldset' => '<fieldset%s>%s</fieldset>',
-		'fieldsetstart' => '<fieldset><legend>%s</legend>',
-		'fieldsetend' => '</fieldset>',
-		'legend' => '<legend>%s</legend>',
-		'css' => '<link rel="%s" type="text/css" href="%s" %s/>',
-		'style' => '<style type="text/css"%s>%s</style>',
-		'charset' => '<meta http-equiv="Content-Type" content="text/html; charset=%s" />',
-		'ul' => '<ul%s>%s</ul>',
-		'ol' => '<ol%s>%s</ol>',
-		'li' => '<li%s>%s</li>',
-		'error' => '<div%s>%s</div>',
-		'javascriptblock' => '<script type="text/javascript"%s>%s</script>',
-		'javascriptstart' => '<script type="text/javascript">',
-		'javascriptlink' => '<script type="text/javascript" src="%s"%s></script>',
-		'javascriptend' => '</script>'
-	);
+    var $tags = array(
+        'meta' => '<meta%s/>',
+        'metalink' => '<link href="%s"%s/>',
+        'link' => '<a href="%s"%s>%s</a>',
+        'mailto' => '<a href="mailto:%s" %s>%s</a>',
+        'form' => '<form %s>',
+        'formend' => '</form>',
+        'input' => '<input name="%s" %s/>',
+        'textarea' => '<textarea name="%s" %s>%s</textarea>',
+        'hidden' => '<input type="hidden" name="%s" %s/>',
+        'checkbox' => '<input type="checkbox" name="%s" %s/>',
+        'checkboxmultiple' => '<input type="checkbox" name="%s[]"%s />',
+        'radio' => '<input type="radio" name="%s" id="%s" %s />%s',
+        'selectstart' => '<select name="%s"%s>',
+        'selectmultiplestart' => '<select name="%s[]"%s>',
+        'selectempty' => '<option value=""%s>&nbsp;</option>',
+        'selectoption' => '<option value="%s"%s>%s</option>',
+        'selectend' => '</select>',
+        'optiongroup' => '<optgroup label="%s"%s>',
+        'optiongroupend' => '</optgroup>',
+        'checkboxmultiplestart' => '',
+        'checkboxmultipleend' => '',
+        'password' => '<input type="password" name="%s" %s/>',
+        'file' => '<input type="file" name="%s" %s/>',
+        'file_no_model' => '<input type="file" name="%s" %s/>',
+        'submit' => '<input %s/>',
+        'submitimage' => '<input type="image" src="%s" %s/>',
+        'button' => '<button type="%s"%s>%s</button>',
+        'image' => '<img src="%s" %s/>',
+        'tableheader' => '<th%s>%s</th>',
+        'tableheaderrow' => '<tr%s>%s</tr>',
+        'tablecell' => '<td%s>%s</td>',
+        'tablerow' => '<tr%s>%s</tr>',
+        'block' => '<div%s>%s</div>',
+        'blockstart' => '<div%s>',
+        'blockend' => '</div>',
+        'tag' => '<%s%s>%s</%s>',
+        'tagstart' => '<%s%s>',
+        'tagend' => '</%s>',
+        'para' => '<p%s>%s</p>',
+        'parastart' => '<p%s>',
+        'label' => '<label for="%s"%s>%s</label>',
+        'fieldset' => '<fieldset%s>%s</fieldset>',
+        'fieldsetstart' => '<fieldset><legend>%s</legend>',
+        'fieldsetend' => '</fieldset>',
+        'legend' => '<legend>%s</legend>',
+        'css' => '<link rel="%s" type="text/css" href="%s" %s/>',
+        'style' => '<style type="text/css"%s>%s</style>',
+        'charset' => '<meta http-equiv="Content-Type" content="text/html; charset=%s" />',
+        'ul' => '<ul%s>%s</ul>',
+        'ol' => '<ol%s>%s</ol>',
+        'li' => '<li%s>%s</li>',
+        'error' => '<div%s>%s</div>',
+        'javascriptblock' => '<script type="text/javascript"%s>%s</script>',
+        'javascriptstart' => '<script type="text/javascript">',
+        'javascriptlink' => '<script type="text/javascript" src="%s"%s></script>',
+        'javascriptend' => '</script>'
+    );
 
 /**
  * Breadcrumbs.
@@ -98,7 +98,7 @@ class HtmlHelper extends AppHelper {
  * @var array
  * @access protected
  */
-	var $_crumbs = array();
+    var $_crumbs = array();
 
 /**
  * Names of script files that have been included once
@@ -106,29 +106,29 @@ class HtmlHelper extends AppHelper {
  * @var array
  * @access private
  */
-	var $__includedScripts = array();
+    var $__includedScripts = array();
 /**
  * Options for the currently opened script block buffer if any.
  *
  * @var array
  * @access protected
  */
-	var $_scriptBlockOptions = array();
+    var $_scriptBlockOptions = array();
 /**
  * Document type definitions
  *
  * @var array
  * @access private
  */
-	var $__docTypes = array(
-		'html4-strict'  => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">',
-		'html4-trans'  => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
-		'html4-frame'  => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">',
-		'xhtml-strict' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
-		'xhtml-trans' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
-		'xhtml-frame' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">',
-		'xhtml11' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">'
-	);
+    var $__docTypes = array(
+        'html4-strict'  => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">',
+        'html4-trans'  => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
+        'html4-frame'  => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">',
+        'xhtml-strict' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
+        'xhtml-trans' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
+        'xhtml-frame' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">',
+        'xhtml11' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">'
+    );
 
 /**
  * Adds a link to the breadcrumbs array.
@@ -140,9 +140,9 @@ class HtmlHelper extends AppHelper {
  * @see HtmlHelper::link() for details on $options that can be used.
  * @access public
  */
-	function addCrumb($name, $link = null, $options = null) {
-		$this->_crumbs[] = array($name, $link, $options);
-	}
+    function addCrumb($name, $link = null, $options = null) {
+        $this->_crumbs[] = array($name, $link, $options);
+    }
 
 /**
  * Returns a doctype string.
@@ -162,12 +162,12 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1439/docType
  */
-	function docType($type = 'xhtml-strict') {
-		if (isset($this->__docTypes[$type])) {
-			return $this->__docTypes[$type];
-		}
-		return null;
-	}
+    function docType($type = 'xhtml-strict') {
+        if (isset($this->__docTypes[$type])) {
+            return $this->__docTypes[$type];
+        }
+        return null;
+    }
 
 /**
  * Creates a link to an external resource and handles basic meta tags
@@ -184,62 +184,62 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1438/meta
  */
-	function meta($type, $url = null, $options = array()) {
-		$inline = isset($options['inline']) ? $options['inline'] : true;
-		unset($options['inline']);
+    function meta($type, $url = null, $options = array()) {
+        $inline = isset($options['inline']) ? $options['inline'] : true;
+        unset($options['inline']);
 
-		if (!is_array($type)) {
-			$types = array(
-				'rss'	=> array('type' => 'application/rss+xml', 'rel' => 'alternate', 'title' => $type, 'link' => $url),
-				'atom'	=> array('type' => 'application/atom+xml', 'title' => $type, 'link' => $url),
-				'icon'	=> array('type' => 'image/x-icon', 'rel' => 'icon', 'link' => $url),
-				'keywords' => array('name' => 'keywords', 'content' => $url),
-				'description' => array('name' => 'description', 'content' => $url),
-			);
+        if (!is_array($type)) {
+            $types = array(
+                'rss'    => array('type' => 'application/rss+xml', 'rel' => 'alternate', 'title' => $type, 'link' => $url),
+                'atom'    => array('type' => 'application/atom+xml', 'title' => $type, 'link' => $url),
+                'icon'    => array('type' => 'image/x-icon', 'rel' => 'icon', 'link' => $url),
+                'keywords' => array('name' => 'keywords', 'content' => $url),
+                'description' => array('name' => 'description', 'content' => $url),
+            );
 
-			if ($type === 'icon' && $url === null) {
-				$types['icon']['link'] = $this->webroot('favicon.ico');
-			}
+            if ($type === 'icon' && $url === null) {
+                $types['icon']['link'] = $this->webroot('favicon.ico');
+            }
 
-			if (isset($types[$type])) {
-				$type = $types[$type];
-			} elseif (!isset($options['type']) && $url !== null) {
-				if (is_array($url) && isset($url['ext'])) {
-					$type = $types[$url['ext']];
-				} else {
-					$type = $types['rss'];
-				}
-			} elseif (isset($options['type']) && isset($types[$options['type']])) {
-				$type = $types[$options['type']];
-				unset($options['type']);
-			} else {
-				$type = array();
-			}
-		} elseif ($url !== null) {
-			$inline = $url;
-		}
-		$options = array_merge($type, $options);
-		$out = null;
+            if (isset($types[$type])) {
+                $type = $types[$type];
+            } elseif (!isset($options['type']) && $url !== null) {
+                if (is_array($url) && isset($url['ext'])) {
+                    $type = $types[$url['ext']];
+                } else {
+                    $type = $types['rss'];
+                }
+            } elseif (isset($options['type']) && isset($types[$options['type']])) {
+                $type = $types[$options['type']];
+                unset($options['type']);
+            } else {
+                $type = array();
+            }
+        } elseif ($url !== null) {
+            $inline = $url;
+        }
+        $options = array_merge($type, $options);
+        $out = null;
 
-		if (isset($options['link'])) {
-			if (isset($options['rel']) && $options['rel'] === 'icon') {
-				$out = sprintf($this->tags['metalink'], $options['link'], $this->_parseAttributes($options, array('link'), ' ', ' '));
-				$options['rel'] = 'shortcut icon';
-			} else {
-				$options['link'] = $this->url($options['link'], true);
-			}
-			$out .= sprintf($this->tags['metalink'], $options['link'], $this->_parseAttributes($options, array('link'), ' ', ' '));
-		} else {
-			$out = sprintf($this->tags['meta'], $this->_parseAttributes($options, array('type'), ' ', ' '));
-		}
+        if (isset($options['link'])) {
+            if (isset($options['rel']) && $options['rel'] === 'icon') {
+                $out = sprintf($this->tags['metalink'], $options['link'], $this->_parseAttributes($options, array('link'), ' ', ' '));
+                $options['rel'] = 'shortcut icon';
+            } else {
+                $options['link'] = $this->url($options['link'], true);
+            }
+            $out .= sprintf($this->tags['metalink'], $options['link'], $this->_parseAttributes($options, array('link'), ' ', ' '));
+        } else {
+            $out = sprintf($this->tags['meta'], $this->_parseAttributes($options, array('type'), ' ', ' '));
+        }
 
-		if ($inline) {
-			return $out;
-		} else {
-			$view =& ClassRegistry::getObject('view');
-			$view->addScript($out);
-		}
-	}
+        if ($inline) {
+            return $out;
+        } else {
+            $view =& ClassRegistry::getObject('view');
+            $view->addScript($out);
+        }
+    }
 
 /**
  * Returns a charset META-tag.
@@ -250,12 +250,12 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1436/charset
  */
-	function charset($charset = null) {
-		if (empty($charset)) {
-			$charset = strtolower(Configure::read('App.encoding'));
-		}
-		return sprintf($this->tags['charset'], (!empty($charset) ? $charset : 'utf-8'));
-	}
+    function charset($charset = null) {
+        if (empty($charset)) {
+            $charset = strtolower(Configure::read('App.encoding'));
+        }
+        return sprintf($this->tags['charset'], (!empty($charset) ? $charset : 'utf-8'));
+    }
 
 /**
  * Creates an HTML link.
@@ -278,44 +278,44 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1442/link
  */
-	function link($title, $url = null, $options = array(), $confirmMessage = false) {
-		$escapeTitle = true;
-		if ($url !== null) {
-			$url = $this->url($url);
-		} else {
-			$url = $this->url($title);
-			$title = $url;
-			$escapeTitle = false;
-		}
+    function link($title, $url = null, $options = array(), $confirmMessage = false) {
+        $escapeTitle = true;
+        if ($url !== null) {
+            $url = $this->url($url);
+        } else {
+            $url = $this->url($title);
+            $title = $url;
+            $escapeTitle = false;
+        }
 
-		if (isset($options['escape'])) {
-			$escapeTitle = $options['escape'];
-		}
+        if (isset($options['escape'])) {
+            $escapeTitle = $options['escape'];
+        }
 
-		if ($escapeTitle === true) {
-			$title = h($title);
-		} elseif (is_string($escapeTitle)) {
-			$title = htmlentities($title, ENT_QUOTES, $escapeTitle);
-		}
+        if ($escapeTitle === true) {
+            $title = h($title);
+        } elseif (is_string($escapeTitle)) {
+            $title = htmlentities($title, ENT_QUOTES, $escapeTitle);
+        }
 
-		if (!empty($options['confirm'])) {
-			$confirmMessage = $options['confirm'];
-			unset($options['confirm']);
-		}
-		if ($confirmMessage) {
-			$confirmMessage = str_replace("'", "\'", $confirmMessage);
-			$confirmMessage = str_replace('"', '\"', $confirmMessage);
-			$options['onclick'] = "return confirm('{$confirmMessage}');";
-		} elseif (isset($options['default']) && $options['default'] == false) {
-			if (isset($options['onclick'])) {
-				$options['onclick'] .= ' event.returnValue = false; return false;';
-			} else {
-				$options['onclick'] = 'event.returnValue = false; return false;';
-			}
-			unset($options['default']);
-		}
-		return sprintf($this->tags['link'], $url, $this->_parseAttributes($options), $title);
-	}
+        if (!empty($options['confirm'])) {
+            $confirmMessage = $options['confirm'];
+            unset($options['confirm']);
+        }
+        if ($confirmMessage) {
+            $confirmMessage = str_replace("'", "\'", $confirmMessage);
+            $confirmMessage = str_replace('"', '\"', $confirmMessage);
+            $options['onclick'] = "return confirm('{$confirmMessage}');";
+        } elseif (isset($options['default']) && $options['default'] == false) {
+            if (isset($options['onclick'])) {
+                $options['onclick'] .= ' event.returnValue = false; return false;';
+            } else {
+                $options['onclick'] = 'event.returnValue = false; return false;';
+            }
+            unset($options['default']);
+        }
+        return sprintf($this->tags['link'], $url, $this->_parseAttributes($options), $title);
+    }
 
 /**
  * Creates a link element for CSS stylesheets.
@@ -333,57 +333,57 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1437/css
  */
-	function css($path, $rel = null, $options = array()) {
-		$options += array('inline' => true);
-		if (is_array($path)) {
-			$out = '';
-			foreach ($path as $i) {
-				$out .= "\n\t" . $this->css($i, $rel, $options);
-			}
-			if ($options['inline'])  {
-				return $out . "\n";
-			}
-			return;
-		}
+    function css($path, $rel = null, $options = array()) {
+        $options += array('inline' => true);
+        if (is_array($path)) {
+            $out = '';
+            foreach ($path as $i) {
+                $out .= "\n\t" . $this->css($i, $rel, $options);
+            }
+            if ($options['inline'])  {
+                return $out . "\n";
+            }
+            return;
+        }
 
-		if (strpos($path, '://') !== false) {
-			$url = $path;
-		} else {
-			if ($path[0] !== '/') {
-				$path = CSS_URL . $path;
-			}
+        if (strpos($path, '://') !== false) {
+            $url = $path;
+        } else {
+            if ($path[0] !== '/') {
+                $path = CSS_URL . $path;
+            }
 
-			if (strpos($path, '?') === false) {
-				if (substr($path, -4) !== '.css') {
-					$path .= '.css';
-				}
-			}
-			$url = $this->assetTimestamp($this->webroot($path));
+            if (strpos($path, '?') === false) {
+                if (substr($path, -4) !== '.css') {
+                    $path .= '.css';
+                }
+            }
+            $url = $this->assetTimestamp($this->webroot($path));
 
-			if (Configure::read('Asset.filter.css')) {
-				$pos = strpos($url, CSS_URL);
-				if ($pos !== false) {
-					$url = substr($url, 0, $pos) . 'ccss/' . substr($url, $pos + strlen(CSS_URL));
-				}
-			}
-		}
+            if (Configure::read('Asset.filter.css')) {
+                $pos = strpos($url, CSS_URL);
+                if ($pos !== false) {
+                    $url = substr($url, 0, $pos) . 'ccss/' . substr($url, $pos + strlen(CSS_URL));
+                }
+            }
+        }
 
-		if ($rel == 'import') {
-			$out = sprintf($this->tags['style'], $this->_parseAttributes($options, array('inline'), '', ' '), '@import url(' . $url . ');');
-		} else {
-			if ($rel == null) {
-				$rel = 'stylesheet';
-			}
-			$out = sprintf($this->tags['css'], $rel, $url, $this->_parseAttributes($options, array('inline'), '', ' '));
-		}
+        if ($rel == 'import') {
+            $out = sprintf($this->tags['style'], $this->_parseAttributes($options, array('inline'), '', ' '), '@import url(' . $url . ');');
+        } else {
+            if ($rel == null) {
+                $rel = 'stylesheet';
+            }
+            $out = sprintf($this->tags['css'], $rel, $url, $this->_parseAttributes($options, array('inline'), '', ' '));
+        }
 
-		if ($options['inline']) {
-			return $out;
-		} else {
-			$view =& ClassRegistry::getObject('view');
-			$view->addScript($out);
-		}
-	}
+        if ($options['inline']) {
+            return $out;
+        } else {
+            $view =& ClassRegistry::getObject('view');
+            $view->addScript($out);
+        }
+    }
 
 /**
  * Returns one or many `<script>` tags depending on the number of scripts given.
@@ -406,50 +406,50 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1589/script
  */
-	function script($url, $options = array()) {
-		if (is_bool($options)) {
-			list($inline, $options) = array($options, array());
-			$options['inline'] = $inline;
-		}
-		$options = array_merge(array('inline' => true, 'once' => true), $options);
-		if (is_array($url)) {
-			$out = '';
-			foreach ($url as $i) {
-				$out .= "\n\t" . $this->script($i, $options);
-			}
-			if ($options['inline'])  {
-				return $out . "\n";
-			}
-			return null;
-		}
-		if ($options['once'] && isset($this->__includedScripts[$url])) {
-			return null;
-		}
-		$this->__includedScripts[$url] = true;
+    function script($url, $options = array()) {
+        if (is_bool($options)) {
+            list($inline, $options) = array($options, array());
+            $options['inline'] = $inline;
+        }
+        $options = array_merge(array('inline' => true, 'once' => true), $options);
+        if (is_array($url)) {
+            $out = '';
+            foreach ($url as $i) {
+                $out .= "\n\t" . $this->script($i, $options);
+            }
+            if ($options['inline'])  {
+                return $out . "\n";
+            }
+            return null;
+        }
+        if ($options['once'] && isset($this->__includedScripts[$url])) {
+            return null;
+        }
+        $this->__includedScripts[$url] = true;
 
-		if (strpos($url, '://') === false) {
-			if ($url[0] !== '/') {
-				$url = JS_URL . $url;
-			}
-			if (strpos($url, '?') === false && substr($url, -3) !== '.js') {
-				$url .= '.js';
-			}
-			$url = $this->assetTimestamp($this->webroot($url));
+        if (strpos($url, '://') === false) {
+            if ($url[0] !== '/') {
+                $url = JS_URL . $url;
+            }
+            if (strpos($url, '?') === false && substr($url, -3) !== '.js') {
+                $url .= '.js';
+            }
+            $url = $this->assetTimestamp($this->webroot($url));
 
-			if (Configure::read('Asset.filter.js')) {
-				$url = str_replace(JS_URL, 'cjs/', $url);
-			}
-		}
-		$attributes = $this->_parseAttributes($options, array('inline', 'once'), ' ');
-		$out = sprintf($this->tags['javascriptlink'], $url, $attributes);
+            if (Configure::read('Asset.filter.js')) {
+                $url = str_replace(JS_URL, 'cjs/', $url);
+            }
+        }
+        $attributes = $this->_parseAttributes($options, array('inline', 'once'), ' ');
+        $out = sprintf($this->tags['javascriptlink'], $url, $attributes);
 
-		if ($options['inline']) {
-			return $out;
-		} else {
-			$view =& ClassRegistry::getObject('view');
-			$view->addScript($out);
-		}
-	}
+        if ($options['inline']) {
+            return $out;
+        } else {
+            $view =& ClassRegistry::getObject('view');
+            $view->addScript($out);
+        }
+    }
 
 /**
  * Wrap $script in a script tag.
@@ -465,22 +465,22 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1604/scriptBlock
  */
-	function scriptBlock($script, $options = array()) {
-		$options += array('safe' => true, 'inline' => true);
-		if ($options['safe']) {
-			$script  = "\n" . '//<![CDATA[' . "\n" . $script . "\n" . '//]]>' . "\n";
-		}
-		$inline = $options['inline'];
-		unset($options['inline'], $options['safe']);
-		$attributes = $this->_parseAttributes($options, ' ', ' ');
-		if ($inline) {
-			return sprintf($this->tags['javascriptblock'], $attributes, $script);
-		} else {
-			$view =& ClassRegistry::getObject('view');
-			$view->addScript(sprintf($this->tags['javascriptblock'], $attributes, $script));
-			return null;
-		}
-	}
+    function scriptBlock($script, $options = array()) {
+        $options += array('safe' => true, 'inline' => true);
+        if ($options['safe']) {
+            $script  = "\n" . '//<![CDATA[' . "\n" . $script . "\n" . '//]]>' . "\n";
+        }
+        $inline = $options['inline'];
+        unset($options['inline'], $options['safe']);
+        $attributes = $this->_parseAttributes($options, ' ', ' ');
+        if ($inline) {
+            return sprintf($this->tags['javascriptblock'], $attributes, $script);
+        } else {
+            $view =& ClassRegistry::getObject('view');
+            $view->addScript(sprintf($this->tags['javascriptblock'], $attributes, $script));
+            return null;
+        }
+    }
 
 /**
  * Begin a script block that captures output until HtmlHelper::scriptEnd()
@@ -497,12 +497,12 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1605/scriptStart
  */
-	function scriptStart($options = array()) {
-		$options += array('safe' => true, 'inline' => true);
-		$this->_scriptBlockOptions = $options;
-		ob_start();
-		return null;
-	}
+    function scriptStart($options = array()) {
+        $options += array('safe' => true, 'inline' => true);
+        $this->_scriptBlockOptions = $options;
+        ob_start();
+        return null;
+    }
 
 /**
  * End a Buffered section of Javascript capturing.
@@ -513,12 +513,12 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1606/scriptEnd
  */
-	function scriptEnd() {
-		$buffer = ob_get_clean();
-		$options = $this->_scriptBlockOptions;
-		$this->_scriptBlockOptions = array();
-		return $this->scriptBlock($buffer, $options);
-	}
+    function scriptEnd() {
+        $buffer = ob_get_clean();
+        $options = $this->_scriptBlockOptions;
+        $this->_scriptBlockOptions = array();
+        return $this->scriptBlock($buffer, $options);
+    }
 
 /**
  * Builds CSS style data from an array of CSS properties
@@ -538,19 +538,19 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1440/style
  */
-	function style($data, $oneline = true) {
-		if (!is_array($data)) {
-			return $data;
-		}
-		$out = array();
-		foreach ($data as $key=> $value) {
-			$out[] = $key.':'.$value.';';
-		}
-		if ($oneline) {
-			return join(' ', $out);
-		}
-		return implode("\n", $out);
-	}
+    function style($data, $oneline = true) {
+        if (!is_array($data)) {
+            return $data;
+        }
+        $out = array();
+        foreach ($data as $key=> $value) {
+            $out[] = $key.':'.$value.';';
+        }
+        if ($oneline) {
+            return join(' ', $out);
+        }
+        return implode("\n", $out);
+    }
 
 /**
  * Returns the breadcrumb trail as a sequence of &raquo;-separated links.
@@ -560,25 +560,25 @@ class HtmlHelper extends AppHelper {
  * @return string Composed bread crumbs
  * @access public
  */
-	function getCrumbs($separator = '&raquo;', $startText = false) {
-		if (!empty($this->_crumbs)) {
-			$out = array();
-			if ($startText) {
-				$out[] = $this->link($startText, '/');
-			}
+    function getCrumbs($separator = '&raquo;', $startText = false) {
+        if (!empty($this->_crumbs)) {
+            $out = array();
+            if ($startText) {
+                $out[] = $this->link($startText, '/');
+            }
 
-			foreach ($this->_crumbs as $crumb) {
-				if (!empty($crumb[1])) {
-					$out[] = $this->link($crumb[0], $crumb[1], $crumb[2]);
-				} else {
-					$out[] = $crumb[0];
-				}
-			}
-			return join($separator, $out);
-		} else {
-			return null;
-		}
-	}
+            foreach ($this->_crumbs as $crumb) {
+                if (!empty($crumb[1])) {
+                    $out[] = $this->link($crumb[0], $crumb[1], $crumb[2]);
+                } else {
+                    $out[] = $crumb[0];
+                }
+            }
+            return join($separator, $out);
+        } else {
+            return null;
+        }
+    }
 
 /**
  * Creates a formatted IMG element. If `$options['url']` is provided, an image link will be
@@ -601,33 +601,33 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1441/image
  */
-	function image($path, $options = array()) {
-		if (is_array($path)) {
-			$path = $this->url($path);
-		} elseif (strpos($path, '://') === false) {
-			if ($path[0] !== '/') {
-				$path = IMAGES_URL . $path;
-			}
-			$path = $this->assetTimestamp($this->webroot($path));
-		}
+    function image($path, $options = array()) {
+        if (is_array($path)) {
+            $path = $this->url($path);
+        } elseif (strpos($path, '://') === false) {
+            if ($path[0] !== '/') {
+                $path = IMAGES_URL . $path;
+            }
+            $path = $this->assetTimestamp($this->webroot($path));
+        }
 
-		if (!isset($options['alt'])) {
-			$options['alt'] = '';
-		}
+        if (!isset($options['alt'])) {
+            $options['alt'] = '';
+        }
 
-		$url = false;
-		if (!empty($options['url'])) {
-			$url = $options['url'];
-			unset($options['url']);
-		}
+        $url = false;
+        if (!empty($options['url'])) {
+            $url = $options['url'];
+            unset($options['url']);
+        }
 
-		$image = sprintf($this->tags['image'], $path, $this->_parseAttributes($options, null, '', ' '));
+        $image = sprintf($this->tags['image'], $path, $this->_parseAttributes($options, null, '', ' '));
 
-		if ($url) {
-			return sprintf($this->tags['link'], $this->url($url), null, $image);
-		}
-		return $image;
-	}
+        if ($url) {
+            return sprintf($this->tags['link'], $this->url($url), null, $image);
+        }
+        return $image;
+    }
 
 /**
  * Returns a row of formatted and named TABLE headers.
@@ -639,13 +639,13 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1446/tableHeaders
  */
-	function tableHeaders($names, $trOptions = null, $thOptions = null) {
-		$out = array();
-		foreach ($names as $arg) {
-			$out[] = sprintf($this->tags['tableheader'], $this->_parseAttributes($thOptions), $arg);
-		}
-		return sprintf($this->tags['tablerow'], $this->_parseAttributes($trOptions), join(' ', $out));
-	}
+    function tableHeaders($names, $trOptions = null, $thOptions = null) {
+        $out = array();
+        foreach ($names as $arg) {
+            $out[] = sprintf($this->tags['tableheader'], $this->_parseAttributes($thOptions), $arg);
+        }
+        return sprintf($this->tags['tablerow'], $this->_parseAttributes($trOptions), join(' ', $out));
+    }
 
 /**
  * Returns a formatted string of table rows (TR's with TD's in them).
@@ -660,47 +660,47 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1447/tableCells
  */
-	function tableCells($data, $oddTrOptions = null, $evenTrOptions = null, $useCount = false, $continueOddEven = true) {
-		if (empty($data[0]) || !is_array($data[0])) {
-			$data = array($data);
-		}
+    function tableCells($data, $oddTrOptions = null, $evenTrOptions = null, $useCount = false, $continueOddEven = true) {
+        if (empty($data[0]) || !is_array($data[0])) {
+            $data = array($data);
+        }
 
-		if ($oddTrOptions === true) {
-			$useCount = true;
-			$oddTrOptions = null;
-		}
+        if ($oddTrOptions === true) {
+            $useCount = true;
+            $oddTrOptions = null;
+        }
 
-		if ($evenTrOptions === false) {
-			$continueOddEven = false;
-			$evenTrOptions = null;
-		}
+        if ($evenTrOptions === false) {
+            $continueOddEven = false;
+            $evenTrOptions = null;
+        }
 
-		if ($continueOddEven) {
-			static $count = 0;
-		} else {
-			$count = 0;
-		}
+        if ($continueOddEven) {
+            static $count = 0;
+        } else {
+            $count = 0;
+        }
 
-		foreach ($data as $line) {
-			$count++;
-			$cellsOut = array();
-			$i = 0;
-			foreach ($line as $cell) {
-				$cellOptions = array();
+        foreach ($data as $line) {
+            $count++;
+            $cellsOut = array();
+            $i = 0;
+            foreach ($line as $cell) {
+                $cellOptions = array();
 
-				if (is_array($cell)) {
-					$cellOptions = $cell[1];
-					$cell = $cell[0];
-				} elseif ($useCount) {
-					$cellOptions['class'] = 'column-' . ++$i;
-				}
-				$cellsOut[] = sprintf($this->tags['tablecell'], $this->_parseAttributes($cellOptions), $cell);
-			}
-			$options = $this->_parseAttributes($count % 2 ? $oddTrOptions : $evenTrOptions);
-			$out[] = sprintf($this->tags['tablerow'], $options, implode(' ', $cellsOut));
-		}
-		return implode("\n", $out);
-	}
+                if (is_array($cell)) {
+                    $cellOptions = $cell[1];
+                    $cell = $cell[0];
+                } elseif ($useCount) {
+                    $cellOptions['class'] = 'column-' . ++$i;
+                }
+                $cellsOut[] = sprintf($this->tags['tablecell'], $this->_parseAttributes($cellOptions), $cell);
+            }
+            $options = $this->_parseAttributes($count % 2 ? $oddTrOptions : $evenTrOptions);
+            $out[] = sprintf($this->tags['tablerow'], $options, implode(' ', $cellsOut));
+        }
+        return implode("\n", $out);
+    }
 
 /**
  * Returns a formatted block tag, i.e DIV, SPAN, P.
@@ -717,21 +717,21 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1443/tag
  */
-	function tag($name, $text = null, $options = array()) {
-		if (is_array($options) && isset($options['escape']) && $options['escape']) {
-			$text = h($text);
-			unset($options['escape']);
-		}
-		if (!is_array($options)) {
-			$options = array('class' => $options);
-		}
-		if ($text === null) {
-			$tag = 'tagstart';
-		} else {
-			$tag = 'tag';
-		}
-		return sprintf($this->tags[$tag], $name, $this->_parseAttributes($options, null, ' ', ''), $text, $name);
-	}
+    function tag($name, $text = null, $options = array()) {
+        if (is_array($options) && isset($options['escape']) && $options['escape']) {
+            $text = h($text);
+            unset($options['escape']);
+        }
+        if (!is_array($options)) {
+            $options = array('class' => $options);
+        }
+        if ($text === null) {
+            $tag = 'tagstart';
+        } else {
+            $tag = 'tag';
+        }
+        return sprintf($this->tags[$tag], $name, $this->_parseAttributes($options, null, ' ', ''), $text, $name);
+    }
 
 /**
  * Returns a formatted DIV tag for HTML FORMs.
@@ -748,12 +748,12 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1444/div
  */
-	function div($class = null, $text = null, $options = array()) {
-		if (!empty($class)) {
-			$options['class'] = $class;
-		}
-		return $this->tag('div', $text, $options);
-	}
+    function div($class = null, $text = null, $options = array()) {
+        if (!empty($class)) {
+            $options['class'] = $class;
+        }
+        return $this->tag('div', $text, $options);
+    }
 
 /**
  * Returns a formatted P tag.
@@ -769,20 +769,20 @@ class HtmlHelper extends AppHelper {
  * @access public
  * @link http://book.cakephp.org/view/1445/para
  */
-	function para($class, $text, $options = array()) {
-		if (isset($options['escape'])) {
-			$text = h($text);
-		}
-		if ($class != null && !empty($class)) {
-			$options['class'] = $class;
-		}
-		if ($text === null) {
-			$tag = 'parastart';
-		} else {
-			$tag = 'para';
-		}
-		return sprintf($this->tags[$tag], $this->_parseAttributes($options, null, ' ', ''), $text);
-	}
+    function para($class, $text, $options = array()) {
+        if (isset($options['escape'])) {
+            $text = h($text);
+        }
+        if ($class != null && !empty($class)) {
+            $options['class'] = $class;
+        }
+        if ($text === null) {
+            $tag = 'parastart';
+        } else {
+            $tag = 'para';
+        }
+        return sprintf($this->tags[$tag], $this->_parseAttributes($options, null, ' ', ''), $text);
+    }
 
 /**
  * Build a nested list (UL/OL) out of an associative array.
@@ -794,14 +794,14 @@ class HtmlHelper extends AppHelper {
  * @return string The nested list
  * @access public
  */
-	function nestedList($list, $options = array(), $itemOptions = array(), $tag = 'ul') {
-		if (is_string($options)) {
-			$tag = $options;
-			$options = array();
-		}
-		$items = $this->__nestedListItem($list, $options, $itemOptions, $tag);
-		return sprintf($this->tags[$tag], $this->_parseAttributes($options, null, ' ', ''), $items);
-	}
+    function nestedList($list, $options = array(), $itemOptions = array(), $tag = 'ul') {
+        if (is_string($options)) {
+            $tag = $options;
+            $options = array();
+        }
+        $items = $this->__nestedListItem($list, $options, $itemOptions, $tag);
+        return sprintf($this->tags[$tag], $this->_parseAttributes($options, null, ' ', ''), $items);
+    }
 
 /**
  * Internal function to build a nested list (UL/OL) out of an associative array.
@@ -814,22 +814,22 @@ class HtmlHelper extends AppHelper {
  * @access private
  * @see HtmlHelper::nestedList()
  */
-	function __nestedListItem($items, $options, $itemOptions, $tag) {
-		$out = '';
+    function __nestedListItem($items, $options, $itemOptions, $tag) {
+        $out = '';
 
-		$index = 1;
-		foreach ($items as $key => $item) {
-			if (is_array($item)) {
-				$item = $key . $this->nestedList($item, $options, $itemOptions, $tag);
-			}
-			if (isset($itemOptions['even']) && $index % 2 == 0) {
-				$itemOptions['class'] = $itemOptions['even'];
-			} else if (isset($itemOptions['odd']) && $index % 2 != 0) {
-				$itemOptions['class'] = $itemOptions['odd'];
-			}
-			$out .= sprintf($this->tags['li'], $this->_parseAttributes($itemOptions, array('even', 'odd'), ' ', ''), $item);
-			$index++;
-		}
-		return $out;
-	}
+        $index = 1;
+        foreach ($items as $key => $item) {
+            if (is_array($item)) {
+                $item = $key . $this->nestedList($item, $options, $itemOptions, $tag);
+            }
+            if (isset($itemOptions['even']) && $index % 2 == 0) {
+                $itemOptions['class'] = $itemOptions['even'];
+            } else if (isset($itemOptions['odd']) && $index % 2 != 0) {
+                $itemOptions['class'] = $itemOptions['odd'];
+            }
+            $out .= sprintf($this->tags['li'], $this->_parseAttributes($itemOptions, array('even', 'odd'), ' ', ''), $item);
+            $index++;
+        }
+        return $out;
+    }
 }

@@ -32,7 +32,7 @@ class DocumentFixture extends CakeTestFixture {
  * @var string 'Document'
  * @access public
  */
-	var $name = 'Document';
+    var $name = 'Document';
 
 /**
  * fields property
@@ -40,11 +40,11 @@ class DocumentFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'document_directory_id' => array('type' => 'integer', 'null' => false),
-		'name' => array('type' => 'string', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'document_directory_id' => array('type' => 'integer', 'null' => false),
+        'name' => array('type' => 'string', 'null' => false)
+    );
 
 /**
  * records property
@@ -52,7 +52,7 @@ class DocumentFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('document_directory_id' => 1, 'name' => 'Document 1')
-	);
+    var $records = array(
+        array('document_directory_id' => 1, 'name' => 'Document 1')
+    );
 }

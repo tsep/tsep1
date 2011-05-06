@@ -32,14 +32,14 @@ class SessionFixture extends CakeTestFixture {
  * @var string 'Session'
  * @access public
  */
-	var $name = 'Session';
+    var $name = 'Session';
 
 /**
  * table property.
  *
  * @var string
  */
-	// var $table = 'sessions';
+    // var $table = 'sessions';
 
 /**
  * fields property
@@ -47,11 +47,11 @@ class SessionFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'string', 'length' => 255, 'key' => 'primary'),
-		'data' => array('type' => 'text','null' => true),
-		'expires' => array('type' => 'integer', 'length' => 11, 'null' => true)
-	);
+    var $fields = array(
+        'id' => array('type' => 'string', 'length' => 255, 'key' => 'primary'),
+        'data' => array('type' => 'text','null' => true),
+        'expires' => array('type' => 'integer', 'length' => 11, 'null' => true)
+    );
 
 /**
  * records property
@@ -59,5 +59,5 @@ class SessionFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array();
+    var $records = array();
 }

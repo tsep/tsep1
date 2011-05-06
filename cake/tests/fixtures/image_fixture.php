@@ -32,7 +32,7 @@ class ImageFixture extends CakeTestFixture {
  * @var string 'Image'
  * @access public
  */
-	var $name = 'Image';
+    var $name = 'Image';
 
 /**
  * fields property
@@ -40,10 +40,10 @@ class ImageFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'name' => array('type' => 'string', 'null' => false)
+    );
 
 /**
  * records property
@@ -51,11 +51,11 @@ class ImageFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('name' => 'Image 1'),
-		array('name' => 'Image 2'),
-		array('name' => 'Image 3'),
-		array('name' => 'Image 4'),
-		array('name' => 'Image 5')
-	);
+    var $records = array(
+        array('name' => 'Image 1'),
+        array('name' => 'Image 2'),
+        array('name' => 'Image 3'),
+        array('name' => 'Image 4'),
+        array('name' => 'Image 5')
+    );
 }

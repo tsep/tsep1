@@ -33,31 +33,31 @@ class Overloadable extends Object {
  *
  * @access private
  */
-	function __construct() {
-		$this->overload();
-		parent::__construct();
-	}
+    function __construct() {
+        $this->overload();
+        parent::__construct();
+    }
 
 /**
  * Overload implementation.
  *
  * @access public
  */
-	function overload() {
-		if (function_exists('overload')) {
-			if (func_num_args() > 0) {
-				foreach (func_get_args() as $class) {
-					if (is_object($class)) {
-						overload(get_class($class));
-					} elseif (is_string($class)) {
-						overload($class);
-					}
-				}
-			} else {
-				overload(get_class($this));
-			}
-		}
-	}
+    function overload() {
+        if (function_exists('overload')) {
+            if (func_num_args() > 0) {
+                foreach (func_get_args() as $class) {
+                    if (is_object($class)) {
+                        overload(get_class($class));
+                    } elseif (is_string($class)) {
+                        overload($class);
+                    }
+                }
+            } else {
+                overload(get_class($this));
+            }
+        }
+    }
 
 /**
  * Magic method handler.
@@ -68,13 +68,13 @@ class Overloadable extends Object {
  * @return boolean Success
  * @access private
  */
-	function __call($method, $params, &$return) {
-		if (!method_exists($this, 'call__')) {
-			trigger_error(sprintf(__('Magic method handler call__ not defined in %s', true), get_class($this)), E_USER_ERROR);
-		}
-		$return = $this->call__($method, $params);
-		return true;
-	}
+    function __call($method, $params, &$return) {
+        if (!method_exists($this, 'call__')) {
+            trigger_error(sprintf(__('Magic method handler call__ not defined in %s', true), get_class($this)), E_USER_ERROR);
+        }
+        $return = $this->call__($method, $params);
+        return true;
+    }
 }
 Overloadable::overload('Overloadable');
 
@@ -93,31 +93,31 @@ class Overloadable2 extends Object {
  *
  * @access private
  */
-	function __construct() {
-		$this->overload();
-		parent::__construct();
-	}
+    function __construct() {
+        $this->overload();
+        parent::__construct();
+    }
 
 /**
  * Overload implementation.
  *
  * @access public
  */
-	function overload() {
-		if (function_exists('overload')) {
-			if (func_num_args() > 0) {
-				foreach (func_get_args() as $class) {
-					if (is_object($class)) {
-						overload(get_class($class));
-					} elseif (is_string($class)) {
-						overload($class);
-					}
-				}
-			} else {
-				overload(get_class($this));
-			}
-		}
-	}
+    function overload() {
+        if (function_exists('overload')) {
+            if (func_num_args() > 0) {
+                foreach (func_get_args() as $class) {
+                    if (is_object($class)) {
+                        overload(get_class($class));
+                    } elseif (is_string($class)) {
+                        overload($class);
+                    }
+                }
+            } else {
+                overload(get_class($this));
+            }
+        }
+    }
 
 /**
  * Magic method handler.
@@ -128,13 +128,13 @@ class Overloadable2 extends Object {
  * @return boolean Success
  * @access private
  */
-	function __call($method, $params, &$return) {
-		if (!method_exists($this, 'call__')) {
-			trigger_error(sprintf(__('Magic method handler call__ not defined in %s', true), get_class($this)), E_USER_ERROR);
-		}
-		$return = $this->call__($method, $params);
-		return true;
-	}
+    function __call($method, $params, &$return) {
+        if (!method_exists($this, 'call__')) {
+            trigger_error(sprintf(__('Magic method handler call__ not defined in %s', true), get_class($this)), E_USER_ERROR);
+        }
+        $return = $this->call__($method, $params);
+        return true;
+    }
 
 /**
  * Getter.
@@ -144,10 +144,10 @@ class Overloadable2 extends Object {
  * @return boolean Success
  * @access private
  */
-	function __get($name, &$value) {
-		$value = $this->get__($name);
-		return true;
-	}
+    function __get($name, &$value) {
+        $value = $this->get__($name);
+        return true;
+    }
 
 /**
  * Setter.
@@ -157,9 +157,9 @@ class Overloadable2 extends Object {
  * @return boolean Success
  * @access private
  */
-	function __set($name, $value) {
-		$this->set__($name, $value);
-		return true;
-	}
+    function __set($name, $value) {
+        $this->set__($name, $value);
+        return true;
+    }
 }
 Overloadable::overload('Overloadable2');

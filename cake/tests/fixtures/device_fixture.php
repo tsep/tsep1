@@ -32,7 +32,7 @@ class DeviceFixture extends CakeTestFixture {
  * @var string 'Device'
  * @access public
  */
-	var $name = 'Device';
+    var $name = 'Device';
 
 /**
  * fields property
@@ -40,12 +40,12 @@ class DeviceFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'device_type_id' => array('type' => 'integer', 'null' => false),
-		'name' => array('type' => 'string', 'null' => false),
-		'typ' => array('type' => 'integer', 'null' => false),
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'device_type_id' => array('type' => 'integer', 'null' => false),
+        'name' => array('type' => 'string', 'null' => false),
+        'typ' => array('type' => 'integer', 'null' => false),
+    );
 
 /**
  * records property
@@ -53,9 +53,9 @@ class DeviceFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('device_type_id' => 1, 'name' => 'Device 1', 'typ' => 1),
-		array('device_type_id' => 1, 'name' => 'Device 2', 'typ' => 1),
-		array('device_type_id' => 1, 'name' => 'Device 3', 'typ' => 2)
-	);
+    var $records = array(
+        array('device_type_id' => 1, 'name' => 'Device 1', 'typ' => 1),
+        array('device_type_id' => 1, 'name' => 'Device 2', 'typ' => 1),
+        array('device_type_id' => 1, 'name' => 'Device 3', 'typ' => 2)
+    );
 }

@@ -32,7 +32,7 @@ class CakeBaseReporter extends SimpleReporter {
  * @var integer
  * @access protected
  */
-	var $_timeStart = 0;
+    var $_timeStart = 0;
 
 /**
  * Time the test runs ended
@@ -40,7 +40,7 @@ class CakeBaseReporter extends SimpleReporter {
  * @var integer
  * @access protected
  */
-	var $_timeEnd = 0;
+    var $_timeEnd = 0;
 
 /**
  * Duration of all test methods.
@@ -48,14 +48,14 @@ class CakeBaseReporter extends SimpleReporter {
  * @var integer
  * @access protected
  */
-	var $_timeDuration = 0;
+    var $_timeDuration = 0;
 
 /**
  * Array of request parameters.  Usually parsed GET params.
  *
  * @var array
  */
-	var $params = array();
+    var $params = array();
 
 /**
  * Character set for the output of test reporting.
@@ -63,7 +63,7 @@ class CakeBaseReporter extends SimpleReporter {
  * @var string
  * @access protected
  */
-	var $_characterSet;
+    var $_characterSet;
 
 /**
  * Does nothing yet. The first output will
@@ -81,14 +81,14 @@ class CakeBaseReporter extends SimpleReporter {
  * @param array $params Array of request parameters the reporter should use. See above.
  * @access public
  */
-	function CakeBaseReporter($charset = 'utf-8', $params = array()) {
-		$this->SimpleReporter();
-		if (!$charset) {
-			$charset = 'utf-8';
-		}
-		$this->_characterSet = $charset;
-		$this->params = $params;
-	}
+    function CakeBaseReporter($charset = 'utf-8', $params = array()) {
+        $this->SimpleReporter();
+        if (!$charset) {
+            $charset = 'utf-8';
+        }
+        $this->_characterSet = $charset;
+        $this->params = $params;
+    }
 
 /**
  * Signals / Paints the beginning of a TestSuite executing.
@@ -98,12 +98,12 @@ class CakeBaseReporter extends SimpleReporter {
  * @param integer $size 
  * @return void
  */
-	function paintGroupStart($test_name, $size) {
-		if (empty($this->_timeStart)) {
-			$this->_timeStart = $this->_getTime();
-		}
-		parent::paintGroupStart($test_name, $size);
-	}
+    function paintGroupStart($test_name, $size) {
+        if (empty($this->_timeStart)) {
+            $this->_timeStart = $this->_getTime();
+        }
+        parent::paintGroupStart($test_name, $size);
+    }
 
 /**
  * Signals/Paints the end of a TestSuite. All test cases have run
@@ -112,11 +112,11 @@ class CakeBaseReporter extends SimpleReporter {
  * @param string $test_name Name of the test that is being run.
  * @return void
  */
-	function paintGroupEnd($test_name) {
-		$this->_timeEnd = $this->_getTime();
-		$this->_timeDuration = $this->_timeEnd - $this->_timeStart;
-		parent::paintGroupEnd($test_name);
-	}
+    function paintGroupEnd($test_name) {
+        $this->_timeEnd = $this->_getTime();
+        $this->_timeDuration = $this->_timeEnd - $this->_timeStart;
+        parent::paintGroupEnd($test_name);
+    }
 
 /**
  * Paints the beginning of a test method being run.  This is used
@@ -125,12 +125,12 @@ class CakeBaseReporter extends SimpleReporter {
  * @param string $method The method name being run.
  * @return void
  */
-	function paintMethodStart($method) {
-		parent::paintMethodStart($method);
-		if (!empty($this->params['codeCoverage'])) {
-			CodeCoverageManager::start();
-		}
-	}
+    function paintMethodStart($method) {
+        parent::paintMethodStart($method);
+        if (!empty($this->params['codeCoverage'])) {
+            CodeCoverageManager::start();
+        }
+    }
 
 /**
  * Paints the end of a test method being run.  This is used
@@ -139,12 +139,12 @@ class CakeBaseReporter extends SimpleReporter {
  * @param string $method The name of the method being run.
  * @return void
  */
-	function paintMethodEnd($method) {
-		parent::paintMethodEnd($method);
-		if (!empty($this->params['codeCoverage'])) {
-			CodeCoverageManager::stop();
-		}
-	}
+    function paintMethodEnd($method) {
+        parent::paintMethodEnd($method);
+        if (!empty($this->params['codeCoverage'])) {
+            CodeCoverageManager::stop();
+        }
+    }
 
 /**
  * Get the current time in microseconds. Similar to getMicrotime in basics.php
@@ -153,10 +153,10 @@ class CakeBaseReporter extends SimpleReporter {
  * @return float Time in microseconds
  * @access protected
  */
-	function _getTime() {
-		list($usec, $sec) = explode(' ', microtime());
-		return ((float)$sec + (float)$usec);
-	}
+    function _getTime() {
+        list($usec, $sec) = explode(' ', microtime());
+        return ((float)$sec + (float)$usec);
+    }
 
 /**
  * Retrieves a list of test cases from the active Manager class,
@@ -164,10 +164,10 @@ class CakeBaseReporter extends SimpleReporter {
  *
  * @return mixed
  */
-	function testCaseList() {
-		$testList = TestManager::getTestCaseList();
-		return $testList;
-	}
+    function testCaseList() {
+        $testList = TestManager::getTestCaseList();
+        return $testList;
+    }
 
 /**
  * Retrieves a list of group test cases from the active Manager class
@@ -175,10 +175,10 @@ class CakeBaseReporter extends SimpleReporter {
  *
  * @return void
  */
-	function groupTestList() {
-		$testList = TestManager::getGroupTestList();
-		return $testList;
-	}
+    function groupTestList() {
+        $testList = TestManager::getGroupTestList();
+        return $testList;
+    }
 
 /**
  * Paints the start of the response from the test suite.
@@ -186,9 +186,9 @@ class CakeBaseReporter extends SimpleReporter {
  *
  * @return void
  */
-	function paintDocumentStart() {
+    function paintDocumentStart() {
 
-	}
+    }
 
 /**
  * Paints the end of the response from the test suite.
@@ -196,9 +196,9 @@ class CakeBaseReporter extends SimpleReporter {
  *
  * @return void
  */
-	function paintDocumentEnd() {
-		
-	}
+    function paintDocumentEnd() {
+        
+    }
 
 /**
  * Paint a list of test sets, core, app, and plugin test sets
@@ -206,20 +206,20 @@ class CakeBaseReporter extends SimpleReporter {
  *
  * @return void
  */
-	function paintTestMenu() {
-		
-	}
+    function paintTestMenu() {
+        
+    }
 
 /**
  * Get the baseUrl if one is available.
  *
  * @return string The base url for the request.
  */
-	function baseUrl() {
-		if (!empty($_SERVER['PHP_SELF'])) {
-			return $_SERVER['PHP_SELF'];
-		}
-		return '';
-	}
+    function baseUrl() {
+        if (!empty($_SERVER['PHP_SELF'])) {
+            return $_SERVER['PHP_SELF'];
+        }
+        return '';
+    }
 
 }

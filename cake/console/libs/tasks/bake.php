@@ -25,7 +25,7 @@ class BakeTask extends Shell {
  * @var string
  * @access public
  */
-	var $plugin = null;
+    var $plugin = null;
 
 /**
  * The db connection being used for baking
@@ -33,14 +33,14 @@ class BakeTask extends Shell {
  * @var string
  * @access public
  */
-	var $connection = null;
+    var $connection = null;
 
 /**
  * Flag for interactive mode
  *
  * @var boolean
  */
-	var $interactive = false;
+    var $interactive = false;
 
 /**
  * Gets the path for output.  Checks the plugin property
@@ -49,12 +49,12 @@ class BakeTask extends Shell {
  * @return string Path to output.
  * @access public
  */
-	function getPath() {
-		$path = $this->path;
-		if (isset($this->plugin)) {
-			$name = substr($this->name, 0, strlen($this->name) - 4);
-			$path = $this->_pluginPath($this->plugin) . Inflector::pluralize(Inflector::underscore($name)) . DS;
-		}
-		return $path;
-	}
+    function getPath() {
+        $path = $this->path;
+        if (isset($this->plugin)) {
+            $name = substr($this->name, 0, strlen($this->name) - 4);
+            $path = $this->_pluginPath($this->plugin) . Inflector::pluralize(Inflector::underscore($name)) . DS;
+        }
+        return $path;
+    }
 }

@@ -35,7 +35,7 @@ class DatabaseGroupTest extends TestSuite {
  * @var string 'All model tests'
  * @access public
  */
-	var $label = 'Datasources, Schema and DbAcl tests';
+    var $label = 'Datasources, Schema and DbAcl tests';
 
 /**
  * ModelGroupTest method
@@ -43,10 +43,10 @@ class DatabaseGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function DatabaseGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'db_acl');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'cake_schema');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'connection_manager');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'datasources' . DS . 'dbo_source');
-	}
+    function DatabaseGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'db_acl');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'cake_schema');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'connection_manager');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'model' . DS . 'datasources' . DS . 'dbo_source');
+    }
 }

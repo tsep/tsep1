@@ -32,7 +32,7 @@ class ThePaperMonkiesFixture extends CakeTestFixture {
  * @var string 'ThePaperMonkies'
  * @access public
  */
-	var $name = 'ThePaperMonkies';
+    var $name = 'ThePaperMonkies';
 
 /**
  * fields property
@@ -40,10 +40,10 @@ class ThePaperMonkiesFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'apple_id' => array('type' => 'integer', 'length' => 10, 'null' => true),
-		'device_id' => array('type' => 'integer', 'length' => 10, 'null' => true)
-	);
+    var $fields = array(
+        'apple_id' => array('type' => 'integer', 'length' => 10, 'null' => true),
+        'device_id' => array('type' => 'integer', 'length' => 10, 'null' => true)
+    );
 
 /**
  * records property
@@ -51,5 +51,5 @@ class ThePaperMonkiesFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array();
+    var $records = array();
 }

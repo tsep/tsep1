@@ -35,28 +35,28 @@ class TestManager {
  *
  * @var string
  */
-	var $_testExtension = '.test.php';
+    var $_testExtension = '.test.php';
 
 /**
  * Extension suffix for group test case files.
  *
  * @var string
  */
-	var $_groupExtension = '.group.php';
+    var $_groupExtension = '.group.php';
 
 /**
  * Is this test an AppTest?
  *
  * @var boolean
  */
-	var $appTest = false;
+    var $appTest = false;
 
 /**
  * Is this test a plugin test?
  *
  * @var mixed boolean false or string name of the plugin being used.
  */
-	var $pluginTest = false;
+    var $pluginTest = false;
 
 /**
  * Constructor for the TestManager class
@@ -64,15 +64,15 @@ class TestManager {
  * @return void
  * @access public
  */
-	function TestManager() {
-		$this->_installSimpleTest();
-		if (isset($_GET['app'])) {
-			$this->appTest = true;
-		}
-		if (isset($_GET['plugin'])) {
-			$this->pluginTest = htmlentities($_GET['plugin']);
-		}
-	}
+    function TestManager() {
+        $this->_installSimpleTest();
+        if (isset($_GET['app'])) {
+            $this->appTest = true;
+        }
+        if (isset($_GET['plugin'])) {
+            $this->pluginTest = htmlentities($_GET['plugin']);
+        }
+    }
 
 /**
  * Includes the required simpletest files in order for the testsuite to run
@@ -80,15 +80,15 @@ class TestManager {
  * @return void
  * @access public
  */
-	function _installSimpleTest() {
-		App::import('Vendor', array(
-			'simpletest' . DS . 'unit_tester',
-			'simpletest' . DS . 'mock_objects',
-			'simpletest' . DS . 'web_tester'
-		));
-		require_once(CAKE_TESTS_LIB . 'cake_web_test_case.php');
-		require_once(CAKE_TESTS_LIB . 'cake_test_case.php');
-	}
+    function _installSimpleTest() {
+        App::import('Vendor', array(
+            'simpletest' . DS . 'unit_tester',
+            'simpletest' . DS . 'mock_objects',
+            'simpletest' . DS . 'web_tester'
+        ));
+        require_once(CAKE_TESTS_LIB . 'cake_web_test_case.php');
+        require_once(CAKE_TESTS_LIB . 'cake_test_case.php');
+    }
 
 /**
  * Runs all tests in the Application depending on the current appTest setting
@@ -98,26 +98,26 @@ class TestManager {
  * @return mixed
  * @access public
  */
-	function runAllTests(&$reporter, $testing = false) {
-		$testCases =& $this->_getTestFileList($this->_getTestsPath());
-		if ($this->appTest) {
-			$test =& new TestSuite(__('All App Tests', true));
-		} else if ($this->pluginTest) {
-			$test =& new TestSuite(sprintf(__('All %s Plugin Tests', true), Inflector::humanize($this->pluginTest)));
-		} else {
-			$test =& new TestSuite(__('All Core Tests', true));
-		}
+    function runAllTests(&$reporter, $testing = false) {
+        $testCases =& $this->_getTestFileList($this->_getTestsPath());
+        if ($this->appTest) {
+            $test =& new TestSuite(__('All App Tests', true));
+        } else if ($this->pluginTest) {
+            $test =& new TestSuite(sprintf(__('All %s Plugin Tests', true), Inflector::humanize($this->pluginTest)));
+        } else {
+            $test =& new TestSuite(__('All Core Tests', true));
+        }
 
-		if ($testing) {
-			return $testCases;
-		}
+        if ($testing) {
+            return $testCases;
+        }
 
-		foreach ($testCases as $testCase) {
-			$test->addTestFile($testCase);
-		}
+        foreach ($testCases as $testCase) {
+            $test->addTestFile($testCase);
+        }
 
-		return $test->run($reporter);
-	}
+        return $test->run($reporter);
+    }
 
 /**
  * Runs a specific test case file
@@ -128,25 +128,25 @@ class TestManager {
  * @return mixed Result of test case being run.
  * @access public
  */
-	function runTestCase($testCaseFile, &$reporter, $testing = false) {
-		$testCaseFileWithPath = $this->_getTestsPath() . DS . $testCaseFile;
+    function runTestCase($testCaseFile, &$reporter, $testing = false) {
+        $testCaseFileWithPath = $this->_getTestsPath() . DS . $testCaseFile;
 
-		if (!file_exists($testCaseFileWithPath) || strpos($testCaseFileWithPath, '..')) {
-			trigger_error(
-				sprintf(__("Test case %s cannot be found", true), htmlentities($testCaseFile)),
-				E_USER_ERROR
-			);
-			return false;
-		}
+        if (!file_exists($testCaseFileWithPath) || strpos($testCaseFileWithPath, '..')) {
+            trigger_error(
+                sprintf(__("Test case %s cannot be found", true), htmlentities($testCaseFile)),
+                E_USER_ERROR
+            );
+            return false;
+        }
 
-		if ($testing) {
-			return true;
-		}
+        if ($testing) {
+            return true;
+        }
 
-		$test =& new TestSuite(sprintf(__('Individual test case: %s', true), $testCaseFile));
-		$test->addTestFile($testCaseFileWithPath);
-		return $test->run($reporter);
-	}
+        $test =& new TestSuite(sprintf(__('Individual test case: %s', true), $testCaseFile));
+        $test->addTestFile($testCaseFileWithPath);
+        return $test->run($reporter);
+    }
 
 /**
  * Runs a specific group test file
@@ -156,30 +156,30 @@ class TestManager {
  * @return mixed Results of group test being run.
  * @access public
  */
-	function runGroupTest($groupTestName, &$reporter) {
-		$filePath = $this->_getTestsPath('groups') . DS . strtolower($groupTestName) . $this->_groupExtension;
+    function runGroupTest($groupTestName, &$reporter) {
+        $filePath = $this->_getTestsPath('groups') . DS . strtolower($groupTestName) . $this->_groupExtension;
 
-		if (!file_exists($filePath) || strpos($filePath, '..')) {
-			trigger_error(sprintf(
-					__("Group test %s cannot be found at %s", true), 
-					htmlentities($groupTestName), 
-					htmlentities($filePath)
-				),
-				E_USER_ERROR
-			);
-		}
+        if (!file_exists($filePath) || strpos($filePath, '..')) {
+            trigger_error(sprintf(
+                    __("Group test %s cannot be found at %s", true), 
+                    htmlentities($groupTestName), 
+                    htmlentities($filePath)
+                ),
+                E_USER_ERROR
+            );
+        }
 
-		require_once $filePath;
-		$test =& new TestSuite(sprintf(__('%s group test', true), $groupTestName));
-		foreach ($this->_getGroupTestClassNames($filePath) as $groupTest) {
-			$testCase = new $groupTest();
-			$test->addTestCase($testCase);
-			if (isset($testCase->label)) {
-				$test->_label = $testCase->label;
-			}
-		}
-		return $test->run($reporter);
-	}
+        require_once $filePath;
+        $test =& new TestSuite(sprintf(__('%s group test', true), $groupTestName));
+        foreach ($this->_getGroupTestClassNames($filePath) as $groupTest) {
+            $testCase = new $groupTest();
+            $test->addTestCase($testCase);
+            if (isset($testCase->label)) {
+                $test->_label = $testCase->label;
+            }
+        }
+        return $test->run($reporter);
+    }
 
 /**
  * Adds all testcases in a given directory to a given GroupTest object
@@ -190,13 +190,13 @@ class TestManager {
  * @access public
  * @static
  */
-	function addTestCasesFromDirectory(&$groupTest, $directory = '.') {
-		$manager =& new TestManager();
-		$testCases =& $manager->_getTestFileList($directory);
-		foreach ($testCases as $testCase) {
-			$groupTest->addTestFile($testCase);
-		}
-	}
+    function addTestCasesFromDirectory(&$groupTest, $directory = '.') {
+        $manager =& new TestManager();
+        $testCases =& $manager->_getTestFileList($directory);
+        foreach ($testCases as $testCase) {
+            $groupTest->addTestFile($testCase);
+        }
+    }
 
 /**
  * Adds a specific test file and thereby all of its test cases and group tests to a given group test file
@@ -207,16 +207,16 @@ class TestManager {
  * @access public
  * @static
  */
-	function addTestFile(&$groupTest, $file) {
-		$manager =& new TestManager();
+    function addTestFile(&$groupTest, $file) {
+        $manager =& new TestManager();
 
-		if (file_exists($file . $manager->_testExtension)) {
-			$file .= $manager->_testExtension;
-		} elseif (file_exists($file . $manager->_groupExtension)) {
-			$file .= $manager->_groupExtension;
-		}
-		$groupTest->addTestFile($file);
-	}
+        if (file_exists($file . $manager->_testExtension)) {
+            $file .= $manager->_testExtension;
+        } elseif (file_exists($file . $manager->_groupExtension)) {
+            $file .= $manager->_groupExtension;
+        }
+        $groupTest->addTestFile($file);
+    }
 
 /**
  * Returns a list of test cases found in the current valid test case path
@@ -224,11 +224,11 @@ class TestManager {
  * @access public
  * @static
  */
-	function &getTestCaseList() {
-		$manager =& new TestManager();
-		$return = $manager->_getTestCaseList($manager->_getTestsPath());
-		return $return;
-	}
+    function &getTestCaseList() {
+        $manager =& new TestManager();
+        $return = $manager->_getTestCaseList($manager->_getTestsPath());
+        return $return;
+    }
 
 /**
  * Builds the list of test cases from a given directory
@@ -236,14 +236,14 @@ class TestManager {
  * @param string $directory Directory to get test case list from.
  * @access protected
  */
-	function &_getTestCaseList($directory = '.') {
-		$fileList =& $this->_getTestFileList($directory);
-		$testCases = array();
-		foreach ($fileList as $testCaseFile) {
-			$testCases[$testCaseFile] = str_replace($directory . DS, '', $testCaseFile);
-		}
-		return $testCases;
-	}
+    function &_getTestCaseList($directory = '.') {
+        $fileList =& $this->_getTestFileList($directory);
+        $testCases = array();
+        foreach ($fileList as $testCaseFile) {
+            $testCases[$testCaseFile] = str_replace($directory . DS, '', $testCaseFile);
+        }
+        return $testCases;
+    }
 
 /**
  * Returns a list of test files from a given directory
@@ -251,10 +251,10 @@ class TestManager {
  * @param string $directory Directory to get test case files from.
  * @access protected
  */
-	function &_getTestFileList($directory = '.') {
-		$return = $this->_getRecursiveFileList($directory, array(&$this, '_isTestCaseFile'));
-		return $return;
-	}
+    function &_getTestFileList($directory = '.') {
+        $return = $this->_getRecursiveFileList($directory, array(&$this, '_isTestCaseFile'));
+        return $return;
+    }
 
 /**
  * Returns a list of group tests found in the current valid test case path
@@ -262,11 +262,11 @@ class TestManager {
  * @access public
  * @static
  */
-	function &getGroupTestList() {
-		$manager =& new TestManager();
-		$return = $manager->_getTestGroupList($manager->_getTestsPath('groups'));
-		return $return;
-	}
+    function &getGroupTestList() {
+        $manager =& new TestManager();
+        $return = $manager->_getTestGroupList($manager->_getTestsPath('groups'));
+        return $return;
+    }
 
 /**
  * Returns a list of group test files from a given directory
@@ -274,10 +274,10 @@ class TestManager {
  * @param string $directory The directory to get group test files from.
  * @access protected
  */
-	function &_getTestGroupFileList($directory = '.') {
-		$return = $this->_getRecursiveFileList($directory, array(&$this, '_isTestGroupFile'));
-		return $return;
-	}
+    function &_getTestGroupFileList($directory = '.') {
+        $return = $this->_getRecursiveFileList($directory, array(&$this, '_isTestGroupFile'));
+        return $return;
+    }
 
 /**
  * Returns a list of group test files from a given directory
@@ -285,16 +285,16 @@ class TestManager {
  * @param string $directory The directory to get group tests from.
  * @access protected
  */
-	function &_getTestGroupList($directory = '.') {
-		$fileList =& $this->_getTestGroupFileList($directory);
-		$groupTests = array();
+    function &_getTestGroupList($directory = '.') {
+        $fileList =& $this->_getTestGroupFileList($directory);
+        $groupTests = array();
 
-		foreach ($fileList as $groupTestFile) {
-			$groupTests[$groupTestFile] = str_replace($this->_groupExtension, '', basename($groupTestFile));
-		}
-		sort($groupTests);
-		return $groupTests;
-	}
+        foreach ($fileList as $groupTestFile) {
+            $groupTests[$groupTestFile] = str_replace($this->_groupExtension, '', basename($groupTestFile));
+        }
+        sort($groupTests);
+        return $groupTests;
+    }
 
 /**
  * Returns a list of class names from a group test file
@@ -302,16 +302,16 @@ class TestManager {
  * @param string $groupTestFile The groupTest file to scan for TestSuite classnames.
  * @access protected
  */
-	function &_getGroupTestClassNames($groupTestFile) {
-		$file = implode("\n", file($groupTestFile));
-		preg_match("~lass\s+?(.*)\s+?extends TestSuite~", $file, $matches);
-		if (!empty($matches)) {
-			unset($matches[0]);
-			return $matches;
-		}
-		$matches = array();
-		return $matches;
-	}
+    function &_getGroupTestClassNames($groupTestFile) {
+        $file = implode("\n", file($groupTestFile));
+        preg_match("~lass\s+?(.*)\s+?extends TestSuite~", $file, $matches);
+        if (!empty($matches)) {
+            unset($matches[0]);
+            return $matches;
+        }
+        $matches = array();
+        return $matches;
+    }
 
 /**
  * Gets a recursive list of files from a given directory and matches then against
@@ -321,24 +321,24 @@ class TestManager {
  * @param mixed $fileTestFunction
  * @access protected
  */
-	function &_getRecursiveFileList($directory = '.', $fileTestFunction) {
-		$fileList = array();
-		if (!is_dir($directory)) {
-			return $fileList;
-		}
+    function &_getRecursiveFileList($directory = '.', $fileTestFunction) {
+        $fileList = array();
+        if (!is_dir($directory)) {
+            return $fileList;
+        }
 
-		$files = glob($directory . DS . '*');
-		$files = $files ? $files : array();
+        $files = glob($directory . DS . '*');
+        $files = $files ? $files : array();
 
-		foreach ($files as $file) {
-			if (is_dir($file)) {
-				$fileList = array_merge($fileList, $this->_getRecursiveFileList($file, $fileTestFunction));
-			} elseif ($fileTestFunction[0]->$fileTestFunction[1]($file)) {
-				$fileList[] = $file;
-			}
-		}
-		return $fileList;
-	}
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                $fileList = array_merge($fileList, $this->_getRecursiveFileList($file, $fileTestFunction));
+            } elseif ($fileTestFunction[0]->$fileTestFunction[1]($file)) {
+                $fileList[] = $file;
+            }
+        }
+        return $fileList;
+    }
 
 /**
  * Tests if a file has the correct test case extension
@@ -347,9 +347,9 @@ class TestManager {
  * @return boolean Whether $file is a test case.
  * @access protected
  */
-	function _isTestCaseFile($file) {
-		return $this->_hasExpectedExtension($file, $this->_testExtension);
-	}
+    function _isTestCaseFile($file) {
+        return $this->_hasExpectedExtension($file, $this->_testExtension);
+    }
 
 /**
  * Tests if a file has the correct group test extension
@@ -358,9 +358,9 @@ class TestManager {
  * @return boolean Whether $file is a group
  * @access protected
  */
-	function _isTestGroupFile($file) {
-		return $this->_hasExpectedExtension($file, $this->_groupExtension);
-	}
+    function _isTestGroupFile($file) {
+        return $this->_hasExpectedExtension($file, $this->_groupExtension);
+    }
 
 /**
  * Check if a file has a specific extension
@@ -370,9 +370,9 @@ class TestManager {
  * @return void
  * @access protected
  */
-	function _hasExpectedExtension($file, $extension) {
-		return $extension == strtolower(substr($file, (0 - strlen($extension))));
-	}
+    function _hasExpectedExtension($file, $extension) {
+        return $extension == strtolower(substr($file, (0 - strlen($extension))));
+    }
 
 /**
  * Returns the given path to the test files depending on a given type of tests (cases, group, ..)
@@ -381,29 +381,29 @@ class TestManager {
  * @return string The path tests are located on
  * @access protected
  */
-	function _getTestsPath($type = 'cases') {
-		if (!empty($this->appTest)) {
-			if ($type == 'cases') {
-				$result = APP_TEST_CASES;
-			} else if ($type == 'groups') {
-				$result = APP_TEST_GROUPS;
-			}
-		} else if (!empty($this->pluginTest)) {
-			$_pluginBasePath = APP . 'plugins' . DS . $this->pluginTest . DS . 'tests';
-			$pluginPath = App::pluginPath($this->pluginTest);
-			if (file_exists($pluginPath . DS . 'tests')) {
-				$_pluginBasePath = $pluginPath . DS . 'tests';
-			}
-			$result = $_pluginBasePath . DS . $type;
-		} else {
-			if ($type == 'cases') {
-				$result = CORE_TEST_CASES;
-			} else if ($type == 'groups') {
-				$result = CORE_TEST_GROUPS;
-			}
-		}
-		return $result;
-	}
+    function _getTestsPath($type = 'cases') {
+        if (!empty($this->appTest)) {
+            if ($type == 'cases') {
+                $result = APP_TEST_CASES;
+            } else if ($type == 'groups') {
+                $result = APP_TEST_GROUPS;
+            }
+        } else if (!empty($this->pluginTest)) {
+            $_pluginBasePath = APP . 'plugins' . DS . $this->pluginTest . DS . 'tests';
+            $pluginPath = App::pluginPath($this->pluginTest);
+            if (file_exists($pluginPath . DS . 'tests')) {
+                $_pluginBasePath = $pluginPath . DS . 'tests';
+            }
+            $result = $_pluginBasePath . DS . $type;
+        } else {
+            if ($type == 'cases') {
+                $result = CORE_TEST_CASES;
+            } else if ($type == 'groups') {
+                $result = CORE_TEST_GROUPS;
+            }
+        }
+        return $result;
+    }
 
 /**
  * Get the extension for either 'group' or 'test' types.
@@ -412,10 +412,10 @@ class TestManager {
  * @return string Extension suffix for test.
  * @access public
  */
-	function getExtension($type = 'test') {
-		if ($type == 'test' || $type == 'case') {
-			return $this->_testExtension;
-		}
-		return $this->_groupExtension;
-	}
+    function getExtension($type = 'test') {
+        if ($type == 'test' || $type == 'case') {
+            return $this->_testExtension;
+        }
+        return $this->_groupExtension;
+    }
 }

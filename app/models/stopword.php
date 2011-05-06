@@ -12,13 +12,13 @@
 *
 */
 class Stopword extends AppModel {
-	
-	var $name = 'Stopword';
-	
-	var $belongsTo = 'Profile';
-	
-	/**
-	 * @var Profile
-	 */
-	var $Profile;
+    
+    var $name = 'Stopword';
+    
+    var $belongsTo = 'Profile';
+    
+    /**
+     * @var Profile
+     */
+    var $Profile;
 }

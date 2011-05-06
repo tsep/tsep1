@@ -46,78 +46,78 @@
  */
 class AppController extends Controller {
 
-	var $helpers = array('Html', 'Session', 'Js', 'Form', 'Paginator');
-	
-	var $components = array('RequestHandler', 'Session', 'Auth', 'Queue');
-	
-	var $view = 'Theme';
-	
-	var $theme = 'default';
-	
-	/**
-	 * @var RequestHandlerComponent
-	 */
-	var $RequestHandler;
-	
-	/**
-	 * @var SessionComponent
-	 */
-	var $Session; 
-	
-	/**
-	 * @var AuthComponent
-	 */
-	var $Auth;
-			
-	/**
-	 * @var QueueComponent
-	 */
-	var $Queue;
-	
+    var $helpers = array('Html', 'Session', 'Js', 'Form', 'Paginator');
+    
+    var $components = array('RequestHandler', 'Session', 'Auth', 'Queue');
+    
+    var $view = 'Theme';
+    
+    var $theme = 'default';
+    
+    /**
+     * @var RequestHandlerComponent
+     */
+    var $RequestHandler;
+    
+    /**
+     * @var SessionComponent
+     */
+    var $Session; 
+    
+    /**
+     * @var AuthComponent
+     */
+    var $Auth;
+            
+    /**
+     * @var QueueComponent
+     */
+    var $Queue;
+    
     function beforeFilter() {
-    	parent::beforeFilter();
-    	
-    	if(isset($this->Auth)) {
-    		
-	        if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
-	        	$this->layout = 'admin';
-	        
-	        }
-	       	else {
-	       		$this->Auth->allow('*');	       		
-	       	}        	
-	    
-	    	$this->Auth->loginAction = array('controller'=>'users', 'action' => 'login', 'admin' => 'true');
-	    	$this->Auth->logoutRedirect = array('controller'=>'users', 'action' => 'logout', 'admin' => 'true');
-	    	$this->Auth->loginRedirect = array('controller' => 'users', 'action' =>'login', 'admin' => 'true');
-    		
-    	}
-    	
-    	if(isset($this->RequestHandler)) {
-    			            		
-    		if ($this->RequestHandler->isAjax())
-    			$this->layout = 'ajax';
-    	}
-    	
-    	if(!isset($this->Security)) {
-    		App::import('Component', 'Security');
-    		$this->Security = new SecurityComponent();
-    	}
-    	
-    	$this->theme = Configure::read('ThemeName');
+        parent::beforeFilter();
+        
+        if(isset($this->Auth)) {
+            
+            if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
+                $this->layout = 'admin';
+            
+            }
+               else {
+                   $this->Auth->allow('*');                   
+               }            
+        
+            $this->Auth->loginAction = array('controller'=>'users', 'action' => 'login', 'admin' => 'true');
+            $this->Auth->logoutRedirect = array('controller'=>'users', 'action' => 'logout', 'admin' => 'true');
+            $this->Auth->loginRedirect = array('controller' => 'users', 'action' =>'login', 'admin' => 'true');
+            
+        }
+        
+        if(isset($this->RequestHandler)) {
+                                    
+            if ($this->RequestHandler->isAjax())
+                $this->layout = 'ajax';
+        }
+        
+        if(!isset($this->Security)) {
+            App::import('Component', 'Security');
+            $this->Security = new SecurityComponent();
+        }
+        
+        $this->theme = Configure::read('ThemeName');
     }
     
     function beforeRender() {
-    	parent::beforeRender();
-    	
-    	$this->set('version', file_get_contents(CONFIGS.'version.txt'));
-    	
-    	if(isset($this->Auth)) {
-    		$this->set('user', $this->Auth->user());
-    	}
-    	else {
-    		$this->set('user', false);
-    	}
+        parent::beforeRender();
+        
+        $this->set('version', file_get_contents(CONFIGS.'version.txt'));
+        
+        if(isset($this->Auth)) {
+            $this->set('user', $this->Auth->user());
+        }
+        else {
+            $this->set('user', false);
+        }
     
     }
        
@@ -126,13 +126,13 @@ class AppController extends Controller {
      * Save the current configuration
      */
     function saveConfiguration () {
-    	
-    	$config = (array)Configure::getInstance();
-    	
-    	$code = "<?php \n ";
-			$code .= '$config = '.var_export($config, true).';';
-		
-			file_put_contents(CONFIGS.'settings.php', $code);
+        
+        $config = (array)Configure::getInstance();
+        
+        $code = "<?php \n ";
+            $code .= '$config = '.var_export($config, true).';';
+        
+            file_put_contents(CONFIGS.'settings.php', $code);
     }
     
     /**
@@ -140,10 +140,10 @@ class AppController extends Controller {
      * @deprecated Use $this->Queue instead
      */
     function getQueue () {
-    	
-    	App::import('Component', 'Queue');
-    	
-    	return new QueueComponent();
+        
+        App::import('Component', 'Queue');
+        
+        return new QueueComponent();
     }
     
     /**
@@ -151,7 +151,7 @@ class AppController extends Controller {
      */
     function processQueue ($redirect = '') {
     
-    	$this->redirect(array('controller' => 'core', 'admin' => true, 'action' => 'batch', '?' => compact('redirect')), null, true);
+        $this->redirect(array('controller' => 'core', 'admin' => true, 'action' => 'batch', '?' => compact('redirect')), null, true);
     }
 
 }

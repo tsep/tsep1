@@ -34,7 +34,7 @@ class ConfigureGroupTest extends TestSuite {
  * @var string 'Configure, Loader, ClassRegistry Tests'
  * @access public
  */
-	var $label = 'Configure, App and ClassRegistry';
+    var $label = 'Configure, App and ClassRegistry';
 
 /**
  * ConfigureGroupTest method
@@ -42,8 +42,8 @@ class ConfigureGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function ConfigureGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'configure');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'class_registry');
-	}
+    function ConfigureGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'configure');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'class_registry');
+    }
 }

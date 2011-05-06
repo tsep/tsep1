@@ -34,7 +34,7 @@ class i18nGroupTest extends TestSuite {
  * @var string
  * @access public
  */
-	var $label = 'i18n, l10n and multibyte tests';
+    var $label = 'i18n, l10n and multibyte tests';
 
 /**
  * LibGroupTest method
@@ -42,9 +42,9 @@ class i18nGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function i18nGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'i18n');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'l10n');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'multibyte');
-	}
+    function i18nGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'i18n');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'l10n');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'multibyte');
+    }
 }

@@ -17,12 +17,12 @@
  * @since         CakePHP(tm) v 1.2.0.4433
  * @license       http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
  */
-	if (version_compare(PHP_VERSION, '4.4.4', '<=') ||
-		PHP_SAPI == 'cgi') {
-		define('STDOUT', fopen('php://stdout', 'w'));
-		define('STDERR', fopen('php://stderr', 'w'));
-		register_shutdown_function(create_function('', 'fclose(STDOUT); fclose(STDERR); return true;'));
-	}
+    if (version_compare(PHP_VERSION, '4.4.4', '<=') ||
+        PHP_SAPI == 'cgi') {
+        define('STDOUT', fopen('php://stdout', 'w'));
+        define('STDERR', fopen('php://stderr', 'w'));
+        register_shutdown_function(create_function('', 'fclose(STDOUT); fclose(STDERR); return true;'));
+    }
 
 include_once dirname(__FILE__) . DS . 'cake_base_reporter.php';
 
@@ -39,14 +39,14 @@ class CakeCliReporter extends CakeBaseReporter {
  *
  * @var string
  */
-	var $separator = '->';
+    var $separator = '->';
 
 /**
  * array of 'request' parameters
  *
  * @var array
  */
-	var $params = array();
+    var $params = array();
 
 /**
  * Constructor
@@ -55,13 +55,13 @@ class CakeCliReporter extends CakeBaseReporter {
  * @param array $params 
  * @return void
  */
-	function CakeCLIReporter($charset = 'utf-8', $params = array()) {
-		$this->CakeBaseReporter($charset, $params);
-	}
+    function CakeCLIReporter($charset = 'utf-8', $params = array()) {
+        $this->CakeBaseReporter($charset, $params);
+    }
 
-	function setFailDetailSeparator($separator) {
-		$this->separator = $separator;
-	}
+    function setFailDetailSeparator($separator) {
+        $this->separator = $separator;
+    }
 
 /**
  * Paint fail faildetail to STDERR.
@@ -70,11 +70,11 @@ class CakeCliReporter extends CakeBaseReporter {
  * @return void
  * @access public
  */
-	function paintFail($message) {
-		parent::paintFail($message);
-		$message .= $this->_getBreadcrumb();
-		fwrite(STDERR, 'FAIL' . $this->separator . $message);
-	}
+    function paintFail($message) {
+        parent::paintFail($message);
+        $message .= $this->_getBreadcrumb();
+        fwrite(STDERR, 'FAIL' . $this->separator . $message);
+    }
 
 /**
  * Paint PHP errors to STDERR.
@@ -83,11 +83,11 @@ class CakeCliReporter extends CakeBaseReporter {
  * @return void
  * @access public
  */
-	function paintError($message) {
-		parent::paintError($message);
-		$message .= $this->_getBreadcrumb();
-		fwrite(STDERR, 'ERROR' . $this->separator . $message);
-	}
+    function paintError($message) {
+        parent::paintError($message);
+        $message .= $this->_getBreadcrumb();
+        fwrite(STDERR, 'ERROR' . $this->separator . $message);
+    }
 
 /**
  * Paint exception faildetail to STDERR.
@@ -96,30 +96,30 @@ class CakeCliReporter extends CakeBaseReporter {
  * @return void
  * @access public
  */
-	function paintException($exception) {
-		parent::paintException($exception);
-		$message .= sprintf('Unexpected exception of type [%s] with message [%s] in [%s] line [%s]',
-			get_class($exception),
-			$exception->getMessage(),
-			$exception->getFile(),
-			$exception->getLine()
-		);
-		$message .= $this->_getBreadcrumb();
-		fwrite(STDERR, 'EXCEPTION' . $this->separator . $message);
-	}
+    function paintException($exception) {
+        parent::paintException($exception);
+        $message .= sprintf('Unexpected exception of type [%s] with message [%s] in [%s] line [%s]',
+            get_class($exception),
+            $exception->getMessage(),
+            $exception->getFile(),
+            $exception->getLine()
+        );
+        $message .= $this->_getBreadcrumb();
+        fwrite(STDERR, 'EXCEPTION' . $this->separator . $message);
+    }
 
 /**
  * Get the breadcrumb trail for the current test method/case
  *
  * @return string The string for the breadcrumb
  */
-	function _getBreadcrumb() {
-		$breadcrumb = $this->getTestList();
-		array_shift($breadcrumb);
-		$out = "\n\tin " . implode("\n\tin ", array_reverse($breadcrumb));
-		$out .= "\n\n";
-		return $out;
-	}
+    function _getBreadcrumb() {
+        $breadcrumb = $this->getTestList();
+        array_shift($breadcrumb);
+        $out = "\n\tin " . implode("\n\tin ", array_reverse($breadcrumb));
+        $out .= "\n\n";
+        return $out;
+    }
 
 /**
  * Paint a test skip message
@@ -127,40 +127,40 @@ class CakeCliReporter extends CakeBaseReporter {
  * @param string $message The message of the skip
  * @return void
  */
-	function paintSkip($message) {
-		parent::paintSkip($message);
-		fwrite(STDOUT, 'SKIP' . $this->separator . $message . "\n\n");
-	}
+    function paintSkip($message) {
+        parent::paintSkip($message);
+        fwrite(STDOUT, 'SKIP' . $this->separator . $message . "\n\n");
+    }
 
 /**
  * Paint a footer with test case name, timestamp, counts of fails and exceptions.
  */
-	function paintFooter($test_name) {
-		$buffer = $this->getTestCaseProgress() . '/' . $this->getTestCaseCount() . ' test cases complete: ';
+    function paintFooter($test_name) {
+        $buffer = $this->getTestCaseProgress() . '/' . $this->getTestCaseCount() . ' test cases complete: ';
 
-		if (0 < ($this->getFailCount() + $this->getExceptionCount())) {
-			$buffer .= $this->getPassCount() . " passes";
-			if (0 < $this->getFailCount()) {
-				$buffer .= ", " . $this->getFailCount() . " fails";
-			}
-			if (0 < $this->getExceptionCount()) {
-				$buffer .= ", " . $this->getExceptionCount() . " exceptions";
-			}
-			$buffer .= ".\n";
-			$buffer .= $this->_timeStats();
-			fwrite(STDOUT, $buffer);
-		} else {
-			fwrite(STDOUT, $buffer . $this->getPassCount() . " passes.\n" . $this->_timeStats());
-		}
+        if (0 < ($this->getFailCount() + $this->getExceptionCount())) {
+            $buffer .= $this->getPassCount() . " passes";
+            if (0 < $this->getFailCount()) {
+                $buffer .= ", " . $this->getFailCount() . " fails";
+            }
+            if (0 < $this->getExceptionCount()) {
+                $buffer .= ", " . $this->getExceptionCount() . " exceptions";
+            }
+            $buffer .= ".\n";
+            $buffer .= $this->_timeStats();
+            fwrite(STDOUT, $buffer);
+        } else {
+            fwrite(STDOUT, $buffer . $this->getPassCount() . " passes.\n" . $this->_timeStats());
+        }
 
-		if (
-			isset($this->params['codeCoverage']) && 
-			$this->params['codeCoverage'] && 
-			class_exists('CodeCoverageManager')
-		) {
-			CodeCoverageManager::report();
-		}
-	}
+        if (
+            isset($this->params['codeCoverage']) && 
+            $this->params['codeCoverage'] && 
+            class_exists('CodeCoverageManager')
+        ) {
+            CodeCoverageManager::report();
+        }
+    }
 
 /**
  * Get the time and memory stats for this test case/group
@@ -168,11 +168,11 @@ class CakeCliReporter extends CakeBaseReporter {
  * @return string String content to display
  * @access protected
  */
-	function _timeStats() {
-		$out = 'Time taken by tests (in seconds): ' . $this->_timeDuration . "\n";
-		if (function_exists('memory_get_peak_usage')) {
-			$out .= 'Peak memory use: (in bytes): ' . number_format(memory_get_peak_usage()) . "\n";
-		}
-		return $out;
-	}
+    function _timeStats() {
+        $out = 'Time taken by tests (in seconds): ' . $this->_timeDuration . "\n";
+        if (function_exists('memory_get_peak_usage')) {
+            $out .= 'Peak memory use: (in bytes): ' . number_format(memory_get_peak_usage()) . "\n";
+        }
+        return $out;
+    }
 }

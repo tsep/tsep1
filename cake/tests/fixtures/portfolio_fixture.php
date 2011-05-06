@@ -32,7 +32,7 @@ class PortfolioFixture extends CakeTestFixture {
  * @var string 'Portfolio'
  * @access public
  */
-	var $name = 'Portfolio';
+    var $name = 'Portfolio';
 
 /**
  * fields property
@@ -40,11 +40,11 @@ class PortfolioFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'seller_id' => array('type' => 'integer', 'null' => false),
-		'name' => array('type' => 'string', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'seller_id' => array('type' => 'integer', 'null' => false),
+        'name' => array('type' => 'string', 'null' => false)
+    );
 
 /**
  * records property
@@ -52,9 +52,9 @@ class PortfolioFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('seller_id' => 1, 'name' => 'Portfolio 1'),
-		array('seller_id' => 1, 'name' => 'Portfolio 2'),
-		array('seller_id' => 2, 'name' => 'Portfolio 1')
-	);
+    var $records = array(
+        array('seller_id' => 1, 'name' => 'Portfolio 1'),
+        array('seller_id' => 1, 'name' => 'Portfolio 2'),
+        array('seller_id' => 2, 'name' => 'Portfolio 1')
+    );
 }

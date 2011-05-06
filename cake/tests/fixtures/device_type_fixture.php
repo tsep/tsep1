@@ -32,7 +32,7 @@ class DeviceTypeFixture extends CakeTestFixture {
  * @var string 'DeviceType'
  * @access public
  */
-	var $name = 'DeviceType';
+    var $name = 'DeviceType';
 
 /**
  * fields property
@@ -40,17 +40,17 @@ class DeviceTypeFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'device_type_category_id' => array('type' => 'integer', 'null' => false),
-		'feature_set_id' => array('type' => 'integer', 'null' => false),
-		'exterior_type_category_id' => array('type' => 'integer', 'null' => false),
-		'image_id' => array('type' => 'integer', 'null' => false),
-		'extra1_id' => array('type' => 'integer', 'null' => false),
-		'extra2_id' => array('type' => 'integer', 'null' => false),
-		'name' => array('type' => 'string', 'null' => false),
-		'order' => array('type' => 'integer', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'device_type_category_id' => array('type' => 'integer', 'null' => false),
+        'feature_set_id' => array('type' => 'integer', 'null' => false),
+        'exterior_type_category_id' => array('type' => 'integer', 'null' => false),
+        'image_id' => array('type' => 'integer', 'null' => false),
+        'extra1_id' => array('type' => 'integer', 'null' => false),
+        'extra2_id' => array('type' => 'integer', 'null' => false),
+        'name' => array('type' => 'string', 'null' => false),
+        'order' => array('type' => 'integer', 'null' => false)
+    );
 
 /**
  * records property
@@ -58,7 +58,7 @@ class DeviceTypeFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('device_type_category_id' => 1, 'feature_set_id' => 1, 'exterior_type_category_id' => 1, 'image_id' => 1, 'extra1_id' => 1, 'extra2_id' => 1, 'name' => 'DeviceType 1', 'order' => 0)
-	);
+    var $records = array(
+        array('device_type_category_id' => 1, 'feature_set_id' => 1, 'exterior_type_category_id' => 1, 'image_id' => 1, 'extra1_id' => 1, 'extra2_id' => 1, 'name' => 'DeviceType 1', 'order' => 0)
+    );
 }

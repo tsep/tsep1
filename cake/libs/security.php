@@ -32,7 +32,7 @@ class Security extends Object {
  * @var string
  * @access public
  */
-	var $hashType = null;
+    var $hashType = null;
 
 /**
  * Singleton implementation to get object instance.
@@ -41,13 +41,13 @@ class Security extends Object {
  * @access public
  * @static
  */
-	function &getInstance() {
-		static $instance = array();
-		if (!$instance) {
-			$instance[0] =& new Security;
-		}
-		return $instance[0];
-	}
+    function &getInstance() {
+        static $instance = array();
+        if (!$instance) {
+            $instance[0] =& new Security;
+        }
+        return $instance[0];
+    }
 
 /**
  * Get allowed minutes of inactivity based on security level.
@@ -56,20 +56,20 @@ class Security extends Object {
  * @access public
  * @static
  */
-	function inactiveMins() {
-		switch (Configure::read('Security.level')) {
-			case 'high':
-				return 10;
-			break;
-			case 'medium':
-				return 100;
-			break;
-			case 'low':
-			default:
-				return 300;
-				break;
-		}
-	}
+    function inactiveMins() {
+        switch (Configure::read('Security.level')) {
+            case 'high':
+                return 10;
+            break;
+            case 'medium':
+                return 100;
+            break;
+            case 'low':
+            default:
+                return 300;
+                break;
+        }
+    }
 
 /**
  * Generate authorization hash.
@@ -78,12 +78,12 @@ class Security extends Object {
  * @access public
  * @static
  */
-	function generateAuthKey() {
-		if (!class_exists('String')) {
-			App::import('Core', 'String');
-		}
-		return Security::hash(String::uuid());
-	}
+    function generateAuthKey() {
+        if (!class_exists('String')) {
+            App::import('Core', 'String');
+        }
+        return Security::hash(String::uuid());
+    }
 
 /**
  * Validate authorization hash.
@@ -94,9 +94,9 @@ class Security extends Object {
  * @static
  * @todo Complete implementation
  */
-	function validateAuthKey($authKey) {
-		return true;
-	}
+    function validateAuthKey($authKey) {
+        return true;
+    }
 
 /**
  * Create a hash from string using given method.
@@ -110,39 +110,39 @@ class Security extends Object {
  * @access public
  * @static
  */
-	function hash($string, $type = null, $salt = false) {
-		$_this =& Security::getInstance();
+    function hash($string, $type = null, $salt = false) {
+        $_this =& Security::getInstance();
 
-		if ($salt) {
-			if (is_string($salt)) {
-				$string = $salt . $string;
-			} else {
-				$string = Configure::read('Security.salt') . $string;
-			}
-		}
+        if ($salt) {
+            if (is_string($salt)) {
+                $string = $salt . $string;
+            } else {
+                $string = Configure::read('Security.salt') . $string;
+            }
+        }
 
-		if (empty($type)) {
-			$type = $_this->hashType;
-		}
-		$type = strtolower($type);
+        if (empty($type)) {
+            $type = $_this->hashType;
+        }
+        $type = strtolower($type);
 
-		if ($type == 'sha1' || $type == null) {
-			if (function_exists('sha1')) {
-				$return = sha1($string);
-				return $return;
-			}
-			$type = 'sha256';
-		}
+        if ($type == 'sha1' || $type == null) {
+            if (function_exists('sha1')) {
+                $return = sha1($string);
+                return $return;
+            }
+            $type = 'sha256';
+        }
 
-		if ($type == 'sha256' && function_exists('mhash')) {
-			return bin2hex(mhash(MHASH_SHA256, $string));
-		}
+        if ($type == 'sha256' && function_exists('mhash')) {
+            return bin2hex(mhash(MHASH_SHA256, $string));
+        }
 
-		if (function_exists('hash')) {
-			return hash($type, $string);
-		}
-		return md5($string);
-	}
+        if (function_exists('hash')) {
+            return hash($type, $string);
+        }
+        return md5($string);
+    }
 
 /**
  * Sets the default hash method for the Security object.  This affects all objects using
@@ -154,10 +154,10 @@ class Security extends Object {
  * @static
  * @see Security::hash()
  */
-	function setHash($hash) {
-		$_this =& Security::getInstance();
-		$_this->hashType = $hash;
-	}
+    function setHash($hash) {
+        $_this =& Security::getInstance();
+        $_this->hashType = $hash;
+    }
 
 /**
  * Encrypts/Decrypts a text using the given key.
@@ -168,24 +168,24 @@ class Security extends Object {
  * @access public
  * @static
  */
-	function cipher($text, $key) {
-		if (empty($key)) {
-			trigger_error(__('You cannot use an empty key for Security::cipher()', true), E_USER_WARNING);
-			return '';
-		}
+    function cipher($text, $key) {
+        if (empty($key)) {
+            trigger_error(__('You cannot use an empty key for Security::cipher()', true), E_USER_WARNING);
+            return '';
+        }
 
-		srand(Configure::read('Security.cipherSeed'));
-		$out = '';
-		$keyLength = strlen($key);
-		for ($i = 0, $textLength = strlen($text); $i < $textLength; $i++) {
-			$j = ord(substr($key, $i % $keyLength, 1));
-			while ($j--) {
-				rand(0, 255);
-			}
-			$mask = rand(0, 255);
-			$out .= chr(ord(substr($text, $i, 1)) ^ $mask);
-		}
-		srand();
-		return $out;
-	}
+        srand(Configure::read('Security.cipherSeed'));
+        $out = '';
+        $keyLength = strlen($key);
+        for ($i = 0, $textLength = strlen($text); $i < $textLength; $i++) {
+            $j = ord(substr($key, $i % $keyLength, 1));
+            while ($j--) {
+                rand(0, 255);
+            }
+            $mask = rand(0, 255);
+            $out .= chr(ord(substr($text, $i, 1)) ^ $mask);
+        }
+        srand();
+        return $out;
+    }
 }

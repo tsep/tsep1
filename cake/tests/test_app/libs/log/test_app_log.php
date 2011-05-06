@@ -19,7 +19,7 @@
  */
 class TestAppLog {
 
-	function write($type, $message) {
-		
-	}
+    function write($type, $message) {
+        
+    }
 }

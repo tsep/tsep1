@@ -18,7 +18,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 if (!class_exists('File')) {
-	require LIBS . 'file.php';
+    require LIBS . 'file.php';
 }
 /**
  * File Storage stream for Logging.  Writes logs to different files
@@ -34,7 +34,7 @@ class FileLog {
  *
  * @var string
  */
-	var $_path = null;
+    var $_path = null;
 
 /**
  * Constructs a new File Logger.
@@ -46,10 +46,10 @@ class FileLog {
  * @param array $options Options for the FileLog, see above.
  * @return void
  */
-	function FileLog($options = array()) {
-		$options += array('path' => LOGS);
-		$this->_path = $options['path'];
-	}
+    function FileLog($options = array()) {
+        $options += array('path' => LOGS);
+        $this->_path = $options['path'];
+    }
 
 /**
  * Implements writing to log files.
@@ -58,20 +58,20 @@ class FileLog {
  * @param string $message The message you want to log.
  * @return boolean success of write.
  */
-	function write($type, $message) {
-		$debugTypes = array('notice', 'info', 'debug');
+    function write($type, $message) {
+        $debugTypes = array('notice', 'info', 'debug');
 
-		if ($type == 'error' || $type == 'warning') {
-			$filename = $this->_path  . 'error.log';
-		} elseif (in_array($type, $debugTypes)) {
-			$filename = $this->_path . 'debug.log';
-		} else {
-			$filename = $this->_path . $type . '.log';
-		}
-		$output = date('Y-m-d H:i:s') . ' ' . ucfirst($type) . ': ' . $message . "\n";
-		$log = new File($filename, true);
-		if ($log->writable()) {
-			return $log->append($output);
-		}
-	}
+        if ($type == 'error' || $type == 'warning') {
+            $filename = $this->_path  . 'error.log';
+        } elseif (in_array($type, $debugTypes)) {
+            $filename = $this->_path . 'debug.log';
+        } else {
+            $filename = $this->_path . $type . '.log';
+        }
+        $output = date('Y-m-d H:i:s') . ' ' . ucfirst($type) . ': ' . $message . "\n";
+        $log = new File($filename, true);
+        if ($log->writable()) {
+            return $log->append($output);
+        }
+    }
 }

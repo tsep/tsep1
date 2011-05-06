@@ -32,7 +32,7 @@ class StoriesTagFixture extends CakeTestFixture {
  * @var string 'StoriesTag'
  * @access public
  */
-	var $name = 'StoriesTag';
+    var $name = 'StoriesTag';
 
 /**
  * fields property
@@ -40,11 +40,11 @@ class StoriesTagFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'story' => array('type' => 'integer', 'null' => false),
-		'tag_id' => array('type' => 'integer', 'null' => false),
-		'indexes' => array('UNIQUE_STORY_TAG' => array('column'=> array('story', 'tag_id'), 'unique'=>1))
-	);
+    var $fields = array(
+        'story' => array('type' => 'integer', 'null' => false),
+        'tag_id' => array('type' => 'integer', 'null' => false),
+        'indexes' => array('UNIQUE_STORY_TAG' => array('column'=> array('story', 'tag_id'), 'unique'=>1))
+    );
 
 /**
  * records property
@@ -52,7 +52,7 @@ class StoriesTagFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('story' => 1, 'tag_id' => 1)
-	);
+    var $records = array(
+        array('story' => 1, 'tag_id' => 1)
+    );
 }

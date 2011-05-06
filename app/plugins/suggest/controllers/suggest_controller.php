@@ -13,27 +13,27 @@
 */
 
 class SuggestController extends AppController {
-	
-	var $name = 'Suggest';
-	var $uses = array('Search');
-	
-	function beforeFilter() {
-		parent::beforeFilter();
-		
-		$this->layout = 'ajax';
-	}
-	
-	function get() {
-		
-		$phrase = $this->params['url']['term'];
-		
-		$this->set('results', $this->Search->get($phrase));
-	}
-	
-	function register() {
-		
-		$phrase = $this->params['url']['term'];
-				
-		$this->set('added', $this->Search->add($phrase));
-	}
+    
+    var $name = 'Suggest';
+    var $uses = array('Search');
+    
+    function beforeFilter() {
+        parent::beforeFilter();
+        
+        $this->layout = 'ajax';
+    }
+    
+    function get() {
+        
+        $phrase = $this->params['url']['term'];
+        
+        $this->set('results', $this->Search->get($phrase));
+    }
+    
+    function register() {
+        
+        $phrase = $this->params['url']['term'];
+                
+        $this->set('added', $this->Search->add($phrase));
+    }
 }

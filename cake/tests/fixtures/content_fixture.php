@@ -32,8 +32,8 @@ class ContentFixture extends CakeTestFixture {
  * @var string 'Aco'
  * @access public
  */
-	var $name = 'Content';
-	var $table = 'Content';
+    var $name = 'Content';
+    var $table = 'Content';
 
 /**
  * fields property
@@ -41,10 +41,10 @@ class ContentFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'iContentId'		=> array('type' => 'integer', 'key' => 'primary'),
-		'cDescription'	=> array('type' => 'string', 'length' => 50, 'null' => true)
-	);
+    var $fields = array(
+        'iContentId'        => array('type' => 'integer', 'key' => 'primary'),
+        'cDescription'    => array('type' => 'string', 'length' => 50, 'null' => true)
+    );
 
 /**
  * records property
@@ -52,10 +52,10 @@ class ContentFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('cDescription' => 'Test Content 1'),
-		array('cDescription' => 'Test Content 2'),
-		array('cDescription' => 'Test Content 3'),
-		array('cDescription' => 'Test Content 4')
-	);
+    var $records = array(
+        array('cDescription' => 'Test Content 1'),
+        array('cDescription' => 'Test Content 2'),
+        array('cDescription' => 'Test Content 3'),
+        array('cDescription' => 'Test Content 4')
+    );
 }

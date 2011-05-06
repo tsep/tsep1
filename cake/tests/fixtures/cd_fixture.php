@@ -32,7 +32,7 @@ class CdFixture extends CakeTestFixture {
  * @var string 'Cd'
  * @access public
  */
-	var $name = 'Cd';
+    var $name = 'Cd';
 
 /**
  * fields property
@@ -40,12 +40,12 @@ class CdFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'title' => array('type' => 'string', 'length' =>  255),
-		'artist' => array('type' => 'string', 'length' => 255, 'null' => true),
-		'genre' => array('type' => 'string', 'length' => 255, 'null' => true)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'title' => array('type' => 'string', 'length' =>  255),
+        'artist' => array('type' => 'string', 'length' => 255, 'null' => true),
+        'genre' => array('type' => 'string', 'length' => 255, 'null' => true)
+    );
 
 /**
  * records property
@@ -53,7 +53,7 @@ class CdFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('id' => 1, 'title' => 'Grace', 'artist' => 'Jeff Buckley', 'genre' => 'awesome')
-	);
+    var $records = array(
+        array('id' => 1, 'title' => 'Grace', 'artist' => 'Jeff Buckley', 'genre' => 'awesome')
+    );
 }

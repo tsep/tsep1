@@ -34,7 +34,7 @@ class TestSuiteGroupTest extends TestSuite {
  * @var string 'Socket and HttpSocket tests'
  * @access public
  */
-	var $label = 'TestSuite';
+    var $label = 'TestSuite';
 
 /**
  * TestSuiteGroupTest method
@@ -42,11 +42,11 @@ class TestSuiteGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function TestSuiteGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'test_manager');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'code_coverage_manager');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cake_test_case');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cake_test_fixture');
+    function TestSuiteGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'test_manager');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'code_coverage_manager');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cake_test_case');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'cake_test_fixture');
 
-	}
+    }
 }

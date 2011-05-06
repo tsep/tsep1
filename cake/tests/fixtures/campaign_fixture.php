@@ -33,7 +33,7 @@ class CampaignFixture extends CakeTestFixture {
  * @var string 'Campaign'
  * @access public
  */
-	var $name = 'Campaign';
+    var $name = 'Campaign';
 
 /**
  * fields property
@@ -41,10 +41,10 @@ class CampaignFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'name' => array('type' => 'string', 'length' => 255, 'null' => false),
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'name' => array('type' => 'string', 'length' => 255, 'null' => false),
+    );
 
 /**
  * records property
@@ -52,9 +52,9 @@ class CampaignFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('name' => 'Hurtigruten'),
-		array('name' => 'Colorline'),
-		array('name' => 'Queen of Scandinavia')
-	);
+    var $records = array(
+        array('name' => 'Hurtigruten'),
+        array('name' => 'Colorline'),
+        array('name' => 'Queen of Scandinavia')
+    );
 }

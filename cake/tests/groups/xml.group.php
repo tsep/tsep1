@@ -34,7 +34,7 @@ class XmlGroupTest extends TestSuite {
  * @var string 'All core views'
  * @access public
  */
-	var $label = 'Xml based classes (Xml, XmlHelper and RssHelper)';
+    var $label = 'Xml based classes (Xml, XmlHelper and RssHelper)';
 
 /**
  * XmlGroupTest method
@@ -42,9 +42,9 @@ class XmlGroupTest extends TestSuite {
  * @access public
  * @return void
  */
-	function XmlGroupTest() {
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'xml');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'helpers' . DS .'rss');
-		TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'helpers' . DS .'xml');
-	}
+    function XmlGroupTest() {
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'xml');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'helpers' . DS .'rss');
+        TestManager::addTestFile($this, CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'helpers' . DS .'xml');
+    }
 }

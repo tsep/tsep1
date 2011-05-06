@@ -32,7 +32,7 @@ class DeviceTypeCategoryFixture extends CakeTestFixture {
  * @var string 'DeviceTypeCategory'
  * @access public
  */
-	var $name = 'DeviceTypeCategory';
+    var $name = 'DeviceTypeCategory';
 
 /**
  * fields property
@@ -40,10 +40,10 @@ class DeviceTypeCategoryFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $fields = array(
-		'id' => array('type' => 'integer', 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => false)
-	);
+    var $fields = array(
+        'id' => array('type' => 'integer', 'key' => 'primary'),
+        'name' => array('type' => 'string', 'null' => false)
+    );
 
 /**
  * records property
@@ -51,7 +51,7 @@ class DeviceTypeCategoryFixture extends CakeTestFixture {
  * @var array
  * @access public
  */
-	var $records = array(
-		array('name' => 'DeviceTypeCategory 1')
-	);
+    var $records = array(
+        array('name' => 'DeviceTypeCategory 1')
+    );
 }
