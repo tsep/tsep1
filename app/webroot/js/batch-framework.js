@@ -41,14 +41,12 @@ $(document).ready(function (){
 	$('body').ajaxError(function () {
 		
 		$('#progress_bar').hide();
-		
-		$('#information_bar').html('<div class="error_box">An unexpected error occurred. Please wait while the page is reloaded.</div>');	
-		
+				
 		setTimeout(function () {
 			
 			window.location.reload();
 			
-		}, 3000);
+		}, 10);
 	});
 	
 	process_batch();

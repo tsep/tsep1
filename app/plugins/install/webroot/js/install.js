@@ -3,4 +3,9 @@ $(document).ready(function () {
 		
 		window.location = window.base + 'install/install/finish';
 	});
+	
+	$('body').ajaxError(function () {
+		
+		window.location = window.base + 'install/install/finish';
+	});
 });

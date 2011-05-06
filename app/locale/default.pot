@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-05-05 03:30+0200\n"
+"POT-Creation-Date: 2011-05-06 03:55+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "Configuration Updated"
 msgstr ""
 
-#: \controllers\core_controller.php:65
+#: \controllers\core_controller.php:67
 msgid "The selected operation failed"
 msgstr ""
 
@@ -34,39 +34,39 @@ msgstr ""
 msgid "The selected profile has been deleted"
 msgstr ""
 
-#: \controllers\profiles_controller.php:113
+#: \controllers\profiles_controller.php:119
 msgid "The profile that you selected to view does not exist"
 msgstr ""
 
-#: \controllers\profiles_controller.php:128
+#: \controllers\profiles_controller.php:132
 msgid "Indexing Profile Created"
 msgstr ""
 
-#: \controllers\profiles_controller.php:132
+#: \controllers\profiles_controller.php:136
 msgid "Failed to save indexing profile"
 msgstr ""
 
-#: \plugins\install\controllers\install_controller.php:47
+#: \plugins\install\controllers\install_controller.php:95
 msgid "Welcome"
 msgstr ""
 
-#: \plugins\install\controllers\install_controller.php:75
+#: \plugins\install\controllers\install_controller.php:109
 msgid "Database Configuration"
 msgstr ""
 
-#: \plugins\install\controllers\install_controller.php:90
+#: \plugins\install\controllers\install_controller.php:124
 msgid "Connection to the database established."
 msgstr ""
 
-#: \plugins\install\controllers\install_controller.php:95
+#: \plugins\install\controllers\install_controller.php:129
 msgid "Could not connect to database."
 msgstr ""
 
-#: \plugins\install\controllers\install_controller.php:121
+#: \plugins\install\controllers\install_controller.php:155
 msgid "Performing the Installation"
 msgstr ""
 
-#: \plugins\install\controllers\install_controller.php:185
+#: \plugins\install\controllers\install_controller.php:219
 msgid "Thanks for installing"
 msgstr ""
 
@@ -105,6 +105,14 @@ msgstr ""
 
 #: \plugins\install\views\install\settings.ctp:6
 msgid "Enter the details for the administrator below."
+msgstr ""
+
+#: \views\core\admin_batch.ctp:4
+msgid "Please Wait"
+msgstr ""
+
+#: \views\core\admin_batch.ctp:6
+msgid "The selected operations are being performed."
 msgstr ""
 
 #: \views\core\admin_setting.ctp:1
@@ -219,7 +227,7 @@ msgstr ""
 
 #: \views\indices\admin_view.ctp:13
 #: \views\profiles\admin_create.ctp:18
-#: \views\profiles\admin_edit.ctp:18
+#: \views\profiles\admin_edit.ctp:21
 msgid "Regular Expression"
 msgstr ""
 
@@ -227,36 +235,44 @@ msgstr ""
 msgid "No Results"
 msgstr ""
 
-#: \views\layouts\admin.ctp:39
+#: \views\layouts\admin.ctp:8;45
+msgid "No update avaliable"
+msgstr ""
+
+#: \views\layouts\admin.ctp:40
 msgid "Visit Site"
 msgstr ""
 
-#: \views\layouts\admin.ctp:39
+#: \views\layouts\admin.ctp:43
+msgid "Loading..."
+msgstr ""
+
+#: \views\layouts\admin.ctp:56
 msgid "Logout"
 msgstr ""
 
-#: \views\layouts\admin.ctp:65
+#: \views\layouts\admin.ctp:82
 msgid "Profiles"
 msgstr ""
 
-#: \views\layouts\admin.ctp:67
+#: \views\layouts\admin.ctp:84
 msgid "New IProfile"
 msgstr ""
 
-#: \views\layouts\admin.ctp:68;109;116
+#: \views\layouts\admin.ctp:85;126;133
 msgid "View all"
 msgstr ""
 
-#: \views\layouts\admin.ctp:107
+#: \views\layouts\admin.ctp:124
 #: \views\stopwords\admin_index.ctp:1
 msgid "Stopwords"
 msgstr ""
 
-#: \views\layouts\admin.ctp:110;117
+#: \views\layouts\admin.ctp:127;134
 msgid "Add new"
 msgstr ""
 
-#: \views\layouts\admin.ctp:114
+#: \views\layouts\admin.ctp:131
 msgid "Themes"
 msgstr ""
 
@@ -275,17 +291,17 @@ msgid "Start URL"
 msgstr ""
 
 #: \views\profiles\admin_create.ctp:14
-#: \views\profiles\admin_edit.ctp:14
+#: \views\profiles\admin_edit.ctp:17
 msgid "The URL to the document root of your website."
 msgstr ""
 
 #: \views\profiles\admin_create.ctp:21
-#: \views\profiles\admin_edit.ctp:21
+#: \views\profiles\admin_edit.ctp:28
 msgid "Generate Regular Expression"
 msgstr ""
 
 #: \views\profiles\admin_create.ctp:22
-#: \views\profiles\admin_edit.ctp:22
+#: \views\profiles\admin_edit.ctp:29
 msgid "The regular expression that URLs must match."
 msgstr ""
 
@@ -301,7 +317,7 @@ msgstr ""
 msgid "Edit Indexing Profile"
 msgstr ""
 
-#: \views\profiles\admin_edit.ctp:33
+#: \views\profiles\admin_edit.ctp:40
 msgid "Submit changes"
 msgstr ""
 
@@ -314,11 +330,11 @@ msgid "Id:"
 msgstr ""
 
 #: \views\profiles\admin_view.ctp:13
-msgid "Text:"
+msgid "Regular Expression:"
 msgstr ""
 
 #: \views\profiles\admin_view.ctp:17
-msgid "Profile Id:"
+msgid "Index this profile"
 msgstr ""
 
 #: \views\stopwords\admin_add.ctp:1
