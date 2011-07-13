@@ -81,36 +81,7 @@
     die();     //So we don't have to wrap the install code in an if block
     }
 
-    //<functions>
-
-    function downloadFile ($url, $path) {
-                 $newfname = $path;
-                 $file = fopen ($url, "rb");
-                 if ($file) {
-                   $newf = fopen ($newfname, "wb");
-
-                   if ($newf)
-                   while(!feof($file)) {
-                     fwrite($newf, fread($file, 1024 * 8 ), 1024 * 8 );
-                   }
-                 }
-
-                 if ($file) {
-                   fclose($file);
-                 }
-
-                if ($newf) {
-                  fclose($newf);
-                }
-    }
-
-    //</functions>
-
-    //<variables>
-
-    $url = 'http://www.tsep.info/php/update/get.php?version=latest';
-
-    //<variables>
+    $httppath = 'http://launchpad.net/tsep/1.x/1.2/+download/application.update.zip';
 
     if(empty($_SESSION['step']))
         $_SESSION['step'] = 0;
@@ -120,14 +91,10 @@
     switch ($_SESSION['step']) {
 
         case 1:
-            $abspath = file_get_contents($url);
-            $_SESSION['path'] = $abspath;
+            $path = dirname(__FILE__).DIRECTORY_SEPARATOR.'application.update.zip';
+            copy($httppath, $path);
             break;
         case 2:
-            $path = dirname(__FILE__).DIRECTORY_SEPARATOR.'application.update.zip';
-            downloadFile($_SESSION['path'], $path);
-            break;
-        case 3:
             $zip = new ZipArchive;
             if ($zip->open(dirname(__FILE__).DIRECTORY_SEPARATOR.'application.update.zip') === TRUE) {
                 $zip->extractTo(dirname(__FILE__));
