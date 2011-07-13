@@ -2,7 +2,7 @@
 /**
 * The core configuration for this application
 * 
-* @author Geoffrey
+* @author Xaav
 *
 * The following will be filled automatically by SubVersion!
 * Do not change by hand!

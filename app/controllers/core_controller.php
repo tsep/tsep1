@@ -5,7 +5,7 @@
 
 /**
  * Core Controller - Misc.
- * @author Geoffrey
+ * @author Xaav
  *
  */
 class CoreController extends AppController {

@@ -2,7 +2,7 @@
 /**
 * Searches and Creates indexing profiles
 *
-* @author geoffreyfishing
+* @author Xaavfishing
 *
 * The following will be filled automatically by SubVersion!
 * Do not change by hand!

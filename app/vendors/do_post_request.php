@@ -2,12 +2,12 @@
 /**
 * POST data to a URL
 * 
-* @author geoffreyfishing
+* @author Xaavfishing
 *
 * The following will be filled automatically by SubVersion!
 * Do not change by hand!
 *  $LastChangedDate: 2011-02-05 13:12:42 -0600 (Sat, 05 Feb 2011) $
-*  $LastChangedBy: geoffreyfishing@gmail.com $
+*  $LastChangedBy: Xaavfishing@gmail.com $
 *  $LastChangedRevision: 182 $
 *
 */

@@ -2,7 +2,7 @@
 /**
 * Queue Component
 * 
-* @author Geoffrey
+* @author Xaav
 *
 * The following will be filled automatically by SubVersion!
 * Do not change by hand!

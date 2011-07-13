@@ -2,7 +2,7 @@
 /**
 * HTTP Crawler for The Search Engine Project
 * 
-* @author geoffreyfishing
+* @author Xaavfishing
 *
 * The following will be filled automatically by SubVersion!
 * Do not change by hand!
@@ -24,7 +24,7 @@
  *  $url_of_page = $result->url;
  * }
  * 
- * @author Geoffrey
+ * @author Xaav
  *
  */
 class TSEPCrawler {
@@ -303,7 +303,7 @@ class TSEPCrawler {
 /**
  * Page
  * A page crawled by TSEPCrawler
- * @author Geoffrey
+ * @author Xaav
  *
  */
 class Page {
