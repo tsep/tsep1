@@ -2,3 +2,4 @@
 /.project
 /.buildpath
 /app/tmp
+/app/config/settings.php
