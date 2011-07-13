@@ -1,3 +1,4 @@
-./.settings
-./.project
-./.buildpath
+/.settings
+/.project
+/.buildpath
+/app/tmp
