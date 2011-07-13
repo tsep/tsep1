@@ -189,7 +189,7 @@ class IndexerComponent extends Object {
 
             if(empty($profile)) {
 
-                $this->log('#0001 Invalid Profile Request. Indexing Failed.');
+                $this->log('#0001 Invalid Profile Request; Indexing Failed.', LOG_ERROR);
 
                 return false;
             }
