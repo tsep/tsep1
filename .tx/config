@@ -2,6 +2,6 @@
 host = https://www.transifex.net
 
 [tsep.messages]
-file_filter = app/locale/<lang>.po
-source_file = app/locale/default.pot
+file_filter = app\locale\<lang>.po
+source_file = app\locale\default.pot
 source_lang = en
