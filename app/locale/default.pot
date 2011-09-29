@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-05-06 03:55+0200\n"
+"POT-Creation-Date: 2011-09-29 02:02+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -38,12 +38,8 @@ msgstr ""
 msgid "The profile that you selected to view does not exist"
 msgstr ""
 
-#: \controllers\profiles_controller.php:132
+#: \controllers\profiles_controller.php:131
 msgid "Indexing Profile Created"
-msgstr ""
-
-#: \controllers\profiles_controller.php:136
-msgid "Failed to save indexing profile"
 msgstr ""
 
 #: \plugins\install\controllers\install_controller.php:95
@@ -74,8 +70,28 @@ msgstr ""
 msgid "Please enter the database settings below."
 msgstr ""
 
+#: \plugins\install\views\install\database.ctp:11
+msgid "Database host:"
+msgstr ""
+
 #: \plugins\install\views\install\database.ctp:15
-#: \plugins\install\views\install\settings.ctp:12
+msgid "Database username:"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:19
+msgid "Database password:"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:23
+msgid "Database name:"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:27
+msgid "Table prefix:"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:33
+#: \plugins\install\views\install\settings.ctp:20
 msgid "Next"
 msgstr ""
 
@@ -105,6 +121,14 @@ msgstr ""
 
 #: \plugins\install\views\install\settings.ctp:6
 msgid "Enter the details for the administrator below."
+msgstr ""
+
+#: \plugins\install\views\install\settings.ctp:9
+msgid "Administrator username:"
+msgstr ""
+
+#: \plugins\install\views\install\settings.ctp:13
+msgid "Administrator password:"
 msgstr ""
 
 #: \views\core\admin_batch.ctp:4
